@@ -15,6 +15,9 @@ Route::get('/report-lost-dog', function () {
     return view('addlost');
 });
 
+Route::get('/adopt-a-dog', function () {
+    return view('adoption');
+});
 Route::post('/upload-images', [AddLostDog::class, 'uploadImages'])->name('upload.images');
 
 Auth::routes();

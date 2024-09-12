@@ -378,7 +378,12 @@
                             <span> Chat </span>
                         </a>
                     </li>
-
+                    <li class="side-nav-item">
+                        <a href="{{ url('/adopt-a-dog') }}" class="side-nav-link">
+                            <i class="uil-comments-alt"></i>
+                            <span> Adoption Form </span>
+                        </a>
+                    </li>
                     <li class="side-nav-item">
                         <a href="{{ url('/report-lost-dog') }}" class="side-nav-link">
                             <i class="uil-comments-alt"></i>
