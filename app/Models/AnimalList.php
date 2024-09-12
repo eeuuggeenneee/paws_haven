@@ -16,10 +16,14 @@ class AnimalList extends Model
         'dog_id_unique',
         'breed',
         'color',
+        'gender',
+        'report_type',
         'location_found',
         'date_found',
         'description',
         'animal_images',
+        'contact_name',
+        'contact_person',
         'isActive',
     ];
 

@@ -8,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description" />
     <meta content="Coderthemes" name="author" />
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <!-- App favicon -->
     <link rel="shortcut icon" href="assets/images/favicon.ico">
@@ -21,13 +22,15 @@
     <!-- Theme Config Js -->
     <script src="assets/js/hyper-config.js"></script>
     <link href="assets/vendor/datatables.net-bs5/css/dataTables.bootstrap5.min.css" rel="stylesheet" type="text/css" />
-    <link href="assets/vendor/datatables.net-responsive-bs5/css/responsive.bootstrap5.min.css" rel="stylesheet" type="text/css" />
+    <link href="assets/vendor/datatables.net-responsive-bs5/css/responsive.bootstrap5.min.css" rel="stylesheet"
+        type="text/css" />
     <!-- App css -->
     <link href="assets/css/app-saas.min.css" rel="stylesheet" type="text/css" id="app-style" />
 
     <!-- Icons css -->
     <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
-    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+        crossorigin="anonymous"></script>
     @livewireStyles
 </head>
 
@@ -80,7 +83,8 @@
                 </div>
                 <ul class="topbar-menu d-flex align-items-center gap-3">
                     <li class="dropdown notification-list">
-                        <a class="nav-link dropdown-toggle arrow-none" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle arrow-none" data-bs-toggle="dropdown" href="#"
+                            role="button" aria-haspopup="false" aria-expanded="false">
                             <i class="ri-notification-3-line font-22"></i>
                             <span class="noti-icon-badge"></span>
                         </a>
@@ -103,9 +107,11 @@
                                 <h5 class="text-muted font-13 fw-normal mt-2">Today</h5>
                                 <!-- item-->
 
-                                <a href="javascript:void(0);" class="dropdown-item p-0 notify-item card unread-noti shadow-none mb-2">
+                                <a href="javascript:void(0);"
+                                    class="dropdown-item p-0 notify-item card unread-noti shadow-none mb-2">
                                     <div class="card-body">
-                                        <span class="float-end noti-close-btn text-muted"><i class="mdi mdi-close"></i></span>
+                                        <span class="float-end noti-close-btn text-muted"><i
+                                                class="mdi mdi-close"></i></span>
                                         <div class="d-flex align-items-center">
                                             <div class="flex-shrink-0">
                                                 <div class="notify-icon bg-primary">
@@ -113,17 +119,21 @@
                                                 </div>
                                             </div>
                                             <div class="flex-grow-1 text-truncate ms-2">
-                                                <h5 class="noti-item-title fw-semibold font-14">Datacorp <small class="fw-normal text-muted ms-1">1 min ago</small></h5>
-                                                <small class="noti-item-subtitle text-muted">Caleb Flakelar commented on Admin</small>
+                                                <h5 class="noti-item-title fw-semibold font-14">Datacorp <small
+                                                        class="fw-normal text-muted ms-1">1 min ago</small></h5>
+                                                <small class="noti-item-subtitle text-muted">Caleb Flakelar commented on
+                                                    Admin</small>
                                             </div>
                                         </div>
                                     </div>
                                 </a>
 
                                 <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item p-0 notify-item card read-noti shadow-none mb-2">
+                                <a href="javascript:void(0);"
+                                    class="dropdown-item p-0 notify-item card read-noti shadow-none mb-2">
                                     <div class="card-body">
-                                        <span class="float-end noti-close-btn text-muted"><i class="mdi mdi-close"></i></span>
+                                        <span class="float-end noti-close-btn text-muted"><i
+                                                class="mdi mdi-close"></i></span>
                                         <div class="d-flex align-items-center">
                                             <div class="flex-shrink-0">
                                                 <div class="notify-icon bg-info">
@@ -131,8 +141,10 @@
                                                 </div>
                                             </div>
                                             <div class="flex-grow-1 text-truncate ms-2">
-                                                <h5 class="noti-item-title fw-semibold font-14">Admin <small class="fw-normal text-muted ms-1">1 hours ago</small></h5>
-                                                <small class="noti-item-subtitle text-muted">New user registered</small>
+                                                <h5 class="noti-item-title fw-semibold font-14">Admin <small
+                                                        class="fw-normal text-muted ms-1">1 hours ago</small></h5>
+                                                <small class="noti-item-subtitle text-muted">New user
+                                                    registered</small>
                                             </div>
                                         </div>
                                     </div>
@@ -141,18 +153,23 @@
                                 <h5 class="text-muted font-13 fw-normal mt-0">Yesterday</h5>
 
                                 <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item p-0 notify-item card read-noti shadow-none mb-2">
+                                <a href="javascript:void(0);"
+                                    class="dropdown-item p-0 notify-item card read-noti shadow-none mb-2">
                                     <div class="card-body">
-                                        <span class="float-end noti-close-btn text-muted"><i class="mdi mdi-close"></i></span>
+                                        <span class="float-end noti-close-btn text-muted"><i
+                                                class="mdi mdi-close"></i></span>
                                         <div class="d-flex align-items-center">
                                             <div class="flex-shrink-0">
                                                 <div class="notify-icon">
-                                                    <img src="assets/images/users/avatar-2.jpg" class="img-fluid rounded-circle" alt="" />
+                                                    <img src="assets/images/users/avatar-2.jpg"
+                                                        class="img-fluid rounded-circle" alt="" />
                                                 </div>
                                             </div>
                                             <div class="flex-grow-1 text-truncate ms-2">
-                                                <h5 class="noti-item-title fw-semibold font-14">Cristina Pride <small class="fw-normal text-muted ms-1">1 day ago</small></h5>
-                                                <small class="noti-item-subtitle text-muted">Hi, How are you? What about our next meeting</small>
+                                                <h5 class="noti-item-title fw-semibold font-14">Cristina Pride <small
+                                                        class="fw-normal text-muted ms-1">1 day ago</small></h5>
+                                                <small class="noti-item-subtitle text-muted">Hi, How are you? What
+                                                    about our next meeting</small>
                                             </div>
                                         </div>
                                     </div>
@@ -161,9 +178,11 @@
                                 <h5 class="text-muted font-13 fw-normal mt-0">30 Dec 2021</h5>
 
                                 <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item p-0 notify-item card read-noti shadow-none mb-2">
+                                <a href="javascript:void(0);"
+                                    class="dropdown-item p-0 notify-item card read-noti shadow-none mb-2">
                                     <div class="card-body">
-                                        <span class="float-end noti-close-btn text-muted"><i class="mdi mdi-close"></i></span>
+                                        <span class="float-end noti-close-btn text-muted"><i
+                                                class="mdi mdi-close"></i></span>
                                         <div class="d-flex align-items-center">
                                             <div class="flex-shrink-0">
                                                 <div class="notify-icon bg-primary">
@@ -172,25 +191,30 @@
                                             </div>
                                             <div class="flex-grow-1 text-truncate ms-2">
                                                 <h5 class="noti-item-title fw-semibold font-14">Datacorp</h5>
-                                                <small class="noti-item-subtitle text-muted">Caleb Flakelar commented on Admin</small>
+                                                <small class="noti-item-subtitle text-muted">Caleb Flakelar commented
+                                                    on Admin</small>
                                             </div>
                                         </div>
                                     </div>
                                 </a>
 
                                 <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item p-0 notify-item card read-noti shadow-none mb-2">
+                                <a href="javascript:void(0);"
+                                    class="dropdown-item p-0 notify-item card read-noti shadow-none mb-2">
                                     <div class="card-body">
-                                        <span class="float-end noti-close-btn text-muted"><i class="mdi mdi-close"></i></span>
+                                        <span class="float-end noti-close-btn text-muted"><i
+                                                class="mdi mdi-close"></i></span>
                                         <div class="d-flex align-items-center">
                                             <div class="flex-shrink-0">
                                                 <div class="notify-icon">
-                                                    <img src="assets/images/users/avatar-4.jpg" class="img-fluid rounded-circle" alt="" />
+                                                    <img src="assets/images/users/avatar-4.jpg"
+                                                        class="img-fluid rounded-circle" alt="" />
                                                 </div>
                                             </div>
                                             <div class="flex-grow-1 text-truncate ms-2">
                                                 <h5 class="noti-item-title fw-semibold font-14">Karen Robinson</h5>
-                                                <small class="noti-item-subtitle text-muted">Wow ! this admin looks good and awesome design</small>
+                                                <small class="noti-item-subtitle text-muted">Wow ! this admin looks
+                                                    good and awesome design</small>
                                             </div>
                                         </div>
                                     </div>
@@ -202,7 +226,8 @@
                             </div>
 
                             <!-- All-->
-                            <a href="javascript:void(0);" class="dropdown-item text-center text-primary notify-item border-top py-2">
+                            <a href="javascript:void(0);"
+                                class="dropdown-item text-center text-primary notify-item border-top py-2">
                                 View All
                             </a>
 
@@ -210,18 +235,21 @@
                     </li>
 
                     <li class="d-none d-sm-inline-block">
-                        <div class="nav-link" id="light-dark-mode" data-bs-toggle="tooltip" data-bs-placement="left" title="Theme Mode">
+                        <div class="nav-link" id="light-dark-mode" data-bs-toggle="tooltip" data-bs-placement="left"
+                            title="Theme Mode">
                             <i class="ri-moon-line font-22"></i>
                         </div>
                     </li>
 
                     <li class="dropdown">
-                        <a class="nav-link dropdown-toggle arrow-none nav-user px-2" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle arrow-none nav-user px-2" data-bs-toggle="dropdown"
+                            href="#" role="button" aria-haspopup="false" aria-expanded="false">
                             <span class="account-user-avatar">
-                                <img src="assets/images/users/avatar-1.jpg" alt="user-image" width="32" class="rounded-circle">
+                                <img src="assets/images/users/avatar-1.jpg" alt="user-image" width="32"
+                                    class="rounded-circle">
                             </span>
                             <span class="d-lg-flex flex-column gap-1 d-none">
-                                    {{-- <h5 class="my-0">{{ Auth::user()->name }}</h5>
+                                {{-- <h5 class="my-0">{{ Auth::user()->name }}</h5>
                                     <h6 class="my-0 fw-normal">{{ Auth::user()->email }}</h6> --}}
                             </span>
                         </a>
@@ -291,7 +319,8 @@
             </a>
 
             <!-- Sidebar Hover Menu Toggle Button -->
-            <div class="button-sm-hover" data-bs-toggle="tooltip" data-bs-placement="right" title="Show Full Sidebar">
+            <div class="button-sm-hover" data-bs-toggle="tooltip" data-bs-placement="right"
+                title="Show Full Sidebar">
                 <i class="ri-checkbox-blank-circle-line align-middle"></i>
             </div>
 
@@ -304,7 +333,8 @@
             <div class="h-100" id="leftside-menu-container" data-simplebar>
                 <div class="leftbar-user">
                     <a href="pages-profile.html">
-                        <img src="assets/images/users/avatar-1.jpg" alt="user-image" height="42" class="rounded-circle shadow-sm">
+                        <img src="assets/images/users/avatar-1.jpg" alt="user-image" height="42"
+                            class="rounded-circle shadow-sm">
                         <span class="leftbar-user-name mt-2">Dominic Keller</span>
                     </a>
                 </div>
@@ -313,7 +343,7 @@
                 <ul class="side-nav">
                     <li class="side-nav-title">Navigation</li>
                     <li class="side-nav-item">
-                        <a  href="#sidebarDashboards" class="side-nav-link">
+                        <a href="#sidebarDashboards" class="side-nav-link">
                             <i class="uil-home-alt"></i>
                             <span class="badge bg-success float-end">5</span>
                             <span> Dashboards </span>
@@ -341,6 +371,7 @@
                         </div>
                     </li>
                     <li class="side-nav-title">Data Management</li>
+
                     <li class="side-nav-item">
                         <a href="apps-chat.html" class="side-nav-link">
                             <i class="uil-comments-alt"></i>
@@ -349,7 +380,15 @@
                     </li>
 
                     <li class="side-nav-item">
-                        <a data-bs-toggle="collapse" href="#sidebarExtendedUI" aria-expanded="false" aria-controls="sidebarExtendedUI" class="side-nav-link">
+                        <a href="{{ url('/report-lost-dog') }}" class="side-nav-link">
+                            <i class="uil-comments-alt"></i>
+                            <span> Report Form </span>
+                        </a>
+                    </li>
+
+                    <li class="side-nav-item">
+                        <a data-bs-toggle="collapse" href="#sidebarExtendedUI" aria-expanded="false"
+                            aria-controls="sidebarExtendedUI" class="side-nav-link">
                             <i class="uil-package"></i>
                             <span> Pets List</span>
                             <span class="menu-arrow"></span>
@@ -357,7 +396,7 @@
                         <div class="collapse" id="sidebarExtendedUI">
                             <ul class="side-nav-second-level">
                                 <li>
-                                    <a href="{{url('/animal-list')}}">Animal Lists</a>
+                                    <a href="{{ url('/animal-list') }}">Animal Lists</a>
                                 </li>
                                 <li>
                             </ul>
@@ -365,7 +404,7 @@
                     </li>
 
 
-               
+
 
 
                     <!-- Help Box -->
@@ -401,7 +440,7 @@
 
             <!-- Footer Start -->
             <footer class="footer">
-              
+
             </footer>
             <!-- end Footer -->
 
@@ -415,10 +454,14 @@
     <!-- END wrapper -->
 
     <!-- Theme Settings -->
- 
+
 
     @livewireScripts
-    
+    <!-- Dropzone File Upload js -->
+    <script src="assets/vendor/dropzone/dropzone-min.js"></script>
+
+    <!-- File Upload Demo js -->
+    <script src="assets/js/ui/component.fileupload.js"></script>
     <!-- Vendor js -->
     <script src="assets/js/vendor.min.js"></script>
     <script src="assets/vendor/datatables.net/js/jquery.dataTables.min.js"></script>

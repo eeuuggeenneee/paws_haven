@@ -18,7 +18,7 @@ class ModalsDogs extends Component
     public $description;
     public $dog_unique;
     public $dogImages = [];
-
+    public $gender;
     protected $listeners = ['editDoggo'];
 
     public function editDoggo($id)
@@ -30,6 +30,7 @@ class ModalsDogs extends Component
         $this->dogName = $finddog->dog_name;
         $this->breed = $finddog->breed;
         $this->color = $finddog->color;
+        $this->gender = $finddog->gender;
         $this->description = $finddog->description;
     }
     public function saveDogData()
@@ -50,6 +51,7 @@ class ModalsDogs extends Component
                     'dog_id_unique' => $this->dog_unique,
                     'breed' => $this->breed,
                     'color' => $this->color,
+                    'gender' => $this->gender,
                     'location_found' => null, // You can adjust this as per your form
                     'date_found' => null,     // Same here
                     'description' => $this->description,
@@ -64,6 +66,7 @@ class ModalsDogs extends Component
                     'dog_id_unique' => $uniqueId,
                     'breed' => $this->breed,
                     'color' => $this->color,
+                    'gender' => $this->gender,
                     'location_found' => null, // You can adjust this as per your form
                     'date_found' => null,     // Same here
                     'description' => $this->description,

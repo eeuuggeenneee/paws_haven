@@ -17,10 +17,14 @@ return new class extends Migration
             $table->string('dog_id_unique');
             $table->string('breed')->nullable();
             $table->string('color')->nullable();
+            $table->string('gender')->nullable();
             $table->string('location_found')->nullable();
             $table->date('date_found')->nullable();
             $table->text('description')->nullable();
+            $table->integer('report_type')->nullable();
             $table->json('animal_images')->nullable();
+            $table->string('contact_name')->nullable();
+            $table->string('contact_number')->nullable();
             $table->integer('isActive')->default(1);
             $table->timestamps();
         });
