@@ -19,8 +19,13 @@ class ModalsDogs extends Component
     public $dog_unique;
     public $dogImages = [];
     public $gender;
-    protected $listeners = ['editDoggo'];
+    public $activedog;
+    protected $listeners = ['editDoggo','activedog'];
 
+    public function activedog($id){
+        $this->activedog = AnimalList::where('dog_id_unique',$id)->where('isActive',true)->first();
+
+    }
     public function editDoggo($id)
     {
 

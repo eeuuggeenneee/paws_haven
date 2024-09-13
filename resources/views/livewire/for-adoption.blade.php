@@ -31,12 +31,16 @@
                         <div class="card alert alert-primary bg-transparent text-primary">
                             <div class="py-1 px-1 mt-2">
                                 <div class="float-end position-absolute">
-                                    <button type="button" class="btn btn-danger" wire:click="adoptionform('{{$d['dog_id_unique']}}')"><i class="mdi mdi-heart-outline"></i>
+                                    <button type="button" class="btn btn-danger"
+                                         data-bs-toggle="modal"
+                                        data-bs-target="#bs-example-modal-lg"><i class="mdi mdi-heart-outline"></i>
                                     </button>
                                 </div>
                                 <div class="text-center">
-                                    <img src="{{ asset('storage/' . $images[0]) }}" class="img-thumbnail" alt="friend"
-                                        style="min-width: 220px; min-height: 170px; width: 220px; height: 170px; object-fit: cover;">
+                                    <a data-bs-toggle="modal" data-bs-target="#viewdog" wire:click="adoptionform('{{ $d['dog_id_unique'] }}')">
+                                        <img src="{{ asset('storage/' . $images[0]) }}" class="img-thumbnail"
+                                            alt="friend"
+                                            style="min-width: 220px; min-height: 170px; width: 220px; height: 170px; object-fit: cover;"></a>
 
                                     <h4 class="mt-2"><a href="pages-profile-2.html"
                                             class="text-reset">{{ $d['dog_name'] }} <i
@@ -252,7 +256,7 @@
                                                     </svg> </i>
                                                 <div>
                                                     <h5 class="mt-1 font-14">
-                                                        {{ 100  }}
+                                                        {{ 100 }}
                                                     </h5>
                                                 </div>
                                             </div>

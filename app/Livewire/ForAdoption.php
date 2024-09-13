@@ -10,6 +10,7 @@ use App\Models\AnimalListStatus;
 class ForAdoption extends Component
 {
     public $doglist;
+    public $activedog;
     public function mount(){
         $dogid = AnimalListStatus::where('isActive',true)->where('status',1)->get('animal_id');
         $this->doglist = AnimalList::whereIn('dog_id_unique',$dogid)->where('isActive',true)->get();
@@ -17,7 +18,8 @@ class ForAdoption extends Component
     }
 
     public function adoptionform($id){
-        dd($id);
+        $this->dispatch('activedog',$id);
+   
     }
     public function render()
     {

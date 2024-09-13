@@ -18,6 +18,10 @@ Route::get('/report-lost-dog', function () {
 Route::get('/adopt-a-dog', function () {
     return view('adoption');
 });
+
+Route::get('/fur-community', function () {
+    return view('furcomm');
+});
 Route::post('/upload-images', [AddLostDog::class, 'uploadImages'])->name('upload.images');
 
 Auth::routes();
