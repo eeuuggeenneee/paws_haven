@@ -9,7 +9,6 @@
     <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description" />
     <meta content="Coderthemes" name="author" />
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
     <!-- App favicon -->
     <link rel="shortcut icon" href="assets/images/favicon.ico">
 
@@ -26,15 +25,13 @@
         type="text/css" />
     <!-- App css -->
     <link href="assets/css/app-saas.min.css" rel="stylesheet" type="text/css" id="app-style" />
-
     <!-- Icons css -->
     <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
     <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
         crossorigin="anonymous"></script>
+    @vite(['resources/js/app.js'])
     @livewireStyles
 </head>
-
-
 <body>
     <!-- Begin page -->
     <div class="wrapper">
@@ -250,7 +247,7 @@
                             </span>
                             <span class="d-lg-flex flex-column gap-1 d-none">
                                 <h5 class="my-0">{{ Auth::user()->name }}</h5>
-                                    <h6 class="my-0 fw-normal">{{ Auth::user()->email }}</h6>
+                                <h6 class="my-0 fw-normal">{{ Auth::user()->email }}</h6>
                             </span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-end dropdown-menu-animated profile-dropdown">
@@ -469,6 +466,9 @@
 
     @livewireScripts
     <!-- Dropzone File Upload js -->
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <x-livewire-alert::scripts />
     <script src="assets/vendor/dropzone/dropzone-min.js"></script>
 
     <!-- File Upload Demo js -->

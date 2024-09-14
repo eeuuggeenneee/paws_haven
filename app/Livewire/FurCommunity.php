@@ -5,6 +5,7 @@ namespace App\Livewire;
 use App\Models\Comment;
 use Livewire\Component;
 use Livewire\WithFileUploads;
+use Livewire\Attribute\On;
 use App\Models\Community;
 use App\Models\Reply;
 use Illuminate\Support\Str;
@@ -92,6 +93,11 @@ class FurCommunity extends Component
             'user_id' => Auth::user()->id,
         ]);
         $this->reset(['replycomment']);
+    }
+
+    public function handlerealtime(): void
+    {   
+        dd('hello');
     }
 
     public function saveReply($commentid){

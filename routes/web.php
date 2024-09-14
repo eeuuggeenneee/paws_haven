@@ -22,6 +22,10 @@ Route::get('/adopt-a-dog', function () {
 Route::get('/fur-community', function () {
     return view('furcomm');
 });
+
+Route::get('/test', function () {
+    return view('testevent');
+});
 Route::post('/upload-images', [AddLostDog::class, 'uploadImages'])->name('upload.images');
 
 Auth::routes();

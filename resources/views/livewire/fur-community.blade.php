@@ -291,13 +291,14 @@
                                                                     src="assets/images/users/avatar-8.jpg"
                                                                     alt="Generic placeholder image" height="32">
                                                                 <div>
-                                                                    <h5 class="m-0">{{$r['name']}} </h5>
-                                                                    <p class="text-muted mb-0"><small>{{ \Carbon\Carbon::parse($r['created_at'])->diffForHumans() }}</small></p>
-                                                                    <p class="">{{$r['messages']}}</p>
+                                                                    <h5 class="m-0">{{ $r['name'] }} </h5>
+                                                                    <p class="text-muted mb-0">
+                                                                        <small>{{ \Carbon\Carbon::parse($r['created_at'])->diffForHumans() }}</small>
+                                                                    </p>
+                                                                    <p class="">{{ $r['messages'] }}</p>
                                                                 </div>
                                                             </div>
                                                         @endforeach
-
                                                     @endif
                                                     <div id="reply-{{ $c['comment_unique_id'] }}">
 
@@ -371,6 +372,13 @@
     <!-- end Footer -->
 
     <script>
+        window.addEventListener('DOMContentLoaded', function (){
+            window.Echo.channel('newpost_received').listen('NewPostEvent', (event) => {
+                console.log(event);
+            });
+        });
+
+
         document.getElementById('uploadBtn').addEventListener('click', function(event) {
             event.preventDefault(); // Prevent the default anchor click behavior
             document.getElementById('files').click(); // Trigger the file input click
