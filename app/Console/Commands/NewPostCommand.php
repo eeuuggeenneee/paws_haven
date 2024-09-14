@@ -28,6 +28,6 @@ class NewPostCommand extends Command
     public function handle(): void
     {
         $id = 'test';
-        event(new NewCommentEvent($id));
+        event(new NewPostEvent($id));
     }
 }

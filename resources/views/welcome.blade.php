@@ -1,172 +1,717 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+<html lang="en">
 
-        <title>Laravel</title>
 
-        <!-- Fonts -->
-        <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
+<head>
+    <meta charset="utf-8" />
+    <title>Paws Haven</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description" />
+    <meta content="Coderthemes" name="author" />
 
-        <!-- Styles -->
-        <style>
-            /* ! tailwindcss v3.4.1 | MIT License | https://tailwindcss.com */*,::after,::before{box-sizing:border-box;border-width:0;border-style:solid;border-color:#e5e7eb}::after,::before{--tw-content:''}:host,html{line-height:1.5;-webkit-text-size-adjust:100%;-moz-tab-size:4;tab-size:4;font-family:Figtree, ui-sans-serif, system-ui, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;font-feature-settings:normal;font-variation-settings:normal;-webkit-tap-highlight-color:transparent}body{margin:0;line-height:inherit}hr{height:0;color:inherit;border-top-width:1px}abbr:where([title]){-webkit-text-decoration:underline dotted;text-decoration:underline dotted}h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit}a{color:inherit;text-decoration:inherit}b,strong{font-weight:bolder}code,kbd,pre,samp{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;font-feature-settings:normal;font-variation-settings:normal;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}table{text-indent:0;border-color:inherit;border-collapse:collapse}button,input,optgroup,select,textarea{font-family:inherit;font-feature-settings:inherit;font-variation-settings:inherit;font-size:100%;font-weight:inherit;line-height:inherit;color:inherit;margin:0;padding:0}button,select{text-transform:none}[type=button],[type=reset],[type=submit],button{-webkit-appearance:button;background-color:transparent;background-image:none}:-moz-focusring{outline:auto}:-moz-ui-invalid{box-shadow:none}progress{vertical-align:baseline}::-webkit-inner-spin-button,::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}summary{display:list-item}blockquote,dd,dl,figure,h1,h2,h3,h4,h5,h6,hr,p,pre{margin:0}fieldset{margin:0;padding:0}legend{padding:0}menu,ol,ul{list-style:none;margin:0;padding:0}dialog{padding:0}textarea{resize:vertical}input::placeholder,textarea::placeholder{opacity:1;color:#9ca3af}[role=button],button{cursor:pointer}:disabled{cursor:default}audio,canvas,embed,iframe,img,object,svg,video{display:block;vertical-align:middle}img,video{max-width:100%;height:auto}[hidden]{display:none}*, ::before, ::after{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: }::backdrop{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: }.absolute{position:absolute}.relative{position:relative}.-left-20{left:-5rem}.top-0{top:0px}.-bottom-16{bottom:-4rem}.-left-16{left:-4rem}.-mx-3{margin-left:-0.75rem;margin-right:-0.75rem}.mt-4{margin-top:1rem}.mt-6{margin-top:1.5rem}.flex{display:flex}.grid{display:grid}.hidden{display:none}.aspect-video{aspect-ratio:16 / 9}.size-12{width:3rem;height:3rem}.size-5{width:1.25rem;height:1.25rem}.size-6{width:1.5rem;height:1.5rem}.h-12{height:3rem}.h-40{height:10rem}.h-full{height:100%}.min-h-screen{min-height:100vh}.w-full{width:100%}.w-\[calc\(100\%\+8rem\)\]{width:calc(100% + 8rem)}.w-auto{width:auto}.max-w-\[877px\]{max-width:877px}.max-w-2xl{max-width:42rem}.flex-1{flex:1 1 0%}.shrink-0{flex-shrink:0}.grid-cols-2{grid-template-columns:repeat(2, minmax(0, 1fr))}.flex-col{flex-direction:column}.items-start{align-items:flex-start}.items-center{align-items:center}.items-stretch{align-items:stretch}.justify-end{justify-content:flex-end}.justify-center{justify-content:center}.gap-2{gap:0.5rem}.gap-4{gap:1rem}.gap-6{gap:1.5rem}.self-center{align-self:center}.overflow-hidden{overflow:hidden}.rounded-\[10px\]{border-radius:10px}.rounded-full{border-radius:9999px}.rounded-lg{border-radius:0.5rem}.rounded-md{border-radius:0.375rem}.rounded-sm{border-radius:0.125rem}.bg-\[\#FF2D20\]\/10{background-color:rgb(255 45 32 / 0.1)}.bg-white{--tw-bg-opacity:1;background-color:rgb(255 255 255 / var(--tw-bg-opacity))}.bg-gradient-to-b{background-image:linear-gradient(to bottom, var(--tw-gradient-stops))}.from-transparent{--tw-gradient-from:transparent var(--tw-gradient-from-position);--tw-gradient-to:rgb(0 0 0 / 0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), var(--tw-gradient-to)}.via-white{--tw-gradient-to:rgb(255 255 255 / 0)  var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), #fff var(--tw-gradient-via-position), var(--tw-gradient-to)}.to-white{--tw-gradient-to:#fff var(--tw-gradient-to-position)}.stroke-\[\#FF2D20\]{stroke:#FF2D20}.object-cover{object-fit:cover}.object-top{object-position:top}.p-6{padding:1.5rem}.px-6{padding-left:1.5rem;padding-right:1.5rem}.py-10{padding-top:2.5rem;padding-bottom:2.5rem}.px-3{padding-left:0.75rem;padding-right:0.75rem}.py-16{padding-top:4rem;padding-bottom:4rem}.py-2{padding-top:0.5rem;padding-bottom:0.5rem}.pt-3{padding-top:0.75rem}.text-center{text-align:center}.font-sans{font-family:Figtree, ui-sans-serif, system-ui, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji}.text-sm{font-size:0.875rem;line-height:1.25rem}.text-sm\/relaxed{font-size:0.875rem;line-height:1.625}.text-xl{font-size:1.25rem;line-height:1.75rem}.font-semibold{font-weight:600}.text-black{--tw-text-opacity:1;color:rgb(0 0 0 / var(--tw-text-opacity))}.text-white{--tw-text-opacity:1;color:rgb(255 255 255 / var(--tw-text-opacity))}.underline{-webkit-text-decoration-line:underline;text-decoration-line:underline}.antialiased{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}.shadow-\[0px_14px_34px_0px_rgba\(0\2c 0\2c 0\2c 0\.08\)\]{--tw-shadow:0px 14px 34px 0px rgba(0,0,0,0.08);--tw-shadow-colored:0px 14px 34px 0px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.ring-1{--tw-ring-offset-shadow:var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);--tw-ring-shadow:var(--tw-ring-inset) 0 0 0 calc(1px + var(--tw-ring-offset-width)) var(--tw-ring-color);box-shadow:var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000)}.ring-transparent{--tw-ring-color:transparent}.ring-white\/\[0\.05\]{--tw-ring-color:rgb(255 255 255 / 0.05)}.drop-shadow-\[0px_4px_34px_rgba\(0\2c 0\2c 0\2c 0\.06\)\]{--tw-drop-shadow:drop-shadow(0px 4px 34px rgba(0,0,0,0.06));filter:var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)}.drop-shadow-\[0px_4px_34px_rgba\(0\2c 0\2c 0\2c 0\.25\)\]{--tw-drop-shadow:drop-shadow(0px 4px 34px rgba(0,0,0,0.25));filter:var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)}.transition{transition-property:color, background-color, border-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-text-decoration-color, -webkit-backdrop-filter;transition-property:color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;transition-property:color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-text-decoration-color, -webkit-backdrop-filter;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms}.duration-300{transition-duration:300ms}.selection\:bg-\[\#FF2D20\] *::selection{--tw-bg-opacity:1;background-color:rgb(255 45 32 / var(--tw-bg-opacity))}.selection\:text-white *::selection{--tw-text-opacity:1;color:rgb(255 255 255 / var(--tw-text-opacity))}.selection\:bg-\[\#FF2D20\]::selection{--tw-bg-opacity:1;background-color:rgb(255 45 32 / var(--tw-bg-opacity))}.selection\:text-white::selection{--tw-text-opacity:1;color:rgb(255 255 255 / var(--tw-text-opacity))}.hover\:text-black:hover{--tw-text-opacity:1;color:rgb(0 0 0 / var(--tw-text-opacity))}.hover\:text-black\/70:hover{color:rgb(0 0 0 / 0.7)}.hover\:ring-black\/20:hover{--tw-ring-color:rgb(0 0 0 / 0.2)}.focus\:outline-none:focus{outline:2px solid transparent;outline-offset:2px}.focus-visible\:ring-1:focus-visible{--tw-ring-offset-shadow:var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);--tw-ring-shadow:var(--tw-ring-inset) 0 0 0 calc(1px + var(--tw-ring-offset-width)) var(--tw-ring-color);box-shadow:var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000)}.focus-visible\:ring-\[\#FF2D20\]:focus-visible{--tw-ring-opacity:1;--tw-ring-color:rgb(255 45 32 / var(--tw-ring-opacity))}@media (min-width: 640px){.sm\:size-16{width:4rem;height:4rem}.sm\:size-6{width:1.5rem;height:1.5rem}.sm\:pt-5{padding-top:1.25rem}}@media (min-width: 768px){.md\:row-span-3{grid-row:span 3 / span 3}}@media (min-width: 1024px){.lg\:col-start-2{grid-column-start:2}.lg\:h-16{height:4rem}.lg\:max-w-7xl{max-width:80rem}.lg\:grid-cols-3{grid-template-columns:repeat(3, minmax(0, 1fr))}.lg\:grid-cols-2{grid-template-columns:repeat(2, minmax(0, 1fr))}.lg\:flex-col{flex-direction:column}.lg\:items-end{align-items:flex-end}.lg\:justify-center{justify-content:center}.lg\:gap-8{gap:2rem}.lg\:p-10{padding:2.5rem}.lg\:pb-10{padding-bottom:2.5rem}.lg\:pt-0{padding-top:0px}.lg\:text-\[\#FF2D20\]{--tw-text-opacity:1;color:rgb(255 45 32 / var(--tw-text-opacity))}}@media (prefers-color-scheme: dark){.dark\:block{display:block}.dark\:hidden{display:none}.dark\:bg-black{--tw-bg-opacity:1;background-color:rgb(0 0 0 / var(--tw-bg-opacity))}.dark\:bg-zinc-900{--tw-bg-opacity:1;background-color:rgb(24 24 27 / var(--tw-bg-opacity))}.dark\:via-zinc-900{--tw-gradient-to:rgb(24 24 27 / 0)  var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), #18181b var(--tw-gradient-via-position), var(--tw-gradient-to)}.dark\:to-zinc-900{--tw-gradient-to:#18181b var(--tw-gradient-to-position)}.dark\:text-white\/50{color:rgb(255 255 255 / 0.5)}.dark\:text-white{--tw-text-opacity:1;color:rgb(255 255 255 / var(--tw-text-opacity))}.dark\:text-white\/70{color:rgb(255 255 255 / 0.7)}.dark\:ring-zinc-800{--tw-ring-opacity:1;--tw-ring-color:rgb(39 39 42 / var(--tw-ring-opacity))}.dark\:hover\:text-white:hover{--tw-text-opacity:1;color:rgb(255 255 255 / var(--tw-text-opacity))}.dark\:hover\:text-white\/70:hover{color:rgb(255 255 255 / 0.7)}.dark\:hover\:text-white\/80:hover{color:rgb(255 255 255 / 0.8)}.dark\:hover\:ring-zinc-700:hover{--tw-ring-opacity:1;--tw-ring-color:rgb(63 63 70 / var(--tw-ring-opacity))}.dark\:focus-visible\:ring-\[\#FF2D20\]:focus-visible{--tw-ring-opacity:1;--tw-ring-color:rgb(255 45 32 / var(--tw-ring-opacity))}.dark\:focus-visible\:ring-white:focus-visible{--tw-ring-opacity:1;--tw-ring-color:rgb(255 255 255 / var(--tw-ring-opacity))}}
-        </style>
-    </head>
-    <body class="font-sans antialiased dark:bg-black dark:text-white/50">
-        <div class="bg-gray-50 text-black/50 dark:bg-black dark:text-white/50">
-            <img id="background" class="absolute -left-20 top-0 max-w-[877px]" src="https://laravel.com/assets/img/welcome/background.svg" />
-            <div class="relative min-h-screen flex flex-col items-center justify-center selection:bg-[#FF2D20] selection:text-white">
-                <div class="relative w-full max-w-2xl px-6 lg:max-w-7xl">
-                    <header class="grid grid-cols-2 items-center gap-2 py-10 lg:grid-cols-3">
-                        <div class="flex lg:justify-center lg:col-start-2">
-                            <svg class="h-12 w-auto text-white lg:h-16 lg:text-[#FF2D20]" viewBox="0 0 62 65" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M61.8548 14.6253C61.8778 14.7102 61.8895 14.7978 61.8897 14.8858V28.5615C61.8898 28.737 61.8434 28.9095 61.7554 29.0614C61.6675 29.2132 61.5409 29.3392 61.3887 29.4265L49.9104 36.0351V49.1337C49.9104 49.4902 49.7209 49.8192 49.4118 49.9987L25.4519 63.7916C25.3971 63.8227 25.3372 63.8427 25.2774 63.8639C25.255 63.8714 25.2338 63.8851 25.2101 63.8913C25.0426 63.9354 24.8666 63.9354 24.6991 63.8913C24.6716 63.8838 24.6467 63.8689 24.6205 63.8589C24.5657 63.8389 24.5084 63.8215 24.456 63.7916L0.501061 49.9987C0.348882 49.9113 0.222437 49.7853 0.134469 49.6334C0.0465019 49.4816 0.000120578 49.3092 0 49.1337L0 8.10652C0 8.01678 0.0124642 7.92953 0.0348998 7.84477C0.0423783 7.8161 0.0598282 7.78993 0.0697995 7.76126C0.0884958 7.70891 0.105946 7.65531 0.133367 7.6067C0.152063 7.5743 0.179485 7.54812 0.20192 7.51821C0.230588 7.47832 0.256763 7.43719 0.290416 7.40229C0.319084 7.37362 0.356476 7.35243 0.388883 7.32751C0.425029 7.29759 0.457436 7.26518 0.498568 7.2415L12.4779 0.345059C12.6296 0.257786 12.8015 0.211853 12.9765 0.211853C13.1515 0.211853 13.3234 0.257786 13.475 0.345059L25.4531 7.2415H25.4556C25.4955 7.26643 25.5292 7.29759 25.5653 7.32626C25.5977 7.35119 25.6339 7.37362 25.6625 7.40104C25.6974 7.43719 25.7224 7.47832 25.7523 7.51821C25.7735 7.54812 25.8021 7.5743 25.8196 7.6067C25.8483 7.65656 25.8645 7.70891 25.8844 7.76126C25.8944 7.78993 25.9118 7.8161 25.9193 7.84602C25.9423 7.93096 25.954 8.01853 25.9542 8.10652V33.7317L35.9355 27.9844V14.8846C35.9355 14.7973 35.948 14.7088 35.9704 14.6253C35.9792 14.5954 35.9954 14.5692 36.0053 14.5405C36.0253 14.4882 36.0427 14.4346 36.0702 14.386C36.0888 14.3536 36.1163 14.3274 36.1375 14.2975C36.1674 14.2576 36.1923 14.2165 36.2272 14.1816C36.2559 14.1529 36.292 14.1317 36.3244 14.1068C36.3618 14.0769 36.3942 14.0445 36.4341 14.0208L48.4147 7.12434C48.5663 7.03694 48.7383 6.99094 48.9133 6.99094C49.0883 6.99094 49.2602 7.03694 49.4118 7.12434L61.3899 14.0208C61.4323 14.0457 61.4647 14.0769 61.5021 14.1055C61.5333 14.1305 61.5694 14.1529 61.5981 14.1803C61.633 14.2165 61.6579 14.2576 61.6878 14.2975C61.7103 14.3274 61.7377 14.3536 61.7551 14.386C61.7838 14.4346 61.8 14.4882 61.8199 14.5405C61.8312 14.5692 61.8474 14.5954 61.8548 14.6253ZM59.893 27.9844V16.6121L55.7013 19.0252L49.9104 22.3593V33.7317L59.8942 27.9844H59.893ZM47.9149 48.5566V37.1768L42.2187 40.4299L25.953 49.7133V61.2003L47.9149 48.5566ZM1.99677 9.83281V48.5566L23.9562 61.199V49.7145L12.4841 43.2219L12.4804 43.2194L12.4754 43.2169C12.4368 43.1945 12.4044 43.1621 12.3682 43.1347C12.3371 43.1097 12.3009 43.0898 12.2735 43.0624L12.271 43.0586C12.2386 43.0275 12.2162 42.9888 12.1887 42.9539C12.1638 42.9203 12.1339 42.8916 12.114 42.8567L12.1127 42.853C12.0903 42.8156 12.0766 42.7707 12.0604 42.7283C12.0442 42.6909 12.023 42.656 12.013 42.6161C12.0005 42.5688 11.998 42.5177 11.9931 42.4691C11.9881 42.4317 11.9781 42.3943 11.9781 42.3569V15.5801L6.18848 12.2446L1.99677 9.83281ZM12.9777 2.36177L2.99764 8.10652L12.9752 13.8513L22.9541 8.10527L12.9752 2.36177H12.9777ZM18.1678 38.2138L23.9574 34.8809V9.83281L19.7657 12.2459L13.9749 15.5801V40.6281L18.1678 38.2138ZM48.9133 9.14105L38.9344 14.8858L48.9133 20.6305L58.8909 14.8846L48.9133 9.14105ZM47.9149 22.3593L42.124 19.0252L37.9323 16.6121V27.9844L43.7219 31.3174L47.9149 33.7317V22.3593ZM24.9533 47.987L39.59 39.631L46.9065 35.4555L36.9352 29.7145L25.4544 36.3242L14.9907 42.3482L24.9533 47.987Z" fill="currentColor"/></svg>
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="assets/images/favicon.ico">
+
+    <!-- Theme Config Js -->
+    <script src="assets/js/hyper-config.js"></script>
+
+    <!-- App css -->
+    <link href="assets/css/app-saas.min.css" rel="stylesheet" type="text/css" id="app-style" />
+
+    <!-- Icons css -->
+    <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+
+    <!-- NAVBAR START -->
+    <nav class="navbar navbar-expand-lg py-lg-3 navbar-dark">
+        <div class="container">
+
+            <!-- logo -->
+            <a href="index.html" class="navbar-brand me-lg-5">
+                <img src="assets/images/logo.png" alt="logo" class="logo-dark" height="22" />
+            </a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+                aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <i class="mdi mdi-menu"></i>
+            </button>
+
+            <!-- menus -->
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+
+                <!-- left menu -->
+                <ul class="navbar-nav me-auto align-items-center">
+                    <li class="nav-item mx-lg-1">
+                        <a class="nav-link active" href="#">Home</a>
+                    </li>
+                    <li class="nav-item mx-lg-1">
+                        <a class="nav-link" href="#">Features</a>
+                    </li>
+                    <li class="nav-item mx-lg-1">
+                        <a class="nav-link" href="#">Pricing</a>
+                    </li>
+                    <li class="nav-item mx-lg-1">
+                        <a class="nav-link" href="#">FAQs</a>
+                    </li>
+                    <li class="nav-item mx-lg-1">
+                        <a class="nav-link" href="#">Clients</a>
+                    </li>
+                    <li class="nav-item mx-lg-1">
+                        <a class="nav-link" href="#">Contact</a>
+                    </li>
+                </ul>
+
+                <!-- right menu -->
+                <ul class="navbar-nav ms-auto align-items-center">
+                    <li class="nav-item me-0">
+                        <a class="btn btn-sm btn-light rounded-pill d-none d-lg-inline-flex" data-bs-toggle="modal"
+                            data-bs-target="#primary-header-modal">
+                            <i class="uil uil-user-circle me-1"></i> Log in / Sign up
+                        </a>
+                    </li>
+                </ul>
+
+            </div>
+        </div>
+    </nav>
+    <!-- NAVBAR END -->
+
+    <!-- START HERO -->
+    <section class="hero-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-5">
+                    <div class="mt-md-4">
+                        <div>
+                            <span class="text-white-50 ms-1">Welcome to Paws Haven</span>
                         </div>
-                        @if (Route::has('login'))
-                            <nav class="-mx-3 flex flex-1 justify-end">
-                                @auth
-                                    <a
-                                        href="{{ url('/dashboard') }}"
-                                        class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
-                                    >
-                                        Dashboard
-                                    </a>
-                                @else
-                                    <a
-                                        href="{{ route('login') }}"
-                                        class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
-                                    >
-                                        Log in
-                                    </a>
+                        <h2 class="text-white fw-normal mb-4 mt-3 lh-base">
+                            Cityland Dog Pound
+                        </h2>
 
-                                    @if (Route::has('register'))
-                                        <a
-                                            href="{{ route('register') }}"
-                                            class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
-                                        >
-                                            Register
-                                        </a>
-                                    @endif
-                                @endauth
-                            </nav>
-                        @endif
-                    </header>
+                        <p class="mb-4 font-16 text-white-50">Cityland Dog Pound in Sta. Maria, Bulacan, is an animal
+                            control facility that serves the local community by managing and caring for stray dogs and
+                            other animals found within the municipality. </p>
+                        <a href="#" target="_blank" class="btn btn-lg font-16 btn-success">About <i
+                                class="mdi mdi-arrow-right ms-1"></i></a>
 
-                    <main class="mt-6">
-                        <div class="grid gap-6 lg:grid-cols-2 lg:gap-8">
-                            <a
-                                href="https://laravel.com/docs"
-                                id="docs-card"
-                                class="flex flex-col items-start gap-6 overflow-hidden rounded-lg bg-white p-6 shadow-[0px_14px_34px_0px_rgba(0,0,0,0.08)] ring-1 ring-white/[0.05] transition duration-300 hover:text-black/70 hover:ring-black/20 focus:outline-none focus-visible:ring-[#FF2D20] md:row-span-3 lg:p-10 lg:pb-10 dark:bg-zinc-900 dark:ring-zinc-800 dark:hover:text-white/70 dark:hover:ring-zinc-700 dark:focus-visible:ring-[#FF2D20]"
-                            >
-                                <div id="screenshot-container" class="relative flex w-full flex-1 items-stretch">
-                                    <img
-                                        src="https://laravel.com/assets/img/welcome/docs-light.svg"
-                                        alt="Laravel documentation screenshot"
-                                        class="aspect-video h-full w-full flex-1 rounded-[10px] object-top object-cover drop-shadow-[0px_4px_34px_rgba(0,0,0,0.06)] dark:hidden"
-                                        onerror="
-                                            document.getElementById('screenshot-container').classList.add('!hidden');
-                                            document.getElementById('docs-card').classList.add('!row-span-1');
-                                            document.getElementById('docs-card-content').classList.add('!flex-row');
-                                            document.getElementById('background').classList.add('!hidden');
-                                        "
-                                    />
-                                    <img
-                                        src="https://laravel.com/assets/img/welcome/docs-dark.svg"
-                                        alt="Laravel documentation screenshot"
-                                        class="hidden aspect-video h-full w-full flex-1 rounded-[10px] object-top object-cover drop-shadow-[0px_4px_34px_rgba(0,0,0,0.25)] dark:block"
-                                    />
-                                    <div
-                                        class="absolute -bottom-16 -left-16 h-40 w-[calc(100%+8rem)] bg-gradient-to-b from-transparent via-white to-white dark:via-zinc-900 dark:to-zinc-900"
-                                    ></div>
-                                </div>
-
-                                <div class="relative flex items-center gap-6 lg:items-end">
-                                    <div id="docs-card-content" class="flex items-start gap-6 lg:flex-col">
-                                        <div class="flex size-12 shrink-0 items-center justify-center rounded-full bg-[#FF2D20]/10 sm:size-16">
-                                            <svg class="size-5 sm:size-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><path fill="#FF2D20" d="M23 4a1 1 0 0 0-1.447-.894L12.224 7.77a.5.5 0 0 1-.448 0L2.447 3.106A1 1 0 0 0 1 4v13.382a1.99 1.99 0 0 0 1.105 1.79l9.448 4.728c.14.065.293.1.447.1.154-.005.306-.04.447-.105l9.453-4.724a1.99 1.99 0 0 0 1.1-1.789V4ZM3 6.023a.25.25 0 0 1 .362-.223l7.5 3.75a.251.251 0 0 1 .138.223v11.2a.25.25 0 0 1-.362.224l-7.5-3.75a.25.25 0 0 1-.138-.22V6.023Zm18 11.2a.25.25 0 0 1-.138.224l-7.5 3.75a.249.249 0 0 1-.329-.099.249.249 0 0 1-.033-.12V9.772a.251.251 0 0 1 .138-.224l7.5-3.75a.25.25 0 0 1 .362.224v11.2Z"/><path fill="#FF2D20" d="m3.55 1.893 8 4.048a1.008 1.008 0 0 0 .9 0l8-4.048a1 1 0 0 0-.9-1.785l-7.322 3.706a.506.506 0 0 1-.452 0L4.454.108a1 1 0 0 0-.9 1.785H3.55Z"/></svg>
-                                        </div>
-
-                                        <div class="pt-3 sm:pt-5 lg:pt-0">
-                                            <h2 class="text-xl font-semibold text-black dark:text-white">Documentation</h2>
-
-                                            <p class="mt-4 text-sm/relaxed">
-                                                Laravel has wonderful documentation covering every aspect of the framework. Whether you are a newcomer or have prior experience with Laravel, we recommend reading our documentation from beginning to end.
-                                            </p>
-                                        </div>
-                                    </div>
-
-                                    <svg class="size-6 shrink-0 stroke-[#FF2D20]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75"/></svg>
-                                </div>
-                            </a>
-
-                            <a
-                                href="https://laracasts.com"
-                                class="flex items-start gap-4 rounded-lg bg-white p-6 shadow-[0px_14px_34px_0px_rgba(0,0,0,0.08)] ring-1 ring-white/[0.05] transition duration-300 hover:text-black/70 hover:ring-black/20 focus:outline-none focus-visible:ring-[#FF2D20] lg:pb-10 dark:bg-zinc-900 dark:ring-zinc-800 dark:hover:text-white/70 dark:hover:ring-zinc-700 dark:focus-visible:ring-[#FF2D20]"
-                            >
-                                <div class="flex size-12 shrink-0 items-center justify-center rounded-full bg-[#FF2D20]/10 sm:size-16">
-                                    <svg class="size-5 sm:size-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><g fill="#FF2D20"><path d="M24 8.25a.5.5 0 0 0-.5-.5H.5a.5.5 0 0 0-.5.5v12a2.5 2.5 0 0 0 2.5 2.5h19a2.5 2.5 0 0 0 2.5-2.5v-12Zm-7.765 5.868a1.221 1.221 0 0 1 0 2.264l-6.626 2.776A1.153 1.153 0 0 1 8 18.123v-5.746a1.151 1.151 0 0 1 1.609-1.035l6.626 2.776ZM19.564 1.677a.25.25 0 0 0-.177-.427H15.6a.106.106 0 0 0-.072.03l-4.54 4.543a.25.25 0 0 0 .177.427h3.783c.027 0 .054-.01.073-.03l4.543-4.543ZM22.071 1.318a.047.047 0 0 0-.045.013l-4.492 4.492a.249.249 0 0 0 .038.385.25.25 0 0 0 .14.042h5.784a.5.5 0 0 0 .5-.5v-2a2.5 2.5 0 0 0-1.925-2.432ZM13.014 1.677a.25.25 0 0 0-.178-.427H9.101a.106.106 0 0 0-.073.03l-4.54 4.543a.25.25 0 0 0 .177.427H8.4a.106.106 0 0 0 .073-.03l4.54-4.543ZM6.513 1.677a.25.25 0 0 0-.177-.427H2.5A2.5 2.5 0 0 0 0 3.75v2a.5.5 0 0 0 .5.5h1.4a.106.106 0 0 0 .073-.03l4.54-4.543Z"/></g></svg>
-                                </div>
-
-                                <div class="pt-3 sm:pt-5">
-                                    <h2 class="text-xl font-semibold text-black dark:text-white">Laracasts</h2>
-
-                                    <p class="mt-4 text-sm/relaxed">
-                                        Laracasts offers thousands of video tutorials on Laravel, PHP, and JavaScript development. Check them out, see for yourself, and massively level up your development skills in the process.
-                                    </p>
-                                </div>
-
-                                <svg class="size-6 shrink-0 self-center stroke-[#FF2D20]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75"/></svg>
-                            </a>
-
-                            <a
-                                href="https://laravel-news.com"
-                                class="flex items-start gap-4 rounded-lg bg-white p-6 shadow-[0px_14px_34px_0px_rgba(0,0,0,0.08)] ring-1 ring-white/[0.05] transition duration-300 hover:text-black/70 hover:ring-black/20 focus:outline-none focus-visible:ring-[#FF2D20] lg:pb-10 dark:bg-zinc-900 dark:ring-zinc-800 dark:hover:text-white/70 dark:hover:ring-zinc-700 dark:focus-visible:ring-[#FF2D20]"
-                            >
-                                <div class="flex size-12 shrink-0 items-center justify-center rounded-full bg-[#FF2D20]/10 sm:size-16">
-                                    <svg class="size-5 sm:size-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><g fill="#FF2D20"><path d="M8.75 4.5H5.5c-.69 0-1.25.56-1.25 1.25v4.75c0 .69.56 1.25 1.25 1.25h3.25c.69 0 1.25-.56 1.25-1.25V5.75c0-.69-.56-1.25-1.25-1.25Z"/><path d="M24 10a3 3 0 0 0-3-3h-2V2.5a2 2 0 0 0-2-2H2a2 2 0 0 0-2 2V20a3.5 3.5 0 0 0 3.5 3.5h17A3.5 3.5 0 0 0 24 20V10ZM3.5 21.5A1.5 1.5 0 0 1 2 20V3a.5.5 0 0 1 .5-.5h14a.5.5 0 0 1 .5.5v17c0 .295.037.588.11.874a.5.5 0 0 1-.484.625L3.5 21.5ZM22 20a1.5 1.5 0 1 1-3 0V9.5a.5.5 0 0 1 .5-.5H21a1 1 0 0 1 1 1v10Z"/><path d="M12.751 6.047h2a.75.75 0 0 1 .75.75v.5a.75.75 0 0 1-.75.75h-2A.75.75 0 0 1 12 7.3v-.5a.75.75 0 0 1 .751-.753ZM12.751 10.047h2a.75.75 0 0 1 .75.75v.5a.75.75 0 0 1-.75.75h-2A.75.75 0 0 1 12 11.3v-.5a.75.75 0 0 1 .751-.753ZM4.751 14.047h10a.75.75 0 0 1 .75.75v.5a.75.75 0 0 1-.75.75h-10A.75.75 0 0 1 4 15.3v-.5a.75.75 0 0 1 .751-.753ZM4.75 18.047h7.5a.75.75 0 0 1 .75.75v.5a.75.75 0 0 1-.75.75h-7.5A.75.75 0 0 1 4 19.3v-.5a.75.75 0 0 1 .75-.753Z"/></g></svg>
-                                </div>
-
-                                <div class="pt-3 sm:pt-5">
-                                    <h2 class="text-xl font-semibold text-black dark:text-white">Laravel News</h2>
-
-                                    <p class="mt-4 text-sm/relaxed">
-                                        Laravel News is a community driven portal and newsletter aggregating all of the latest and most important news in the Laravel ecosystem, including new package releases and tutorials.
-                                    </p>
-                                </div>
-
-                                <svg class="size-6 shrink-0 self-center stroke-[#FF2D20]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75"/></svg>
-                            </a>
-
-                            <div class="flex items-start gap-4 rounded-lg bg-white p-6 shadow-[0px_14px_34px_0px_rgba(0,0,0,0.08)] ring-1 ring-white/[0.05] transition duration-300 hover:text-black/70 hover:ring-black/20 focus:outline-none focus-visible:ring-[#FF2D20] lg:pb-10 dark:bg-zinc-900 dark:ring-zinc-800 dark:hover:text-white/70 dark:hover:ring-zinc-700 dark:focus-visible:ring-[#FF2D20]">
-                                <div class="flex size-12 shrink-0 items-center justify-center rounded-full bg-[#FF2D20]/10 sm:size-16">
-                                    <svg class="size-5 sm:size-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                        <g fill="#FF2D20">
-                                            <path
-                                                d="M16.597 12.635a.247.247 0 0 0-.08-.237 2.234 2.234 0 0 1-.769-1.68c.001-.195.03-.39.084-.578a.25.25 0 0 0-.09-.267 8.8 8.8 0 0 0-4.826-1.66.25.25 0 0 0-.268.181 2.5 2.5 0 0 1-2.4 1.824.045.045 0 0 0-.045.037 12.255 12.255 0 0 0-.093 3.86.251.251 0 0 0 .208.214c2.22.366 4.367 1.08 6.362 2.118a.252.252 0 0 0 .32-.079 10.09 10.09 0 0 0 1.597-3.733ZM13.616 17.968a.25.25 0 0 0-.063-.407A19.697 19.697 0 0 0 8.91 15.98a.25.25 0 0 0-.287.325c.151.455.334.898.548 1.328.437.827.981 1.594 1.619 2.28a.249.249 0 0 0 .32.044 29.13 29.13 0 0 0 2.506-1.99ZM6.303 14.105a.25.25 0 0 0 .265-.274 13.048 13.048 0 0 1 .205-4.045.062.062 0 0 0-.022-.07 2.5 2.5 0 0 1-.777-.982.25.25 0 0 0-.271-.149 11 11 0 0 0-5.6 2.815.255.255 0 0 0-.075.163c-.008.135-.02.27-.02.406.002.8.084 1.598.246 2.381a.25.25 0 0 0 .303.193 19.924 19.924 0 0 1 5.746-.438ZM9.228 20.914a.25.25 0 0 0 .1-.393 11.53 11.53 0 0 1-1.5-2.22 12.238 12.238 0 0 1-.91-2.465.248.248 0 0 0-.22-.187 18.876 18.876 0 0 0-5.69.33.249.249 0 0 0-.179.336c.838 2.142 2.272 4 4.132 5.353a.254.254 0 0 0 .15.048c1.41-.01 2.807-.282 4.117-.802ZM18.93 12.957l-.005-.008a.25.25 0 0 0-.268-.082 2.21 2.21 0 0 1-.41.081.25.25 0 0 0-.217.2c-.582 2.66-2.127 5.35-5.75 7.843a.248.248 0 0 0-.09.299.25.25 0 0 0 .065.091 28.703 28.703 0 0 0 2.662 2.12.246.246 0 0 0 .209.037c2.579-.701 4.85-2.242 6.456-4.378a.25.25 0 0 0 .048-.189 13.51 13.51 0 0 0-2.7-6.014ZM5.702 7.058a.254.254 0 0 0 .2-.165A2.488 2.488 0 0 1 7.98 5.245a.093.093 0 0 0 .078-.062 19.734 19.734 0 0 1 3.055-4.74.25.25 0 0 0-.21-.41 12.009 12.009 0 0 0-10.4 8.558.25.25 0 0 0 .373.281 12.912 12.912 0 0 1 4.826-1.814ZM10.773 22.052a.25.25 0 0 0-.28-.046c-.758.356-1.55.635-2.365.833a.25.25 0 0 0-.022.48c1.252.43 2.568.65 3.893.65.1 0 .2 0 .3-.008a.25.25 0 0 0 .147-.444c-.526-.424-1.1-.917-1.673-1.465ZM18.744 8.436a.249.249 0 0 0 .15.228 2.246 2.246 0 0 1 1.352 2.054c0 .337-.08.67-.23.972a.25.25 0 0 0 .042.28l.007.009a15.016 15.016 0 0 1 2.52 4.6.25.25 0 0 0 .37.132.25.25 0 0 0 .096-.114c.623-1.464.944-3.039.945-4.63a12.005 12.005 0 0 0-5.78-10.258.25.25 0 0 0-.373.274c.547 2.109.85 4.274.901 6.453ZM9.61 5.38a.25.25 0 0 0 .08.31c.34.24.616.561.8.935a.25.25 0 0 0 .3.127.631.631 0 0 1 .206-.034c2.054.078 4.036.772 5.69 1.991a.251.251 0 0 0 .267.024c.046-.024.093-.047.141-.067a.25.25 0 0 0 .151-.23A29.98 29.98 0 0 0 15.957.764a.25.25 0 0 0-.16-.164 11.924 11.924 0 0 0-2.21-.518.252.252 0 0 0-.215.076A22.456 22.456 0 0 0 9.61 5.38Z"
-                                            />
-                                        </g>
-                                    </svg>
-                                </div>
-
-                                <div class="pt-3 sm:pt-5">
-                                    <h2 class="text-xl font-semibold text-black dark:text-white">Vibrant Ecosystem</h2>
-
-                                    <p class="mt-4 text-sm/relaxed">
-                                        Laravel's robust library of first-party tools and libraries, such as <a href="https://forge.laravel.com" class="rounded-sm underline hover:text-black focus:outline-none focus-visible:ring-1 focus-visible:ring-[#FF2D20] dark:hover:text-white dark:focus-visible:ring-[#FF2D20]">Forge</a>, <a href="https://vapor.laravel.com" class="rounded-sm underline hover:text-black focus:outline-none focus-visible:ring-1 focus-visible:ring-[#FF2D20] dark:hover:text-white">Vapor</a>, <a href="https://nova.laravel.com" class="rounded-sm underline hover:text-black focus:outline-none focus-visible:ring-1 focus-visible:ring-[#FF2D20] dark:hover:text-white">Nova</a>, <a href="https://envoyer.io" class="rounded-sm underline hover:text-black focus:outline-none focus-visible:ring-1 focus-visible:ring-[#FF2D20] dark:hover:text-white">Envoyer</a>, and <a href="https://herd.laravel.com" class="rounded-sm underline hover:text-black focus:outline-none focus-visible:ring-1 focus-visible:ring-[#FF2D20] dark:hover:text-white">Herd</a> help you take your projects to the next level. Pair them with powerful open source libraries like <a href="https://laravel.com/docs/billing" class="rounded-sm underline hover:text-black focus:outline-none focus-visible:ring-1 focus-visible:ring-[#FF2D20] dark:hover:text-white">Cashier</a>, <a href="https://laravel.com/docs/dusk" class="rounded-sm underline hover:text-black focus:outline-none focus-visible:ring-1 focus-visible:ring-[#FF2D20] dark:hover:text-white">Dusk</a>, <a href="https://laravel.com/docs/broadcasting" class="rounded-sm underline hover:text-black focus:outline-none focus-visible:ring-1 focus-visible:ring-[#FF2D20] dark:hover:text-white">Echo</a>, <a href="https://laravel.com/docs/horizon" class="rounded-sm underline hover:text-black focus:outline-none focus-visible:ring-1 focus-visible:ring-[#FF2D20] dark:hover:text-white">Horizon</a>, <a href="https://laravel.com/docs/sanctum" class="rounded-sm underline hover:text-black focus:outline-none focus-visible:ring-1 focus-visible:ring-[#FF2D20] dark:hover:text-white">Sanctum</a>, <a href="https://laravel.com/docs/telescope" class="rounded-sm underline hover:text-black focus:outline-none focus-visible:ring-1 focus-visible:ring-[#FF2D20] dark:hover:text-white">Telescope</a>, and more.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </main>
-
-                    <footer class="py-16 text-center text-sm text-black dark:text-white/70">
-                        Laravel v{{ Illuminate\Foundation\Application::VERSION }} (PHP v{{ PHP_VERSION }})
-                    </footer>
+                    </div>
+                </div>
+                <div class="col-md-5 offset-md-2">
+                    <div class="text-md-end mt-3 mt-md-0">
+                        <img src="assets/images/svg/features-1.svg" alt="" class="img-fluid" />
+                    </div>
                 </div>
             </div>
         </div>
-    </body>
+    </section>
+    <!-- END HERO -->
+
+    <!-- START SERVICES -->
+    <section class="py-5">
+        <div class="container">
+            <div class="row py-4">
+                <div class="col-lg-12">
+                    <div class="text-center">
+                        <h1 class="mt-0"><svg xmlns="http://www.w3.org/2000/svg" version="1.1"
+                                xmlns:xlink="http://www.w3.org/1999/xlink" width="100" height="100" x="0" y="0"
+                                viewBox="0 0 512 511" style="enable-background:new 0 0 512 512" xml:space="preserve"
+                                class="">
+                                <g>
+                                    <path fill="#80c0e4"
+                                        d="M36.031 243.777C-65.582 59.578 126.996-72.203 256 64.371c171.824-181.906 456.441 112.262 8.438 372.27-5.27 3.046-11.61 3.046-16.88 0a917.061 917.061 0 0 1-12.632-7.461l-79.262-106.95zm0 0"
+                                        opacity="1" data-original="#80c0e4" class=""></path>
+                                    <path fill="#5ba0d3"
+                                        d="M248.578 437.188a17.027 17.027 0 0 0 4.36 1.449c1.105.207 2.218.3 3.335.281a885.654 885.654 0 0 1-26.863-17.18l5.516 7.442c2.07 1.246 4.16 2.492 6.265 3.734 2.102 1.242 7.043 4.102 7.387 4.274zm0 0"
+                                        opacity="1" data-original="#5ba0d3" class=""></path>
+                                    <path fill="#e9e9e9"
+                                        d="M373.031 294.746c-16.41 16.461-79.652 77.844-138.105 134.434C130.883 366.719 68.465 302.578 36.03 243.777c50.074-50.843 122.305-124.015 143.074-144.425 17.98-17.852 44.82-19.97 59.934-4.739 6.598 6.66 9.879 15.528 9.957 24.899a51.734 51.734 0 0 1 3.41-3.719c17.992-17.852 44.813-19.973 59.934-4.75 11.148 11.238 12.789 28.789 5.66 44.39 15.648-7.011 33.191-5.242 44.352 6 15.109 15.231 12.777 42.04-5.204 59.891a55.123 55.123 0 0 1-3.75 3.38c9.372.151 18.223 3.5 24.832 10.16 15.11 15.23 12.782 42.042-5.199 59.882zm0 0"
+                                        opacity="1" data-original="#e9e9e9" class=""></path>
+                                    <path fill="#5ba0d3"
+                                        d="M196.95 21.242c-30.669-13.867-65.88-17.504-98.247-7.46-23.156 7.183-44.281 21.077-59.969 39.765C11.945 85.453 3.262 129.063 9.602 169.633c.058.37.12.738.183 1.11 4.168 25.66 13.723 50.327 26.246 73.034l34.274 22.477a309.255 309.255 0 0 1-4.274-7.477C-18.547 105.457 100.7-11.539 217.453 32.305a167.983 167.983 0 0 0-20.504-11.063zm0 0"
+                                        opacity="1" data-original="#5ba0d3" class=""></path>
+                                    <g fill="#e1738c">
+                                        <path
+                                            d="M286.273 134.172c-7.617-7.68-22.086-5.68-32.308 4.469-10.227 10.148-12.336 24.597-4.719 32.273 7.621 7.68 22.086 5.68 32.313-4.469 10.222-10.144 12.336-24.597 4.714-32.273zM220.035 120.992c-7.62-7.676-22.086-5.676-32.312 4.469-10.223 10.148-12.336 24.598-4.715 32.277 7.62 7.68 22.086 5.676 32.312-4.468 10.223-10.149 12.336-24.598 4.715-32.278zM336.281 184.563c-7.617-7.68-22.086-5.676-32.308 4.468-10.227 10.149-12.336 24.598-4.72 32.278 7.622 7.675 22.087 5.675 32.313-4.47 10.223-10.148 12.336-24.597 4.715-32.276zM351.91 253.938c-7.62-7.676-22.086-5.676-32.308 4.472-10.227 10.145-12.34 24.594-4.72 32.274 7.622 7.68 22.087 5.68 32.313-4.47 10.223-10.148 12.336-24.597 4.715-32.277zM278.71 270.645c-18.089-18.227.688-35.06-20.21-56.118-20.902-21.058-37.875-2.406-55.965-20.636-14.086-14.192-53.508-6.645-62.168 27.66-8.656 34.304 26.942 40.476 48.442 62.14s27.402 57.305 61.773 48.91c34.367-8.398 42.215-47.761 28.129-61.956zm0 0"
+                                            fill="#e1738c" opacity="1" data-original="#e1738c" class="">
+                                        </path>
+                                    </g>
+                                    <path fill="#d3d2d8"
+                                        d="M237.273 426.906C149.664 369.965 95.48 312.168 66.035 258.777c-5.758-10.433-10.558-20.691-14.492-30.746-5.34 5.418-10.535 10.692-15.512 15.746 11.657 21.13 27.184 42.95 47.125 65.137 1.735 1.93 3.5 3.86 5.301 5.793 9.906 10.64 20.836 21.355 32.84 32.113 1.09.98 2.191 1.957 3.3 2.938 22.184 19.57 47.958 39.265 77.669 58.875a913.07 913.07 0 0 0 32.66 20.547c.785-.758 1.566-1.516 2.347-2.274zm0 0"
+                                        opacity="1" data-original="#d3d2d8"></path>
+                                    <path
+                                        d="M274.21 122.063c-9.339.132-19.038 4.812-25.534 11.261-10.918 10.836-16.965 30.582-4.754 42.883 12.219 12.313 32 6.402 42.918-4.43 10.918-10.836 16.957-30.586 4.754-42.882-4.895-4.934-11.055-6.926-17.383-6.833zm9.114 26.265c-.847 4.887-4.148 9.918-7.054 12.8-4.844 4.81-15.61 10.653-21.704 4.509-6.078-6.125-.144-16.883 4.676-21.668 4.863-4.824 15.602-10.656 21.703-4.508 2.426 2.445 2.942 5.621 2.38 8.867zM220.598 158.598c13.144-13.043 15.277-32.282 4.757-42.883-12.218-12.309-32-6.403-42.917 4.433-10.91 10.829-16.946 30.598-4.758 42.88 12.218 12.312 32 6.406 42.918-4.43zm-34.645-15c.852-4.891 4.149-9.922 7.047-12.801 4.871-4.836 15.602-10.668 21.707-4.516 4.617 4.653 2.477 14.574-4.676 21.672-4.86 4.824-15.605 10.652-21.703 4.508-2.426-2.441-2.937-5.621-2.375-8.863zM341.602 179.281c-12.22-12.312-32-6.402-42.918 4.434-13.145 13.043-15.278 32.281-4.754 42.883 12.21 12.308 32.004 6.398 42.914-4.434 10.922-10.836 16.965-30.582 4.758-42.883zm-8.41 19.414c-.649 4.434-3.169 9.106-6.91 12.825-4.84 4.8-15.618 10.644-21.708 4.507-4.613-4.648-2.472-14.57 4.676-21.668 7.125-7.07 26.34-12.078 23.941 4.336zM309.559 295.969c12.214 12.312 32 6.406 42.918-4.43 10.918-10.836 16.96-30.582 4.753-42.883-12.21-12.308-31.996-6.406-42.917 4.43-13.141 13.047-15.278 32.281-4.754 42.883zm15.32-32.235c4.746-4.71 15.57-10.695 21.707-4.507 6.082 6.128.152 16.87-4.676 21.664-4.855 4.816-15.61 10.656-21.707 4.511-4.613-4.648-2.473-14.574 4.676-21.668zM133.094 219.73c-7.348 29.114 12.422 42.149 29.86 53.653 15.304 10.094 26.003 20.875 35.98 36.254 12.59 19.406 28.156 36.441 53.425 30.265 18.946-4.629 33.371-18.43 38.582-36.918 4.149-14.718 1.5-29.129-6.914-37.605-6.597-6.649-6.707-12.61-6.855-20.867-.18-9.89-.406-22.207-13.352-35.25-12.949-13.047-25.257-13.364-35.152-13.621-8.25-.211-14.215-.368-20.813-7.016-5.761-5.805-14.433-9-24.421-9-19.371 0-43.387 12.55-50.34 40.105zm50.34-25.105c5.875 0 10.894 1.664 13.773 4.566 10.84 10.922 22.059 11.211 31.074 11.446 9.043.23 16.188.418 24.89 9.187 8.708 8.774 8.84 15.918 9.005 24.961.164 9.016.367 20.238 11.207 31.16 4.472 4.504 5.726 13.735 3.125 22.97-3.727 13.21-14.086 23.089-27.711 26.417-18.754 4.582-28.23-9.914-37.277-23.86-11.102-17.113-23.282-29.382-40.305-40.613-18.606-12.27-28.106-19.511-23.574-37.457 4.988-19.773 22.05-28.777 35.793-28.777zm0 0"
+                                        fill="#000000" opacity="1" data-original="#000000" class=""></path>
+                                    <path
+                                        d="M440.32 295.723c3.157 2.511 7.973 2.023 10.54-1.203 40.277-50.684 61.417-103.372 61.136-152.372-.246-43.453-17.27-82.02-47.926-108.597C436.34 9.516 400.473-2.055 363.074.973c-38.504 3.117-75.379 21.289-107.082 52.68C226.027 23.995 191.22 6.038 154.898 1.581c-35.32-4.332-70.187 4.535-98.183 24.969-28.98 21.156-48.352 53.094-54.54 89.937-6.859 40.856 2.575 86.13 27.286 130.926 17.387 31.52 42.273 62.852 73.98 93.129 42.028 40.133 90.168 73.523 140.356 102.602 7.531 4.367 16.871 4.355 24.402-.004 67.492-39.168 122.238-81.348 162.723-125.368a7.501 7.501 0 0 0-.442-10.597 7.502 7.502 0 0 0-10.597.445c-39.461 42.906-93.031 84.137-159.203 122.543-2.934 1.7-6.438 1.7-9.364.004a901.11 901.11 0 0 1-4.129-2.406c42.86-41.504 128.18-124.719 131.125-127.676 20.887-20.727 23.239-52.344 5.239-70.488-4.29-4.32-9.477-7.598-15.235-9.692a59.48 59.48 0 0 0 6.993-12.054c2.996-6.961 4.496-14.262 4.46-21.356-.054-11.355-4.03-22.2-12.097-30.332-9.813-9.879-23.988-14.004-38.52-11.785.707-4.418.848-8.942.34-13.39-2.465-21.641-20.46-37.278-42.082-37.54-12.004-.144-23.87 4.102-33.488 11.2-11.363-32-50.926-33.688-74.836-15.22-1.836 1.423-56.379 55.848-85.05 84.872a7.502 7.502 0 0 0 .062 10.61 7.504 7.504 0 0 0 10.605-.067c26.508-26.766 52.817-53.75 79.684-80.153 11.543-11.343 31.336-17.93 45.855-7.71 7.305 5.14 11.176 13.792 11.254 22.609.059 6.836 8.871 9.984 13.254 4.75 12.117-14.488 37.145-23.176 52.262-8 9.437 9.496 9.449 24.43 4.164 35.992-2.778 6.082 3.765 12.703 9.887 9.961 13.269-5.941 27.382-4.2 35.96 4.437 10.27 10.352 10.227 27.711.957 41.825a46.666 46.666 0 0 1-9.343 10.37c-5.27 4.333-2.16 13.184 4.64 13.298 12.407.199 23.41 8.027 26.5 20.25 2.73 10.8-.562 23.773-9.39 34.117-24.762 29.02-54.23 53.453-81.567 79.926-18.035 18.03-36.64 35.53-54.96 53.273-47.07-28.652-87.442-58.945-120.06-90.09-28.96-27.656-51.968-56.117-68.46-84.672 2.644-2.687 28.222-28.632 38.289-38.836a7.497 7.497 0 0 0-.07-10.605c-2.914-2.875-7.735-2.84-10.606.07a80808.419 80808.419 0 0 0-35.074 35.57c-19.531-38.812-26.754-77.437-20.91-112.25C22.504 86.02 39.762 57.5 65.559 38.673c24.91-18.184 55.988-26.067 87.511-22.2 35.035 4.298 68.742 22.65 97.473 53.067 1.418 1.5 3.39 2.352 5.453 2.352s4.035-.852 5.453-2.352c30.301-32.078 65.86-50.617 102.836-53.61 33.356-2.702 65.3 7.583 89.961 28.962 51.82 44.921 67.242 136.648-15.133 240.296a7.497 7.497 0 0 0 1.207 10.536zm0 0"
+                                        fill="#000000" opacity="1" data-original="#000000" class=""></path>
+                                </g>
+                            </svg></h1>
+                        <h3><span class="text-primary">Paws Haven<br></span> is a <span class="text-primary">lost and
+                                found</span> website dedicated to helping dog owners report and locate lost or found
+                            dogs within their community.</h3>
+                        <p class="text-muted mt-2">These pounds are typically overseen by the
+                            local government unit (LGU) or by private organizations in collaboration with the LGU. Their
+                            primary functions include rescuing stray or abandoned dogs, providing temporary shelter,
+                            ensuring the animals are fed and cared for, and facilitating the adoption or return of these
+                            animals to their owners.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <hr>
+    </section>
+    <!-- END SERVICES -->
+
+    <!-- START FEATURES 2 -->
+    <section class="">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="text-center">
+                        <h1 class="mt-0"><i class="mdi mdi-heart-multiple-outline"></i></h1>
+                        <h3>Adoptable dogs you'll <span class="text-danger">love</span></h3>
+                        <p class="text-muted mt-2">Adopting from the Cityland Dog Pound not only provides a loving home
+                            for a dog in need but also helps alleviate the burden on the pound, making space for more
+                            dogs to be rescued and cared for.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-2 py-5 align-items-center">
+                <div class="col-lg-5 col-md-6">
+                    <img src="assets/images/svg/features-1.svg" class="img-fluid" alt="">
+                </div>
+                <div class="col-lg-6 offset-md-1 col-md-5">
+                    <h3 class="fw-normal">Inbuilt applications and pages</h3>
+                    <p class="text-muted mt-3">Hyper comes with a variety of ready-to-use applications and pages that
+                        help to speed up the development</p>
+
+                    <div class="mt-4">
+                        <p class="text-muted"><i class="mdi mdi-circle-medium text-primary"></i> Breed </p>
+                        <p class="text-muted"><i class="mdi mdi-circle-medium text-primary"></i> Color </p>
+                        <p class="text-muted"><i class="mdi mdi-circle-medium text-primary"></i> Gender </p>
+
+                    </div>
+
+                    <a href="#" class="btn btn-success rounded-pill mt-3">Adopt Dog <i
+                            class="mdi mdi-arrow-right ms-1"></i></a>
+
+                </div>
+            </div>
+
+            <div class="row pb-3 pt-5 align-items-center">
+                <div class="col-lg-6 col-md-5">
+                    <h3 class="fw-normal">Lost Dogs</h3>
+                    <p class="text-muted mt-3">Owners of lost dogs can visit the pound to check if their pet has been
+                        taken in. The facility usually keeps the dogs for a specific period, allowing time for owners to
+                        reclaim their pets. After this holding period, if a dog is not claimed, it might be put up for
+                        adoption or, in some unfortunate cases, humanely euthanized, depending on local regulations.</p>
+
+                    <div class="mt-4">
+                        <p class="text-muted"><i class="mdi mdi-circle-medium text-success"></i> Built with latest
+                            Bootstrap</p>
+                        <p class="text-muted"><i class="mdi mdi-circle-medium text-success"></i> Extensive use of SCSS
+                            variables</p>
+                        <p class="text-muted"><i class="mdi mdi-circle-medium text-success"></i> Well documented and
+                            structured code</p>
+                        <p class="text-muted"><i class="mdi mdi-circle-medium text-success"></i> Detailed
+                            Documentation</p>
+                    </div>
+
+                    <a href="#" class="btn btn-info rounded-pill mt-3">View Dog <i
+                            class="mdi mdi-arrow-right ms-1"></i></a>
+
+                </div>
+                <div class="col-lg-5 col-md-6 offset-md-1">
+                    <img src="assets/images/svg/features-2.svg" class="img-fluid" alt="">
+                </div>
+            </div>
+
+        </div>
+    </section>
+    <!-- END FEATURES 2 -->
+
+    <!-- START PRICING -->
+    <section class="py-5 bg-light-lighten border-top border-bottom border-light">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="text-center">
+                        <h1 class="mt-0"><svg xmlns="http://www.w3.org/2000/svg" version="1.1"
+                                xmlns:xlink="http://www.w3.org/1999/xlink" width="100" height="100" x="0" y="0"
+                                viewBox="0 0 300 300" style="enable-background:new 0 0 512 512" xml:space="preserve"
+                                class="">
+                                <g>
+                                    <path
+                                        d="M239.698 173.953c7.719 0 14-6.281 14-14s-6.281-14-14-14-14 6.281-14 14 6.281 14 14 14zm0-20c3.309 0 6 2.691 6 6s-2.691 6-6 6-6-2.691-6-6 2.691-6 6-6zM262.026 112.621a4.276 4.276 0 1 0 0-8.553 4.276 4.276 0 0 0 0 8.553zM53.542 62.115h.078a4.003 4.003 0 0 0 3.922-4.08l-.16-8a4.001 4.001 0 0 0-4-3.92h-.078a4.003 4.003 0 0 0-3.922 4.08l.16 8a4 4 0 0 0 4 3.92zM53.858 70.111h-.082a4.002 4.002 0 0 0-3.918 4.08l.16 7.998a4.001 4.001 0 0 0 4 3.92h.078a4.003 4.003 0 0 0 3.922-4.08l-.16-7.998a4.002 4.002 0 0 0-4-3.92zM45.698 69.953c2.211 0 4-1.791 4-4s-1.789-4-4-4h-8c-2.211 0-4 1.791-4 4s1.789 4 4 4zM61.698 69.953h.082l8-.16c2.207-.045 3.961-1.871 3.918-4.08s-1.809-3.811-4.082-3.92l-8 .16a4.001 4.001 0 0 0 .082 8zM102.589 42.6a4.276 4.276 0 1 0 0-8.552 4.276 4.276 0 0 0 0 8.552zM229.698 193.953h-156c-19.852 0-36 16.15-36 36s16.148 36 36 36h156c19.852 0 36-16.15 36-36s-16.149-36-36-36zm0 64h-156c-15.438 0-28-12.561-28-28s12.562-28 28-28h156c15.438 0 28 12.561 28 28s-12.563 28-28 28z"
+                                        fill="#727cf5" opacity="1" data-original="#000000" class=""></path>
+                                    <path
+                                        d="M79.698 213.953h-10c-2.211 0-4 1.791-4 4v24c0 2.209 1.789 4 4 4h10c7.719 0 14-7.178 14-16s-6.281-16-14-16zm0 24h-6v-16h6c3.254 0 6 3.664 6 8s-2.746 8-6 8zM153.698 214.365c-2.211 0-4 1.791-4 4v10.564l-8.691-12.811a3.999 3.999 0 0 0-7.308 2.246v23.588c0 2.209 1.789 4 4 4s4-1.791 4-4v-10.564l8.691 12.811a4 4 0 0 0 7.309-2.246v-23.588a4 4 0 0 0-4.001-4zM179.042 216.371c-.668-1.539-2.262-2.52-3.891-2.412a3.998 3.998 0 0 0-3.609 2.818l-7.383 24a3.999 3.999 0 0 0 2.648 4.998c.391.121.789.18 1.176.18a4.005 4.005 0 0 0 3.824-2.826l4.184-13.605 6.031 14.012a4.005 4.005 0 0 0 5.258 2.092 4.005 4.005 0 0 0 2.094-5.256zM233.698 221.953c2.211 0 4-1.791 4-4s-1.789-4-4-4h-12c-2.211 0-4 1.791-4 4v24c0 2.209 1.789 4 4 4h12c2.211 0 4-1.791 4-4s-1.789-4-4-4h-8v-3.795h4c2.211 0 4-1.791 4-4s-1.789-4-4-4h-4v-4.205zM113.924 214.365c-7.625 0-13.828 6.203-13.828 13.828v3.932c0 7.625 6.203 13.828 13.828 13.828 7.629 0 13.832-6.203 13.832-13.828v-3.932c0-7.625-6.203-13.828-13.832-13.828zm5.832 17.76c0 3.213-2.617 5.828-5.832 5.828s-5.828-2.615-5.828-5.828v-3.932c0-3.213 2.613-5.828 5.828-5.828s5.832 2.615 5.832 5.828zM209.698 213.953h-16c-2.211 0-4 1.791-4 4s1.789 4 4 4h4v20c0 2.209 1.789 4 4 4s4-1.791 4-4v-20h4c2.211 0 4-1.791 4-4s-1.789-4-4-4zM132.991 115.377l-4.488 5.727c-4.027 5.135-8.945 9.453-13.66 13.357-6.113 5.062-8.863 12.791-7.355 20.674 1.605 8.393 8.316 15.139 16.695 16.789 8.367 1.645 16.629-1.564 21.594-8.379 1.273-1.752 3.488-2.799 5.922-2.799s4.648 1.045 5.926 2.799c4.109 5.639 10.465 8.805 17.266 8.805 1.457 0 2.938-.146 4.418-.443 8.109-1.631 14.734-8.146 16.488-16.211 1.727-7.943-1.035-16.066-7.203-21.201-3.281-2.725-7.07-6.02-10.332-9.791 0-.002 0-.002-.004-.002l-8.828-10.205a23.594 23.594 0 0 0-17.855-8.164c-7.303-.001-14.076 3.296-18.584 9.044zm6.297 4.936a15.516 15.516 0 0 1 12.285-5.98c4.535 0 8.84 1.967 11.809 5.398l8.828 10.205c3.641 4.211 7.738 7.777 11.266 10.709 3.926 3.268 5.609 8.258 4.5 13.352-1.086 5.008-5.203 9.053-10.246 10.066-5.285 1.072-10.512-.934-13.641-5.227-2.777-3.814-7.406-6.09-12.391-6.09s-9.617 2.277-12.387 6.09c-3.113 4.27-8.309 6.277-13.582 5.24-5.129-1.012-9.398-5.307-10.383-10.445-.953-4.973.766-9.836 4.598-13.008 5.059-4.188 10.359-8.854 14.855-14.584zM107.217 129.803c8.605 0 15.605-7 15.605-15.604s-7-15.602-15.605-15.602c-8.602 0-15.602 6.998-15.602 15.602s7.001 15.604 15.602 15.604zm0-23.205c4.195 0 7.605 3.41 7.605 7.602 0 4.193-3.41 7.604-7.605 7.604-4.191 0-7.602-3.41-7.602-7.604.001-4.192 3.411-7.602 7.602-7.602zM180.573 114.199c0 8.604 7 15.604 15.605 15.604 8.602 0 15.602-7 15.602-15.604s-7-15.602-15.602-15.602c-8.605.001-15.605 6.999-15.605 15.602zm15.605-7.601c4.191 0 7.602 3.41 7.602 7.602 0 4.193-3.41 7.604-7.602 7.604-4.195 0-7.605-3.41-7.605-7.604 0-4.192 3.41-7.602 7.605-7.602zM169.104 103.748c9.164 0 16.621-7.457 16.621-16.623s-7.457-16.623-16.621-16.623c-9.168 0-16.625 7.457-16.625 16.623s7.457 16.623 16.625 16.623zm0-25.246c4.754 0 8.621 3.869 8.621 8.623s-3.867 8.623-8.621 8.623-8.625-3.869-8.625-8.623 3.871-8.623 8.625-8.623zM134.292 103.748c9.168 0 16.625-7.457 16.625-16.623s-7.457-16.623-16.625-16.623c-9.164 0-16.621 7.457-16.621 16.623s7.456 16.623 16.621 16.623zm0-25.246c4.754 0 8.625 3.869 8.625 8.623s-3.871 8.623-8.625 8.623-8.621-3.869-8.621-8.623 3.867-8.623 8.621-8.623z"
+                                        fill="#727cf5" opacity="1" data-original="#000000" class=""></path>
+                                </g>
+                            </svg></h1>
+                        <h3>How you can <span class="text-primary">help </span>us:</h3>
+                        <p class="text-muted mt-2">Reminder: We do not accept Cash Donation
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-3 pt-3">
+                <div class="col-md-6">
+                    <div class="card card-pricing h-100">
+                        <div class="card-body text-center">
+                            <p class="card-pricing-plan-name fw-bold text-uppercase">Medical Care and Rehabilitation
+                            </p>
+                            <svg xmlns="http://www.w3.org/2000/svg" version="1.1"
+                                xmlns:xlink="http://www.w3.org/1999/xlink" width="90" height="90" x="0" y="0"
+                                viewBox="0 0 512 512" style="enable-background:new 0 0 512 512" xml:space="preserve"
+                                class="">
+                                <g>
+                                    <path
+                                        d="M504.485 320.134c0-79.685-68.186-144.282-152.297-144.282S199.89 240.45 199.89 320.134s68.186 144.282 152.297 144.282c12.281 0 24.218-1.387 35.658-3.987l68.546 44.065-21.139-63.418c41.678-25.744 69.233-70.292 69.233-120.942z"
+                                        style="" fill="#75e0f1" data-original="#75e0f1" class=""></path>
+                                    <path
+                                        d="M504.485 320.134c0-33.405-11.988-64.155-32.105-88.61 10.279 19.427 16.073 41.352 16.073 64.563 0 79.685-68.186 144.282-152.297 144.282-48.85 0-92.324-21.793-120.194-55.672 25.01 47.268 76.613 79.719 136.225 79.719 12.281 0 24.218-1.387 35.658-3.987l68.546 44.065-21.139-63.418c41.678-25.744 69.233-70.292 69.233-120.942z"
+                                        style="" fill="#3dc9d9" data-original="#3dc9d9"></path>
+                                    <path
+                                        d="M298.082 370.232c0-29.881 24.224-54.106 54.106-54.106s54.106 24.224 54.106 54.106c0 29.881-24.224 42.082-54.106 42.082s-54.106-12.201-54.106-42.082zM304.094 280.056c0-9.96 8.075-24.047 18.035-24.047s18.035 14.086 18.035 24.047c0 9.96-8.075 18.035-18.035 18.035s-18.035-8.075-18.035-18.035zM364.211 280.056c0-9.96 8.075-24.047 18.035-24.047s18.035 14.086 18.035 24.047c0 9.96-8.075 18.035-18.035 18.035s-18.035-8.075-18.035-18.035zM412.305 316.126c0-9.96 8.075-24.047 18.035-24.047s18.035 14.087 18.035 24.047-8.075 18.035-18.035 18.035c-9.96.001-18.035-8.074-18.035-18.035zM256 316.126c0-9.96 8.075-24.047 18.035-24.047s18.035 14.087 18.035 24.047-8.075 18.035-18.035 18.035c-9.96.001-18.035-8.074-18.035-18.035z"
+                                        style="" fill="#ffffff" data-original="#ffffff"></path>
+                                    <path
+                                        d="M7.515 151.805C7.515 72.12 75.701 7.523 159.812 7.523S312.11 72.121 312.11 151.805s-68.186 144.282-152.297 144.282a160.763 160.763 0 0 1-35.658-3.987l-68.546 44.065 21.139-63.418C35.069 247.003 7.515 202.455 7.515 151.805z"
+                                        style="" fill="#aed45b" data-original="#aed45b"></path>
+                                    <path
+                                        d="M257.656 41.247c19.092 24.104 30.406 54.056 30.406 86.512 0 79.685-68.186 144.282-152.297 144.282-37.221 0-71.316-12.656-97.771-33.665 10.694 13.481 23.809 25.14 38.754 34.371l-21.139 63.419 68.546-44.065a160.756 160.756 0 0 0 35.658 3.987c84.111 0 152.297-64.597 152.297-144.282 0-44.391-21.168-84.093-54.454-110.559z"
+                                        style="" fill="#9ac932" data-original="#9ac932"></path>
+                                    <path
+                                        d="M231.953 127.758h-48.094V79.665h-48.094v48.093H87.671v48.094h48.094v48.094h48.094v-48.094h48.094z"
+                                        style="" fill="#ffffff" data-original="#ffffff"></path>
+                                    <path
+                                        d="M512 320.134c0-83.701-71.692-151.796-159.812-151.796a168.78 168.78 0 0 0-33.95 3.455 145.004 145.004 0 0 0 1.387-19.987c0-42.44-18.899-83.236-51.851-111.926a7.515 7.515 0 0 0-9.87 11.334c29.672 25.834 46.691 62.499 46.691 100.591 0 75.414-64.949 136.767-144.783 136.767a153.57 153.57 0 0 1-33.993-3.799 7.506 7.506 0 0 0-5.729 1.007l-50.611 32.536 14.397-43.19a7.515 7.515 0 0 0-3.18-8.77c-41.117-25.4-65.666-68.221-65.666-114.55 0-75.414 64.949-136.767 144.783-136.767 24.164 0 48.078 5.734 69.156 16.581a7.515 7.515 0 0 0 6.878-13.364C212.649 6.318 186.358.009 159.812.009 71.692.009 0 68.105 0 151.805c0 49.654 25.219 95.622 67.773 124.103l-19.294 57.88c-.93 2.788-.108 5.948 2.064 7.927 2.489 2.268 6.294 2.592 9.128.77l65.928-42.382a168.823 168.823 0 0 0 34.213 3.497c11.648 0 23.005-1.2 33.951-3.46a145.911 145.911 0 0 0-1.388 19.992c0 83.701 71.692 151.796 159.812 151.796 11.514 0 23.007-1.175 34.212-3.497l65.929 42.382c2.834 1.823 6.64 1.498 9.129-.77 2.173-1.981 2.994-5.139 2.064-7.927l-19.294-57.881C486.781 415.754 512 369.787 512 320.134zm-80.697 114.549a7.516 7.516 0 0 0-3.18 8.77l14.397 43.19-50.612-32.536a7.515 7.515 0 0 0-5.729-1.007 153.541 153.541 0 0 1-33.992 3.799c-79.834 0-144.783-61.353-144.783-136.767 0-8.098.763-16.195 2.25-24.101 51.973-16.246 92.247-57.172 105.386-108.112a153.247 153.247 0 0 1 37.146-4.553c79.834 0 144.783 61.353 144.783 136.767.002 46.329-24.547 89.15-65.666 114.55z"
+                                        fill="#000000" opacity="1" data-original="#000000"></path>
+                                    <path
+                                        d="M352.188 308.612c-33.977 0-61.62 27.643-61.62 61.62 0 31.056 23.035 49.597 61.62 49.597s61.62-18.541 61.62-49.597c0-33.977-27.643-61.62-61.62-61.62zm0 96.188c-17.4 0-46.591-4.491-46.591-34.568 0-25.691 20.9-46.591 46.591-46.591s46.591 20.9 46.591 46.591c0 30.076-29.191 34.568-46.591 34.568zM322.129 305.606c14.089 0 25.55-11.461 25.55-25.55 0-12.565-10.191-31.562-25.55-31.562s-25.55 18.997-25.55 31.562c0 14.087 11.462 25.55 25.55 25.55zm0-42.082c4.523 0 10.521 9.424 10.521 16.532 0 5.801-4.719 10.521-10.521 10.521s-10.521-4.719-10.521-10.521c.001-7.108 5.998-16.532 10.521-16.532zM382.247 305.606c14.089 0 25.55-11.461 25.55-25.55 0-12.565-10.191-31.562-25.55-31.562s-25.55 18.997-25.55 31.562c0 14.087 11.461 25.55 25.55 25.55zm0-42.082c4.523 0 10.521 9.424 10.521 16.532 0 5.801-4.719 10.521-10.521 10.521-5.801 0-10.521-4.719-10.521-10.521 0-7.108 5.998-16.532 10.521-16.532zM430.341 284.565c-15.359 0-25.55 18.997-25.55 31.562 0 14.089 11.461 25.55 25.55 25.55s25.55-11.461 25.55-25.55c-.001-12.565-10.191-31.562-25.55-31.562zm0 42.082c-5.801 0-10.521-4.719-10.521-10.521 0-7.108 5.998-16.532 10.521-16.532 4.523 0 10.521 9.424 10.521 16.532-.001 5.802-4.72 10.521-10.521 10.521zM299.585 316.126c0-12.565-10.191-31.562-25.55-31.562s-25.55 18.997-25.55 31.562c0 14.089 11.461 25.55 25.55 25.55s25.55-11.462 25.55-25.55zm-25.55 10.521c-5.801 0-10.521-4.719-10.521-10.521 0-7.108 5.998-16.532 10.521-16.532 4.523 0 10.521 9.424 10.521 16.532 0 5.802-4.719 10.521-10.521 10.521zM135.765 231.461h48.094a7.514 7.514 0 0 0 7.515-7.515v-40.579h40.579a7.514 7.514 0 0 0 7.515-7.515v-48.094a7.514 7.514 0 0 0-7.515-7.515h-40.579V79.665a7.514 7.514 0 0 0-7.515-7.515h-48.094a7.514 7.514 0 0 0-7.515 7.515v40.579H87.671a7.514 7.514 0 0 0-7.515 7.515v48.094a7.514 7.514 0 0 0 7.515 7.515h40.579v40.579a7.515 7.515 0 0 0 7.515 7.514zm-40.579-63.123v-33.065h40.579a7.514 7.514 0 0 0 7.515-7.515V87.179h33.065v40.579a7.514 7.514 0 0 0 7.515 7.515h40.579v33.065H183.86a7.514 7.514 0 0 0-7.515 7.515v40.579H143.28v-40.579a7.514 7.514 0 0 0-7.515-7.515H95.186z"
+                                        fill="#000000" opacity="1" data-original="#000000"></path>
+                                </g>
+                            </svg>
+                            <ul class="card-pricing-features">
+                                <li>Provide essential vaccinations to protect against diseases.
+                                </li>
+                                <li>Cover costs for surgeries, treatments, and emergency medical care.</li>
+                                <li>Support rehabilitation for injured or abused dogs to ensure full recovery.
+                                </li>
+                                <li>Offer ongoing health check-ups and preventative care.
+                                </li>
+                                <li>Ensure dogs are healthy and ready for adoption into loving <br>homes.
+
+                                </li>
+                            </ul>
+                            <button class="btn btn-primary mt-4 mb-2 rounded-pill">Choose Plan</button>
+                        </div>
+                    </div>
+                    <!-- end Pricing_card -->
+                </div>
+                <!-- end col -->
+
+                <div class="col-md-6 ">
+                    <div class="card card-pricing h-100">
+                        <div class="card-body text-center">
+                            <p class="card-pricing-plan-name fw-bold text-uppercase">Shelter and Daily Care</p>
+                            <svg xmlns="http://www.w3.org/2000/svg" version="1.1"
+                                xmlns:xlink="http://www.w3.org/1999/xlink" width="90" height="90" x="0" y="0"
+                                viewBox="0 0 512 512" style="enable-background:new 0 0 512 512" xml:space="preserve"
+                                class="">
+                                <g>
+                                    <path
+                                        d="M267.246 60.787c-3.342-2.227-7.23-3.403-11.246-3.403s-7.904 1.177-11.246 3.403L49.487 190.869v264.272h413.027V190.869L267.246 60.787z"
+                                        style="" fill="#eaf9fa" data-original="#eaf9fa" class=""></path>
+                                    <path
+                                        d="M433 171.208v244.549c0 5.523-4.477 10-10 10H49.487v29.384h413.027V190.869L433 171.208z"
+                                        style="" fill="#d4f2f6" data-original="#d4f2f6" class=""></path>
+                                    <path
+                                        d="M256 190.976c-71.625 0-129.896 58.271-129.896 129.896v134.269h259.792V320.872c0-71.625-58.271-129.896-129.896-129.896z"
+                                        style="" fill="#a6e7f0" data-original="#a6e7f0"></path>
+                                    <path
+                                        d="M256 219.391c-56.047 0-101.481 45.435-101.481 101.481V455.14h202.963V320.872c-.001-56.046-45.435-101.481-101.482-101.481z"
+                                        style="" fill="#6bd9e7" data-original="#6bd9e7"></path>
+                                    <path
+                                        d="M256 219.391c-5.014 0-9.941.37-14.759 1.072 49.05 7.148 86.722 49.376 86.722 100.409V455.14h29.519V320.872c-.001-56.046-45.435-101.481-101.482-101.481z"
+                                        style="" fill="#2ed1e2" data-original="#2ed1e2"></path>
+                                    <path
+                                        d="M474.521 200.07 266.692 61.619a19.284 19.284 0 0 0-21.384 0L37.479 200.07c-8.864 5.905-20.836 3.506-26.741-5.358-5.905-8.864-3.506-20.837 5.358-26.741L245.308 15.275a19.282 19.282 0 0 1 21.383 0l229.213 152.696c8.864 5.905 11.263 17.878 5.358 26.741-5.904 8.864-17.877 11.263-26.741 5.358z"
+                                        style="" fill="#fe646f" data-original="#fe646f" class=""></path>
+                                    <path
+                                        d="M495.905 167.971 266.692 15.275a19.282 19.282 0 0 0-21.383 0l-7.058 4.702 222.155 147.994c8.752 5.831 11.186 17.572 5.561 26.4l8.555 5.699c8.864 5.905 20.836 3.506 26.741-5.358 5.905-8.864 3.506-20.836-5.358-26.741z"
+                                        style="" fill="#fd4755" data-original="#fd4755" class=""></path>
+                                    <path
+                                        d="M186.204 455.141V334.877c0-12.216-9.903-22.119-22.119-22.119-20.977 0-37.981 17.005-37.981 37.981v104.402h60.1z"
+                                        style="" fill="#bb5d4c" data-original="#bb5d4c"></path>
+                                    <path
+                                        d="M186.204 455.141V334.877c0-12.216-9.903-22.119-22.119-22.119-20.977 0-37.981 17.005-37.981 37.981v104.402h60.1z"
+                                        style="" fill="#bb5d4c" data-original="#bb5d4c"></path>
+                                    <path d="M126.104 425.757h60.101v29.384h-60.101z" style="" fill="#a44f3e"
+                                        data-original="#a44f3e"></path>
+                                    <path
+                                        d="M385.896 455.141V350.739c0-20.976-17.005-37.981-37.981-37.981-12.216 0-22.119 9.903-22.119 22.119V455.14h60.1z"
+                                        style="" fill="#bb5d4c" data-original="#bb5d4c"></path>
+                                    <path d="M325.795 425.757h60.101v29.384h-60.101z" style="" fill="#a44f3e"
+                                        data-original="#a44f3e"></path>
+                                    <path
+                                        d="m192.962 454.165 1.7.976h122.677l1.7-.976c15.409 0 28.017-12.608 28.017-28.017 0-8.786-4.1-16.66-10.48-21.805-6.688-5.393-10.779-13.358-10.779-21.95v-47.516c0-6.971 3.232-13.179 8.27-17.234-3.009-6.173-7.787-11.448-13.937-14.998l-10.406-6.008c-33.244-19.192-74.201-19.192-107.444 0l-10.406 6.008c-6.15 3.551-10.928 8.826-13.937 14.998 5.039 4.054 8.271 10.263 8.271 17.234v47.516c0 8.591-4.091 16.557-10.779 21.95-6.381 5.145-10.48 13.019-10.48 21.805-.004 15.409 12.604 28.017 28.013 28.017z"
+                                        style="" fill="#c96e59" data-original="#c96e59"></path>
+                                    <path
+                                        d="M347.055 426.148c0-.131-.01-.26-.011-.391H164.957c-.002.131-.011.26-.011.391 0 15.409 12.608 28.017 28.017 28.017l1.7.976H317.34l1.7-.976c15.407 0 28.015-12.608 28.015-28.017z"
+                                        style="" fill="#bb5d4c" data-original="#bb5d4c"></path>
+                                    <path
+                                        d="M304.566 455.141a49.278 49.278 0 0 0 1.101-10.335v-13.638c0-27.276-22.316-49.592-49.592-49.592s-49.592 22.316-49.592 49.592v13.638c0 3.543.386 6.998 1.101 10.335h96.982z"
+                                        style="" fill="#ffbd86" data-original="#ffbd86"></path>
+                                    <path
+                                        d="M305.666 431.168c0-1.828-.108-3.632-.303-5.411h-98.578a49.609 49.609 0 0 0-.303 5.411v13.638c0 3.542.386 6.998 1.101 10.335h96.983a49.278 49.278 0 0 0 1.1-10.335v-13.638z"
+                                        style="" fill="#f6a96c" data-original="#f6a96c"></path>
+                                    <path
+                                        d="M261.966 413.413h-11.783c-8.633 0-15.697-7.064-15.697-15.697v-.443c0-8.633 7.064-15.697 15.697-15.697h11.783c8.633 0 15.697 7.064 15.697 15.697v.443c0 8.633-7.064 15.697-15.697 15.697z"
+                                        style="" fill="#766e6e" data-original="#766e6e"></path>
+                                    <path
+                                        d="M262.945 381.625c.024.356.055.71.055 1.072v.443c0 8.633-7.064 15.697-15.697 15.697h-12.76c.582 8.113 7.385 14.576 15.64 14.576h11.783c8.633 0 15.697-7.064 15.697-15.697v-.443c0-8.303-6.538-15.135-14.718-15.648z"
+                                        style="" fill="#5b5555" data-original="#5b5555"></path>
+                                    <path
+                                        d="M494.287 499.961H17.713c-5.641 0-10.213-4.573-10.213-10.213v-25.409c0-5.641 4.573-10.213 10.213-10.213h476.574c5.641 0 10.213 4.573 10.213 10.213v25.409c0 5.64-4.573 10.213-10.213 10.213z"
+                                        style="" fill="#a6e7f0" data-original="#a6e7f0"></path>
+                                    <path
+                                        d="M494.287 454.126H469v13.497c0 5.641-4.573 10.213-10.213 10.213H7.5v11.912c0 5.641 4.573 10.213 10.213 10.213h476.574c5.641 0 10.213-4.573 10.213-10.213v-25.409c0-5.641-4.573-10.213-10.213-10.213z"
+                                        style="" fill="#6bd9e7" data-original="#6bd9e7"></path>
+                                    <circle cx="256" cy="179.766" r="67.993" style="" fill="#ffd15b"
+                                        data-original="#ffd15b"></circle>
+                                    <path
+                                        d="M257.623 111.815C279.247 123.197 294 145.873 294 172.007 294 209.559 263.559 240 226.008 240c-.545 0-1.082-.028-1.624-.041a67.68 67.68 0 0 0 31.616 7.8c37.551 0 67.992-30.441 67.992-67.992 0-37.007-29.57-67.087-66.369-67.952z"
+                                        style="" fill="#ffc344" data-original="#ffc344" class=""></path>
+                                    <path
+                                        d="M275.516 189.106c-2.458-2.01-4.406-4.58-5.508-7.558-2.106-5.695-7.582-9.754-14.009-9.754s-11.903 4.06-14.009 9.754c-1.101 2.978-3.05 5.548-5.508 7.558a14.9 14.9 0 0 0-5.486 11.701c.073 8.011 6.575 14.609 14.584 14.792a14.943 14.943 0 0 0 4.876-.694 18.263 18.263 0 0 1 11.083 0c1.533.487 3.173.733 4.876.694 8.009-.183 14.512-6.781 14.584-14.792a14.884 14.884 0 0 0-5.483-11.701z"
+                                        style="" fill="#c96e59" data-original="#c96e59"></path>
+                                    <path
+                                        d="M275.516 189.106c-2.458-2.01-4.406-4.58-5.507-7.558a14.948 14.948 0 0 0-11.224-9.484 28.545 28.545 0 0 1 6.224 17.829c0 10.781-5.952 20.168-14.747 25.066.065-.02.132-.033.196-.054a18.263 18.263 0 0 1 11.083 0c1.533.487 3.173.733 4.876.694 8.009-.183 14.512-6.781 14.584-14.792a14.892 14.892 0 0 0-5.485-11.701z"
+                                        style="" fill="#bb5d4c" data-original="#bb5d4c"></path>
+                                    <path
+                                        d="M193.67 206.938c-40.233 22.098-67.566 64.883-67.566 113.934v133.254h259.792V320.872c0-49.052-27.333-91.836-67.566-113.934"
+                                        style="stroke-width:15;stroke-linejoin:round;stroke-miterlimit:10;"
+                                        fill="none" stroke="#000000" stroke-width="15" stroke-linejoin="round"
+                                        stroke-miterlimit="10" data-original="#000000" class=""></path>
+                                    <path
+                                        d="M229.874 343.574v7.917M282.126 343.574v7.917M243.229 143.929v4.644M268.771 143.929v4.644M219.427 161.345v4.644M292.573 161.345v4.644M275.516 189.106c-2.458-2.01-4.406-4.58-5.508-7.558-2.106-5.695-7.582-9.754-14.009-9.754s-11.903 4.06-14.009 9.754c-1.101 2.978-3.05 5.548-5.508 7.558a14.9 14.9 0 0 0-5.486 11.701c.073 8.011 6.575 14.609 14.584 14.792a14.943 14.943 0 0 0 4.876-.694 18.263 18.263 0 0 1 11.083 0c1.533.487 3.173.733 4.876.694 8.009-.183 14.512-6.781 14.584-14.792a14.884 14.884 0 0 0-5.483-11.701z"
+                                        style="stroke-width:15;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;"
+                                        fill="none" stroke="#000000" stroke-width="15" stroke-linecap="round"
+                                        stroke-linejoin="round" stroke-miterlimit="10" data-original="#000000"
+                                        class=""></path>
+                                    <circle cx="256" cy="179.766" r="67.993"
+                                        style="stroke-width:15;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;"
+                                        fill="none" stroke="#000000" stroke-width="15" stroke-linecap="round"
+                                        stroke-linejoin="round" stroke-miterlimit="10" data-original="#000000"
+                                        class=""></circle>
+                                    <path
+                                        d="M261.966 413.413h-11.783c-8.633 0-15.697-7.064-15.697-15.697v-.443c0-8.633 7.064-15.697 15.697-15.697h11.783c8.633 0 15.697 7.064 15.697 15.697v.443c0 8.633-7.064 15.697-15.697 15.697z"
+                                        style="stroke-width:15;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;"
+                                        fill="none" stroke="#000000" stroke-width="15" stroke-linecap="round"
+                                        stroke-linejoin="round" stroke-miterlimit="10" data-original="#000000"
+                                        class=""></path>
+                                    <path
+                                        d="M242.955 383.362c-20.961 5.79-36.473 25.069-36.473 47.806v13.638c0 3.186.327 6.297.91 9.32h97.364c.583-3.023.91-6.134.91-9.32v-13.638c0-22.737-15.513-42.015-36.473-47.806M494.287 499.961H17.713c-5.641 0-10.213-4.573-10.213-10.213v-25.409c0-5.641 4.573-10.213 10.213-10.213h476.574c5.641 0 10.213 4.573 10.213 10.213v25.409c0 5.64-4.573 10.213-10.213 10.213zM177.937 317.638a22.024 22.024 0 0 0-13.852-4.88c-20.976 0-37.981 17.005-37.981 37.981v103.386M385.896 454.126V350.739c0-20.976-17.005-37.981-37.981-37.981-12.216 0-22.119 9.903-22.119 22.119"
+                                        style="stroke-width:15;stroke-linejoin:round;stroke-miterlimit:10;"
+                                        fill="none" stroke="#000000" stroke-width="15" stroke-linejoin="round"
+                                        stroke-miterlimit="10" data-original="#000000" class=""></path>
+                                    <path
+                                        d="M319.038 454.165c15.409 0 28.017-12.608 28.017-28.017 0-8.786-4.1-16.66-10.48-21.805-6.688-5.393-10.779-13.358-10.779-21.95v-47.516c0-6.971 3.232-13.179 8.27-17.234-3.009-6.173-7.787-11.448-13.937-14.998l-10.406-6.008c-33.244-19.192-74.201-19.192-107.444 0l-10.406 6.008c-6.15 3.551-10.928 8.826-13.937 14.998 5.039 4.054 8.271 10.263 8.271 17.234v47.516c0 8.591-4.091 16.557-10.779 21.95-6.381 5.145-10.48 13.019-10.48 21.805 0 15.409 12.607 28.017 28.017 28.017M357.239 313.915c-2.484-36.677-24.451-68.004-55.638-83.719M210.399 230.196c-31.188 15.715-53.154 47.043-55.638 83.719"
+                                        style="stroke-width:15;stroke-linejoin:round;stroke-miterlimit:10;"
+                                        fill="none" stroke="#000000" stroke-width="15" stroke-linejoin="round"
+                                        stroke-miterlimit="10" data-original="#000000" class=""></path>
+                                    <path
+                                        d="M129.266 92.579 16.095 167.971c-8.864 5.905-11.263 17.878-5.358 26.742s17.877 11.263 26.741 5.358l207.83-138.452a19.284 19.284 0 0 1 21.384 0L474.521 200.07c8.864 5.905 20.836 3.506 26.741-5.358 5.905-8.864 3.506-20.837-5.358-26.742L266.692 15.275a19.282 19.282 0 0 0-21.383 0l-86.854 57.86M49.487 330v124.126h413.026V419M462.513 384V192.071M49.487 192.071V295"
+                                        style="stroke-width:15;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;"
+                                        fill="none" stroke="#000000" stroke-width="15" stroke-linecap="round"
+                                        stroke-linejoin="round" stroke-miterlimit="10" data-original="#000000"
+                                        class=""></path>
+                                </g>
+                            </svg>
+                            <ul class="card-pricing-features">
+                                <li>Supply nutritious food to maintain the dogs' health and energy.
+                                </li>
+                                <li>Provide clean and comfortable bedding for rest and recovery.
+                                </li>
+                                <li>Maintain safe, sanitary shelter conditions to prevent illness.
+                                </li>
+                                <li>Cover utility costs for heating, cooling, and water in the shelter.
+                                </li>
+                                <li>Offer enrichment activities and toys to improve dogs’ <br>well-being while they
+                                    await
+                                    adoption.</li>
+                            </ul>
+                            <button class="btn btn-primary mt-4 mb-2 rounded-pill">Choose Plan</button>
+                        </div>
+                    </div>
+                    <!-- end Pricing_card -->
+                </div>
+                <!-- end col -->
+
+            </div>
+
+        </div>
+    </section>
+    <!-- END PRICING -->
+
+
+    <!-- START CONTACT -->
+    <section class="py-5 bg-light-lighten border-top border-bottom border-light">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="text-center">
+                        <h3><span class="text-primary">About</span> us</h3>
+                        <p class="text-muted mt-2"> For more information please contact us.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row align-items-center mt-3">
+                <div class="col-md-4">
+                    <p class="text-muted"><span class="fw-bold">Customer Support:</span><br> <span
+                            class="d-block mt-1">+1 234 56 7894</span></p>
+                    <p class="text-muted mt-4"><span class="fw-bold">Email Address:</span><br> <span
+                            class="d-block mt-1">info@gmail.com</span></p>
+                    <p class="text-muted mt-4"><span class="fw-bold">Office Address:</span><br> <span
+                            class="d-block mt-1">4461 Cedar Street Moro, AR 72368</span></p>
+                    <p class="text-muted mt-4"><span class="fw-bold">Office Time:</span><br> <span
+                            class="d-block mt-1">9:00AM To 6:00PM</span></p>
+                </div>
+
+                <div class="col-md-7">
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1535.241857099605!2d121.00039165144975!3d14.871589059077712!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3397a9435a2e096f%3A0x1dff22aaf74463ba!2sPulong%20Buhangin%20Youth%20Band!5e0!3m2!1sen!2sph!4v1726316707307!5m2!1sen!2sph"
+                        width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- END CONTACT -->
+
+    <!-- START FOOTER -->
+    <footer class="bg-dark py-2">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+
+                    <p class="text-light text-opacity-50 mt-2 text-center mb-0">© 2024 -
+                        <script>
+                            document.write(new Date().getFullYear())
+                        </script> Paws Haven . Design and coded by
+                        Coderthemes
+                    </p>
+
+                </div>
+            </div>
+        </div>
+    </footer>
+    <div id="primary-header-modal" class="modal fade " tabindex="-1" role="dialog"
+        aria-labelledby="primary-header-modalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <ul class="nav nav-pills bg-nav-pills nav-justified border-bottom">
+                    <li class="nav-item">
+                        <a href="#home1" data-bs-toggle="tab" aria-expanded="false" class="nav-link rounded-0">
+                            <i class="mdi mdi-home-variant d-md-none d-block"></i>
+                            <span class="d-none d-md-block">Log in</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#profile1" data-bs-toggle="tab" aria-expanded="true"
+                            class="nav-link rounded-0 active">
+                            <i class="mdi mdi-account-circle d-md-none d-block"></i>
+                            <span class="d-none d-md-block">Sign up</span>
+                        </a>
+                    </li>
+                </ul>
+
+                <div class="tab-content">
+                    <div class="tab-pane" id="home1">
+                        <div class="card">
+                            <!-- Logo -->
+                            <div class="card-header  text-center bg-primary  " style="border-radius: 0 !important">
+                                <a href="index.html">
+                                    <span><img src="assets/images/logo.png" alt="logo" height="22"></span>
+                                </a>
+                            </div>
+
+                            <div class="card-body p-4">
+
+                                <div class="text-center w-75 m-auto">
+                                    <h4 class="text-dark-50 text-center pb-0 fw-bold">Sign In</h4>
+                                    <p class="text-muted mb-4">Enter your email address and password to access admin
+                                        panel.</p>
+                                </div>
+
+                                <form method="POST" action="{{ route('login') }}">
+                                    @csrf
+                                    <div class="mb-3">
+                                        <label for="emailaddress" class="form-label">Email address</label>
+                                        <input id="email" type="email"
+                                            class="form-control @error('email') is-invalid @enderror" name="email"
+                                            value="{{ old('email') }}" required autocomplete="email" autofocus>
+
+                                        @error('email')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <a href="pages-recoverpw.html" class="text-muted float-end"><small>Forgot your
+                                                password?</small></a>
+                                        <label for="password" class="form-label">Password</label>
+                                        <div class="input-group input-group-merge">
+                                            <input id="password" type="password"
+                                                class="form-control @error('password') is-invalid @enderror"
+                                                name="password" required autocomplete="current-password">
+
+                                            <div class="input-group-text" data-password="false">
+                                                <span class="password-eye"></span>
+                                            </div>
+                                        </div>
+                                        @error('password')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+
+                                    <div class="mb-3 mb-3">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" name="remember"
+                                                id="remember" {{ old('remember') ? 'checked' : '' }}>
+
+                                            <label class="form-check-label" for="checkbox-signin">Remember me</label>
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-3 mb-0 text-center">
+                                        <button class="btn btn-primary" type="submit"> Log In </button>
+                                    </div>
+
+                                </form>
+                            </div> <!-- end card-body -->
+                        </div>
+                    </div>
+                    <div class="tab-pane show active" id="profile1">
+                        <div class="card">
+                            <!-- Logo-->
+                            <div class="card-header py-4 text-center bg-primary" style="border-radius: 0 !important">
+                                <a href="index.html">
+                                    <span><img src="assets/images/logo.png" alt="logo" height="22"></span>
+                                </a>
+                            </div>
+
+                            <div class="card-body p-4">
+
+                                <div class="text-center w-75 m-auto">
+                                    <h4 class="text-dark-50 text-center mt-0 fw-bold">Free Sign Up</h4>
+                                    <p class="text-muted mb-4">Don't have an account? Create your account, it takes
+                                        less than a minute </p>
+                                </div>
+
+                                <form method="POST" action="{{ route('register') }}">
+                                    @csrf
+
+                                    <div class="mb-3">
+                                        <label for="fullname" class="form-label">Full Name</label>
+                                        <input id="name" type="text"
+                                            class="form-control @error('name') is-invalid @enderror" name="name"
+                                            value="{{ old('name') }}" required autocomplete="name" autofocus>
+
+                                        @error('name')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="emailaddress" class="form-label">Email address</label>
+                                        <input id="email" type="email"
+                                            class="form-control @error('email') is-invalid @enderror" name="email"
+                                            value="{{ old('email') }}" required autocomplete="email">
+
+                                        @error('email')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+
+                                    <div class="mb-3">
+                               
+                                        <label for="password" class="form-label">Password</label>
+                                        <div class="input-group input-group-merge">
+                                            <input id="password" type="password"
+                                                class="form-control @error('password') is-invalid @enderror"
+                                                name="password" required autocomplete="new-password">
+
+
+                                            <div class="input-group-text" data-password="false">
+                                                <span class="password-eye"></span>
+                                            </div>
+                                        </div>
+                                        @error('password')
+                                            <span class="invalid-feedback d-block" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="password" class="form-label">Confirm Password</label>
+                                        <div class="input-group input-group-merge">
+
+                                            <input id="password-confirm" type="password" class="form-control"
+                                                name="password_confirmation" required autocomplete="new-password">
+
+                                            <div class="input-group-text" data-password="false"><span
+                                                    class="password-eye"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                               
+                                    <div class="mb-3">
+                                        <div class="form-check">
+                                            <input type="checkbox" class="form-check-input" id="checkbox-signup">
+                                            <label class="form-check-label" for="checkbox-signup">I accept <a
+                                                    href="#" class="text-muted">Terms and Conditions</a></label>
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-3 text-center">
+                                        <button class="btn btn-primary" type="submit"> Sign Up </button>
+                                    </div>
+
+                                </form>
+                            </div> <!-- end card-body -->
+                        </div>
+                    </div>
+                </div>
+
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div>
+    <!-- END FOOTER -->
+    <!-- Vendor js -->
+    <script src="assets/js/vendor.min.js"></script>
+
+    <!-- App js -->
+    <script src="assets/js/app.min.js"></script>
+
+</body>
+
 </html>

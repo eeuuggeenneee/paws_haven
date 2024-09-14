@@ -193,7 +193,6 @@
                                                     <div class="w-100">
                                                         <div class="d-flex">
                                                             <h5 class="m-0"> {{ $c['name'] }} </h5> 
-
                                                             <a onclick="addflex('{{ $c['comment_unique_id'] }}')"
                                                                 class="btn btn-sm btn-link text-muted p-0 ps-2">
                                                                 <i class='uil uil-comments-alt me-1'></i> Reply
