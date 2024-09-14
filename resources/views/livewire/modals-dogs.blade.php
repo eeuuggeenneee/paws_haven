@@ -477,5 +477,8 @@
             modal.show(); 
         }
         document.getElementById('adopt_dog').addEventListener('click', show_adoptmodal);
+
+        
     </script>
+    
 </div>

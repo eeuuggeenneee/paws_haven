@@ -2,6 +2,8 @@
 
 namespace App\Livewire;
 
+use App\Events\NewCommentEvent;
+use App\Events\NewReplyEvent;
 use App\Models\Comment;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -92,12 +94,9 @@ class FurCommunity extends Component
             'isActive' => 1,
             'user_id' => Auth::user()->id,
         ]);
-        $this->reset(['replycomment']);
-    }
 
-    public function handlerealtime(): void
-    {   
-        dd('hello');
+        event(new NewCommentEvent($commentunique,$post_id));
+        $this->reset(['replycomment']);
     }
 
     public function saveReply($commentid){
@@ -112,6 +111,7 @@ class FurCommunity extends Component
             'isActive' => 1,
             'user_id' => Auth::user()->id,
         ]); 
+        event(new NewReplyEvent($replyunique,$commentid));
     }
     public function render()
     {

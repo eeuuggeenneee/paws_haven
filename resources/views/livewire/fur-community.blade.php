@@ -158,7 +158,7 @@
                     </div> <!-- end card-->
                 </div> <!-- end col -->
 
-                <div class="col-xxl-9 col-lg-12 order-lg-2 order-xxl-1">
+                <div class="col-xxl-7 col-lg-12 order-lg-2 order-xxl-1">
                     <!-- new post -->
                     <div class="card">
                         <div class="card-body p-0">
@@ -217,7 +217,7 @@
 
                     <!-- start news feeds -->
                     @foreach ($posts as $p)
-                        <div class="card">
+                        <div class="card" wire:ignore>
                             <div class="card-body pb-1">
                                 <div class="d-flex">
                                     <img class="me-2 rounded" src="assets/images/users/avatar-3.jpg"
@@ -252,64 +252,68 @@
 
                                 <hr class="m-0" />
 
-                                <div class="my-1">
-                                    <a href="javascript: void(0);" class="btn btn-sm btn-link text-muted ps-0"><i
-                                            class='mdi mdi-heart text-danger'></i> 2k Likes</a>
+                                <div class="">
                                     <a href="javascript: void(0);" class="btn btn-sm btn-link text-muted"><i
                                             class='uil uil-comments-alt'></i> 200 Comments</a>
                                 </div>
                                 <hr class="m-0" />
                                 <div class="mt-3">
                                     <!-- para sa comments -->
-                                    @if (isset($comments[$p['post_id_unique']]))
-                                        @foreach ($comments[$p['post_id_unique']] as $c)
-                                            <div class="d-flex">
-                                                <img class="me-2 mt-1 rounded" src="assets/images/users/avatar-9.jpg"
-                                                    alt="Generic placeholder image" height="32">
-                                                <div class="w-100">
-                                                    <h5 class="m-0"> {{ $c['name'] }} </h5>
-                                                    <p class="text-muted mb-0">
-                                                        <small>{{ \Carbon\Carbon::parse($c['created_at'])->diffForHumans() }}
-                                                        </small>
-                                                    </p>
-                                                    <p class="my-1">{{ $c['messages'] }}</p>
-                                                    <div>
-                                                        <a href="javascript: void(0);"
-                                                            class="btn btn-sm btn-link text-muted p-0">
-                                                            <i class='uil uil-heart me-1'></i> Like
-                                                        </a>
-                                                        <a onclick="addflex('{{ $c['comment_unique_id'] }}')"
-                                                            class="btn btn-sm btn-link text-muted p-0 ps-2">
-                                                            <i class='uil uil-comments-alt me-1'></i> Reply
-                                                        </a>
-                                                    </div>
-                                                    <!-- for reply in the comment  -->
-                                                    @if (isset($replies[$c['comment_unique_id']]))
-                                                        @foreach ($replies[$c['comment_unique_id']] as $r)
-                                                            <div class="d-flex mb-1">
-                                                                <img class="me-2 mt-1 rounded"
-                                                                    src="assets/images/users/avatar-8.jpg"
-                                                                    alt="Generic placeholder image" height="32">
-                                                                <div>
-                                                                    <h5 class="m-0">{{ $r['name'] }} </h5>
-                                                                    <p class="text-muted mb-0">
-                                                                        <small>{{ \Carbon\Carbon::parse($r['created_at'])->diffForHumans() }}</small>
-                                                                    </p>
-                                                                    <p class="">{{ $r['messages'] }}</p>
-                                                                </div>
-                                                            </div>
-                                                        @endforeach
-                                                    @endif
-                                                    <div id="reply-{{ $c['comment_unique_id'] }}">
+                                    <div id="appendhere-{{ $p['post_id_unique'] }}">
+                                        @if (isset($comments[$p['post_id_unique']]))
+                                            @foreach ($comments[$p['post_id_unique']] as $c)
+                                                <div class="d-flex">
+                                                    <img class="me-2 mt-1 rounded"
+                                                        src="assets/images/users/avatar-9.jpg"
+                                                        alt="Generic placeholder image" height="32">
+                                                    <div class="w-100">
+                                                        <div class="d-flex">
+                                                            <h5 class="m-0"> {{ $c['name'] }} </h5> 
 
-                                                    </div>
-                                                    <!-- end d-flex-->
-                                                </div> <!-- end div -->
-                                            </div>
-                                        @endforeach
-                                    @endif
+                                                            <a onclick="addflex('{{ $c['comment_unique_id'] }}')"
+                                                                class="btn btn-sm btn-link text-muted p-0 ps-2">
+                                                                <i class='uil uil-comments-alt me-1'></i> Reply
+                                                            </a>
+                                                        </div>
+                                                        <p class="text-muted mb-0">
+                                                            <small>{{ \Carbon\Carbon::parse($c['created_at'])->diffForHumans() }}
+                                                            </small>
+                                                        </p>
+                                                        <p class="my-1">{{ $c['messages'] }}</p>
+                                                        <div>
+                                                    
+                                                            
+                                                        </div>
+                                                        <!-- for reply in the comment  -->
+                                                        <div id="appendhere-{{ $c['comment_unique_id'] }}">
+                                                            @if (isset($replies[$c['comment_unique_id']]))
+                                                                @foreach ($replies[$c['comment_unique_id']] as $r)
+                                                                    <div class="d-flex mb-1">
+                                                                        <img class="me-2 mt-1 rounded"
+                                                                            src="assets/images/users/avatar-8.jpg"
+                                                                            alt="Generic placeholder image"
+                                                                            height="32">
+                                                                        <div>
+                                                                            <h5 class="m-0">{{ $r['name'] }}
+                                                                            </h5>
+                                                                            <p class="text-muted mb-0">
+                                                                                <small>{{ \Carbon\Carbon::parse($r['created_at'])->diffForHumans() }}</small>
+                                                                            </p>
+                                                                            <p class="">{{ $r['messages'] }}</p>
+                                                                        </div>
+                                                                    </div>
+                                                                @endforeach
+                                                            @endif
+                                                        </div>
+                                                        <div id="reply-{{ $c['comment_unique_id'] }}">
 
-
+                                                        </div>
+                                                        <!-- end d-flex-->
+                                                    </div> <!-- end div -->
+                                                </div>
+                                            @endforeach
+                                        @endif
+                                    </div>
                                     <hr />
 
                                     <!-- reply sa post  -->
@@ -328,7 +332,6 @@
                                             </div>
                                         </div> <!-- end w-100 -->
                                     </div> <!-- end d-flex -->
-
                                 </div>
                             </div> <!-- end card-body -->
                         </div>
@@ -372,11 +375,24 @@
     <!-- end Footer -->
 
     <script>
-        window.addEventListener('DOMContentLoaded', function (){
+        window.addEventListener('DOMContentLoaded', function() {
             window.Echo.channel('newpost_received').listen('NewPostEvent', (event) => {
                 console.log(event);
             });
+            window.Echo.channel('reply_channel').listen('NewReplyEvent', (event) => {
+                var reply = event.newreply[0];
+                var comment_id = event.comment_id;
+                appendNewReply(reply, comment_id);
+            });
+            window.Echo.channel('new_comment').listen('NewCommentEvent', (event) => {
+                var comment = event.newcomment[0];
+                var post_id = event.post_id;
+                console.log(comment);
+                appendNewComment(comment, post_id); // Assuming the event has a comment object
+
+            });
         });
+
 
 
         document.getElementById('uploadBtn').addEventListener('click', function(event) {
@@ -389,29 +405,30 @@
 
             // Create the new HTML content
             const newHtml = `
-                <div class="d-flex mt-1 mb-2">
+                <div class="d-flex mt-1 mb-2" id="removethis">
                     <img class="me-2 rounded" src="assets/images/users/avatar-8.jpg" alt="Generic placeholder image" height="32">
                     <div class="w-100">
                         <div class="input-group">
                             <input type="text" class="form-control border-1 form-control-sm" wire:model="replyrepl" placeholder="Write a reply">
                             <a class="input-group-text" wire:click="saveReply('${id}')" style="cursor: pointer;">
                                 <i class="uil uil-envelope-send"></i>
-                                <!-- Replace with your desired icon -->
                             </a>
                         </div>
                     </div>
                 </div>
             `;
-
+        
+            var element = document.getElementById('removethis');
+            if (element) {
+                element.parentNode.removeChild(element);
+            }
             // Find the container by id
             const container = document.getElementById('reply-' + id);
             if (container) {
-                // Check if the content already exists
-                if (!container.querySelector('.input-group')) {
-                    container.innerHTML += newHtml;
-                } else {
-                    console.log('Content already added for this id.');
-                }
+                // Remove any previously added reply box
+
+                // Add the new reply box
+                container.insertAdjacentHTML('beforeend', newHtml);
             } else {
                 console.error(`Element with id reply-${id} not found.`);
             }

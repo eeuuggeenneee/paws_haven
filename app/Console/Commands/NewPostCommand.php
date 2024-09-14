@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Events\NewCommentEvent;
 use App\Events\NewPostEvent;
 use Illuminate\Console\Command;
 
@@ -27,6 +28,6 @@ class NewPostCommand extends Command
     public function handle(): void
     {
         $id = 'test';
-        event(new NewPostEvent($id));
+        event(new NewCommentEvent($id));
     }
 }
