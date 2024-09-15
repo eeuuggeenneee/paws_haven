@@ -27,11 +27,11 @@
     <link href="assets/css/app-saas.min.css" rel="stylesheet" type="text/css" id="app-style" />
     <!-- Icons css -->
     <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
-    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
-        crossorigin="anonymous"></script>
+
     @vite(['resources/js/app.js'])
     @livewireStyles
 </head>
+
 <body>
     <!-- Begin page -->
     <div class="wrapper">
@@ -43,22 +43,22 @@
                     <!-- Topbar Brand Logo -->
                     <div class="logo-topbar">
                         <!-- Logo light -->
-                        <a href="index.html" class="logo-light">
+                        <a href="{{ url('/home') }}" class="logo-light">
                             <span class="logo-lg">
-                                <img src="assets/images/logo.png" alt="logo">
+                                <img src="assets/logo2.png" alt="logo" height="100%">
                             </span>
                             <span class="logo-sm">
-                                <img src="assets/images/logo-sm.png" alt="small logo">
+                                <h3 class="py-2 px-2 text-white">PH</h3>
                             </span>
                         </a>
 
                         <!-- Logo Dark -->
-                        <a href="index.html" class="logo-dark">
+                        <a href="{{ url('/home') }}" class="logo-dark">
                             <span class="logo-lg">
-                                <img src="assets/images/logo-dark.png" alt="dark logo">
+                                <img src="assets/logo2.png" alt="logo" height="100%">
                             </span>
                             <span class="logo-sm">
-                                <img src="assets/images/logo-dark-sm.png" alt="small logo">
+                                <h3 class="py-2 px-2 text-black">PH</h3>
                             </span>
                         </a>
                     </div>
@@ -270,18 +270,6 @@
 
                             <!-- item-->
                             <a href="javascript:void(0);" class="dropdown-item">
-                                <i class="mdi mdi-lifebuoy me-1"></i>
-                                <span>Support</span>
-                            </a>
-
-                            <!-- item-->
-                            <a href="javascript:void(0);" class="dropdown-item">
-                                <i class="mdi mdi-lock-outline me-1"></i>
-                                <span>Lock Screen</span>
-                            </a>
-
-                            <!-- item-->
-                            <a href="javascript:void(0);" class="dropdown-item">
                                 <i class="mdi mdi-logout me-1"></i>
                                 <span>Logout</span>
                             </a>
@@ -296,22 +284,22 @@
         <div class="leftside-menu">
 
             <!-- Brand Logo Light -->
-            <a href="index.html" class="logo logo-light">
+            <a href="{{ url('/home') }}" class="logo logo-light">
                 <span class="logo-lg">
-                    <img src="assets/images/logo.png" alt="logo">
+                    <h3 class="py-2 px-2 text-white">PAWS HAVEN</h3>
                 </span>
                 <span class="logo-sm">
-                    <img src="assets/images/logo-sm.png" alt="small logo">
+                    <h3 class="mt-3 text-white">PH</h3>
                 </span>
             </a>
 
             <!-- Brand Logo Dark -->
-            <a href="index.html" class="logo logo-dark">
+            <a href="{{ url('/home') }}" class="logo logo-dark">
                 <span class="logo-lg">
-                    <img src="assets/images/logo-dark.png" alt="dark logo">
+                    <h3 class="py-2 px-2 text-white">PAWS HAVEN</h3>
                 </span>
                 <span class="logo-sm">
-                    <img src="assets/images/logo-dark-sm.png" alt="small logo">
+                    <h3 class="mt-3 text-white">PAWS</h3>
                 </span>
             </a>
 
@@ -340,41 +328,13 @@
                 <ul class="side-nav">
                     <li class="side-nav-title">Navigation</li>
                     <li class="side-nav-item">
-                        <a href="#sidebarDashboards" class="side-nav-link">
+                        <a href="{{ url('/home') }}" class="side-nav-link">
                             <i class="uil-home-alt"></i>
-                            <span class="badge bg-success float-end">5</span>
                             <span> Dashboards </span>
                         </a>
                     </li>
-                    <li class="side-nav-item">
-                        <div class="collapse" id="sidebarDashboards">
-                            <ul class="side-nav-second-level">
-                                <li>
-                                    <a href="dashboard-analytics.html">Analytics</a>
-                                </li>
-                                <li>
-                                    <a href="index.html">Ecommerce</a>
-                                </li>
-                                <li>
-                                    <a href="dashboard-projects.html">Projects</a>
-                                </li>
-                                <li>
-                                    <a href="dashboard-crm.html">CRM</a>
-                                </li>
-                                <li>
-                                    <a href="dashboard-wallet.html">E-Wallet</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
                     <li class="side-nav-title">Data Management</li>
 
-                    <li class="side-nav-item">
-                        <a href="apps-chat.html" class="side-nav-link">
-                            <i class="uil-comments-alt"></i>
-                            <span> Chat </span>
-                        </a>
-                    </li>
                     <li class="side-nav-item">
                         <a href="{{ url('/fur-community') }}" class="side-nav-link">
                             <i class="uil-comments-alt"></i>
@@ -416,7 +376,7 @@
 
 
                     <!-- Help Box -->
-                    <div class="help-box text-white text-center">
+                    {{-- <div class="help-box text-white text-center">
                         <a href="javascript: void(0);" class="float-end close-btn text-white">
                             <i class="mdi mdi-close"></i>
                         </a>
@@ -424,7 +384,7 @@
                         <h5 class="mt-3">Unlimited Access</h5>
                         <p class="mb-3">Upgrade to plan to get access to unlimited reports</p>
                         <a href="javascript: void(0);" class="btn btn-secondary btn-sm">Upgrade</a>
-                    </div>
+                    </div> --}}
                     <!-- end Help Box -->
 
 

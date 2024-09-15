@@ -100,7 +100,7 @@
                                                     $images = json_decode($activedog['animal_images']);
                                                 }
                                             @endphp
-                                            <div class="d-lg-flex d-none justify-content-center">
+                                            <div class="d-lg-flex justify-content-center">
                                                 <div id="carouselExampleIndicators" class="carousel slide"
                                                     data-bs-ride="carousel">
                                                     <div class="carousel-inner" role="listbox">

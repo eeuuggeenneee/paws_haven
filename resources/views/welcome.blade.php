@@ -20,6 +20,24 @@
 
     <!-- Icons css -->
     <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+
+    <style>
+        /* Default size for larger screens */
+        .responsive-img {
+            width: 540px;
+            height: 390px;
+            object-fit: cover;
+        }
+
+        /* Size for screens 400px wide or less */
+        @media (max-width: 400px) {
+            .responsive-img {
+                margin-top: 50px;
+                width: 100%;
+                height: 230px;
+            }
+        }
+    </style>
 </head>
 
 <body>
@@ -29,8 +47,8 @@
         <div class="container">
 
             <!-- logo -->
-            <a href="index.html" class="navbar-brand me-lg-5">
-                <img src="assets/images/logo.png" alt="logo" class="logo-dark" height="22" />
+            <a href="{{ url('/home') }}" class="navbar-brand me-lg-5">
+                PAWS HAVEN
             </a>
 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
@@ -47,19 +65,16 @@
                         <a class="nav-link active" href="#">Home</a>
                     </li>
                     <li class="nav-item mx-lg-1">
-                        <a class="nav-link" href="#">Features</a>
+                        <a class="nav-link" href="#">Adopt</a>
                     </li>
                     <li class="nav-item mx-lg-1">
-                        <a class="nav-link" href="#">Pricing</a>
+                        <a class="nav-link" href="#">Lost and Found</a>
                     </li>
                     <li class="nav-item mx-lg-1">
-                        <a class="nav-link" href="#">FAQs</a>
+                        <a class="nav-link" href="#">Donate</a>
                     </li>
                     <li class="nav-item mx-lg-1">
-                        <a class="nav-link" href="#">Clients</a>
-                    </li>
-                    <li class="nav-item mx-lg-1">
-                        <a class="nav-link" href="#">Contact</a>
+                        <a class="nav-link" href="#">About Us</a>
                     </li>
                 </ul>
 
@@ -94,14 +109,16 @@
                         <p class="mb-4 font-16 text-white-50">Cityland Dog Pound in Sta. Maria, Bulacan, is an animal
                             control facility that serves the local community by managing and caring for stray dogs and
                             other animals found within the municipality. </p>
-                        <a href="#" target="_blank" class="btn btn-lg font-16 btn-success">About <i
+                        <a data-bs-toggle="modal" data-bs-target="#primary-header-modal"
+                            class="btn btn-lg font-16 btn-success">View More <i
                                 class="mdi mdi-arrow-right ms-1"></i></a>
 
                     </div>
                 </div>
                 <div class="col-md-5 offset-md-2">
                     <div class="text-md-end mt-3 mt-md-0">
-                        <img src="assets/images/svg/features-1.svg" alt="" class="img-fluid" />
+                        <img src="assets/images/dogfound.png" alt="" class="img-fluid responsive-img"/>
+
                     </div>
                 </div>
             </div>
@@ -149,8 +166,9 @@
                                         fill="#000000" opacity="1" data-original="#000000" class=""></path>
                                 </g>
                             </svg></h1>
-                        <h3><span class="text-primary">Paws Haven<br></span> is a <span class="text-primary">lost and
-                                found</span> website dedicated to helping dog owners report and locate lost or found
+                        <h3><span class="text-primary">Paws Haven</span> is a <span class="text-primary">lost and
+                                found</span> website <br> dedicated to helping dog owners report and locate lost or
+                            found
                             dogs within their community.</h3>
                         <p class="text-muted mt-2">These pounds are typically overseen by the
                             local government unit (LGU) or by private organizations in collaboration with the LGU. Their
@@ -184,22 +202,59 @@
             </div>
             <div class="row mt-2 py-5 align-items-center">
                 <div class="col-lg-5 col-md-6">
-                    <img src="assets/images/svg/features-1.svg" class="img-fluid" alt="">
+                    <div id="carouselExampleCaption" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-inner" role="listbox">
+                            <div class="carousel-item active">
+                                <img src="assets/images/small/small-1.jpg" alt="..." class="d-block img-fluid">
+                                <div class="carousel-caption d-none d-md-block">
+                                    <h3 class="text-white">First slide label</h3>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                                </div>
+                            </div>
+                            <div class="carousel-item">
+                                <img src="assets/images/small/small-3.jpg" alt="..." class="d-block img-fluid">
+                                <div class="carousel-caption d-none d-md-block">
+                                    <h3 class="text-white">Second slide label</h3>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                                </div>
+                            </div>
+                            <div class="carousel-item">
+                                <img src="assets/images/small/small-2.jpg" alt="..." class="d-block img-fluid">
+                                <div class="carousel-caption d-none d-md-block">
+                                    <h3 class="text-white">Third slide label</h3>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <a class="carousel-control-prev" href="#carouselExampleCaption" role="button"
+                            data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </a>
+                        <a class="carousel-control-next" href="#carouselExampleCaption" role="button"
+                            data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </a>
+                    </div>
                 </div>
                 <div class="col-lg-6 offset-md-1 col-md-5">
-                    <h3 class="fw-normal">Inbuilt applications and pages</h3>
-                    <p class="text-muted mt-3">Hyper comes with a variety of ready-to-use applications and pages that
-                        help to speed up the development</p>
+                    <h3 class="fw-normal mt-3">Why Adopt a Dog</h3>
+                    <p class="text-muted mt-3">It fosters a sense of responsibility and compassion, helping to create a
+                        kinder society where animals are given the care and respect they deserve. Additionally, adopted
+                        dogs often develop a deep bond with their new families, as they sense the second chance they’ve
+                        been given.</p>
 
                     <div class="mt-4">
-                        <p class="text-muted"><i class="mdi mdi-circle-medium text-primary"></i> Breed </p>
-                        <p class="text-muted"><i class="mdi mdi-circle-medium text-primary"></i> Color </p>
-                        <p class="text-muted"><i class="mdi mdi-circle-medium text-primary"></i> Gender </p>
+                        <p class="text-muted"><i class="mdi mdi-circle-medium text-primary"></i> Save a Life </p>
+                        <p class="text-muted"><i class="mdi mdi-circle-medium text-primary"></i> Companionship and
+                            Love </p>
+                        <p class="text-muted"><i class="mdi mdi-circle-medium text-primary"></i> Lower Costs </p>
 
                     </div>
 
-                    <a href="#" class="btn btn-success rounded-pill mt-3">Adopt Dog <i
-                            class="mdi mdi-arrow-right ms-1"></i></a>
+                    <a class="btn btn-success rounded-pill mt-3" data-bs-toggle="modal"
+                        data-bs-target="#primary-header-modal">Adopt Dog <i class="mdi mdi-arrow-right ms-1"></i></a>
 
                 </div>
             </div>
@@ -211,24 +266,60 @@
                         taken in. The facility usually keeps the dogs for a specific period, allowing time for owners to
                         reclaim their pets. After this holding period, if a dog is not claimed, it might be put up for
                         adoption or, in some unfortunate cases, humanely euthanized, depending on local regulations.</p>
+                    <h4 class="mt-4 fw-normal">What Happens to Lost Dogs at the Pound:</h4>
 
-                    <div class="mt-4">
-                        <p class="text-muted"><i class="mdi mdi-circle-medium text-success"></i> Built with latest
-                            Bootstrap</p>
-                        <p class="text-muted"><i class="mdi mdi-circle-medium text-success"></i> Extensive use of SCSS
-                            variables</p>
-                        <p class="text-muted"><i class="mdi mdi-circle-medium text-success"></i> Well documented and
-                            structured code</p>
-                        <p class="text-muted"><i class="mdi mdi-circle-medium text-success"></i> Detailed
-                            Documentation</p>
+                    <div class="ms-3 mt-1">
+
+                        <p class="text-muted"><i class="mdi mdi-circle-medium text-success"></i> Safe and Cared For
+                        </p>
+                        <p class="text-muted"><i class="mdi mdi-circle-medium text-success"></i> Health Check &
+                            Shelter Care </p>
+                        <p class="text-muted"><i class="mdi mdi-circle-medium text-success"></i> Efforts to Locate
+                            Owners </p>
+                        <p class="text-muted"><i class="mdi mdi-circle-medium text-success"></i> Adoption
+                            Opportunities </p>
                     </div>
 
-                    <a href="#" class="btn btn-info rounded-pill mt-3">View Dog <i
-                            class="mdi mdi-arrow-right ms-1"></i></a>
+                    <a class="btn btn-info rounded-pill mt-3" data-bs-toggle="modal"
+                        data-bs-target="#primary-header-modal">View Dog <i class="mdi mdi-arrow-right ms-1"></i></a>
 
                 </div>
                 <div class="col-lg-5 col-md-6 offset-md-1">
-                    <img src="assets/images/svg/features-2.svg" class="img-fluid" alt="">
+                    <div id="carouselExampleCaption" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-inner" role="listbox">
+                            <div class="carousel-item active">
+                                <img src="assets/images/small/small-1.jpg" alt="..." class="d-block img-fluid">
+                                <div class="carousel-caption d-none d-md-block">
+                                    <h3 class="text-white">First slide label</h3>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                                </div>
+                            </div>
+                            <div class="carousel-item">
+                                <img src="assets/images/small/small-3.jpg" alt="..." class="d-block img-fluid">
+                                <div class="carousel-caption d-none d-md-block">
+                                    <h3 class="text-white">Second slide label</h3>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                                </div>
+                            </div>
+                            <div class="carousel-item">
+                                <img src="assets/images/small/small-2.jpg" alt="..." class="d-block img-fluid">
+                                <div class="carousel-caption d-none d-md-block">
+                                    <h3 class="text-white">Third slide label</h3>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <a class="carousel-control-prev" href="#carouselExampleCaption" role="button"
+                            data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </a>
+                        <a class="carousel-control-next" href="#carouselExampleCaption" role="button"
+                            data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </a>
+                    </div>
                 </div>
             </div>
 
@@ -311,7 +402,6 @@
 
                                 </li>
                             </ul>
-                            <button class="btn btn-primary mt-4 mb-2 rounded-pill">Choose Plan</button>
                         </div>
                     </div>
                     <!-- end Pricing_card -->
@@ -449,7 +539,6 @@
                                     await
                                     adoption.</li>
                             </ul>
-                            <button class="btn btn-primary mt-4 mb-2 rounded-pill">Choose Plan</button>
                         </div>
                     </div>
                     <!-- end Pricing_card -->
@@ -508,8 +597,7 @@
                     <p class="text-light text-opacity-50 mt-2 text-center mb-0">© 2024 -
                         <script>
                             document.write(new Date().getFullYear())
-                        </script> Paws Haven . Design and coded by
-                        Coderthemes
+                        </script> Paws Haven . 
                     </p>
 
                 </div>
@@ -540,13 +628,15 @@
                     <div class="tab-pane" id="home1">
                         <div class="card">
                             <!-- Logo -->
-                            <div class="card-header  text-center bg-primary  " style="border-radius: 0 !important">
-                                <a href="index.html">
-                                    <span><img src="assets/images/logo.png" alt="logo" height="22"></span>
+                            <div class="card-header  text-center bg-white  " style="border-radius: 0 !important">
+                                <a href="{{ url('/home') }}">
+                                    <span>
+                                        <img src="assets/logo2.png" alt="logo" height="100%">
+                                    </span>
                                 </a>
                             </div>
 
-                            <div class="card-body p-4">
+                            <div class="card-body p-2">
 
                                 <div class="text-center w-75 m-auto">
                                     <h4 class="text-dark-50 text-center pb-0 fw-bold">Sign In</h4>
@@ -609,13 +699,15 @@
                     <div class="tab-pane show active" id="profile1">
                         <div class="card">
                             <!-- Logo-->
-                            <div class="card-header py-4 text-center bg-primary" style="border-radius: 0 !important">
-                                <a href="index.html">
-                                    <span><img src="assets/images/logo.png" alt="logo" height="22"></span>
+                            <div class="card-header py-2 text-center bg-white" style="border-radius: 0 !important">
+                                <a href="{{ url('/home') }}">
+                                    <span>
+                                        <span><img src="assets/logo2.png" alt="logo" height="100%"></span>
+                                    </span>
                                 </a>
                             </div>
 
-                            <div class="card-body p-4">
+                            <div class="card-body p-2">
 
                                 <div class="text-center w-75 m-auto">
                                     <h4 class="text-dark-50 text-center mt-0 fw-bold">Free Sign Up</h4>
@@ -653,7 +745,7 @@
                                     </div>
 
                                     <div class="mb-3">
-                               
+
                                         <label for="password" class="form-label">Password</label>
                                         <div class="input-group input-group-merge">
                                             <input id="password" type="password"
@@ -683,7 +775,7 @@
                                             </div>
                                         </div>
                                     </div>
-                               
+
                                     <div class="mb-3">
                                         <div class="form-check">
                                             <input type="checkbox" class="form-check-input" id="checkbox-signup">

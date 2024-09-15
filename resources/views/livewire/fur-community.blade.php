@@ -41,23 +41,17 @@
                                 <img class="d-flex align-self-start rounded me-2" src="assets/images/users/avatar-5.jpg"
                                     alt="Dominic Keller" height="48">
                                 <div class="w-100 overflow-hidden">
-                                    <h5 class="mt-1 mb-0">Dominic Keller</h5>
-                                    <p class="mb-1 mt-1 text-muted">California, USA</p>
+                                    <h5 class="mt-1 mb-0">{{Auth::user()->name}}</h5>
+                                    <p class="mb-1 mt-1 text-muted">User</p>
                                 </div>
                             </div>
 
                             <div class="list-group list-group-flush mt-2">
                                 <a href="javascript:void(0);"
                                     class="list-group-item list-group-item-action text-primary border-0"><i
-                                        class='uil uil-images me-1'></i> News Feed</a>
+                                        class='uil uil-images me-1'></i> Profile </a>
                                 <a href="javascript:void(0);" class="list-group-item list-group-item-action border-0"><i
-                                        class='uil uil-comment-alt-message me-1'></i> Messages</a>
-                                <a href="javascript:void(0);" class="list-group-item list-group-item-action border-0"><i
-                                        class='uil uil-calendar-alt me-1'></i> Events</a>
-                                <a href="javascript:void(0);" class="list-group-item list-group-item-action border-0"><i
-                                        class='uil uil-users-alt me-1'></i> Groups</a>
-                                <a href="javascript:void(0);" class="list-group-item list-group-item-action border-0"><i
-                                        class='uil uil-copy me-1'></i> Pages</a>
+                                        class='uil uil-comment-alt-message me-1'></i> My Post </a>
                             </div>
                         </div>
                     </div>
@@ -65,24 +59,84 @@
 
                     <!-- event info -->
                     <div class="card">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <h4 class="header-title">Most Clicked Dogs</h4>
+                                <div class="dropdown">
+                                    <a href="#" class="dropdown-toggle arrow-none card-drop"
+                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class="mdi mdi-dots-horizontal"></i>
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-end">
+                                        <!-- item-->
+                                        <a href="javascript:void(0);" class="dropdown-item">Today</a>
+                                        <!-- item-->
+                                        <a href="javascript:void(0);" class="dropdown-item">Yesterday</a>
+                                        <!-- item-->
+                                        <a href="javascript:void(0);" class="dropdown-item">Last Week</a>
+                                        <!-- item-->
+                                        <a href="javascript:void(0);" class="dropdown-item">Last Month</a>
+                                    </div>
+                                </div>
+                            </div>
+    
+                            <div class="d-flex mt-3">
+                                <i class='uil uil-arrow-growth me-2 font-18 text-primary'></i>
+                                <div>
+                                    <a class="mt-1 font-14" href="javascript:void(0);">
+                                        <strong>Jaleel</strong>
+                                        <span class="text-muted"><br>
+                                            Iure maxime quibusdam nihil facilis sunt quia.
+                                        </span>
+                                    </a>
+                                </div>
+                            </div>
+    
+                            <div class="d-flex mt-3">
+                                <i class='uil uil-arrow-growth me-2 font-18 text-primary'></i>
+                                <div>
+                                    <a class="mt-1 font-14" href="javascript:void(0);">
+                                        <strong>Gina </strong><br>
+                                        <span class="text-muted">
+                                            Omnis voluptas quam quaerat ut dolore velit.
+                                        </span>
+                                    </a>
+                                </div>
+                            </div>
+    
+                            <div class="d-flex mt-3">
+                                <i class='uil uil-arrow-growth me-2 font-18 text-primary'></i>
+                                <div>
+                                    <a class="mt-1 font-14" href="javascript:void(0);">
+                                        <strong>Gracie </strong>
+                                        <span class="text-muted"><br>
+                                            Culpa ab asperiores veritatis nam ea qui.
+                                        </span>
+                                    </a>
+                                </div>
+                            </div>
+    
+                        </div> <!-- end card-body-->
+                    </div>
+                    {{-- <div class="card">
                         <div class="card-body p-2">
                             <div class="list-group list-group-flush my-2">
                                 <a href="javascript:void(0);" class="list-group-item list-group-item-action border-0"><i
-                                        class='uil uil-calendar-alt me-1'></i> 3 events this week</a>
+                                        class='uil uil-calendar-alt me-1'></i> Jeel • BullDog • Male </a>
                                 <a href="javascript:void(0);" class="list-group-item list-group-item-action border-0"><i
                                         class='uil uil-calender me-1'></i> Eva's birthday today</a>
                                 <a href="javascript:void(0);" class="list-group-item list-group-item-action border-0"><i
                                         class='uil uil-bookmark me-1'></i> Jenny's wedding tomorrow</a>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                     <!-- end event info -->
 
                     <!-- news -->
                     <!-- end card-->
                 </div> <!-- end col -->
-
-                <div class="col-xxl-6 col-lg-12 order-lg-2 order-xxl-1">
+             
+                <div class="col-xxl-9 col-lg-12 order-lg-2 order-xxl-1">
                     <!-- new post -->
                     <div class="card">
                         <div class="card-body p-0">
@@ -94,20 +148,7 @@
                                         <span class="d-none d-md-block">Create Post</span>
                                     </a>
                                 </li>
-                                <li class="nav-item">
-                                    <a href="#photo-video" data-bs-toggle="tab" aria-expanded="true"
-                                        class="nav-link px-3 py-2">
-                                        <i class="mdi mdi-image font-18 d-md-none d-block"></i>
-                                        <span class="d-none d-md-block">Photos/Videos</span>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="#story" data-bs-toggle="tab" aria-expanded="true"
-                                        class="nav-link px-3 py-2">
-                                        <i class="mdi mdi-book-open-variant font-18 d-md-none d-block"></i>
-                                        <span class="d-none d-md-block">Story</span>
-                                    </a>
-                                </li>
+                               
                             </ul> <!-- end nav-->
                             <div class="tab-content">
                                 <div class="tab-pane show active p-3" id="newpost">
@@ -269,69 +310,7 @@
                     </div>
                     <!-- end loader -->
                 </div>
-
-                <div class="col-xxl-3 col-lg-6 order-lg-1 order-xxl-1 fixed-column">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="d-flex justify-content-between align-items-center mb-2">
-                                <h4 class="header-title">Trending</h4>
-                                <div class="dropdown">
-                                    <a href="#" class="dropdown-toggle arrow-none card-drop"
-                                        data-bs-toggle="dropdown" aria-expanded="false">
-                                        <i class="mdi mdi-dots-horizontal"></i>
-                                    </a>
-                                    <div class="dropdown-menu dropdown-menu-end">
-                                        <!-- item-->
-                                        <a href="javascript:void(0);" class="dropdown-item">Today</a>
-                                        <!-- item-->
-                                        <a href="javascript:void(0);" class="dropdown-item">Yesterday</a>
-                                        <!-- item-->
-                                        <a href="javascript:void(0);" class="dropdown-item">Last Week</a>
-                                        <!-- item-->
-                                        <a href="javascript:void(0);" class="dropdown-item">Last Month</a>
-                                    </div>
-                                </div>
-                            </div>
-    
-                            <div class="d-flex mt-3">
-                                <i class='uil uil-arrow-growth me-2 font-18 text-primary'></i>
-                                <div>
-                                    <a class="mt-1 font-14" href="javascript:void(0);">
-                                        <strong>Golden Globes:</strong>
-                                        <span class="text-muted">
-                                            The 27 Best moments from the Golden Globe Awards
-                                        </span>
-                                    </a>
-                                </div>
-                            </div>
-    
-                            <div class="d-flex mt-3">
-                                <i class='uil uil-arrow-growth me-2 font-18 text-primary'></i>
-                                <div>
-                                    <a class="mt-1 font-14" href="javascript:void(0);">
-                                        <strong>World Cricket:</strong>
-                                        <span class="text-muted">
-                                            India has won ICC T20 World Cup Yesterday
-                                        </span>
-                                    </a>
-                                </div>
-                            </div>
-    
-                            <div class="d-flex mt-3">
-                                <i class='uil uil-arrow-growth me-2 font-18 text-primary'></i>
-                                <div>
-                                    <a class="mt-1 font-14" href="javascript:void(0);">
-                                        <strong>Antartica:</strong>
-                                        <span class="text-muted">
-                                            Metling of Totten Glacier could cause high risk to areas near by sea
-                                        </span>
-                                    </a>
-                                </div>
-                            </div>
-    
-                        </div> <!-- end card-body-->
-                    </div>
-                </div>
+              
                
                 <!-- end col -->
             </div> <!--end row -->
