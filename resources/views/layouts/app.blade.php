@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-layout="topnav">
 
 
 <head>
@@ -36,6 +36,7 @@
     <!-- Begin page -->
     <div class="wrapper">
         <!-- ========== Topbar Start ========== -->
+        <!-- ========== Topbar End ========== -->
         <div class="navbar-custom">
             <div class="topbar container-fluid">
                 <div class="d-flex align-items-center gap-lg-2 gap-1">
@@ -69,7 +70,8 @@
                     </button>
 
                     <!-- Horizontal Menu Toggle Button -->
-                    <button class="navbar-toggle" data-bs-toggle="collapse" data-bs-target="#topnav-menu-content">
+                    <button class="navbar-toggle" data-bs-toggle="collapse"
+                        data-bs-target="#topnav-menu-content">
                         <div class="lines">
                             <span></span>
                             <span></span>
@@ -92,7 +94,8 @@
                                         <h6 class="m-0 font-16 fw-semibold"> Notification</h6>
                                     </div>
                                     <div class="col-auto">
-                                        <a href="javascript: void(0);" class="text-dark text-decoration-underline">
+                                        <a href="javascript: void(0);"
+                                            class="text-dark text-decoration-underline">
                                             <small>Clear All</small>
                                         </a>
                                     </div>
@@ -118,7 +121,8 @@
                                             <div class="flex-grow-1 text-truncate ms-2">
                                                 <h5 class="noti-item-title fw-semibold font-14">Datacorp <small
                                                         class="fw-normal text-muted ms-1">1 min ago</small></h5>
-                                                <small class="noti-item-subtitle text-muted">Caleb Flakelar commented on
+                                                <small class="noti-item-subtitle text-muted">Caleb Flakelar
+                                                    commented on
                                                     Admin</small>
                                             </div>
                                         </div>
@@ -163,8 +167,8 @@
                                                 </div>
                                             </div>
                                             <div class="flex-grow-1 text-truncate ms-2">
-                                                <h5 class="noti-item-title fw-semibold font-14">Cristina Pride <small
-                                                        class="fw-normal text-muted ms-1">1 day ago</small></h5>
+                                                <h5 class="noti-item-title fw-semibold font-14">Cristina Pride
+                                                    <small class="fw-normal text-muted ms-1">1 day ago</small></h5>
                                                 <small class="noti-item-subtitle text-muted">Hi, How are you? What
                                                     about our next meeting</small>
                                             </div>
@@ -188,7 +192,8 @@
                                             </div>
                                             <div class="flex-grow-1 text-truncate ms-2">
                                                 <h5 class="noti-item-title fw-semibold font-14">Datacorp</h5>
-                                                <small class="noti-item-subtitle text-muted">Caleb Flakelar commented
+                                                <small class="noti-item-subtitle text-muted">Caleb Flakelar
+                                                    commented
                                                     on Admin</small>
                                             </div>
                                         </div>
@@ -232,8 +237,8 @@
                     </li>
 
                     <li class="d-none d-sm-inline-block">
-                        <div class="nav-link" id="light-dark-mode" data-bs-toggle="tooltip" data-bs-placement="left"
-                            title="Theme Mode">
+                        <div class="nav-link" id="light-dark-mode" data-bs-toggle="tooltip"
+                            data-bs-placement="left" title="Theme Mode">
                             <i class="ri-moon-line font-22"></i>
                         </div>
                     </li>
@@ -278,105 +283,134 @@
                 </ul>
             </div>
         </div>
-        <!-- ========== Topbar End ========== -->
-
         <!-- ========== Left Sidebar Start ========== -->
-        <div class="leftside-menu">
-
-            <!-- Brand Logo Light -->
-            <a href="{{ url('/home') }}" class="logo logo-light">
-                <span class="logo-lg">
-                    <h3 class="py-2 px-2 text-white">PAWS HAVEN</h3>
-                </span>
-                <span class="logo-sm">
-                    <h3 class="mt-3 text-white">PH</h3>
-                </span>
-            </a>
-
-            <!-- Brand Logo Dark -->
-            <a href="{{ url('/home') }}" class="logo logo-dark">
-                <span class="logo-lg">
-                    <h3 class="py-2 px-2 text-white">PAWS HAVEN</h3>
-                </span>
-                <span class="logo-sm">
-                    <h3 class="mt-3 text-white">PAWS</h3>
-                </span>
-            </a>
-
-            <!-- Sidebar Hover Menu Toggle Button -->
-            <div class="button-sm-hover" data-bs-toggle="tooltip" data-bs-placement="right"
-                title="Show Full Sidebar">
-                <i class="ri-checkbox-blank-circle-line align-middle"></i>
-            </div>
-
-            <!-- Full Sidebar Menu Close Button -->
-            <div class="button-close-fullsidebar">
-                <i class="ri-close-fill align-middle"></i>
-            </div>
-
-            <!-- Sidebar -->
-            <div class="h-100" id="leftside-menu-container" data-simplebar>
-                <div class="leftbar-user">
-                    <a href="pages-profile.html">
-                        <img src="assets/images/users/avatar-1.jpg" alt="user-image" height="42"
-                            class="rounded-circle shadow-sm">
-                        <span class="leftbar-user-name mt-2">Dominic Keller</span>
-                    </a>
-                </div>
-
-                <!--- Sidemenu -->
-                <ul class="side-nav">
-                    <li class="side-nav-title">Navigation</li>
-                    <li class="side-nav-item">
-                        <a href="{{ url('/home') }}" class="side-nav-link">
-                            <i class="uil-home-alt"></i>
-                            <span> Dashboards </span>
-                        </a>
-                    </li>
-                    <li class="side-nav-title">Data Management</li>
-
-                    <li class="side-nav-item">
-                        <a href="{{ url('/fur-community') }}" class="side-nav-link">
-                            <i class="uil-comments-alt"></i>
-                            <span> Fur Community </span>
-                        </a>
-                    </li>
-                    <li class="side-nav-item">
-                        <a href="{{ url('/adopt-a-dog') }}" class="side-nav-link">
-                            <i class="uil-comments-alt"></i>
-                            <span> Adoption Form </span>
-                        </a>
-                    </li>
-                    <li class="side-nav-item">
-                        <a href="{{ url('/report-lost-dog') }}" class="side-nav-link">
-                            <i class="uil-comments-alt"></i>
-                            <span> Report Form </span>
-                        </a>
-                    </li>
-
-                    <li class="side-nav-item">
-                        <a data-bs-toggle="collapse" href="#sidebarExtendedUI" aria-expanded="false"
-                            aria-controls="sidebarExtendedUI" class="side-nav-link">
-                            <i class="uil-package"></i>
-                            <span> Pets List</span>
-                            <span class="menu-arrow"></span>
-                        </a>
-                        <div class="collapse" id="sidebarExtendedUI">
-                            <ul class="side-nav-second-level">
-                                <li>
-                                    <a href="{{ url('/animal-list') }}">Animal Lists</a>
+        @if (Auth::user()->role == 'user')
+            <div class="topnav">
+                <div class="container-fluid">
+                    <nav class="navbar navbar-expand-lg">
+                        <div class="collapse navbar-collapse" id="topnav-menu-content">
+                            <ul class="navbar-nav">
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link" href="{{ url('/home') }}" role="button">
+                                        <i class="uil-home-alt"></i>Dashboards 
+                                    </a>
                                 </li>
-                                <li>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link" href="{{ url('/fur-community') }}" role="button">
+                                        <i class="uil-dashboard"></i>Fur Community 
+                                    </a>
+                                </li>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link" href="{{ url('/adopt-a-dog') }}" role="button">
+                                        <i class="uil-dashboard"></i>Adoption 
+                                    </a>
+                                </li>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link" href="{{ url('/report-lost-dog') }}" role="button">
+                                        <i class="uil-dashboard"></i>Report Lost Dog 
+                                    </a>
+                                </li>
                             </ul>
                         </div>
-                    </li>
+                    </nav>
+                </div>
+            </div>
+        @else
+            <div class="leftside-menu">
+       
+                <a href="{{ url('/home') }}" class="logo logo-light">
+                    <span class="logo-lg">
+                        <h3 class="py-2 px-2 text-white">PAWS HAVEN</h3>
+                    </span>
+                    <span class="logo-sm">
+                        <h3 class="mt-3 text-white">PH</h3>
+                    </span>
+                </a>
+
+                <!-- Brand Logo Dark -->
+                <a href="{{ url('/home') }}" class="logo logo-dark">
+                    <span class="logo-lg">
+                        <h3 class="py-2 px-2 text-white">PAWS HAVEN</h3>
+                    </span>
+                    <span class="logo-sm">
+                        <h3 class="mt-3 text-white">PAWS</h3>
+                    </span>
+                </a>
+
+                <!-- Sidebar Hover Menu Toggle Button -->
+                <div class="button-sm-hover" data-bs-toggle="tooltip" data-bs-placement="right"
+                    title="Show Full Sidebar">
+                    <i class="ri-checkbox-blank-circle-line align-middle"></i>
+                </div>
+
+                <!-- Full Sidebar Menu Close Button -->
+                <div class="button-close-fullsidebar">
+                    <i class="ri-close-fill align-middle"></i>
+                </div>
+
+                <!-- Sidebar -->
+                <div class="h-100" id="leftside-menu-container" data-simplebar>
+                    <div class="leftbar-user">
+                        <a href="pages-profile.html">
+                            <img src="assets/images/users/avatar-1.jpg" alt="user-image" height="42"
+                                class="rounded-circle shadow-sm">
+                            <span class="leftbar-user-name mt-2">Dominic Keller</span>
+                        </a>
+                    </div>
+
+                    <!--- Sidemenu -->
+                    <ul class="side-nav">
+                        <li class="side-nav-title">Navigation</li>
+                        <li class="side-nav-item">
+                            <a href="{{ url('/home') }}" class="side-nav-link">
+                                <i class="uil-home-alt"></i>
+                                <span> Dashboards </span>
+                            </a>
+                        </li>
+                        <li class="side-nav-title">Data Management</li>
+
+                        <li class="side-nav-item">
+                            <a href="{{ url('/fur-community') }}" class="side-nav-link">
+                                <i class="uil-comments-alt"></i>
+                                <span> Fur Community </span>
+                            </a>
+                        </li>
+                        <li class="side-nav-item">
+                            <a href="{{ url('/adopt-a-dog') }}" class="side-nav-link">
+                                <i class="uil-comments-alt"></i>
+                                <span> Adoption Form </span>
+                            </a>
+                        </li>
+                        <li class="side-nav-item">
+                            <a href="{{ url('/report-lost-dog') }}" class="side-nav-link">
+                                <i class="uil-comments-alt"></i>
+                                <span> Report Form </span>
+                            </a>
+                        </li>
+
+                        <li class="side-nav-item">
+                            <a data-bs-toggle="collapse" href="#sidebarExtendedUI" aria-expanded="false"
+                                aria-controls="sidebarExtendedUI" class="side-nav-link">
+                                <i class="uil-package"></i>
+                                <span> Pets List</span>
+                                <span class="menu-arrow"></span>
+                            </a>
+                            <div class="collapse" id="sidebarExtendedUI">
+                                <ul class="side-nav-second-level">
+                                    <li>
+                                        <a href="{{ url('/animal-list') }}">Animal Lists</a>
+                                    </li>
+                                    <li>
+                                </ul>
+                            </div>
+                        </li>
 
 
 
 
 
-                    <!-- Help Box -->
-                    {{-- <div class="help-box text-white text-center">
+                        <!-- Help Box -->
+                        {{-- <div class="help-box text-white text-center">
                         <a href="javascript: void(0);" class="float-end close-btn text-white">
                             <i class="mdi mdi-close"></i>
                         </a>
@@ -385,15 +419,17 @@
                         <p class="mb-3">Upgrade to plan to get access to unlimited reports</p>
                         <a href="javascript: void(0);" class="btn btn-secondary btn-sm">Upgrade</a>
                     </div> --}}
-                    <!-- end Help Box -->
+                        <!-- end Help Box -->
 
 
-                </ul>
-                <!--- End Sidemenu -->
+                    </ul>
+                    <!--- End Sidemenu -->
 
-                <div class="clearfix"></div>
+                    <div class="clearfix"></div>
+                </div>
             </div>
-        </div>
+        @endif
+
         <!-- ========== Left Sidebar End ========== -->
 
         <!-- ============================================================== -->
@@ -425,6 +461,7 @@
 
 
     @livewireScripts
+    
     <!-- Dropzone File Upload js -->
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 

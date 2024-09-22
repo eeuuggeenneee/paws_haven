@@ -1,6 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
- @livewire('add-lost-dog')
- @livewire('modals-dogs')
+    <div class="container-fluid">
+        @livewire('add-lost-dog')
+        @livewire('modals-dogs')
+    </div>
 @endsection
