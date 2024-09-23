@@ -117,7 +117,7 @@
                 </div>
                 <div class="col-md-5 offset-md-2">
                     <div class="text-md-end mt-3 mt-md-0">
-                        <img src="assets/images/dogfound.png" alt="" class="img-fluid responsive-img"/>
+                        <img src="assets/images/dogfound.png" alt="" class="img-fluid responsive-img" />
 
                     </div>
                 </div>
@@ -597,7 +597,7 @@
                     <p class="text-light text-opacity-50 mt-2 text-center mb-0">© 2024 -
                         <script>
                             document.write(new Date().getFullYear())
-                        </script> Paws Haven . 
+                        </script> Paws Haven .
                     </p>
 
                 </div>
@@ -610,14 +610,14 @@
             <div class="modal-content">
                 <ul class="nav nav-pills bg-nav-pills nav-justified border-bottom">
                     <li class="nav-item">
-                        <a href="#home1" data-bs-toggle="tab" aria-expanded="false" class="nav-link rounded-0">
+                        <a href="#home1" data-bs-toggle="tab" aria-expanded="false" id="logintab"
+                            class="nav-link rounded-0 active">
                             <i class="mdi mdi-home-variant d-md-none d-block"></i>
                             <span class="d-none d-md-block">Log in</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#profile1" data-bs-toggle="tab" aria-expanded="true"
-                            class="nav-link rounded-0 active">
+                        <a href="#profile1" data-bs-toggle="tab" aria-expanded="true" class="nav-link rounded-0 " id="regtab">
                             <i class="mdi mdi-account-circle d-md-none d-block"></i>
                             <span class="d-none d-md-block">Sign up</span>
                         </a>
@@ -625,7 +625,7 @@
                 </ul>
 
                 <div class="tab-content">
-                    <div class="tab-pane" id="home1">
+                    <div class="tab-pane show active" id="home1">
                         <div class="card">
                             <!-- Logo -->
                             <div class="card-header  text-center bg-white  " style="border-radius: 0 !important">
@@ -646,6 +646,11 @@
 
                                 <form method="POST" action="{{ route('login') }}">
                                     @csrf
+                                    @if (session('error'))
+                                        <div class="alert alert-danger">
+                                            {{ session('error') }}
+                                        </div>
+                                    @endif
                                     <div class="mb-3">
                                         <label for="emailaddress" class="form-label">Email address</label>
                                         <input id="email" type="email"
@@ -660,8 +665,8 @@
                                     </div>
 
                                     <div class="mb-3">
-                                        <a href="pages-recoverpw.html" class="text-muted float-end"><small>Forgot your
-                                                password?</small></a>
+                                        {{-- <a href="pages-recoverpw.html" class="text-muted float-end"><small>Forgot your
+                                                password?</small></a> --}}
                                         <label for="password" class="form-label">Password</label>
                                         <div class="input-group input-group-merge">
                                             <input id="password" type="password"
@@ -696,7 +701,7 @@
                             </div> <!-- end card-body -->
                         </div>
                     </div>
-                    <div class="tab-pane show active" id="profile1">
+                    <div class="tab-pane " id="profile1">
                         <div class="card">
                             <!-- Logo-->
                             <div class="card-header py-2 text-center bg-white" style="border-radius: 0 !important">
@@ -715,12 +720,12 @@
                                         less than a minute </p>
                                 </div>
 
-                                <form method="POST" action="{{ route('register') }}">
+                                <form method="POST" action="{{ route('register') }}" id="registrationForm">
                                     @csrf
 
                                     <div class="mb-3">
                                         <label for="fullname" class="form-label">Full Name</label>
-                                        <input id="name" type="text"
+                                        <input id="rname" type="text"
                                             class="form-control @error('name') is-invalid @enderror" name="name"
                                             value="{{ old('name') }}" required autocomplete="name" autofocus>
 
@@ -733,7 +738,7 @@
 
                                     <div class="mb-3">
                                         <label for="emailaddress" class="form-label">Email address</label>
-                                        <input id="email" type="email"
+                                        <input id="remail" type="email"
                                             class="form-control @error('email') is-invalid @enderror" name="email"
                                             value="{{ old('email') }}" required autocomplete="email">
 
@@ -778,7 +783,8 @@
 
                                     <div class="mb-3">
                                         <div class="form-check">
-                                            <input type="checkbox" class="form-check-input" id="checkbox-signup">
+                                            <input type="checkbox" class="form-check-input" id="checkbox-signup"
+                                                required>
                                             <label class="form-check-label" for="checkbox-signup">I accept <a
                                                     href="#" class="text-muted">Terms and Conditions</a></label>
                                         </div>
@@ -803,7 +809,27 @@
 
     <!-- App js -->
     <script src="assets/js/app.min.js"></script>
-
+    <script>
+        var errorMessage = @json(session('error'));
+        var validationErrors = @json($errors->toArray());
+        if (Object.keys(validationErrors).length > 0) {
+            if (validationErrors.is_register) {
+                var modalElement = document.getElementById('primary-header-modal');
+                var modal = new bootstrap.Modal(modalElement);
+                modal.show();
+                document.getElementById('regtab').click();
+            }else{
+                var modalElement = document.getElementById('primary-header-modal');
+                var modal = new bootstrap.Modal(modalElement);
+                modal.show();
+            }
+        }
+        if (errorMessage) {
+            var modalElement = document.getElementById('primary-header-modal');
+            var modal = new bootstrap.Modal(modalElement);
+            modal.show();
+        }
+    </script>
 </body>
 
 </html>

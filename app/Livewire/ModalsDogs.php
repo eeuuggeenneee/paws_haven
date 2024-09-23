@@ -7,6 +7,8 @@ use Livewire\Component;
 use Livewire\WithFileUploads;
 use App\Models\AnimalList;
 use App\Models\AnimalListStatus;
+use App\Models\Rounds;
+use Illuminate\Support\Facades\Auth;
 
 class ModalsDogs extends Component
 {
@@ -20,11 +22,30 @@ class ModalsDogs extends Component
     public $dogImages = [];
     public $gender;
     public $activedog;
-    protected $listeners = ['editDoggo','activedog'];
 
-    public function activedog($id){
-        $this->activedog = AnimalList::where('dog_id_unique',$id)->where('isActive',true)->first();
+    public $fulladdress;
+    public $specificloc;
+    public $reason;
+    public $schedule;
+    public $contact;
+    protected $listeners = ['editDoggo', 'activedog'];
 
+    public function saveRounds()
+    {
+        Rounds::create([
+            'address' => $this->fulladdress,
+            'specific_location' => $this->specificloc,
+            'reason' => $this->reason,
+            'schedule' => $this->schedule,
+            'contact' => $this->contact,
+            'user_id' => Auth::user()->id,
+        ]);
+        $this->dispatch('saveRounds', 'Your rounds request has been successfully saved! Please expect a call from the pound when your request is approved. Thank you!');
+
+    }
+    public function activedog($id)
+    {
+        $this->activedog = AnimalList::where('dog_id_unique', $id)->where('isActive', true)->first();
     }
     public function editDoggo($id)
     {
@@ -49,7 +70,7 @@ class ModalsDogs extends Component
         if ($this->dogName == '' || $this->breed == '' || $this->color == '' || $this->description == "" || count($images) == 0) {
         } else {
             if ($this->dog_unique) {
-           
+
                 AnimalList::where('dog_id_unique', $this->dog_unique)->update(['isActive' => 0]);
                 $dog = AnimalList::create([
                     'dog_name' => $this->dogName,

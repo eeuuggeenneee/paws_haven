@@ -13,7 +13,7 @@
     <link rel="shortcut icon" href="assets/images/favicon.ico">
 
     <!-- Daterangepicker css -->
-    <link href="assets/vendor/daterangepicker/daterangepicker.css" rel="stylesheet" type="text/css">
+    <link href="assets/vendor/flatpickr/flatpickr.min.css" rel="stylesheet" type="text/css" />
 
     <!-- Vector Map css -->
     <link href="assets/vendor/jsvectormap/css/jsvectormap.min.css" rel="stylesheet" type="text/css">
@@ -27,12 +27,35 @@
     <link href="assets/css/app-saas.min.css" rel="stylesheet" type="text/css" id="app-style" />
     <!-- Icons css -->
     <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
-
+    <style>
+        .daterangepicker {
+            z-index: 400000;
+        }
+        #success-alert-modal{
+            z-index: 400000;
+        }
+    </style>
     @vite(['resources/js/app.js'])
+
     @livewireStyles
 </head>
 
 <body>
+    <div id="success-alert-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content modal-filled bg-success">
+                <div class="modal-body p-4">
+                    <div class="text-center">
+                        <i class="ri-check-line h1"></i>
+                        <h4 class="mt-2">Saved!</h4>
+                        <p id="datatoedit"></p>
+                        <button type="button" class="btn btn-light my-2" data-bs-dismiss="modal" onclick="location.reload()">Continue</button>
+
+                    </div>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div>
     <!-- Begin page -->
     <div class="wrapper">
         <!-- ========== Topbar Start ========== -->
@@ -70,8 +93,7 @@
                     </button>
 
                     <!-- Horizontal Menu Toggle Button -->
-                    <button class="navbar-toggle" data-bs-toggle="collapse"
-                        data-bs-target="#topnav-menu-content">
+                    <button class="navbar-toggle" data-bs-toggle="collapse" data-bs-target="#topnav-menu-content">
                         <div class="lines">
                             <span></span>
                             <span></span>
@@ -94,8 +116,7 @@
                                         <h6 class="m-0 font-16 fw-semibold"> Notification</h6>
                                     </div>
                                     <div class="col-auto">
-                                        <a href="javascript: void(0);"
-                                            class="text-dark text-decoration-underline">
+                                        <a href="javascript: void(0);" class="text-dark text-decoration-underline">
                                             <small>Clear All</small>
                                         </a>
                                     </div>
@@ -168,7 +189,8 @@
                                             </div>
                                             <div class="flex-grow-1 text-truncate ms-2">
                                                 <h5 class="noti-item-title fw-semibold font-14">Cristina Pride
-                                                    <small class="fw-normal text-muted ms-1">1 day ago</small></h5>
+                                                    <small class="fw-normal text-muted ms-1">1 day ago</small>
+                                                </h5>
                                                 <small class="noti-item-subtitle text-muted">Hi, How are you? What
                                                     about our next meeting</small>
                                             </div>
@@ -237,8 +259,8 @@
                     </li>
 
                     <li class="d-none d-sm-inline-block">
-                        <div class="nav-link" id="light-dark-mode" data-bs-toggle="tooltip"
-                            data-bs-placement="left" title="Theme Mode">
+                        <div class="nav-link" id="light-dark-mode" data-bs-toggle="tooltip" data-bs-placement="left"
+                            title="Theme Mode">
                             <i class="ri-moon-line font-22"></i>
                         </div>
                     </li>
@@ -292,22 +314,27 @@
                             <ul class="navbar-nav">
                                 <li class="nav-item dropdown">
                                     <a class="nav-link" href="{{ url('/home') }}" role="button">
-                                        <i class="uil-home-alt"></i>Dashboards 
+                                        <i class="uil-home-alt"></i>Dashboards
                                     </a>
                                 </li>
                                 <li class="nav-item dropdown">
                                     <a class="nav-link" href="{{ url('/fur-community') }}" role="button">
-                                        <i class="uil-dashboard"></i>Fur Community 
+                                        <i class="uil-dashboard"></i>Fur Community
                                     </a>
                                 </li>
                                 <li class="nav-item dropdown">
                                     <a class="nav-link" href="{{ url('/adopt-a-dog') }}" role="button">
-                                        <i class="uil-dashboard"></i>Adoption 
+                                        <i class="uil-dashboard"></i>Adoption
                                     </a>
                                 </li>
                                 <li class="nav-item dropdown">
                                     <a class="nav-link" href="{{ url('/report-lost-dog') }}" role="button">
-                                        <i class="uil-dashboard"></i>Report Lost Dog 
+                                        <i class="uil-dashboard"></i>Report Lost Dog
+                                    </a>
+                                </li>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link" href="{{ url('/request-rounds') }}" role="button">
+                                        <i class="uil-dashboard"></i>Request Rounds
                                     </a>
                                 </li>
                             </ul>
@@ -317,7 +344,7 @@
             </div>
         @else
             <div class="leftside-menu">
-       
+
                 <a href="{{ url('/home') }}" class="logo logo-light">
                     <span class="logo-lg">
                         <h3 class="py-2 px-2 text-white">PAWS HAVEN</h3>
@@ -387,7 +414,12 @@
                                 <span> Report Form </span>
                             </a>
                         </li>
-
+                        <li class="side-nav-item">
+                            <a href="{{ url('/request-rounds') }}" class="side-nav-link">
+                                <i class="uil-comments-alt"></i>
+                                <span> Request Rounds </span>
+                            </a>
+                        </li>
                         <li class="side-nav-item">
                             <a data-bs-toggle="collapse" href="#sidebarExtendedUI" aria-expanded="false"
                                 aria-controls="sidebarExtendedUI" class="side-nav-link">
@@ -461,17 +493,25 @@
 
 
     @livewireScripts
-    
-    <!-- Dropzone File Upload js -->
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-    <x-livewire-alert::scripts />
-    <script src="assets/vendor/dropzone/dropzone-min.js"></script>
 
-    <!-- File Upload Demo js -->
-    <script src="assets/js/ui/component.fileupload.js"></script>
+
+
     <!-- Vendor js -->
     <script src="assets/js/vendor.min.js"></script>
+
+    <!-- Bootstrap Timepicker Plugin js -->
+    <script src="assets/vendor/bootstrap-timepicker/js/bootstrap-timepicker.min.js"></script>
+  
+    <!-- Flatpickr Timepicker Plugin js -->
+    <script src="assets/vendor/flatpickr/flatpickr.min.js"></script>
+
+    <!-- Timepicker Demo js -->
+    <script src="assets/js/pages/demo.timepicker.js"></script>
+
+    <!-- App js -->
+    <script src="assets/js/app.min.js"></script>
+
     <script src="assets/vendor/datatables.net/js/jquery.dataTables.min.js"></script>
     <script src="assets/vendor/datatables.net-bs5/js/dataTables.bootstrap5.min.js"></script>
     <script src="assets/vendor/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
@@ -479,6 +519,8 @@
     <script src="assets/vendor/jquery-datatables-checkboxes/js/dataTables.checkboxes.min.js"></script>
     <!-- App js -->
     <script src="assets/js/app.min.js"></script>
+
+
 
 </body>
 

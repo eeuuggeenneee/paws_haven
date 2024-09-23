@@ -63,6 +63,10 @@
                                         role="tab" aria-controls="v-pills-profile" aria-selected="false">
                                         <i class='uil uil-comment-alt-message me-1'></i> My Post
                                     </a>
+                                    <a class="nav-link list-group-item list-group-item-action border-0"
+                                        data-bs-toggle="modal" data-bs-target="#request_rounds">
+                                        <i class='uil uil-comment-alt-message me-1'></i> Request Rounds
+                                    </a>
 
                                 </div>
                             </div>
@@ -437,8 +441,21 @@
             </div>
         </div>
     </footer>
-    <!-- end Footer -->
 
+
+    <!-- end Footer -->
+    <script>
+        document.addEventListener('livewire:init', function() {
+            Livewire.on('saveRounds', event => {
+                closeAllModals();
+                var successlabel = document.getElementById('datatoedit');
+                successlabel.innerHTML = event[0];
+                var modalElement = document.getElementById('success-alert-modal');
+                var modal = new bootstrap.Modal(modalElement);
+                modal.show();
+            });
+        });
+    </script>
     <script>
         window.addEventListener('DOMContentLoaded', function() {
             window.Echo.channel('newpost_received').listen('NewPostEvent', (event) => {
@@ -458,6 +475,24 @@
             });
         });
 
+        function closeAllModals() {
+            // Select all modals
+            const modals = document.querySelectorAll('.modal.show');
+
+            // Loop through each modal and hide it
+            modals.forEach(modal => {
+                const bootstrapModal = bootstrap.Modal.getInstance(modal);
+                if (bootstrapModal) {
+                    bootstrapModal.hide();
+                }
+            });
+
+            // Remove all backdrop elements
+            const backdrops = document.querySelectorAll('.modal-backdrop');
+            backdrops.forEach(backdrop => {
+                backdrop.parentNode.removeChild(backdrop); // Remove each backdrop
+            });
+        }
 
 
         document.getElementById('uploadBtn').addEventListener('click', function(event) {
