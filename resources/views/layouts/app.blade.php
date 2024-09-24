@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-layout="topnav" data-menu-color="brand" data-topbar-color="light" >
+<html lang="en" data-layout="topnav" data-menu-color="brand" data-topbar-color="light">
 
 
 <head>
@@ -18,6 +18,7 @@
     <!-- Vector Map css -->
     <link href="assets/vendor/jsvectormap/css/jsvectormap.min.css" rel="stylesheet" type="text/css">
 
+
     <!-- Theme Config Js -->
     <script src="assets/js/hyper-config.js"></script>
     <link href="assets/vendor/datatables.net-bs5/css/dataTables.bootstrap5.min.css" rel="stylesheet" type="text/css" />
@@ -31,7 +32,8 @@
         .daterangepicker {
             z-index: 400000;
         }
-        #success-alert-modal{
+
+        #success-alert-modal {
             z-index: 400000;
         }
     </style>
@@ -49,7 +51,8 @@
                         <i class="ri-check-line h1"></i>
                         <h4 class="mt-2">Saved!</h4>
                         <p id="datatoedit"></p>
-                        <button type="button" class="btn btn-light my-2" data-bs-dismiss="modal" onclick="location.reload()">Continue</button>
+                        <button type="button" class="btn btn-light my-2" data-bs-dismiss="modal"
+                            onclick="location.reload()">Continue</button>
 
                     </div>
                 </div>
@@ -499,10 +502,15 @@
 
     <!-- Vendor js -->
     <script src="assets/js/vendor.min.js"></script>
+    <!-- Dropzone File Upload js -->
+    <script src="assets/vendor/dropzone/dropzone-min.js"></script>
+
+    <!-- File Upload Demo js -->
+    <script src="assets/js/ui/component.fileupload.js"></script>
 
     <!-- Bootstrap Timepicker Plugin js -->
     <script src="assets/vendor/bootstrap-timepicker/js/bootstrap-timepicker.min.js"></script>
-  
+
     <!-- Flatpickr Timepicker Plugin js -->
     <script src="assets/vendor/flatpickr/flatpickr.min.js"></script>
 
