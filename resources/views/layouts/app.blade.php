@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-layout="topnav">
+<html lang="en" data-layout="topnav" data-menu-color="brand" data-topbar-color="light" >
 
 
 <head>
@@ -312,11 +312,11 @@
                     <nav class="navbar navbar-expand-lg">
                         <div class="collapse navbar-collapse" id="topnav-menu-content">
                             <ul class="navbar-nav">
-                                <li class="nav-item dropdown">
+                                {{-- <li class="nav-item dropdown">
                                     <a class="nav-link" href="{{ url('/home') }}" role="button">
                                         <i class="uil-home-alt"></i>Dashboards
                                     </a>
-                                </li>
+                                </li> --}}
                                 <li class="nav-item dropdown">
                                     <a class="nav-link" href="{{ url('/fur-community') }}" role="button">
                                         <i class="uil-dashboard"></i>Fur Community
@@ -332,11 +332,11 @@
                                         <i class="uil-dashboard"></i>Report Lost Dog
                                     </a>
                                 </li>
-                                <li class="nav-item dropdown">
+                                {{-- <li class="nav-item dropdown">
                                     <a class="nav-link" href="{{ url('/request-rounds') }}" role="button">
                                         <i class="uil-dashboard"></i>Request Rounds
                                     </a>
-                                </li>
+                                </li> --}}
                             </ul>
                         </div>
                     </nav>

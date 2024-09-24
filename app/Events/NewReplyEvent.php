@@ -26,7 +26,7 @@ class NewReplyEvent implements ShouldBroadcastNow
         //
         $reply = Reply::where('reply_unique_id',$reply)
         ->leftJoin('users', 'replies.user_id', '=', 'users.id')
-        ->select('replies.*', 'users.name') // Select relevant fields
+        ->select('replies.*', 'users.name','users.profile_path') // Select relevant fields
         ->get()->toArray(); 
 
         $this->newreply = $reply;

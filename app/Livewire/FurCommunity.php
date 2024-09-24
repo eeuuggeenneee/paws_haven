@@ -18,7 +18,6 @@ class FurCommunity extends Component
 {
     use WithFileUploads;
 
-    use WithFileUploads;
 
     public $files = [];
     public $message;
@@ -28,16 +27,21 @@ class FurCommunity extends Component
     public $replyrepl;
     public $comments;
     public $replies;    
+
+
     public function mount()
     {
         // Get all active posts
-        $this->posts = Community::where('isActive', true)->get();
+        $this->posts = Community::where('isActive', true)
+        ->leftJoin('users', 'communities.user_id', '=', 'users.id')
+        ->select('communities.*', 'users.name','users.profile_path')
+        ->get();
         $postIds = $this->posts->pluck('post_id_unique');
-
+        // dd($this->posts);
         //get comments
         $commentsg = Comment::whereIn('post_unique_id', $postIds)
         ->leftJoin('users', 'comments.user_id', '=', 'users.id')
-        ->select('comments.*', 'users.name') // Select relevant fields
+        ->select('comments.*', 'users.name','users.profile_path') // Select relevant fields
         ->get();
         $this->comments = collect($commentsg)->groupBy('post_unique_id')->toArray();
         $commentIds = $commentsg->pluck('comment_unique_id');
@@ -45,7 +49,7 @@ class FurCommunity extends Component
         //replies
         $repliesg = Reply::whereIn('comment_unique_id', $commentIds)
         ->leftJoin('users', 'replies.user_id', '=', 'users.id')
-        ->select('replies.*', 'users.name') // Select relevant fields
+        ->select('replies.*', 'users.name','users.profile_path') // Select relevant fields
         ->get();
 
         $this->replies = collect($repliesg)->groupBy('comment_unique_id')->toArray();
@@ -112,6 +116,7 @@ class FurCommunity extends Component
             'user_id' => Auth::user()->id,
         ]); 
         event(new NewReplyEvent($replyunique,$commentid));
+        $this->reset(['replyrepl']);
     }
     public function render()
     {

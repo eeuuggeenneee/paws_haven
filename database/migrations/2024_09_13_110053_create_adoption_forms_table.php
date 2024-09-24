@@ -17,8 +17,11 @@ return new class extends Migration
             $table->string('c_number'); // Contact number
             $table->text('address');
             $table->text('reason');
+            $table->text('materials');
             $table->boolean('tos_agree')->default(false); // Terms of service agreement
             $table->string('dog_id_unique')->unique(); // Unique dog ID
+            $table->unsignedBigInteger('user_id');
+            $table->boolean('is_active')->default(1);
             $table->timestamps();
         });
     }

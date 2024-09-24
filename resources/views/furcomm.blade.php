@@ -8,7 +8,7 @@
         
             const newCommentHtml = `
                 <div class="d-flex">
-                    <img class="me-2 mt-1 rounded" src="assets/images/users/avatar-9.jpg" alt="Generic placeholder image" height="32">
+                    <img class="me-2 mt-1 rounded" src="/storage/${comment.profile_path}" alt="Generic placeholder image" height="32">
                     <div class="w-100">
                         <div class="d-flex">
                             <h5 class="m-0"> ${comment.name} </h5>
@@ -33,7 +33,7 @@
             console.log(reply,comment_id);
             const newReplyHtml = `
                 <div class="d-flex mb-1">
-                    <img class="me-2 mt-1 rounded" src="assets/images/users/avatar-8.jpg" alt="Generic placeholder image" height="32">
+                    <img class="me-2 mt-1 rounded" src="/storage/${reply.profile_path}" alt="Generic placeholder image" height="32">
                     <div>
                         <h5 class="m-0">${reply.name}</h5>
                         <p class="text-muted mb-0">

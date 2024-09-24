@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Database\Seeder;
 use Faker\Factory as Faker;
 use App\Models\AnimalListStatus;
+use App\Models\Status;
 use Illuminate\Support\Str;
 
 use function Laravel\Prompts\password;
@@ -20,6 +21,15 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         // User::factory(10)->create();
+
+        $status = ['For Adoption','Lost Dog', 'Found Dog', 'Pending Adoption', 'Adopted'];
+
+        foreach($status as $s){
+            Status::create([
+                'name' => $s
+            ]);
+        }
+
 
         User::create([
             'email' => 'admin@gmail.com',
@@ -35,6 +45,7 @@ class DatabaseSeeder extends Seeder
             'role' => 'user'
         ]);
 
+      
         $faker = Faker::create();
 
         foreach (range(1, 10) as $index) {

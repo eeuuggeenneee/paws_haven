@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('password');
             $table->string('profile_path')->nullable();
             $table->string('contact')->nullable();
+            $table->string('about_me')->nullable();
             $table->string('address')->nullable();
             $table->string('role')->default('user');
             $table->rememberToken();

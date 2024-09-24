@@ -38,7 +38,7 @@
                             </div>
 
                             <div class="d-flex align-self-start">
-                                <img class="d-flex align-self-start rounded me-2" src="assets/images/users/avatar-5.jpg"
+                                <img class="d-flex align-self-start rounded me-2" src="{{ asset('storage/' . Auth::user()->profile_path) }}"
                                     alt="Dominic Keller" height="48">
                                 <div class="w-100 overflow-hidden">
                                     <h5 class="mt-1 mb-0">{{ Auth::user()->name }}</h5>
@@ -47,7 +47,7 @@
                             </div>
                             <div class="list-group list-group-flush mt-2">
                                 <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist"
-                                    aria-orientation="vertical">
+                                    aria-orientation="vertical" wire:ignore>
                                     <a class="nav-link active show list-group-item list-group-item-action border-0"
                                         id="v-pills-timeline-tab" data-bs-toggle="pill" href="#v-pills-timeline"
                                         role="tab" aria-controls="v-pills-timeline" aria-selected="false">
@@ -157,7 +157,7 @@
                     <!-- new post -->
 
                     <!-- end new post -->
-                    <div class="tab-content" id="v-pills-tabContent">
+                    <div class="tab-content" id="v-pills-tabContent" >
                         <div class="tab-pane fade active show" id="v-pills-timeline" role="tabpanel"
                             aria-labelledby="v-pills-timeline-tab">
                             <div class="card">
@@ -205,7 +205,7 @@
                                 <div class="card" wire:ignore>
                                     <div class="card-body pb-1">
                                         <div class="d-flex">
-                                            <img class="me-2 rounded" src="assets/images/users/avatar-3.jpg"
+                                            <img class="me-2 rounded" src="{{ asset('storage/' . $p['profile_path']) }}"
                                                 alt="Generic placeholder image" height="32">
                                             <div class="w-100">
                                                 <div class="dropdown float-end text-muted">
@@ -249,7 +249,7 @@
                                                     @foreach ($comments[$p['post_id_unique']] as $c)
                                                         <div class="d-flex">
                                                             <img class="me-2 mt-1 rounded"
-                                                                src="assets/images/users/avatar-9.jpg"
+                                                                src="{{ asset('storage/' . $c['profile_path']) }}"
                                                                 alt="Generic placeholder image" height="32">
                                                             <div class="w-100">
                                                                 <div class="d-flex">
@@ -274,7 +274,7 @@
                                                                         @foreach ($replies[$c['comment_unique_id']] as $r)
                                                                             <div class="d-flex mb-1">
                                                                                 <img class="me-2 mt-1 rounded"
-                                                                                    src="assets/images/users/avatar-8.jpg"
+                                                                                    src="{{ asset('storage/' . $r['profile_path']) }}"
                                                                                     alt="Generic placeholder image"
                                                                                     height="32">
                                                                                 <div>
@@ -304,7 +304,7 @@
 
                                             <!-- reply sa post  -->
                                             <div class="d-flex mb-2">
-                                                <img src="assets/images/users/avatar-1.jpg" height="32"
+                                                <img src="{{ asset('storage/' . Auth::user()->profile_path) }}" height="32"
                                                     class="align-self-start rounded me-2" alt="Arya Stark" />
                                                 <div class="w-100">
                                                     <div class="input-group">
@@ -325,82 +325,8 @@
                                 </div>
                             @endforeach
                         </div>
-                        <div class="tab-pane fade " id="v-pills-home" role="tabpanel"
-                            aria-labelledby="v-pills-home-tab">
-                            <div class="card bg-primary">
-                                <div class="card-body profile-user-box">
-                                    <div class="row">
-                                        <div class="col-sm-8">
-                                            <div class="row align-items-center">
-                                                <div class="col-auto">
-                                                    <div class="avatar-lg">
-                                                        <img src="assets/images/users/avatar-2.jpg" alt=""
-                                                            class="rounded-circle img-thumbnail">
-                                                    </div>
-                                                </div>
-                                                <div class="col">
-                                                    <div>
-                                                        <h4 class="mt-1 mb-1 text-white">Michael Franklin</h4>
-                                                        <p class="font-13 text-white-50"> Authorised Brand Seller</p>
-
-                                                        <ul class="mb-0 list-inline text-light">
-                                                            <li class="list-inline-item me-3">
-                                                                <h5 class="mb-1 text-white">$ 25,184</h5>
-                                                                <p class="mb-0 font-13 text-white-50">Total Revenue</p>
-                                                            </li>
-                                                            <li class="list-inline-item">
-                                                                <h5 class="mb-1 text-white">5482</h5>
-                                                                <p class="mb-0 font-13 text-white-50">Number of Orders
-                                                                </p>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div> <!-- end col-->
-
-                                        <div class="col-sm-4">
-                                            <div class="text-center mt-sm-0 mt-3 text-sm-end">
-                                                <button type="button" class="btn btn-light">
-                                                    <i class="mdi mdi-account-edit me-1"></i> Edit Profile
-                                                </button>
-                                            </div>
-                                        </div> <!-- end col-->
-                                    </div> <!-- end row -->
-
-                                </div> <!-- end card-body/ profile-user-box-->
-                            </div>
-                            <div class="card">
-                                <div class="card-body">
-                                    <h4 class="header-title mt-0 mb-3">Seller Information</h4>
-                                    <p class="text-muted font-13">
-                                        Hye, I’m Michael Franklin residing in this beautiful world. I create websites
-                                        and mobile apps with great UX and UI design. I have done work with big companies
-                                        like Nokia, Google and Yahoo. Meet me or Contact me for any queries. One Extra
-                                        line for filling space. Fill as many you want.
-                                    </p>
-
-                                    <hr />
-
-                                    <div class="text-start">
-                                        <p class="text-muted"><strong>Full Name :</strong> <span
-                                                class="ms-2">Michael A. Franklin</span></p>
-
-                                        <p class="text-muted"><strong>Mobile :</strong><span class="ms-2">(+12) 123
-                                                1234 567</span></p>
-
-                                        <p class="text-muted"><strong>Email :</strong> <span
-                                                class="ms-2">coderthemes@gmail.com</span></p>
-
-                                        <p class="text-muted"><strong>Location :</strong> <span
-                                                class="ms-2">USA</span></p>
-
-                                        <p class="text-muted"><strong>Languages :</strong>
-                                            <span class="ms-2"> English, German, Spanish </span>
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
+                        <div class="tab-pane fade " id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab" >
+                            @livewire('profile')
                         </div>
                         <div class="tab-pane fade" id="v-pills-profile" role="tabpanel"
                             aria-labelledby="v-pills-profile-tab">
@@ -442,9 +368,64 @@
         </div>
     </footer>
 
-
     <!-- end Footer -->
     <script>
+        document.getElementById('uploadprof').addEventListener('click', function() {
+            // Trigger the hidden file input click
+            document.getElementById('profilepic-input').click();
+        });
+        document.getElementById('edit').addEventListener('click', function() {
+            // Name display and input field
+            var nameDisplay = document.getElementById('auth-name');
+            var nameInput = document.getElementById('simpleinput');
+
+            // About Me display and textarea
+            var aboutMeDisplay = document.getElementById('about-me-display');
+            var aboutMeTextarea = document.getElementById('aboutme');
+
+            // Contact display and input field
+            var contactDisplay = document.getElementById('contact-display');
+            var contactInput = document.getElementById('contact-input');
+
+            // Email display and input field
+            var emailDisplay = document.getElementById('email-display');
+            var emailInput = document.getElementById('email-input');
+
+            // Address display and input field
+            var addressDisplay = document.getElementById('address-display');
+            var addressInput = document.getElementById('address-input');
+
+            var saveprof = document.getElementById('saveprof');
+
+            var uploadprof = document.getElementById('uploadprof');
+
+
+            // Toggle visibility for Name
+            uploadprof.classList.toggle('d-none');
+
+            saveprof.classList.toggle('d-none');
+
+            nameDisplay.classList.toggle('d-none');
+            nameInput.classList.toggle('d-none');
+
+            // Toggle visibility for About Me
+            aboutMeDisplay.classList.toggle('d-none');
+            aboutMeTextarea.classList.toggle('d-none');
+
+            // Toggle visibility for Contact
+            contactDisplay.classList.toggle('d-none');
+            contactInput.classList.toggle('d-none');
+
+            // Toggle visibility for Email
+            emailDisplay.classList.toggle('d-none');
+            emailInput.classList.toggle('d-none');
+
+            // Toggle visibility for Address
+            addressDisplay.classList.toggle('d-none');
+            addressInput.classList.toggle('d-none');
+        });
+
+
         document.addEventListener('livewire:init', function() {
             Livewire.on('saveRounds', event => {
                 closeAllModals();
@@ -506,7 +487,7 @@
             // Create the new HTML content
             const newHtml = `
                 <div class="d-flex mt-1 mb-2" id="removethis">
-                    <img class="me-2 rounded" src="assets/images/users/avatar-8.jpg" alt="Generic placeholder image" height="32">
+                    <img class="me-2 rounded" src="{{ asset('storage/' . Auth::user()->profile_path) }}" alt="Generic placeholder image" height="32">
                     <div class="w-100">
                         <div class="input-group">
                             <input type="text" class="form-control border-1 form-control-sm" wire:model="replyrepl" placeholder="Write a reply">

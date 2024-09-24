@@ -27,7 +27,7 @@ class NewCommentEvent implements ShouldBroadcastNow
         //
         $comment = Comment::where('comment_unique_id', $newcomment) 
             ->leftJoin('users', 'comments.user_id', '=', 'users.id')
-            ->select('comments.*', 'users.name') // Select relevant fields
+            ->select('comments.*', 'users.name','users.profile_path') // Select relevant fields
             ->get()
             ->toArray(); 
 

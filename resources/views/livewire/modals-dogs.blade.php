@@ -378,12 +378,103 @@
                                                     </div>
                                                 </div>
 
+                                                <button type="button" id="adoptiontoggle"
+                                                    class="mt-3 btn btn-outline-success rounded-pill w-100"><i
+                                                        class="uil-heart"></i> Adopt the dog <i
+                                                        class="uil-heart"></i></button>
                                             </form>
                                         </div> <!-- end col -->
                                     </div> <!-- end row-->
+                                    <div class="container mt-3 d-none" id="adoptionform">
+                                        <div class="card">
+                                            <div class="card-header bg-info text-white">
+                                                <h5 class="card-title">Adoption Form</h5>
+                                                <h6 class="card-subtitle ">Every Information is important</h6>
+                                            </div>
+                                            <div class="card-body">
 
+                                                <form class="needs-validation" id="checkform" novalidate>
+                                                    <div class="row">
+                                                        <div class="mb-3 col-6">
+                                                            <label class="form-label" for="validationCustom01">First
+                                                                name</label>
+                                                            <input type="text" class="form-control"
+                                                                id="validationCustom01" placeholder="First name"
+                                                                wire:model="a_fname" required>
+                                                            <div class="valid-feedback">
+                                                                Looks good!
+                                                            </div>
+                                                        </div>
+                                                        <div class="mb-3 col-6">
+                                                            <label class="form-label" for="validationCustom02">Last
+                                                                name</label>
+                                                            <input type="text" class="form-control"
+                                                                id="validationCustom02" placeholder="Last name"
+                                                                wire:model="a_lname" required>
+                                                            <div class="valid-feedback">
+                                                                Looks good!
+                                                            </div>
+                                                        </div>
+                                                    </div>
 
+                                                    <div class="mb-3">
+                                                        <label class="form-label" for="validationCustom03">Contact
+                                                            Number</label>
+                                                        <input type="tel" class="form-control"
+                                                            id="validationCustom03" placeholder="09123456789" required
+                                                            wire:model="a_contact" pattern="09[0-9]{9}"
+                                                            title="Phone number must start with 09 and contain exactly 11 digits."
+                                                            maxlength="11"
+                                                            oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 11);">
+                                                        <div class="invalid-feedback">
+                                                            Please provide a valid city.
+                                                        </div>
+                                                    </div>
 
+                                                    <div class="mb-3">
+                                                        <label class="form-label"
+                                                            for="validationCustom04">Address</label>
+                                                        <input type="text" class="form-control"
+                                                            wire:model="a_address" id="validationCustom04"
+                                                            placeholder="Address" required>
+                                                        <div class="invalid-feedback">
+                                                            Please provide a valid address.
+                                                        </div>
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label class="form-label" for="validationCustom02">Materials
+                                                            ex. dog cage</label>
+                                                        <input type="text" class="form-control"
+                                                            id="validationCustom02" placeholder="Last name"
+                                                            wire:model="a_materials" required>
+                                                        <div class="valid-feedback">
+                                                            Looks good!
+                                                        </div>
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label class="form-label"
+                                                            for="validationCustom05">Reason</label>
+                                                        <textarea class="form-control" rows="4" wire:model="a_reason" required></textarea>
+                                                        <div class="invalid-feedback">
+                                                            Please provide a valid reason.
+                                                        </div>
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <div class="form-check">
+                                                            <input type="checkbox" class="form-check-input"
+                                                                id="invalidCheck" required wire:model="a_tos">
+                                                            <label class="form-check-label form-label"
+                                                                for="invalidCheck">Agree to terms
+                                                                and conditions</label>
+                                                            <div class="invalid-feedback">
+                                                                You must agree before submitting.
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div> <!-- end card-body-->
                             </div> <!-- end card-->
                         </div> <!-- end col-->
@@ -392,13 +483,16 @@
 
                 <div class="modal-footer">
                     <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-success" id="adopt_dog">Adopt Dog</button>
+                    <button type="button" class="btn btn-success d-none" id="adopt_dog">Confirm Adoption</button>
+                    <button type="button" class="btn btn-success d-none" id="hidden_dog"
+                        wire:click="confirmadoption">Confirm Adoption</button>
+
                 </div>
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
     </div>
     <div class="modal fade" id="adoptdog" tabindex="100" style="z-index: 10051 !important;" role="dialog"
-        aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        aria-labelledby="myLargeModalLabel" aria-hidden="true" wire:ignore.self>
         <div class="modal-dialog modal-lg modal-dialog-centered">
             <div class="modal-content ">
                 <div class="modal-header bg-info">
@@ -406,159 +500,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
                 </div>
                 <div class="modal-body">
-                    <div id="rootwizard" class="container">
-                        <ul class="nav nav-pills nav-justified form-wizard-header mb-3">
-                            <li class="nav-item active" data-target-form="#accountForm">
-                                <a href="#first" data-bs-toggle="tab" data-toggle="tab"
-                                    class="nav-link rounded-0 py-2 active">
-                                    <i class="mdi mdi-account-circle font-18 align-middle me-1"></i>
-                                    <span class="d-none d-sm-inline">Account</span>
-                                </a>
-                            </li>
-                            <li class="nav-item" data-target-form="#profileForm">
-                                <a href="#second" data-bs-toggle="tab" data-toggle="tab"
-                                    class="nav-link rounded-0 py-2">
-                                    <i class="mdi mdi-face-man-profile font-18 align-middle me-1"></i>
-                                    <span class="d-none d-sm-inline">Profile</span>
-                                </a>
-                            </li>
-                            <li class="nav-item" data-target-form="#otherForm">
-                                <a href="#third" data-bs-toggle="tab" data-toggle="tab"
-                                    class="nav-link rounded-0 py-2">
-                                    <i class="mdi mdi-checkbox-marked-circle-outline font-18 align-middle me-1"></i>
-                                    <span class="d-none d-sm-inline">Finish</span>
-                                </a>
-                            </li>
-                        </ul>
 
-                        <div class="tab-content mb-0 b-0">
-
-                            <div class="tab-pane show active" id="first">
-                                <form id="accountForm" method="post" action="#" class="form-horizontal">
-                                    <div class="row">
-                                        <div class="col-12">
-                                            <div class="row mb-3">
-                                                <label class="col-md-3 col-form-label" for="userName3">User
-                                                    name</label>
-                                                <div class="col-md-9">
-                                                    <input type="text" class="form-control" id="userName3"
-                                                        name="userName3" required>
-                                                </div>
-                                            </div>
-                                            <div class="row mb-3">
-                                                <label class="col-md-3 col-form-label" for="password3">
-                                                    Password</label>
-                                                <div class="col-md-9">
-                                                    <input type="password" id="password3" name="password3"
-                                                        class="form-control" required>
-                                                </div>
-                                            </div>
-
-                                            <div class="row mb-3">
-                                                <label class="col-md-3 col-form-label" for="confirm3">Re
-                                                    Password</label>
-                                                <div class="col-md-9">
-                                                    <input type="password" id="confirm3" name="confirm3"
-                                                        class="form-control" required>
-                                                </div>
-                                            </div>
-                                        </div> <!-- end col -->
-                                    </div> <!-- end row -->
-                                </form>
-                                <ul class="list-inline wizard mb-0">
-                                    <li class="next list-inline-item float-end">
-                                        <a href="javascript:void(0);" class="btn btn-info">Add More Info <i
-                                                class="mdi mdi-arrow-right ms-1"></i></a>
-                                    </li>
-                                </ul>
-                            </div>
-
-                            <div class="tab-pane fade" id="second">
-                                <form id="profileForm" method="post" action="#" class="form-horizontal">
-                                    <div class="row">
-                                        <div class="col-12">
-                                            <div class="row mb-3">
-                                                <label class="col-md-3 col-form-label" for="name3"> First
-                                                    name</label>
-                                                <div class="col-md-9">
-                                                    <input type="text" id="name3" name="name3"
-                                                        class="form-control" required>
-                                                </div>
-                                            </div>
-                                            <div class="row mb-3">
-                                                <label class="col-md-3 col-form-label" for="surname3"> Last
-                                                    name</label>
-                                                <div class="col-md-9">
-                                                    <input type="text" id="surname3" name="surname3"
-                                                        class="form-control" required>
-                                                </div>
-                                            </div>
-
-                                            <div class="row mb-3">
-                                                <label class="col-md-3 col-form-label" for="email3">Email</label>
-                                                <div class="col-md-9">
-                                                    <input type="email" id="email3" name="email3"
-                                                        class="form-control" required>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- end col -->
-                                    </div>
-                                    <!-- end row -->
-                                </form>
-                                <ul class="pager wizard mb-0 list-inline">
-                                    <li class="previous list-inline-item">
-                                        <button type="button" class="btn btn-light"><i
-                                                class="mdi mdi-arrow-left me-1"></i> Back to Account</button>
-                                    </li>
-                                    <li class="next list-inline-item float-end">
-                                        <button type="button" class="btn btn-info">Add More Info <i
-                                                class="mdi mdi-arrow-right ms-1"></i></button>
-                                    </li>
-                                </ul>
-                            </div>
-
-                            <div class="tab-pane fade" id="third">
-                                <form id="otherForm" method="post" action="#" class="form-horizontal"></form>
-                                <div class="row">
-                                    <div class="col-12">
-                                        <div class="text-center">
-                                            <h2 class="mt-0">
-                                                <i class="mdi mdi-check-all"></i>
-                                            </h2>
-                                            <h3 class="mt-0">Thank you !</h3>
-
-                                            <p class="w-75 mb-2 mx-auto">Quisque nec turpis at urna dictum luctus.
-                                                Suspendisse convallis dignissim eros at volutpat. In egestas mattis
-                                                dui. Aliquam mattis dictum aliquet.</p>
-
-                                            <div class="mb-3">
-                                                <div class="form-check d-inline-block">
-                                                    <input type="checkbox" class="form-check-input" id="customCheck4"
-                                                        required>
-                                                    <label class="form-check-label" for="customCheck4">I agree with
-                                                        the Terms and Conditions</label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- end col -->
-                                </div>
-                                <!-- end row -->
-                                </form>
-                                <ul class="pager wizard mb-0 list-inline mt-1">
-                                    <li class="previous list-inline-item">
-                                        <button type="button" class="btn btn-light"><i
-                                                class="mdi mdi-arrow-left me-1"></i> Back to Profile</button>
-                                    </li>
-                                    <li class="next list-inline-item float-end">
-                                        <button type="button" class="btn btn-info">Submit</button>
-                                    </li>
-                                </ul>
-                            </div>
-
-                        </div> <!-- tab-content -->
-                    </div>
                 </div>
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
@@ -576,32 +518,34 @@
                 <div class="modal-body">
                     <div class="mb-3">
                         <label class="form-label" for="validationCustom01">Requestor</label>
-                        <input type="text" class="form-control" id="validationCustom01" placeholder="First name" 
-                            value="{{Auth::user()->name}}"  disabled>
+                        <input type="text" class="form-control" id="validationCustom01" placeholder="First name"
+                            value="{{ Auth::user()->name }}" disabled>
                         <div class="valid-feedback">
                             Looks good!
                         </div>
                     </div>
                     <div class="mb-3">
-                        <label class="form-label" for="validationCustom03">Address, where you want rounds to be conducted</label>
-                        <input type="text" class="form-control" id="validationCustom03" placeholder="Full address" wire:model="fulladdress"
-                            required>
+                        <label class="form-label" for="validationCustom03">Address, where you want rounds to be
+                            conducted</label>
+                        <input type="text" class="form-control" id="validationCustom03"
+                            placeholder="Full address" wire:model="fulladdress" required>
                         <div class="invalid-feedback">
                             Please provide a valid address.
                         </div>
                     </div>
                     <div class="mb-3">
                         <label class="form-label" for="validationCustom03">Contact number</label>
-                        <input type="text" class="form-control" id="validationCustom03" placeholder="09123456789" wire:model="contact"
-                            required>
+                        <input type="text" class="form-control" id="validationCustom03" placeholder="09123456789"
+                            wire:model="contact" required>
                         <div class="invalid-feedback">
                             Please provide a valid phone number.
                         </div>
                     </div>
                     <div class="mb-3">
-                        <label class="form-label" for="validationCustom04">Specific Locations, Mention any particular spots</label>
-                        <input type="text" class="form-control" id="validationCustom04" placeholder="ex. New york street" wire:model="specificloc"
-                            required>
+                        <label class="form-label" for="validationCustom04">Specific Locations, Mention any particular
+                            spots</label>
+                        <input type="text" class="form-control" id="validationCustom04"
+                            placeholder="ex. New york street" wire:model="specificloc" required>
                         <div class="invalid-feedback">
                             Please provide a valid locations.
                         </div>
@@ -615,7 +559,8 @@
                     </div>
                     <div class="mb-3">
                         <label class="form-label" for="validationCustom05">Preferred Schedule</label>
-                        <input type="text" id="datetime-datepicker" class="form-control" placeholder="Date and Time" wire:model="schedule">
+                        <input type="text" id="datetime-datepicker" class="form-control"
+                            placeholder="Date and Time" wire:model="schedule">
                         <div class="invalid-feedback">
                             Please provide a valid schedule.
                         </div>
@@ -630,12 +575,30 @@
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
     <script>
-        function show_adoptmodal() {
-            var modalElement = document.getElementById('adoptdog');
-            var modal = new bootstrap.Modal(modalElement);
-            modal.show();
-        }
-        document.getElementById('adopt_dog').addEventListener('click', show_adoptmodal);
+        document.getElementById('adoptiontoggle').addEventListener('click', function() {
+            var adopt_dog = document.getElementById('adopt_dog');
+            var adoptionform = document.getElementById('adoptionform');
+
+            adopt_dog.classList.toggle('d-none');
+            adoptionform.classList.toggle('d-none');
+        });
+        document.getElementById('adopt_dog').addEventListener('click', function() {
+            var form = document.getElementById('checkform');
+
+            // Add 'was-validated' class to trigger Bootstrap validation styles
+            form.classList.add('was-validated');
+
+            // Check if all required fields are filled and valid
+            if (!form.checkValidity()) {
+                // Form is incomplete or invalid, prevent further action
+                alert('Please fill out all required fields.');
+                return false; // Stop further actions
+            }
+
+            // All required fields are filled, proceed with your logic
+            console.log("All required fields are filled and valid.");
+            // document.getElementById('hidden_dog').click();  // Example of a next step if all fields are valid
+        });
     </script>
 
 </div>
