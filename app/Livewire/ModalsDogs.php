@@ -36,27 +36,33 @@ class ModalsDogs extends Component
     public $a_address;
     public $a_materials;
     public $a_tos;
+    public $a_reason;
 
     protected $listeners = ['editDoggo', 'activedog'];
 
     public function confirmadoption()
     {
+
         AdoptionForm::create([
             'fullname' => $this->a_fname . ' ' . $this->a_lname,
             'c_number' => $this->a_contact,
+            'reason' => $this->a_reason,
             'address' => $this->a_address,
             'materials' => $this->a_materials,
             'tos_agree' => $this->a_tos,
             'dog_id_unique' => $this->dog_unique,
             'user_id' => Auth::user()->id,
         ]);
-        AnimalListStatus::where('dog_id_unique', $this->dog_unique)->update(['isActive' => 0]);
+        AnimalListStatus::where('animal_id', $this->dog_unique)->update(['isActive' => 0]);
 
         AnimalListStatus::create([
             'animal_id' => $this->dog_unique,
             'status' => 4,
             'isActive' => 1,
         ]);
+
+        $this->dispatch('dogAdopted', 'Your adoption request has been successfully saved! Please expect a call from the pound when your request is approved. Thank you!');
+
     }
     public function saveRounds()
     {

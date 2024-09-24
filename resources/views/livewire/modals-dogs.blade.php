@@ -594,10 +594,35 @@
                 alert('Please fill out all required fields.');
                 return false; // Stop further actions
             }
+            document.getElementById('hidden_dog').click();  
+        });
+        function closeAllModals() {
+            // Select all modals
+            const modals = document.querySelectorAll('.modal.show');
 
-            // All required fields are filled, proceed with your logic
-            console.log("All required fields are filled and valid.");
-            // document.getElementById('hidden_dog').click();  // Example of a next step if all fields are valid
+            // Loop through each modal and hide it
+            modals.forEach(modal => {
+                const bootstrapModal = bootstrap.Modal.getInstance(modal);
+                if (bootstrapModal) {
+                    bootstrapModal.hide();
+                }
+            });
+
+            // Remove all backdrop elements
+            const backdrops = document.querySelectorAll('.modal-backdrop');
+            backdrops.forEach(backdrop => {
+                backdrop.parentNode.removeChild(backdrop); // Remove each backdrop
+            });
+        }
+        document.addEventListener('livewire:init', function() {
+            Livewire.on('dogAdopted', event => {
+                closeAllModals();
+                var successlabel = document.getElementById('datatoedit');
+                successlabel.innerHTML = event[0];
+                var modalElement = document.getElementById('success-alert-modal');
+                var modal = new bootstrap.Modal(modalElement);
+                modal.show();
+            });
         });
     </script>
 

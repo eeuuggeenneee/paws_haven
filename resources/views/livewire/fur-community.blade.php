@@ -435,6 +435,16 @@
                 var modal = new bootstrap.Modal(modalElement);
                 modal.show();
             });
+            Livewire.on('dogAdopted', event => {
+                closeAllModals();
+                var successlabel = document.getElementById('datatoedit');
+                successlabel.innerHTML = event[0];
+                var modalElement = document.getElementById('success-alert-modal');
+                var modal = new bootstrap.Modal(modalElement);
+                modal.show();
+            });
+
+            
         });
     </script>
     <script>
