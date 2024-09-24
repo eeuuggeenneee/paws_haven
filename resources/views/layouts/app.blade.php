@@ -426,25 +426,11 @@
                             </a>
                         </li>
                         <li class="side-nav-item">
-                            <a data-bs-toggle="collapse" href="#sidebarExtendedUI" aria-expanded="false"
-                                aria-controls="sidebarExtendedUI" class="side-nav-link">
-                                <i class="uil-package"></i>
-                                <span> Pets List</span>
-                                <span class="menu-arrow"></span>
+                            <a href="{{ url('/animal-list') }}" class="side-nav-link">
+                                <i class="uil-comments-alt"></i>
+                                <span> Dog Lists </span>
                             </a>
-                            <div class="collapse" id="sidebarExtendedUI">
-                                <ul class="side-nav-second-level">
-                                    <li>
-                                        <a href="{{ url('/animal-list') }}">Animal Lists</a>
-                                    </li>
-                                    <li>
-                                </ul>
-                            </div>
                         </li>
-
-
-
-
 
                         <!-- Help Box -->
                         {{-- <div class="help-box text-white text-center">

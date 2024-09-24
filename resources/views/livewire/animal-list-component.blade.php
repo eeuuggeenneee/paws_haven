@@ -7,11 +7,11 @@
                 <div class="page-title-box">
                     <div class="page-title-right">
                         <ol class="breadcrumb m-0">
-                            <li class="breadcrumb-item"><a href="javascript: void(0);">Pet List</a></li>
+                            <li class="breadcrumb-item"><a href="javascript: void(0);">Dog List</a></li>
                             <li class="breadcrumb-item active">List</li>
                         </ol>
                     </div>
-                    <h4 class="page-title">Pet List</h4>
+                    <h4 class="page-title">Dog List</h4>
                 </div>
             </div>
         </div>
@@ -70,7 +70,7 @@
                                                 <td class="table-action">
                                                     <a href="javascript:void(0);" class="action-icon"> <i
                                                             class="mdi mdi-eye"></i></a>
-                                                    <a wire:click="editDog('{{ $item['dog_id_unique']  }}')"
+                                                    <a data-bs-toggle="modal" data-bs-target="#info-header-modal" wire:click="editDog('{{ $item['dog_id_unique']  }}')"
                                                         class="action-icon"> <i
                                                             class="mdi mdi-square-edit-outline"></i></a>
                                                     <a wire:click="deleteDog('{{ $item['dog_id_unique']  }}')" class="action-icon"> <i
