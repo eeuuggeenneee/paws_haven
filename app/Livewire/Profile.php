@@ -44,7 +44,6 @@ class Profile extends Component
         $this->cabout_me = $user->about_me;
         $this->c_address = $user->address;
         $this->c_contact = $user->contact;
-        $this->profilepic = $user->profile_path;
         $this->cfullname = Auth::user()->name;
 
         $this->postcount = Community::where('user_id', $user->id)->count();

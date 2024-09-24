@@ -1,4 +1,4 @@
-<div >
+<div>
     <div class="card bg-primary">
         <div class="card-body profile-user-box">
             <div class="row">
@@ -6,28 +6,31 @@
                     <div class="row align-items-center">
                         <div class="col-auto text-center">
                             <div class="avatar-lg ">
-                                <img src="{{ asset('storage/' . Auth::user()->profile_path) }}" alt="" style="width: 86px; height: 86px; min-width: 86px; max-width: 86px; min-height: 86px; max-height: 86px;"
+                                <img src="{{ asset('storage/' . Auth::user()->profile_path) }}" alt=""
+                                    style="width: 86px; height: 86px; min-width: 86px; max-width: 86px; min-height: 86px; max-height: 86px;"
                                     class="rounded-circle img-thumbnail">
                             </div>
-                            <button type="button" class="mt-1 d-none btn btn-success btn-sm"
-                                id="uploadprof" wire:ignore.self>Upload</button>
+                            <button type="button" class="mt-1 d-none btn btn-success btn-sm" id="uploadprof"
+                                wire:ignore.self>Upload</button>
                             <input type="file" hidden wire:model="profilepic" id="profilepic-input">
                         </div>
                         <div class="col">
                             <div>
                                 <h4 class="mt-1 mb-1 text-white">
-                                    <input type="text" wire:ignore.self id="simpleinput" class="w-50 text-white form-control bg-transparent d-none" value="{{ Auth::user()->name }}" wire:model="cfullname">
+                                    <input type="text" wire:ignore.self id="simpleinput"
+                                        class="w-50 text-white form-control bg-transparent d-none"
+                                        value="{{ Auth::user()->name }}" wire:model="cfullname">
                                     <span id="auth-name" wire:ignore.self>{{ Auth::user()->name }}</span>
                                 </h4>
                                 <p class="font-13 text-white-50 text-capitalize">
                                     {{ Auth::user()->role }}</p>
                                 <ul class="mb-0 list-inline text-light">
                                     <li class="list-inline-item me-3">
-                                        <h5 class="mb-1 text-white">{{$postcount}}</h5>
+                                        <h5 class="mb-1 text-white">{{ $postcount }}</h5>
                                         <p class="mb-0 font-13 text-white-50">Total Post</p>
                                     </li>
                                     <li class="list-inline-item">
-                                        <h5 class="mb-1 text-white">{{$commentcount}}</h5>
+                                        <h5 class="mb-1 text-white">{{ $commentcount }}</h5>
                                         <p class="mb-0 font-13 text-white-50">Total Comments
                                         </p>
                                     </li>
@@ -62,9 +65,13 @@
             <div class="text-start">
                 <p class="text-muted">
                     <strong>Mobile Number:</strong>
+
                     <span id="contact-display" class="ms-2" wire:ignore.self>{{ Auth::user()->contact }}</span>
-                    <input type="text" id="contact-input" class="form-control d-none ms-2" wire:ignore.self
-                        value="{{ Auth::user()->contact }}" wire:model="c_contact">
+
+                    <input type="tel" id="contact-input" class="form-control d-none ms-2" id="validationCustom03" placeholder="09123456789"
+                        required wire:model="c_contact" pattern="09[0-9]{9}"
+                        title="Phone number must start with 09 and contain exactly 11 digits." maxlength="11"
+                        oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 11);" wire:ignore.self>
                 </p>
 
                 <!-- Email -->
@@ -85,8 +92,8 @@
             </div>
 
             <div class="text-center">
-                <button type="button" wire:click="saveProf" class="btn btn-success d-none" id="saveprof" wire:ignore.self><i class="uil-cloud-computing"
-                        ></i> Save Profile </button>
+                <button type="button" wire:click="saveProf" class="btn btn-success d-none" id="saveprof"
+                    wire:ignore.self><i class="uil-cloud-computing"></i> Save Profile </button>
 
             </div>
         </div>
