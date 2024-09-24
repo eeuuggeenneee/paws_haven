@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-layout="topnav" data-menu-color="brand" data-topbar-color="light">
+<html lang="en"  @if(Auth::user()->role == 'admin') data-layout="dualnav" @else data-layout="topnav" @endif data-menu-color="brand" data-topbar-color="light">
 
 
 <head>
