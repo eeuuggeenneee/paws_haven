@@ -16,6 +16,9 @@ class Rounds extends Model
         'reason',
         'contact',
         'user_id',
+        'is_approved',
+        'is_rejected',
+        'is_active',
     ];
 
     public function user()

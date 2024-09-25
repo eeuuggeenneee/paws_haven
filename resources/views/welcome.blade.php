@@ -617,7 +617,8 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#profile1" data-bs-toggle="tab" aria-expanded="true" class="nav-link rounded-0 " id="regtab">
+                        <a href="#profile1" data-bs-toggle="tab" aria-expanded="true" class="nav-link rounded-0 "
+                            id="regtab">
                             <i class="mdi mdi-account-circle d-md-none d-block"></i>
                             <span class="d-none d-md-block">Sign up</span>
                         </a>
@@ -698,6 +699,17 @@
                                     </div>
 
                                 </form>
+                                <div class="text-center mt-4">
+                                    <p class="text-muted font-16">Sign in with</p>
+                                    <ul class="social-list list-inline mt-3">
+                                        <li class="list-inline-item">
+                                            <a href="{{ route('google-auth')}}"
+                                                class="social-list-item border-danger text-danger"><i
+                                                    class="mdi mdi-google"></i></a>
+                                        </li>
+                                      
+                                    </ul>
+                                </div>
                             </div> <!-- end card-body -->
                         </div>
                     </div>
@@ -795,6 +807,17 @@
                                     </div>
 
                                 </form>
+                                <div class="text-center mt-4">
+                                    <p class="text-muted font-16">Sign up with</p>
+                                    <ul class="social-list list-inline mt-3">
+                                        <li class="list-inline-item">
+                                            <a href="javascript: void(0);"
+                                                class="social-list-item border-danger text-danger"><i
+                                                    class="mdi mdi-google"></i></a>
+                                        </li>
+                                      
+                                    </ul>
+                                </div>
                             </div> <!-- end card-body -->
                         </div>
                     </div>
@@ -818,7 +841,7 @@
                 var modal = new bootstrap.Modal(modalElement);
                 modal.show();
                 document.getElementById('regtab').click();
-            }else{
+            } else {
                 var modalElement = document.getElementById('primary-header-modal');
                 var modal = new bootstrap.Modal(modalElement);
                 modal.show();

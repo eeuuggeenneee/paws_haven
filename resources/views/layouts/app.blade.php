@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en"  @if(Auth::user()->role == 'admin') data-layout="dualnav" @else data-layout="topnav" @endif data-menu-color="brand" data-topbar-color="light">
+
+<html lang="en"   @if (Auth::user()->type == 1) data-layout="dualnav" @else data-layout="topnav" @endif>
 
 
 <head>
@@ -40,6 +41,8 @@
         #success-alert-modal {
             z-index: 400000;
         }
+
+    
     </style>
     @vite(['resources/js/app.js'])
 
@@ -67,6 +70,7 @@
     <div class="wrapper">
         <!-- ========== Topbar Start ========== -->
         <!-- ========== Topbar End ========== -->
+   
         <div class="navbar-custom">
             <div class="topbar container-fluid">
                 <div class="d-flex align-items-center gap-lg-2 gap-1">
@@ -311,7 +315,9 @@
             </div>
         </div>
         <!-- ========== Left Sidebar Start ========== -->
-        @if (Auth::user()->role == 'user')
+     
+
+        @if (Auth::user()->type == 0)
             <div class="topnav">
                 <div class="container-fluid">
                     <nav class="navbar navbar-expand-lg">
@@ -329,14 +335,17 @@
                                 </li>
                                 <li class="nav-item dropdown">
                                     <a class="nav-link" href="{{ url('/adopt-a-dog') }}" role="button">
-                                        <i class="uil-dashboard"></i>Adoption
+                                        <i class="uil-dashboard"></i>Adoption List
                                     </a>
                                 </li>
                                 <li class="nav-item dropdown">
-                                    <a class="nav-link" href="{{ url('/report-lost-dog') }}" role="button">
-                                        <i class="uil-dashboard"></i>Report Lost Dog
+                                    <a class="nav-link" href="{{ url('/lost-n-found') }}" role="button">
+                                        <i class="uil-dashboard"></i>Lost and Found List
                                     </a>
                                 </li>
+                            
+
+
                                 {{-- <li class="nav-item dropdown">
                                     <a class="nav-link" href="{{ url('/request-rounds') }}" role="button">
                                         <i class="uil-dashboard"></i>Request Rounds
@@ -392,13 +401,13 @@
 
                     <!--- Sidemenu -->
                     <ul class="side-nav">
-                        <li class="side-nav-title">Navigation</li>
-                        <li class="side-nav-item">
+                        {{-- <li class="side-nav-title">Navigation</li> --}}
+                        {{-- <li class="side-nav-item">
                             <a href="{{ url('/home') }}" class="side-nav-link">
                                 <i class="uil-home-alt"></i>
                                 <span> Dashboards </span>
                             </a>
-                        </li>
+                        </li> --}}
                         <li class="side-nav-title">Data Management</li>
 
                         <li class="side-nav-item">
@@ -408,30 +417,23 @@
                             </a>
                         </li>
                         <li class="side-nav-item">
-                            <a href="{{ url('/adopt-a-dog') }}" class="side-nav-link">
-                                <i class="uil-comments-alt"></i>
-                                <span> Adoption Form </span>
-                            </a>
-                        </li>
-                        <li class="side-nav-item">
                             <a href="{{ url('/report-lost-dog') }}" class="side-nav-link">
                                 <i class="uil-comments-alt"></i>
-                                <span> Report Form </span>
-                            </a>
-                        </li>
-                        <li class="side-nav-item">
-                            <a href="{{ url('/request-rounds') }}" class="side-nav-link">
-                                <i class="uil-comments-alt"></i>
-                                <span> Request Rounds </span>
+                                <span> Add Dog for LnF </span>
                             </a>
                         </li>
                         <li class="side-nav-item">
                             <a href="{{ url('/animal-list') }}" class="side-nav-link">
                                 <i class="uil-comments-alt"></i>
-                                <span> Dog Lists </span>
+                                <span> Add Dog For Adoption </span>
                             </a>
                         </li>
-
+                        <li class="side-nav-item">
+                            <a href="{{ url('/ticket-list') }}" class="side-nav-link">
+                                <i class="uil-comments-alt"></i>
+                                <span> Ticket Lists </span>
+                            </a>
+                        </li>
                         <!-- Help Box -->
                         {{-- <div class="help-box text-white text-center">
                         <a href="javascript: void(0);" class="float-end close-btn text-white">
@@ -472,7 +474,6 @@
             <!-- end Footer -->
 
         </div>
-
         <!-- ============================================================== -->
         <!-- End Page content -->
         <!-- ============================================================== -->
@@ -505,6 +506,7 @@
 
     <!-- Timepicker Demo js -->
     <script src="assets/js/pages/demo.timepicker.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <!-- App js -->
     <script src="assets/js/app.min.js"></script>

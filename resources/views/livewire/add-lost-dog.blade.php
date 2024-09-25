@@ -135,7 +135,12 @@
 
                             <div class="mb-3 position-relative">
                                 <label class="form-label">Contact Number</label>
-                                <input class="form-control" type="text" wire:model="contact_number">
+                                <input type="tel" class="form-control"
+                                id="validationCustom03" placeholder="09123456789" required
+                                wire:model="contact_number" pattern="09[0-9]{9}"
+                                title="Phone number must start with 09 and contain exactly 11 digits."
+                                maxlength="11"
+                                oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 11);">
                             </div>
                         </div> <!-- end col-->
                     </div>

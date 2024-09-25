@@ -51,7 +51,7 @@ class AddLostDog extends Component
 
         AnimalListStatus::create([
             'animal_id' => $dog->dog_id_unique,
-            'status' => 1,
+            'status' => $this->report_type,
             'isActive' => 1,
         ]);
         

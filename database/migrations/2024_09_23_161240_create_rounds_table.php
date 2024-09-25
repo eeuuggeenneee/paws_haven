@@ -18,6 +18,9 @@ return new class extends Migration
             $table->string('schedule');
             $table->string('contact');
             $table->string('reason');
+            $table->boolean('is_approved');
+            $table->boolean('is_rejected');
+            $table->boolean('is_active');
             $table->unsignedBigInteger('user_id');
             $table->timestamps();
         });

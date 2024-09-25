@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\GoogleAuthController;
 use Illuminate\Support\Facades\Route;
 use App\Livewire\AddLostDog;
 
@@ -27,10 +28,24 @@ Route::get('/request-rounds', function () {
     return view('rounds');
 })->middleware('is_login');
 
+Route::get('/ticket-list', function () {
+    return view('ticket');
+})->middleware('is_login');
+
+Route::get('/lost-n-found', function () {
+    return view('lostfound');
+})->middleware('is_login');
+
+
 
 Route::get('/test', function () {
     return view('testevent');
 })->middleware('is_login');
+
+
+Route::get('auth/google', [GoogleAuthController::class,'redirect'])->name('google-auth');
+Route::get('auth/google/callback', [GoogleAuthController::class,'callbackGoogle']);
+
 
 
 Route::post('/upload-images', [AddLostDog::class, 'uploadImages'])->name('upload.images');

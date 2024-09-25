@@ -62,7 +62,6 @@ class ModalsDogs extends Component
         ]);
 
         $this->dispatch('dogAdopted', 'Your adoption request has been successfully saved! Please expect a call from the pound when your request is approved. Thank you!');
-
     }
     public function saveRounds()
     {
@@ -72,6 +71,9 @@ class ModalsDogs extends Component
             'reason' => $this->reason,
             'schedule' => $this->schedule,
             'contact' => $this->contact,
+            'is_approved' => 0,
+            'is_rejected' => 0,
+            'is_active' => 1,
             'user_id' => Auth::user()->id,
         ]);
         $this->dispatch('saveRounds', 'Your rounds request has been successfully saved! Please expect a call from the pound when your request is approved. Thank you!');
