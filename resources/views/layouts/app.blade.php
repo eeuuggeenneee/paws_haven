@@ -41,7 +41,9 @@
         #success-alert-modal {
             z-index: 400000;
         }
-
+        .swal2-container{
+            z-index: 400000;
+        }
     
     </style>
     @vite(['resources/js/app.js'])

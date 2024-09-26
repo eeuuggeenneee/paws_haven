@@ -8,12 +8,15 @@ use Livewire\Component;
 use Livewire\WithFileUploads;
 use App\Models\AnimalList;
 use App\Models\AnimalListStatus;
+use App\Models\DogClaim;
 use App\Models\Rounds;
 use Illuminate\Support\Facades\Auth;
+use Jantinnerezo\LivewireAlert\LivewireAlert;
 
 class ModalsDogs extends Component
 {
     use WithFileUploads;
+    use LivewireAlert;
 
     public $dogName;
     public $breed;
@@ -38,7 +41,45 @@ class ModalsDogs extends Component
     public $a_tos;
     public $a_reason;
 
+
+    public $c_fname;
+    public $c_lname;
+    public $c_contact;
+    public $c_breed;
+    public $c_gender;
+    public $c_proof;
+    public $c_loc;
+    public $c_desc;
+    public $c_address;
+
     protected $listeners = ['editDoggo', 'activedog'];
+    public function confirmclaim()
+    {
+        if ($this->c_proof) {
+            $path = $this->c_proof->store('claim_pictures', 'public');
+        }
+        DogClaim::create([
+            'fullname' => $this->c_fname . ' ' . $this->c_lname,
+            'address' => $this->c_address,
+            'dog_description' => $this->c_desc,
+            'breed' => $this->c_breed,
+            'gender' => $this->c_gender,
+            'contact' =>  $this->c_contact,
+            'proof' => $path,
+            'last_loc' => $this->c_loc,
+            'dog_id_unique' => $this->dog_unique,
+            'isActive' => 1,
+            'user_id' => Auth::user()->id,
+        ]);
+
+        AnimalListStatus::where('animal_id', $this->dog_unique)->update(['isActive' => 0]);
+        AnimalListStatus::create([
+            'animal_id' => $this->dog_unique,
+            'status' => 6,
+            'isActive' => 1,
+        ]);
+        $this->dispatch('dogClaimed', 'Your claim request has been successfully saved! Please expect a call from the pound when your request is approved. Thank you!');
+    }
 
     public function confirmadoption()
     {
@@ -85,9 +126,7 @@ class ModalsDogs extends Component
     }
     public function editDoggo($id)
     {
-
         $finddog = AnimalList::where('dog_id_unique', $id)->first();
-
         $this->dog_unique = $id;
         $this->dogName = $finddog->dog_name;
         $this->breed = $finddog->breed;
@@ -144,6 +183,9 @@ class ModalsDogs extends Component
                 $this->dispatch('dogSaved', 'Data has been successfully saved!');
             }
         }
+    }
+    public function mount(){
+     
     }
 
 
