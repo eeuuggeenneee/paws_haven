@@ -47,7 +47,7 @@
         <div class="container">
 
             <!-- logo -->
-            <a href="{{ url('/home') }}" class="navbar-brand me-lg-5">
+            <a href="" class="navbar-brand me-lg-5">
                 PAWS HAVEN
             </a>
 
