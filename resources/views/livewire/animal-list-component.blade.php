@@ -68,8 +68,7 @@
                                                     {{ $item['description'] }}
                                                 </td>
                                                 <td class="table-action">
-                                                    <a href="javascript:void(0);" class="action-icon"> <i
-                                                            class="mdi mdi-eye"></i></a>
+                                                  
                                                     <a data-bs-toggle="modal" data-bs-target="#info-header-modal"
                                                         wire:click="editDog('{{ $item['dog_id_unique'] }}')"
                                                         class="action-icon"> <i

@@ -139,11 +139,15 @@
                                                                 </h5>
                                                             </td>
                                                             <td>
-                                                                <a href="javascript:void(0);"
-                                                                    wire:click="adoptionpending('{{ $data['dog_id_unique'] }}')"
-                                                                    data-bs-toggle="modal" data-bs-target="#viewdog"
-                                                                    class="action-icon"> <i
-                                                                        class="mdi mdi-square-edit-outline"></i></a>
+                                                                @if ($data['status_name'] == 'For Adoption')
+                                                                @else
+                                                                    <a href="javascript:void(0);"
+                                                                        wire:click="adoptionpending('{{ $data['dog_id_unique'] }}')"
+                                                                        data-bs-toggle="modal" data-bs-target="#viewdog"
+                                                                        class="action-icon"> <i
+                                                                            class="mdi mdi-square-edit-outline"></i></a>
+                                                                @endif
+
                                                                 <a href="javascript:void(0);" class="action-icon"> <i
                                                                         class="mdi mdi-delete"></i></a>
                                                             </td>
@@ -353,12 +357,14 @@
                                                         </h5>
                                                     </td>
                                                     <td>
-                                                        @if ($cdata['is_rejected'] == 0 && $cdata['is_approved'] == 0)
+                                                        @if ($cdata['status_name'] == 'Found Dog')
+                                                        @else
                                                             <a href="javascript:void(0);"
                                                                 wire:click="getlostclaim({{ $cdata['id'] ?? 0 }})"
                                                                 class="action-icon" data-bs-toggle="modal"
                                                                 data-bs-target="#primary-header-modal2"> <i
-                                                                    class="mdi mdi-square-edit-outline"></i></a>
+                                                                    class="mdi mdi-square-edit-outline"></i>
+                                                            </a>
                                                         @endif
 
                                                         <a href="javascript:void(0);" class="action-icon"> <i
