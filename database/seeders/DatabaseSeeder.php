@@ -22,7 +22,7 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
-        $status = ['For Adoption','Lost Dog', 'Found Dog', 'Pending Adoption', 'Adopted'];
+        $status = ['For Adoption','Lost Dog', 'Found Dog', 'Pending Adoption', 'Adopted','Pending Claim','Claimed'];
 
         foreach($status as $s){
             Status::create([

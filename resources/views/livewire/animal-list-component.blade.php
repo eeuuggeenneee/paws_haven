@@ -70,11 +70,12 @@
                                                 <td class="table-action">
                                                     <a href="javascript:void(0);" class="action-icon"> <i
                                                             class="mdi mdi-eye"></i></a>
-                                                    <a data-bs-toggle="modal" data-bs-target="#info-header-modal" wire:click="editDog('{{ $item['dog_id_unique']  }}')"
+                                                    <a data-bs-toggle="modal" data-bs-target="#info-header-modal"
+                                                        wire:click="editDog('{{ $item['dog_id_unique'] }}')"
                                                         class="action-icon"> <i
                                                             class="mdi mdi-square-edit-outline"></i></a>
-                                                    <a wire:click="deleteDog('{{ $item['dog_id_unique']  }}')" class="action-icon"> <i
-                                                            class="mdi mdi-delete"></i></a>
+                                                    <a wire:click="deleteDog('{{ $item['dog_id_unique'] }}')"
+                                                        class="action-icon"> <i class="mdi mdi-delete"></i></a>
                                                 </td>
                                             </tr>
                                         @endforeach
@@ -90,26 +91,40 @@
 
     </div>
     @livewire('modals-dogs')
-   
+
     <script>
         document.addEventListener('livewire:init', function() {
             Livewire.on('dogSaved', event => {
-                var successlabel = document.getElementById('datatoedit');
-                successlabel.innerHTML = event[0];
-                var modalElement = document.getElementById('success-alert-modal');
-                var modal = new bootstrap.Modal(modalElement);
-                modal.show();
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Success!',
+                    text: event[0],
+                    confirmButtonText: 'Okay'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // Reload the page
+                        location.reload();
+                    }
+                });
+
             });
             Livewire.on('editDogSave', event => {
-                var successlabel = document.getElementById('datatoedit');
-                successlabel.innerHTML = event[0];
-                var modalElement = document.getElementById('success-alert-modal');
-                var modal = new bootstrap.Modal(modalElement);
-                modal.show();
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Success!',
+                    text: event[0],
+                    confirmButtonText: 'Okay'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // Reload the page
+                        location.reload();
+                    }
+                });
+
             });
         });
         document.getElementById('closeButton').addEventListener('click', closeAllModals);
-        
+
         function closeAllModals() {
             location.reload();
         }

@@ -38,8 +38,9 @@
                             </div>
 
                             <div class="d-flex align-self-start">
-                                <img class="d-flex align-self-start rounded me-2" src="{{ asset('storage/' . Auth::user()->profile_path) }}"
-                                    alt="Dominic Keller" height="48">
+                                <img class="d-flex align-self-start rounded me-2"
+                                    src="{{ asset('storage/' . Auth::user()->profile_path) }}" alt="Dominic Keller"
+                                    height="48">
                                 <div class="w-100 overflow-hidden">
                                     <h5 class="mt-1 mb-0">{{ Auth::user()->name }}</h5>
                                     <p class="mb-1 mt-1 text-muted">User</p>
@@ -157,7 +158,7 @@
                     <!-- new post -->
 
                     <!-- end new post -->
-                    <div class="tab-content" id="v-pills-tabContent" >
+                    <div class="tab-content" id="v-pills-tabContent">
                         <div class="tab-pane fade active show" id="v-pills-timeline" role="tabpanel"
                             aria-labelledby="v-pills-timeline-tab">
                             <div class="card">
@@ -205,7 +206,8 @@
                                 <div class="card" wire:ignore>
                                     <div class="card-body pb-1">
                                         <div class="d-flex">
-                                            <img class="me-2 rounded" src="{{ asset('storage/' . $p['profile_path']) }}"
+                                            <img class="me-2 rounded"
+                                                src="{{ asset('storage/' . $p['profile_path']) }}"
                                                 alt="Generic placeholder image" height="32">
                                             <div class="w-100">
                                                 <div class="dropdown float-end text-muted">
@@ -304,8 +306,9 @@
 
                                             <!-- reply sa post  -->
                                             <div class="d-flex mb-2">
-                                                <img src="{{ asset('storage/' . Auth::user()->profile_path) }}" height="32"
-                                                    class="align-self-start rounded me-2" alt="Arya Stark" />
+                                                <img src="{{ asset('storage/' . Auth::user()->profile_path) }}"
+                                                    height="32" class="align-self-start rounded me-2"
+                                                    alt="Arya Stark" />
                                                 <div class="w-100">
                                                     <div class="input-group">
                                                         <input type="text"
@@ -325,7 +328,8 @@
                                 </div>
                             @endforeach
                         </div>
-                        <div class="tab-pane fade " id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab" >
+                        <div class="tab-pane fade " id="v-pills-home" role="tabpanel"
+                            aria-labelledby="v-pills-home-tab">
                             @livewire('profile')
                         </div>
                         <div class="tab-pane fade" id="v-pills-profile" role="tabpanel"
@@ -429,22 +433,36 @@
         document.addEventListener('livewire:init', function() {
             Livewire.on('saveRounds', event => {
                 closeAllModals();
-                var successlabel = document.getElementById('datatoedit');
-                successlabel.innerHTML = event[0];
-                var modalElement = document.getElementById('success-alert-modal');
-                var modal = new bootstrap.Modal(modalElement);
-                modal.show();
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Success!',
+                    text: event[0],
+                    confirmButtonText: 'Okay'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // Reload the page
+                        location.reload();
+                    }
+                });
+
             });
             Livewire.on('dogAdopted', event => {
                 closeAllModals();
-                var successlabel = document.getElementById('datatoedit');
-                successlabel.innerHTML = event[0];
-                var modalElement = document.getElementById('success-alert-modal');
-                var modal = new bootstrap.Modal(modalElement);
-                modal.show();
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Success!',
+                    text: event[0],
+                    confirmButtonText: 'Okay'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // Reload the page
+                        location.reload();
+                    }
+                });
+
             });
 
-            
+
         });
     </script>
     <script>

@@ -110,7 +110,7 @@
                                                                                     class="rounded-circle avatar-xs"
                                                                                     alt="friend" wire:ignore.self>
                                                                             @else
-                                                                                <img src="{{ asset('storage/default-image.jpg') }}"
+                                                                                <img src="{{ asset('storage/profile_pictures/xjxxrQTF3FiMAJ92RTzIrh15XRKYVLP9rtQt6g1E.png') }}"
                                                                                     class="rounded-circle avatar-xs"
                                                                                     alt="default" wire:ignore.self>
                                                                             @endif
@@ -129,7 +129,13 @@
                                                             <td>{{ $data['created_at']->format('M-d-Y') }}</td>
                                                             <td>
                                                                 <h5 class="my-0"><span
-                                                                        class="badge badge-info-lighten">{{ $data['status_name'] }}</span>
+                                                                        class="badge badge-info-lighten">
+                                                                        @if ($data['status_name'] == 'For Adoption')
+                                                                            Rejected
+                                                                        @else
+                                                                            {{ $data['status_name'] }}
+                                                                        @endif
+                                                                    </span>
                                                                 </h5>
                                                             </td>
                                                             <td>
@@ -256,7 +262,119 @@
                     </div>
                 </div>
                 <div class="tab-pane" id="settings-b1">
-                    <p>...</p>
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row mb-2">
+                                <div class="col-xl-8">
+                                    {{-- <form
+                                        class="row gy-2 gx-2 align-items-center justify-content-xl-start justify-content-between">
+                                        <div class="col-auto">
+                                            <label for="inputPassword2" class="visually-hidden">Search</label>
+                                            <input type="search" class="form-control" id="inputPassword2"
+                                                placeholder="Search...">
+                                        </div>
+                                        <div class="col-auto">
+                                            <div class="d-flex align-items-center">
+                                                <label for="status-select" class="me-2">Status</label>
+                                                <select class="form-select" id="status-select">
+                                                    <option selected>Choose...</option>
+                                                    <option value="1">Paid</option>
+                                                    <option value="2">Awaiting Authorization</option>
+                                                    <option value="3">Payment Failed</option>
+                                                    <option value="4">Cash On Delivery</option>
+                                                    <option value="5">Fulfilled</option>
+                                                    <option value="6">Unfulfilled</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </form> --}}
+                                </div>
+                                <div class="col-xl-4">
+
+                                </div><!-- end col-->
+                            </div>
+                            <h3>Claim List</h3>
+                            <div class="table-responsive">
+                                <table class="table table-centered table-nowrap mb-0">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th>Requestor</th>
+                                            <th>Dog</th>
+                                            <th>Address</th>
+                                            <th>Contact</th>
+                                            <th>Status</th>
+                                            <th style="width: 125px;">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody wire:ignore>
+                                        @if (isset($claimlist))
+
+                                            @foreach ($claimlist as $cdata)
+                                                @php
+                                                    $imagestc = json_decode($cdata['animal_images']);
+                                                @endphp
+                                                <tr>
+                                                    <td> {{ $cdata['fullname'] ?? 'N/A' }} </td>
+                                                    <td>
+                                                        <div class="d-flex">
+                                                            <div class="d-flex align-items-center">
+                                                                <div class="flex-shrink-0">
+                                                                    @if (!is_null($imagestc) && isset($imagestc[0]))
+                                                                        <img src="{{ asset('storage/' . $imagestc[0]) }}"
+                                                                            class="rounded-circle avatar-xs"
+                                                                            alt="friend" wire:ignore.self>
+                                                                    @else
+                                                                        <img src="{{ asset('storage/profile_pictures/xjxxrQTF3FiMAJ92RTzIrh15XRKYVLP9rtQt6g1E.png') }}"
+                                                                            class="rounded-circle avatar-xs"
+                                                                            alt="default" wire:ignore.self>
+                                                                    @endif
+                                                                </div>
+                                                                <div class="flex-grow-1 ms-2">
+                                                                    <h5 class="my-0">{{ $cdata['dog_name'] }}
+                                                                    </h5>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <p class="mb-0 txt-muted">
+                                                            {{ $cdata['address'] ?? 'N/A' }} </p>
+                                                    </td>
+                                                    <td>{{ $cdata['contact'] ?? 'N/A' }}</td>
+                                                    <td>
+                                                        <h5 class="my-0"><span class="badge badge-info-lighten">
+                                                                @if ($cdata['status_name'] == 'Found Dog')
+                                                                    Rejected
+                                                                @else
+                                                                    {{ $cdata['status_name'] }}
+                                                                @endif
+
+                                                            </span>
+                                                        </h5>
+                                                    </td>
+                                                    <td>
+                                                        @if ($cdata['is_rejected'] == 0 && $cdata['is_approved'] == 0)
+                                                            <a href="javascript:void(0);"
+                                                                wire:click="getlostclaim({{ $cdata['id'] ?? 0 }})"
+                                                                class="action-icon" data-bs-toggle="modal"
+                                                                data-bs-target="#primary-header-modal2"> <i
+                                                                    class="mdi mdi-square-edit-outline"></i></a>
+                                                        @endif
+
+                                                        <a href="javascript:void(0);" class="action-icon"> <i
+                                                                class="mdi mdi-delete"></i></a>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        @endif
+
+
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div> <!-- end card-body-->
+                    </div>
                 </div>
             </div>
 
@@ -710,6 +828,144 @@
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
     </div>
+    <div id="primary-header-modal2" class="modal fade" tabindex="-1" role="dialog"
+        aria-labelledby="primary-header-modalLabel" aria-hidden="true" wire:ignore.self>
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-primary">
+                    <h4 class="modal-title text-white" id="primary-header-modalLabel">Claim Details</h4>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                        aria-hidden="true"></button>
+                </div>
+                @if (isset($activelostclaim))
+                    <div class="modal-body">
+                        <div class=" d-block">
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h4 class="header-title mb-3">Claim Information</h4>
+                                            <ul class="list-unstyled mb-0">
+                                                <li>
+                                                    <p class="mb-2"><span class="fw-bold me-2">Requestor:</span>
+                                                        {{ $activelostclaim['fullname'] }}</p>
+                                                    <p class="mb-2"><span class="fw-bold me-2">Address:</span>
+                                                        {{ $activelostclaim['address'] }}</p>
+                                                    </p>
+                                                    <p class="mb-2"><span class="fw-bold me-2">Breed:</span>
+                                                        {{ $activelostclaim['c_breed'] }}
+                                                    </p>
+                                                    <p class="mb-2"><span class="fw-bold me-2">Gender:</span>
+                                                        {{ $activelostclaim['c_gender'] }}
+                                                    </p>
+                                                    <p class="mb-0"><span class="fw-bold me-2">Contact
+                                                            Number:</span>
+                                                        {{ $activelostclaim['contact'] }} </p>
+                                                </li>
+                                            </ul>
+
+                                        </div>
+                                    </div>
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h4>Proof</h4>
+                                            <div class="text-center">
+                                                <img src="" alt="">
+                                                <img src="{{ asset('storage/' . $activelostclaim['proof']) }}"
+                                                    class="img-thumbnail" alt="friend"
+                                                    style="min-width: 250px; min-height: 170px; width: 250px; height: 170px; object-fit: cover;">
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="col-6">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h4>Dog Details</h4>
+                                            @php
+                                                $images = [];
+                                                if (isset($activelostclaim)) {
+                                                    $images = json_decode($activelostclaim['animal_images']);
+                                                }
+                                            @endphp
+                                            <div class="d-lg-flex justify-content-center">
+                                                <div id="carouselExampleCaption" class="carousel slide"
+                                                    data-bs-ride="carousel">
+                                                    <div class="carousel-inner" role="listbox">
+                                                        @foreach ($images as $img)
+                                                            <div
+                                                                class="carousel-item {{ $loop->first ? 'active' : '' }}">
+                                                                <img src="{{ asset('storage/' . $img) }}"
+                                                                    alt="..." class="d-block img-fluid"
+                                                                    style="min-width: 300px; min-height: 250px; width: 300px; height: 250px; object-fit: cover;">
+                                                                <div class="carousel-caption d-none d-md-block">
+                                                                    <h3 class="text-white">
+                                                                        {{ $activelostclaim['dog_name'] }}</h3>
+                                                                    <p>{{ $activelostclaim['description'] }}
+                                                                    </p>
+                                                                </div>
+                                                            </div>
+                                                        @endforeach
+                                                    </div>
+                                                    <a class="carousel-control-prev" href="#carouselExampleCaption"
+                                                        role="button" data-bs-slide="prev">
+                                                        <span class="carousel-control-prev-icon"
+                                                            aria-hidden="true"></span>
+                                                        <span class="visually-hidden">Previous</span>
+                                                    </a>
+                                                    <a class="carousel-control-next" href="#carouselExampleCaption"
+                                                        role="button" data-bs-slide="next">
+                                                        <span class="carousel-control-next-icon"
+                                                            aria-hidden="true"></span>
+                                                        <span class="visually-hidden">Next</span>
+                                                    </a>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h4 class="header-title mb-3">Dog Information</h4>
+                                            <ul class="list-unstyled mb-0">
+                                                <li>
+                                                    <p class="mb-2"><span class="fw-bold me-2">Dog Name:</span>
+                                                        {{ $activelostclaim['dog_name'] ?? 'N/A' }}
+                                                    </p>
+                                                    <p class="mb-2"><span class="fw-bold me-2">Breed:</span>
+                                                        {{ $activelostclaim['breed'] ?? 'N/A' }}
+                                                    </p>
+                                                    <p class="mb-2"><span class="fw-bold me-2">Gender:</span>
+                                                        {{ $activelostclaim['gender'] ?? 'N/A' }}
+                                                    </p>
+                                                    <p class="mb-0"><span class="fw-bold me-2">Location
+                                                            Found:</span>
+                                                        {{ $activelostclaim['location_found'] ?? 'N/A' }} </p>
+                                                </li>
+                                            </ul>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                @endif
+            </div>
+            <div class="modal-footer">
+                @if (isset($activelostclaim))
+                    <button type="button" class="btn btn-success" id="approve_claim"
+                        onclick="approve_claim('{{ $activelostclaim['dog_id_unique'] }}')">Approve
+                        Claim</button>
+                    <button type="button" class="btn btn-danger" id="reject_claim"
+                        onclick="reject_claim('{{ $activelostclaim['dog_id_unique'] }}')">Reject
+                        Claim</button>
+                @endif
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
     <script>
         document.getElementById('approve_rounds').addEventListener('click', function() {
             Swal.fire({
@@ -758,12 +1014,7 @@
                 }
             });
         });
-        document.addEventListener('livewire:init', function() {
-            Livewire.on('reload', event => {
-                location.reload();
-            });
 
-        });
         document.getElementById('approve_adoption').addEventListener('click', function() {
             Swal.fire({
                 title: 'Are you sure?',
@@ -803,13 +1054,79 @@
             }).then((result) => {
                 if (result.isConfirmed) {
                     // Perform the reject action here
+                    Livewire.dispatch('r_adopted')
                     Swal.fire(
                         'Rejected!',
                         'The adoption has been rejected.',
-                        'error'
-                    )
+                        'success'
+                    ).then((result) => {
+                        if (result.isConfirmed) {
+                            location.reload();
+                        }
+                    });
                 }
             });
+        });
+
+        function approve_claim(id) {
+            Swal.fire({
+                title: 'Are you sure?',
+                text: 'Do you really want to approve this claim?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, approve it!',
+                cancelButtonText: 'No, cancel!',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Perform the approval action here
+                    Livewire.dispatch('claim_dog', {
+                        id: id
+                    });
+                    Swal.fire(
+                        'Approved!',
+                        'The claim has been approved.',
+                        'success'
+                    ).then(() => {
+                        // Reload the page after the user clicks "OK" or clicks outside the modal
+                        location.reload();
+                    });
+                }
+            });
+        }
+
+        function reject_claim(id) {
+            Swal.fire({
+                title: 'Are you sure?',
+                text: 'Do you really want to reject this claim?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Yes, reject it!',
+                cancelButtonText: 'No, cancel!',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Livewire.dispatch('claim_dog_rejected', {
+                        id: id
+                    });
+                    Swal.fire(
+                        'Rejected!',
+                        'The claim has been rejected.',
+                        'success'
+                    ).then(() => {
+                        // Reload the page after the user clicks "OK" or clicks outside the modal
+                        location.reload();
+                    });
+                }
+            });
+        }
+        document.addEventListener('livewire:init', function() {
+            Livewire.on('reload', event => {
+                location.reload();
+            });
+
         });
     </script>
 </div>

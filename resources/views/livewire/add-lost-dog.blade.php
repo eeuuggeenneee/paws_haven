@@ -1,6 +1,8 @@
 <div>
     <!-- plugin js -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+        integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <!-- start page title -->
     <div class="row">
         <div class="col-12">
@@ -32,19 +34,19 @@
                                 <div class="col-6">
                                     <div class="mb-3">
                                         <label for="dog_name" class="form-label">Breed</label>
-                                        <input type="text" id="dog_name" class="form-control" placeholder="Enter dog name"
-                                            wire:model="breed">
+                                        <input type="text" id="dog_name" class="form-control"
+                                            placeholder="Enter dog name" wire:model="breed">
                                     </div>
                                 </div>
                                 <div class="col-6">
                                     <div class="mb-3">
                                         <label for="dog_name" class="form-label">Color</label>
-                                        <input type="text" id="dog_name" class="form-control" placeholder="Enter dog name"
-                                            wire:model="color">
+                                        <input type="text" id="dog_name" class="form-control"
+                                            placeholder="Enter dog name" wire:model="color">
                                     </div>
                                 </div>
                             </div>
-                          
+
 
                             <div class="mb-3">
                                 <label for="description" class="form-label">Description</label>
@@ -84,16 +86,20 @@
                                 <p class="text-muted font-14">Recommended thumbnail size 800x400 (px).</p>
 
                                 <!-- File Upload -->
-                                <form action="{{ route('upload.images') }}" method="post" enctype="multipart/form-data" class="dropzone" id="myAwesomeDropzone" data-plugin="dropzone" data-previews-container="#file-previews" data-upload-preview-template="#uploadPreviewTemplate">
+                                <form action="{{ route('upload.images') }}" method="post" enctype="multipart/form-data"
+                                    class="dropzone" id="myAwesomeDropzone" data-plugin="dropzone"
+                                    data-previews-container="#file-previews"
+                                    data-upload-preview-template="#uploadPreviewTemplate">
                                     @csrf
                                     <div class="fallback">
                                         <input type="file" wire:model="images" multiple>
                                     </div>
-                                
+
                                     <div class="dz-message needsclick">
                                         <i class="h1 text-muted ri-upload-cloud-2-line"></i>
                                         <h3>Drop files here or click to upload.</h3>
-                                        <span class="text-muted font-13">(This is just a demo dropzone. Selected files are <strong>not</strong> actually uploaded.)</span>
+                                        <span class="text-muted font-13">(This is just a demo dropzone. Selected files
+                                            are <strong>not</strong> actually uploaded.)</span>
                                     </div>
                                 </form>
 
@@ -135,12 +141,12 @@
 
                             <div class="mb-3 position-relative">
                                 <label class="form-label">Contact Number</label>
-                                <input type="tel" class="form-control"
-                                id="validationCustom03" placeholder="09123456789" required
-                                wire:model="contact_number" pattern="09[0-9]{9}"
-                                title="Phone number must start with 09 and contain exactly 11 digits."
-                                maxlength="11"
-                                oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 11);">
+                                <input type="tel" class="form-control" id="validationCustom03"
+                                    placeholder="09123456789" required wire:model="contact_number"
+                                    pattern="09[0-9]{9}"
+                                    title="Phone number must start with 09 and contain exactly 11 digits."
+                                    maxlength="11"
+                                    oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 11);">
                             </div>
                         </div> <!-- end col-->
                     </div>
@@ -157,13 +163,20 @@
     </div>
     <!-- end row-->
     <script>
-       document.addEventListener('livewire:init', function() {
+        document.addEventListener('livewire:init', function() {
             Livewire.on('dogSaved', event => {
-                var successlabel = document.getElementById('datatoedit');
-                successlabel.innerHTML = event[0];
-                var modalElement = document.getElementById('success-alert-modal');
-                var modal = new bootstrap.Modal(modalElement);
-                modal.show();
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Success!',
+                    text: event[0],
+                    confirmButtonText: 'Okay'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // Reload the page
+                        location.reload();
+                    }
+                });
+
             });
         });
     </script>
