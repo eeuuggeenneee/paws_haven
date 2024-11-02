@@ -29,12 +29,13 @@
                             <div class="py-1 px-1 mt-2">
                                 <div class="float-end position-absolute">
                                     <button type="button" class="btn btn-danger"
-                                         data-bs-toggle="modal"
+                                        wire:click="heartDog('{{ $d['dog_id_unique'] }}')" data-bs-toggle="modal"
                                         data-bs-target="#bs-example-modal-lg"><i class="mdi mdi-heart-outline"></i>
                                     </button>
                                 </div>
                                 <div class="text-center">
-                                    <a data-bs-toggle="modal" data-bs-target="#viewdog" wire:click="adoptionform('{{ $d['dog_id_unique'] }}')">
+                                    <a data-bs-toggle="modal" data-bs-target="#viewdog"
+                                        wire:click="adoptionform('{{ $d['dog_id_unique'] }}')">
                                         <img src="{{ asset('storage/' . $images[0]) }}" class="img-thumbnail"
                                             alt="friend"
                                             style="min-width: 220px; min-height: 170px; width: 220px; height: 170px; object-fit: cover;"></a>
@@ -252,8 +253,8 @@
                                                         </g>
                                                     </svg> </i>
                                                 <div>
-                                                    <h5 class="mt-1 font-14">
-                                                        {{ 100 }}
+                                                    <h5 class="mt-1 font-14" id="clicked-{{$d['dog_id_unique']}}" wire:ignore>
+                                                        {{ $d['clicked'] ?? '0' }}
                                                     </h5>
                                                 </div>
                                             </div>
@@ -277,7 +278,31 @@
     </div> <!-- content -->
 
     <!-- Footer Start -->
-    
-    <!-- end Footer -->
 
+    <!-- end Footer -->
+    <script>
+        document.addEventListener('livewire:init', function() {
+            Livewire.on('dogSaved', event => {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Success!',
+                    text: event[0],
+                    confirmButtonText: 'Okay'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // Reload the page
+                        location.reload();
+                    }
+                });
+
+            });
+
+            Livewire.on('heart_dog', event => {
+                let dogid = document.getElementById('clicked-'+ event[0]);
+                dogid.textContent = event[1];
+                console.log(event);
+            });
+
+        });
+    </script>
 </div>

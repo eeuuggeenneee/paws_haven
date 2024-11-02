@@ -33,16 +33,20 @@
                             <div class="row">
                                 <div class="col-6">
                                     <div class="mb-3">
-                                        <label for="dog_name" class="form-label">Breed</label>
-                                        <input type="text" id="dog_name" class="form-control"
-                                            placeholder="Enter dog name" wire:model="breed">
+                                        <label for="dog_name" class="form-label">Breed  <small> (missing dog breed? <a data-bs-toggle="modal" data-bs-target="#addmorebreed" class="text-primary">click here)</a></small></label>
+                                        <select id="dog-breed" name="dog-breed" class="form-select" wire:model="breed">
+                                            <option value="" disabled selected>Select a breed</option>
+                                            @foreach($breedlist as $breed)
+                                                <option value="{{$breed['id']}}">{{$breed['name']}}</option>
+                                            @endforeach
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="col-6">
                                     <div class="mb-3">
                                         <label for="dog_name" class="form-label">Color</label>
                                         <input type="text" id="dog_name" class="form-control"
-                                            placeholder="Enter dog name" wire:model="color">
+                                            placeholder="Enter dog color" wire:model="color">
                                     </div>
                                 </div>
                             </div>
@@ -65,7 +69,7 @@
                                     placeholder="Enter last location" wire:model="location_found">
                             </div>
 
-                            <div class="mb-3">
+                            <div class="mb-3 d-none">
                                 <label class="form-label">What Are You Reporting?</label>
                                 <br>
                                 <div class="form-check form-check-inline">
@@ -75,7 +79,7 @@
                                 </div>
                                 <div class="form-check form-check-inline">
                                     <input type="radio" class="form-check-input" name="report_type" id="found_dog"
-                                        value="3" wire:model="report_type">
+                                        value="3" wire:model="report_type" checked>
                                     <label class="form-check-label" for="found_dog">Found Dog</label>
                                 </div>
                             </div>
@@ -86,9 +90,9 @@
                                 <p class="text-muted font-14">Recommended thumbnail size 800x400 (px).</p>
 
                                 <!-- File Upload -->
-                                <form action="{{ route('upload.images') }}" method="post" enctype="multipart/form-data"
-                                    class="dropzone" id="myAwesomeDropzone" data-plugin="dropzone"
-                                    data-previews-container="#file-previews"
+                                <form action="{{ route('upload.images') }}" method="post"
+                                    enctype="multipart/form-data" class="dropzone" id="myAwesomeDropzone"
+                                    data-plugin="dropzone" data-previews-container="#file-previews"
                                     data-upload-preview-template="#uploadPreviewTemplate">
                                     @csrf
                                     <div class="fallback">

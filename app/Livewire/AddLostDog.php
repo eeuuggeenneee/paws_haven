@@ -8,6 +8,7 @@ use App\Models\AnimalList;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use App\Models\AnimalListStatus;
+use App\Models\DogBreed;
 use Illuminate\Support\Str;
 
 class AddLostDog extends Component
@@ -20,14 +21,15 @@ class AddLostDog extends Component
     public $description;
     public $date_found;
     public $location_found;
-    public $report_type;
+    public $report_type = 3;
     public $images = [];
     public $contact_name;
     public $contact_number;
-
+    public $breedlist;
     public $dog_images = [];   
     public function mount(){
         $this->clearDogImages();
+        $this->breedlist = DogBreed::where('isActive',1)->get();
     } 
     public function submitForm()
     {

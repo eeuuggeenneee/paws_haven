@@ -8,6 +8,7 @@ use Livewire\Component;
 use Livewire\WithFileUploads;
 use App\Models\AnimalList;
 use App\Models\AnimalListStatus;
+use App\Models\DogBreed;
 use App\Models\DogClaim;
 use App\Models\Rounds;
 use Illuminate\Support\Facades\Auth;
@@ -52,13 +53,24 @@ class ModalsDogs extends Component
     public $c_desc;
     public $c_address;
 
+    public $breedName;
+    public $breedlist;
+
     protected $listeners = ['editDoggo', 'activedog'];
+    public function addDogBreed(){
+
+        DogBreed::create([
+            'name' => $this->breedName,
+            'isActive' => 1,
+        ]);
+        $this->dispatch('dogSaved', 'Data has been successfully saved!');
+    }
     public function confirmclaim()
     {
         if ($this->c_proof) {
             $path = $this->c_proof->store('claim_pictures', 'public');
         }
-        DogClaim::create([
+        $claimgo = DogClaim::create([
             'fullname' => $this->c_fname . ' ' . $this->c_lname,
             'address' => $this->c_address,
             'dog_description' => $this->c_desc,
@@ -73,18 +85,22 @@ class ModalsDogs extends Component
         ]);
 
         AnimalListStatus::where('animal_id', $this->dog_unique)->update(['isActive' => 0]);
-        AnimalListStatus::create([
+        $status = AnimalListStatus::create([
             'animal_id' => $this->dog_unique,
             'status' => 6,
             'isActive' => 1,
         ]);
-        $this->dispatch('dogClaimed', 'Your claim request has been successfully saved! Please expect a call from the pound when your request is approved. Thank you!');
+
+        $formattedId = str_pad($claimgo->id, 4, '0', STR_PAD_LEFT);
+        $ticket = 'C' . $status->created_at->format('ym') . '-'. $formattedId;
+
+        $this->dispatch('dogClaimed', 'Your claim request has been successfully saved! Please expect a call from the pound when your request is approved. Thank you!',$ticket);
     }
 
     public function confirmadoption()
     {
 
-        AdoptionForm::create([
+        $adoptionid = AdoptionForm::create([
             'fullname' => $this->a_fname . ' ' . $this->a_lname,
             'c_number' => $this->a_contact,
             'reason' => $this->a_reason,
@@ -96,13 +112,16 @@ class ModalsDogs extends Component
         ]);
         AnimalListStatus::where('animal_id', $this->dog_unique)->update(['isActive' => 0]);
 
-        AnimalListStatus::create([
+        $status = AnimalListStatus::create([
             'animal_id' => $this->dog_unique,
             'status' => 4,
             'isActive' => 1,
         ]);
+        
+        $formattedId = str_pad($adoptionid->id, 4, '0', STR_PAD_LEFT);
+        $ticket = 'A' . $status->created_at->format('ym') . '-'. $formattedId;
 
-        $this->dispatch('dogAdopted', 'Your adoption request has been successfully saved! Please expect a call from the pound when your request is approved. Thank you!');
+        $this->dispatch('dogAdopted', 'Your adoption request has been successfully saved! Please expect a call from the pound when your request is approved. Thank you!', $ticket);
     }
     public function saveRounds()
     {
@@ -185,10 +204,7 @@ class ModalsDogs extends Component
         }
     }
     public function mount(){
-     
     }
-
-
     public function render()
     {
         return view('livewire.modals-dogs');

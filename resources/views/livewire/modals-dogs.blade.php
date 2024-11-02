@@ -427,7 +427,7 @@
                                                             maxlength="11"
                                                             oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 11);">
                                                         <div class="invalid-feedback">
-                                                            Please provide a valid city.
+                                                            Please provide a valid phone number.
                                                         </div>
                                                     </div>
 
@@ -464,8 +464,9 @@
                                                             <input type="checkbox" class="form-check-input"
                                                                 id="invalidCheck" required wire:model="a_tos">
                                                             <label class="form-check-label form-label"
-                                                                for="invalidCheck">Agree to terms
-                                                                and conditions</label>
+                                                                for="invalidCheck">Agree to <a class="text-primary"
+                                                                    onclick="openTerms()">
+                                                                    terms and conditions </a></label>
                                                             <div class="invalid-feedback">
                                                                 You must agree before submitting.
                                                             </div>
@@ -938,8 +939,9 @@
                                                             <input type="checkbox" class="form-check-input"
                                                                 id="invalidCheck" required wire:model="a_tos">
                                                             <label class="form-check-label form-label"
-                                                                for="invalidCheck">Agree to terms
-                                                                and conditions</label>
+                                                                for="invalidCheck">Agree to <a class="text-primary"
+                                                                    onclick="openTerms()">
+                                                                    terms and conditions </a> </label>
                                                             <div class="invalid-feedback">
                                                                 You must agree before submitting.
                                                             </div>
@@ -1051,7 +1053,111 @@
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
+
+    <div id="terms-modal" class="modal" data-bs-backdrop="static" style="z-index: 1000000000;" tabindex="-1"
+        role="dialog" aria-labelledby="standard-modalLabel">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="standard-modalLabel">Terms and Conditions for Adopting or Claiming a
+                        Dog</h4>
+                    <button type="button" class="btn-close" onclick="closeTerms()"></button>
+                </div>
+                <div class="modal-body">
+                    <h5>1. Agreement to Provide a Safe and Caring Environment</h5>
+                    <p>By adopting or claiming a dog, you agree to provide a safe, loving, and healthy environment for
+                        the dog, including adequate food, water, shelter, and companionship.</p>
+
+                    <h5>2. Health and Medical Care Responsibility</h5>
+                    <p>You acknowledge that it is your responsibility to provide regular veterinary care, including
+                        vaccinations, flea prevention, deworming, and any other necessary medical treatments.</p>
+                    <p>If adopting, you accept that any known health conditions of the dog have been disclosed to you
+                        and that the dog pound is not responsible for future health issues that may arise.</p>
+
+                    <h5>3. Spay/Neuter Requirement</h5>
+                    <p>All adopted dogs must be spayed or neutered, either before adoption or within a specified time
+                        frame if not already done. If adopting an unaltered dog, you agree to follow through with this
+                        requirement and provide proof of completion to the dog pound.</p>
+
+                    <h5>4. Compliance with Local Laws</h5>
+                    <p>You agree to abide by all local, state, and federal regulations regarding dog ownership,
+                        including but not limited to licensing, leash laws, and breed-specific legislation (where
+                        applicable).</p>
+
+                    <h5>5. No Return Policy or Limited Return Period</h5>
+                    <p>If you decide you are unable to care for the dog, you agree to return the dog to the pound or
+                        rehome the dog responsibly. Some adoption facilities may have a limited return period or may
+                        require approval before rehoming.</p>
+
+                    <h5>6. Non-Transferable Adoption</h5>
+                    <p>The adopted or claimed dog is non-transferable, meaning it may not be sold, gifted, or
+                        transferred to another individual without prior consent from the dog pound.</p>
+
+                    <h5>7. Home Check and Follow-Up</h5>
+                    <p>You may be subject to a home visit or follow-up check within a specified time frame after
+                        adoption to ensure the dog is being well cared for.</p>
+
+                    <h5>8. Waiver of Liability</h5>
+                    <p>You release the dog pound from any liability arising from the dog’s behavior or any incidents
+                        involving the dog after adoption or claim. This includes any harm or damage the dog may cause to
+                        property, people, or other animals.</p>
+
+                    <h5>9. Disclosure of Information</h5>
+                    <p>You agree to provide accurate information during the adoption or claim process, including details
+                        of any previous pets, living situation, and household members to ensure the adoption is in the
+                        dog’s best interest.</p>
+
+                    <h5>10. Financial Responsibility</h5>
+                    <p>You understand that any fees paid for the adoption are non-refundable and that all future costs
+                        related to the dog’s care, including but not limited to food, supplies, grooming, and medical
+                        expenses, are solely your responsibility.</p>
+
+                    <h5>11. Commitment to Training and Socialization</h5>
+                    <p>You commit to providing proper training, socialization, and, if necessary, behavioral
+                        interventions for the dog. This includes but is not limited to basic obedience training,
+                        housebreaking, and social interaction.</p>
+
+                    <h5>12. Right to Reclaim</h5>
+                    <p>The dog pound reserves the right to reclaim the dog if it is discovered that any of the above
+                        terms and conditions are violated or if the dog is found to be in an unsafe environment.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-light" onclick="closeTerms()">Close</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+    <div id="addmorebreed" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="standard-modalLabel" aria-hidden="true">
+        <div class="modal-dialog" wire:ignore.self>
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="standard-modalLabel">Add Dog Breed</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="simpleinput" class="form-label">Breed name</label>
+                        <input type="text" id="simpleinput" class="form-control" wire:model="breedName">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" wire:click="addDogBreed" data-bs-dismiss="modal">Submit</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div>
     <script>
+        function openTerms() {
+            console.log('hehe');
+            $('#terms-modal').modal('show');
+        }
+
+        function closeTerms() {
+            console.log('hehe');
+            $('#terms-modal').modal('hide');
+        }
         document.getElementById('claimtoggle').addEventListener('click', function() {
             var claim_dog = document.getElementById('claim_dog');
             var claimformtoggle = document.getElementById('claimformtoggle');
@@ -1063,6 +1169,7 @@
             var adopt_dog = document.getElementById('adopt_dog');
             var adoptionform = document.getElementById('adoptionform');
 
+
             adopt_dog.classList.toggle('d-none');
             adoptionform.classList.toggle('d-none');
         });
@@ -1070,10 +1177,8 @@
         document.getElementById('claim_dog').addEventListener('click', function() {
             var form2 = document.getElementById('claimcheckform');
 
-            // Add 'was-validated' class to trigger Bootstrap validation styles
             form2.classList.add('was-validated');
 
-            // Check if all required fields are filled and valid
             if (!form2.checkValidity()) {
                 // Form is incomplete or invalid, prevent further action
                 const Toast = Swal.mixin({
@@ -1084,7 +1189,7 @@
                     timerProgressBar: true,
                 });
                 Toast.fire({
-                    icon: 'success',
+                    icon: 'warning',
                     title: 'Please fill out all required fields.'
                 });
 
@@ -1115,10 +1220,33 @@
             // Check if all required fields are filled and valid
             if (!form.checkValidity()) {
                 // Form is incomplete or invalid, prevent further action
-                alert('Please fill out all required fields.');
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: 'top-end', // Position of the toast
+                    showConfirmButton: false,
+                    timer: 3000, // Duration before the toast disappears (in milliseconds)
+                    timerProgressBar: true,
+                });
+                Toast.fire({
+                    icon: 'warning',
+                    title: 'Please fill out all required fields. '
+                });                
                 return false; // Stop further actions
             }
-            document.getElementById('hidden_dog').click();
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "Do you want to confirm the adoption?",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, confirm it!',
+                cancelButtonText: 'Cancel'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.getElementById('hidden_dog').click();
+                }
+            });
         });
 
         function closeAllModals() {
@@ -1144,7 +1272,7 @@
                 closeAllModals();
                 Swal.fire({
                     icon: 'success',
-                    title: 'Success!',
+                    title: 'Ticket Number '+ event[1],
                     text: event[0],
                     confirmButtonText: 'Okay'
                 }).then((result) => {
@@ -1153,13 +1281,12 @@
                         location.reload();
                     }
                 });
-
             });
             Livewire.on('dogClaimed', event => {
                 closeAllModals();
                 Swal.fire({
                     icon: 'success',
-                    title: 'Success!',
+                    title: 'Ticket Number '+ event[1],
                     text: event[0],
                     confirmButtonText: 'Okay'
                 }).then((result) => {

@@ -20,4 +20,8 @@ class AnimalListStatus extends Model
     {
         return $this->belongsTo(AnimalList::class, 'animal_id', 'dog_id_unique');
     }
+    public function animalClick()
+    {
+        return $this->belongsTo(ClickDogs::class, 'dog_id_unique', 'dog_id_unique');
+    }
 }

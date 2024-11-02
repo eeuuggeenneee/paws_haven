@@ -83,7 +83,7 @@
                     <li class="nav-item me-0">
                         <a class="btn btn-sm btn-light rounded-pill d-none d-lg-inline-flex" data-bs-toggle="modal"
                             data-bs-target="#primary-header-modal">
-                            <i class="uil uil-user-circle me-1"></i> Log in / Sign up
+                            <i class="uil uil-user-circle me-1"></i> Log in
                         </a>
                     </li>
                 </ul>
@@ -608,221 +608,113 @@
         aria-labelledby="primary-header-modalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
-                <ul class="nav nav-pills bg-nav-pills nav-justified border-bottom">
-                    <li class="nav-item">
-                        <a href="#home1" data-bs-toggle="tab" aria-expanded="false" id="logintab"
-                            class="nav-link rounded-0 active">
-                            <i class="mdi mdi-home-variant d-md-none d-block"></i>
-                            <span class="d-none d-md-block">Log in</span>
+                <div class="card">
+                    <!-- Logo -->
+                    <div class="card-header  text-center bg-white  " style="border-radius: 0 !important">
+                        <a href="{{ url('/home') }}">
+                            <span>
+                                <img src="assets/logo2.png" alt="logo" height="100%">
+                            </span>
                         </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#profile1" data-bs-toggle="tab" aria-expanded="true" class="nav-link rounded-0 "
-                            id="regtab">
-                            <i class="mdi mdi-account-circle d-md-none d-block"></i>
-                            <span class="d-none d-md-block">Sign up</span>
-                        </a>
-                    </li>
-                </ul>
+                    </div>
 
-                <div class="tab-content">
-                    <div class="tab-pane show active" id="home1">
-                        <div class="card">
-                            <!-- Logo -->
-                            <div class="card-header  text-center bg-white  " style="border-radius: 0 !important">
-                                <a href="{{ url('/home') }}">
-                                    <span>
-                                        <img src="assets/logo2.png" alt="logo" height="100%">
+                    <div class="card-body p-2">
+
+                        <div class="text-center w-75 m-auto">
+                            <h4 class="text-dark-50 text-center pb-0 fw-bold">Sign In</h4>
+                            <p class="text-muted mb-4">Enter your email address and password to access website</p>
+                        </div>
+
+                        <form method="POST" action="{{ route('login') }}">
+                            @csrf
+                            @if (session('error'))
+                                <div class="alert alert-danger">
+                                    {{ session('error') }}
+                                </div>
+                            @endif
+                            <div class="mb-3">
+                                <label for="emailaddress" class="form-label">Email address</label>
+                                <input id="email" type="email"
+                                    class="form-control @error('email') is-invalid @enderror" name="email"
+                                    value="{{ old('email') }}" required autocomplete="email" autofocus>
+
+                                @error('email')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
                                     </span>
-                                </a>
+                                @enderror
                             </div>
 
-                            <div class="card-body p-2">
+                            <div class="mb-3">
+                                {{-- <a href="pages-recoverpw.html" class="text-muted float-end"><small>Forgot your
+                                        password?</small></a> --}}
+                                <label for="password" class="form-label">Password</label>
+                                <div class="input-group input-group-merge">
+                                    <input id="password" type="password"
+                                        class="form-control @error('password') is-invalid @enderror" name="password"
+                                        required autocomplete="current-password">
 
-                                <div class="text-center w-75 m-auto">
-                                    <h4 class="text-dark-50 text-center pb-0 fw-bold">Sign In</h4>
-                                    <p class="text-muted mb-4">Enter your email address and password to access admin
-                                        panel.</p>
+                                    <div class="input-group-text" data-password="false">
+                                        <span class="password-eye"></span>
+                                    </div>
                                 </div>
-
-                                <form method="POST" action="{{ route('login') }}">
-                                    @csrf
-                                    @if (session('error'))
-                                        <div class="alert alert-danger">
-                                            {{ session('error') }}
-                                        </div>
-                                    @endif
-                                    <div class="mb-3">
-                                        <label for="emailaddress" class="form-label">Email address</label>
-                                        <input id="email" type="email"
-                                            class="form-control @error('email') is-invalid @enderror" name="email"
-                                            value="{{ old('email') }}" required autocomplete="email" autofocus>
-
-                                        @error('email')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
-
-                                    <div class="mb-3">
-                                        {{-- <a href="pages-recoverpw.html" class="text-muted float-end"><small>Forgot your
-                                                password?</small></a> --}}
-                                        <label for="password" class="form-label">Password</label>
-                                        <div class="input-group input-group-merge">
-                                            <input id="password" type="password"
-                                                class="form-control @error('password') is-invalid @enderror"
-                                                name="password" required autocomplete="current-password">
-
-                                            <div class="input-group-text" data-password="false">
-                                                <span class="password-eye"></span>
-                                            </div>
-                                        </div>
-                                        @error('password')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
-
-                                    <div class="mb-3 mb-3">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" name="remember"
-                                                id="remember" {{ old('remember') ? 'checked' : '' }}>
-
-                                            <label class="form-check-label" for="checkbox-signin">Remember me</label>
-                                        </div>
-                                    </div>
-
-                                    <div class="mb-3 mb-0 text-center">
-                                        <button class="btn btn-primary" type="submit"> Log In </button>
-                                    </div>
-
-                                </form>
-                                <div class="text-center mt-4">
-                                    <p class="text-muted font-16">Sign in with</p>
-                                    <ul class="social-list list-inline mt-3">
-                                        <li class="list-inline-item">
-                                            <a href="{{ route('google-auth')}}"
-                                                class="social-list-item border-danger text-danger"><i
-                                                    class="mdi mdi-google"></i></a>
-                                        </li>
-                                      
-                                    </ul>
-                                </div>
-                            </div> <!-- end card-body -->
-                        </div>
-                    </div>
-                    <div class="tab-pane " id="profile1">
-                        <div class="card">
-                            <!-- Logo-->
-                            <div class="card-header py-2 text-center bg-white" style="border-radius: 0 !important">
-                                <a href="{{ url('/home') }}">
-                                    <span>
-                                        <span><img src="assets/logo2.png" alt="logo" height="100%"></span>
+                                @error('password')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
                                     </span>
-                                </a>
+                                @enderror
                             </div>
 
-                            <div class="card-body p-2">
+                            <div class="mb-3 mb-3">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="remember" id="remember"
+                                        {{ old('remember') ? 'checked' : '' }}>
 
-                                <div class="text-center w-75 m-auto">
-                                    <h4 class="text-dark-50 text-center mt-0 fw-bold">Free Sign Up</h4>
-                                    <p class="text-muted mb-4">Don't have an account? Create your account, it takes
-                                        less than a minute </p>
+                                    <label class="form-check-label" for="checkbox-signin">Remember me</label>
                                 </div>
+                            </div>
 
-                                <form method="POST" action="{{ route('register') }}" id="registrationForm">
-                                    @csrf
+                            <div class="mb-3 mb-0 text-center">
+                                <button class="btn btn-primary" type="submit"> Log In </button>
+                            </div>
 
-                                    <div class="mb-3">
-                                        <label for="fullname" class="form-label">Full Name</label>
-                                        <input id="rname" type="text"
-                                            class="form-control @error('name') is-invalid @enderror" name="name"
-                                            value="{{ old('name') }}" required autocomplete="name" autofocus>
+                        </form>
+                        <div class="text-center mt-4">
+                            <p class="text-muted font-16">Sign in with</p>
+                            <ul class="social-list list-inline mt-3">
+                                <li class="list-inline-item">
+                                    <a href="{{ route('google-auth') }}"
+                                        class=" text-danger"><svg
+                                            xmlns="http://www.w3.org/2000/svg" version="1.1"
+                                            xmlns:xlink="http://www.w3.org/1999/xlink" width="25" height="25"
+                                            x="0" y="0" viewBox="0 0 512 512"
+                                            style="enable-background:new 0 0 512 512" xml:space="preserve"
+                                            class="">
+                                            <g>
+                                                <path fill="#0085f7"
+                                                    d="M34.909 448.047h81.455V250.229l-53.338-93.138L0 162.956v250.182c0 19.287 15.622 34.909 34.909 34.909z"
+                                                    opacity="1" data-original="#0085f7"></path>
+                                                <path fill="#00a94b"
+                                                    d="M395.636 448.047h81.455c19.287 0 34.909-15.622 34.909-34.909V162.956l-62.935-5.865-53.428 93.138v197.818z"
+                                                    opacity="1" data-original="#00a94b"></path>
+                                                <path fill="#ffbc00"
+                                                    d="m395.636 98.956-47.847 91.303 47.847 59.97L512 162.956v-46.545c0-43.142-49.251-67.782-83.782-41.891z"
+                                                    opacity="1" data-original="#ffbc00" class=""></path>
+                                                <path fill="#ff4131" fill-rule="evenodd"
+                                                    d="m116.364 250.229-45.593-96.31 45.593-54.963L256 203.683 395.636 98.956v151.273L256 354.956z"
+                                                    clip-rule="evenodd" opacity="1" data-original="#ff4131"
+                                                    class=""></path>
+                                                <path fill="#e51c19"
+                                                    d="M0 116.411v46.545l116.364 87.273V98.956L83.782 74.52C49.251 48.629 0 73.269 0 116.411z"
+                                                    opacity="1" data-original="#e51c19"></path>
+                                            </g>
+                                        </svg></a>
+                                </li>
 
-                                        @error('name')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
-
-                                    <div class="mb-3">
-                                        <label for="emailaddress" class="form-label">Email address</label>
-                                        <input id="remail" type="email"
-                                            class="form-control @error('email') is-invalid @enderror" name="email"
-                                            value="{{ old('email') }}" required autocomplete="email">
-
-                                        @error('email')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
-
-                                    <div class="mb-3">
-
-                                        <label for="password" class="form-label">Password</label>
-                                        <div class="input-group input-group-merge">
-                                            <input id="password" type="password"
-                                                class="form-control @error('password') is-invalid @enderror"
-                                                name="password" required autocomplete="new-password">
-
-
-                                            <div class="input-group-text" data-password="false">
-                                                <span class="password-eye"></span>
-                                            </div>
-                                        </div>
-                                        @error('password')
-                                            <span class="invalid-feedback d-block" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="password" class="form-label">Confirm Password</label>
-                                        <div class="input-group input-group-merge">
-
-                                            <input id="password-confirm" type="password" class="form-control"
-                                                name="password_confirmation" required autocomplete="new-password">
-
-                                            <div class="input-group-text" data-password="false"><span
-                                                    class="password-eye"></span>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="mb-3">
-                                        <div class="form-check">
-                                            <input type="checkbox" class="form-check-input" id="checkbox-signup"
-                                                required>
-                                            <label class="form-check-label" for="checkbox-signup">I accept <a
-                                                    href="#" class="text-muted">Terms and Conditions</a></label>
-                                        </div>
-                                    </div>
-
-                                    <div class="mb-3 text-center">
-                                        <button class="btn btn-primary" type="submit"> Sign Up </button>
-                                    </div>
-
-                                </form>
-                                <div class="text-center mt-4">
-                                    <p class="text-muted font-16">Sign up with</p>
-                                    <ul class="social-list list-inline mt-3">
-                                        <li class="list-inline-item">
-                                            <a href="javascript: void(0);"
-                                                class="social-list-item border-danger text-danger"><i
-                                                    class="mdi mdi-google"></i></a>
-                                        </li>
-                                      
-                                    </ul>
-                                </div>
-                            </div> <!-- end card-body -->
+                            </ul>
                         </div>
-                    </div>
+                    </div> <!-- end card-body -->
                 </div>
-
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
     </div>

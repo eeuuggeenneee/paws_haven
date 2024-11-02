@@ -31,6 +31,11 @@ class AnimalList extends Model
     {
         return $this->hasMany(AnimalListStatus::class, 'animal_id', 'dog_id_unique');
     }
+    
+    public function clickDogs()
+    {
+        return $this->hasMany(ClickDogs::class, 'dog_id_unique', 'dog_id_unique');
+    }
     public function scopeActive($query)
     {
         return $query->where('isActive', true);
