@@ -11,7 +11,6 @@
                             aria-hidden="true"></button>
                     </div>
                     <div class="modal-body">
-
                         <div class="mb-3">
                             <label class="form-label" for="dogName">Dog name</label>
                             <input type="text" class="form-control" id="dogName" placeholder="Dog name"
@@ -39,7 +38,7 @@
                         <div class="mb-3">
                             <label class="form-label" for="color">Gender</label>
                             <div class="input-group">
-                                <select class="form-select mb-3" required wire:model="gender">
+                                <select class="form-select mb-3" wire:model="gender" required>
                                     <option selected>Select gender</option>
                                     <option value="Male">Male</option>
                                     <option value="Female">Female</option>
@@ -54,13 +53,14 @@
                         </div>
                         <div class="mb-3">
                             <label for="dogImages" class="form-label">Dog Images</label>
-                            <input class="form-control" type="file" id="dogImages" wire:model="dogImages" multiple>
+                            <input class="form-control" type="file" id="dogImages" wire:model="dogImages" multiple @if(!$updatedog) required @endif>
                         </div>
 
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-info" wire:click="saveDogData">Save changes</button>
+                        <button type="button" class="btn btn-info" onclick="confimSaveAdd()">Save changes</button>
+
                     </div>
                 </form>
             </div><!-- /.modal-content -->
@@ -1215,8 +1215,43 @@
                 }
             });
         }
+        function confimSaveAdd() {
+            var form3 = document.getElementById('formadddog');
 
+            form3.classList.add('was-validated');
 
+            if (!form3.checkValidity()) {
+                // Form is incomplete or invalid, prevent further action
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: 'top-end', // Position of the toast
+                    showConfirmButton: false,
+                    timer: 3000, // Duration before the toast disappears (in milliseconds)
+                    timerProgressBar: true,
+                });
+                Toast.fire({
+                    icon: 'warning',
+                    title: 'Please fill out all required fields.'
+                });
+
+                return false; // Stop further actions
+            }
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "Are you sure you want to save this form?",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, save it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Livewire.dispatch('saveDogData');
+                }
+            });
+        }
+
+        
         function openTerms() {
             console.log('hehe');
             $('#terms-modal').modal('show');

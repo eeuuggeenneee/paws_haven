@@ -57,9 +57,9 @@ class ModalsDogs extends Component
 
     public $breedName;
     public $breedlist;
-    public $updatedog;
+    public $updatedog = false;
 
-    protected $listeners = ['editDoggo', 'activedog','clearData'];
+    protected $listeners = ['editDoggo', 'activedog','clearData','saveDogData'];
     public function addDogBreed()
     {
         DogBreed::create([
@@ -167,6 +167,7 @@ class ModalsDogs extends Component
     public function clearData()
     {
         // dd('hello');
+        $this->updatedog = false;
         $this->dog_unique = '';
         $this->dogName = '';
         $this->breed = '';
