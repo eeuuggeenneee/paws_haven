@@ -18,6 +18,7 @@ class AddLostDog extends Component
     public $dog_name;
     public $breed;
     public $color;
+    public $gender;
     public $description;
     public $date_found;
     public $location_found;
@@ -26,11 +27,72 @@ class AddLostDog extends Component
     public $contact_name;
     public $contact_number;
     public $breedlist;
-    public $dog_images = [];   
-    public function mount(){
+    public $dog_images = [];
+    public $dog_unique;
+    public $updatedog = false;
+    protected $listeners = ['editDoggo', 'adddog'];
+    public function mount()
+    {
         $this->clearDogImages();
-        $this->breedlist = DogBreed::where('isActive',1)->get();
-    } 
+        $this->breedlist = DogBreed::where('isActive', 1)->get();
+    }
+    public function updateForm()
+    {
+        $finddog = AnimalList::where('dog_id_unique', $this->dog_unique)->where('isActive', 1)->first();
+        $dogImages = session()->get('dog_images', []);
+       
+        if ($finddog) {
+            if ($dogImages) {
+                $finddog->animal_images = json_encode($dogImages);
+            }
+            $finddog->dog_name = $this->dog_name;
+            $finddog->dog_id_unique = $this->dog_unique;
+            $finddog->breed = $this->breed;
+            $finddog->color = $this->color;
+            $finddog->gender = $this->gender;
+            $finddog->report_type = $this->report_type;
+            $finddog->location_found = $this->location_found;
+            $finddog->date_found = $this->date_found;
+            $finddog->description = $this->description;
+            $finddog->contact_name = $this->contact_name;
+            $finddog->contact_number = $this->contact_number;
+            $finddog->isActive = 1;
+            $finddog->save();
+        }
+        
+        $this->clearDogImages();
+        $this->dispatch('dogUpdate', 'Data has been successfully updated!');
+    }
+    public function adddog()
+    {
+        //clear the variables
+        $this->updatedog = false;
+        $this->dog_unique = null;
+        $this->dog_name = null;
+        $this->breed = null;
+        $this->color = null;
+        $this->gender = null;
+        $this->description = null;
+        $this->date_found = null;
+        $this->location_found = null;
+        $this->contact_name = null;
+        $this->contact_number = null;
+    }
+    public function editDoggo($id)
+    {
+        $this->updatedog = true;
+        $finddog = AnimalList::where('dog_id_unique', $id)->where('isActive', 1)->first();
+        $this->dog_unique = $finddog->dog_id_unique;
+        $this->dog_name = $finddog->dog_name;
+        $this->breed = $finddog->breed;
+        $this->color = $finddog->color;
+        $this->gender = $finddog->gender;
+        $this->description = $finddog->description;
+        $this->date_found = $finddog->date_found;
+        $this->location_found = $finddog->location_found;
+        $this->contact_name = $finddog->contact_name;
+        $this->contact_number = $finddog->contact_number;
+    }
     public function submitForm()
     {
         $dogImages = session()->get('dog_images', []);
@@ -40,6 +102,7 @@ class AddLostDog extends Component
             'dog_name' => $this->dog_name,
             'breed' => $this->breed,
             'color' => $this->color,
+            'gender' => $this->gender,
             'description' => $this->description,
             'date_found' => $this->date_found,
             'dog_id_unique' => $uniqueId,
@@ -56,7 +119,7 @@ class AddLostDog extends Component
             'status' => $this->report_type,
             'isActive' => 1,
         ]);
-        
+
         $this->dispatch('dogSaved', 'Data has been successfully saved!');
         $this->clearDogImages();
         $this->resetForm();
@@ -65,23 +128,23 @@ class AddLostDog extends Component
     {
         // Remove 'dog_images' from session
         session()->forget('dog_images');
-        
+
         return response()->json([
             'message' => 'Dog images session cleared!'
         ]);
     }
-    
+
     public function uploadImages(Request $request)
     {
         if ($request->hasFile('file')) {
             $file = $request->file('file');
             $filePath = $file->store('animal_images', 'public');
-    
+
             // Retrieve and update the session data
             $dogImages = session()->get('dog_images', []);
             $dogImages[] = $filePath;
             session()->put('dog_images', $dogImages);
-    
+
             return response()->json([
                 'filePath' => $filePath,
                 'message' => 'File uploaded successfully!'

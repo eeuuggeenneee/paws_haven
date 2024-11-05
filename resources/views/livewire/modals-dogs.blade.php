@@ -20,8 +20,12 @@
                         </div>
                         <div class="mb-3">
                             <label class="form-label" for="breed">Breed</label>
-                            <input type="text" class="form-control" id="breed" placeholder="Breed"
-                                wire:model="breed" required>
+                            <select id="dog-breed" name="dog-breed" class="form-select" wire:model="breed" required>
+                                <option value="" disabled selected>Select a breed</option>
+                                @foreach ($breedlist as $breed)
+                                    <option value="{{ $breed['id'] }}">{{ $breed['name'] }}</option>
+                                @endforeach
+                            </select>
                             <div class="valid-feedback">Looks good!</div>
                         </div>
                         <input type="hidden" class="form-control" wire:model="dog_unique">
@@ -62,7 +66,18 @@
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
     </div>
-
+    <div id="lostandfounddog" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="info-header-modalLabel"
+        aria-hidden="true" wire:ignore.self>
+        <div class="modal-dialog modal-dialog-centered modal-full-width">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="fullWidthModalLabel">Add Dog</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                @livewire('add-lost-dog')
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div>
     <!-- /.modal -->
     <div class="modal fade" id="viewdog" tabindex="-1" style="z-index: 10050 !important;" role="dialog"
         aria-labelledby="myLargeModalLabel" aria-hidden="true" wire:ignore.self>
@@ -370,7 +385,7 @@
                                                                     </svg> </i>
                                                                 <div>
                                                                     <h5 class="mt-1 font-14">
-                                                                        {{ $activedog['contact'] ?? 'N/A' }}
+                                                                        {{ $activedog['contact_number'] ?? 'N/A' }}
                                                                     </h5>
                                                                 </div>
                                                             </div>
@@ -1011,6 +1026,36 @@
                         </div>
                     </div>
                     <div class="mb-3">
+                        <label class="form-label" for="validationCustom03">Barangay</label>
+                        <select class="form-select mb-3" wire:model="barangay" required>
+                            <option selected>Select a Barangay</option>
+                            <option value="Bagbaguin">Bagbaguin</option>
+                            <option value="Bulac">Bulac</option>
+                            <option value="Balasing">Balasing</option>
+                            <option value="Beunavista">Beunavista</option>
+                            <option value="Camangyanan">Camangyanan</option>
+                            <option value="Catmon">Catmon</option>
+                            <option value="Caypombo">Caypombo</option>
+                            <option value="Caysio">Caysio</option>
+                            <option value="Guyong">Guyong</option>
+                            <option value="Lalakhan">Lalakhan</option>
+                            <option value="Mag-asawang sapa">Mag-asawang Sapa</option>
+                            <option value="Mahabang parang">Mahabang Parang</option>
+                            <option value="Manggahan">Manggahan</option>
+                            <option value="Parada">Parada</option>
+                            <option value="Poblacion">Poblacion</option>
+                            <option value="Pulong Buhangin">Pulong Buhangin</option>
+                            <option value="San Gabriel">San Gabriel</option>
+                            <option value="San Jose Patag">San Jose Patag</option>
+                            <option value="San Vicente">San Vicente</option>
+                            <option value="Santa Clara">Santa Clara</option>
+                            <option value="Santa Cruz">Santa Cruz</option>
+                            <option value="Silangan">Silangan</option>
+                            <option value="Tabing Bakod">Tabing Bakod</option>
+                            <option value="Tumana">Tumana</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
                         <label class="form-label" for="validationCustom03">Contact number</label>
                         <input type="text" type="tel" class="form-control" id="validationCustom03"
                             placeholder="09123456789" required wire:model="contact" pattern="09[0-9]{9}"
@@ -1020,6 +1065,7 @@
                             Please provide a valid phone number.
                         </div>
                     </div>
+
                     <div class="mb-3">
                         <label class="form-label" for="validationCustom04">Specific Locations, Mention any particular
                             spots</label>
@@ -1033,21 +1079,24 @@
                         <label class="form-label" for="validationCustom04">Reason for request</label>
                         <textarea class="form-control" id="description" rows="5" placeholder="Enter a reason..." wire:model="reason"></textarea>
                         <div class="invalid-feedback">
-                            Please provide a valid locations.
+                            Please provide a valid reason.
                         </div>
                     </div>
-                    <div class="mb-3">
+                    {{-- <div class="mb-3">
                         <label class="form-label" for="validationCustom05">Preferred Schedule</label>
                         <input type="text" id="datetime-datepicker" class="form-control"
                             placeholder="Date and Time" wire:model="schedule">
                         <div class="invalid-feedback">
                             Please provide a valid schedule.
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" wire:click="saveRounds">Submit Request</button>
+                    <button type="button" class="btn btn-primary" onclick="saveRounds()">Submit Request</button>
+                    <button type="button " class="btn btn-primary d-none" id="real_btn_rounds"
+                        wire:click="saveRounds">Submit Request</button>
+
                 </div>
 
             </div><!-- /.modal-content -->
@@ -1128,7 +1177,8 @@
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
 
-    <div id="addmorebreed" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="standard-modalLabel" aria-hidden="true">
+    <div id="addmorebreed" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="standard-modalLabel"
+        aria-hidden="true">
         <div class="modal-dialog" wire:ignore.self>
             <div class="modal-content">
                 <div class="modal-header">
@@ -1143,12 +1193,30 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" wire:click="addDogBreed" data-bs-dismiss="modal">Submit</button>
+                    <button type="button" class="btn btn-primary" wire:click="addDogBreed"
+                        data-bs-dismiss="modal">Submit</button>
                 </div>
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
     </div>
     <script>
+        function saveRounds() {
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "Are you sure you want to request rounds?",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, submit it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.getElementById('real_btn_rounds').click();
+                }
+            });
+        }
+
+
         function openTerms() {
             console.log('hehe');
             $('#terms-modal').modal('show');
@@ -1230,7 +1298,7 @@
                 Toast.fire({
                     icon: 'warning',
                     title: 'Please fill out all required fields. '
-                });                
+                });
                 return false; // Stop further actions
             }
             Swal.fire({
@@ -1272,7 +1340,7 @@
                 closeAllModals();
                 Swal.fire({
                     icon: 'success',
-                    title: 'Ticket Number '+ event[1],
+                    title: 'Ticket Number ' + event[1],
                     text: event[0],
                     confirmButtonText: 'Okay'
                 }).then((result) => {
@@ -1286,7 +1354,7 @@
                 closeAllModals();
                 Swal.fire({
                     icon: 'success',
-                    title: 'Ticket Number '+ event[1],
+                    title: 'Ticket Number ' + event[1],
                     text: event[0],
                     confirmButtonText: 'Okay'
                 }).then((result) => {
@@ -1295,7 +1363,21 @@
                         location.reload();
                     }
                 });
+            });
 
+            Livewire.on('saveRounds', event => {
+                closeAllModals();
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Ticket Number ' + event[1],
+                    text: event[0],
+                    confirmButtonText: 'Okay'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // Reload the page
+                        location.reload();
+                    }
+                });
 
             });
         });

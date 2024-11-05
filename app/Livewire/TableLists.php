@@ -7,6 +7,7 @@ use App\Models\AnimalList;
 use App\Models\AnimalListStatus;
 use App\Models\DogClaim;
 use App\Models\Rounds;
+use App\Models\RoundsStatus;
 use Livewire\Component;
 
 class TableLists extends Component
@@ -42,12 +43,17 @@ class TableLists extends Component
             ->get();
 
 
-        $this->reqrounds = Rounds::where('is_active', 1)
+        $this->reqrounds = Rounds::where('rounds.is_active', 1)
             ->leftJoin('users', 'users.id', '=', 'rounds.user_id')
-            ->select('users.name', 'rounds.*',)
+            ->leftJoin('rounds_statuses', function ($join) {
+                $join->on('rounds_statuses.rounds_id', '=', 'rounds.id')
+                    ->where('rounds_statuses.is_active', '=', 1);
+            })
+            ->select('users.name', 'rounds.*', 'rounds_statuses.is_approved')
             ->get();
+        // dd($this->reqrounds);
 
-        $this->claimlist = AnimalListStatus::whereIn('status', [6, 7, 3])
+        $this->claimlist = AnimalListStatus::whereIn('status', [6, 7, 4])
             ->leftJoin('dog_claims', 'dog_claims.dog_id_unique', '=', 'animal_list_statuses.animal_id')
             ->leftJoin('statuses', 'statuses.id', '=', 'animal_list_statuses.status')
             ->leftJoin('animal_lists', function ($join) {
@@ -82,11 +88,24 @@ class TableLists extends Component
     }
     public function rounds_accepted()
     {
-        Rounds::where('id', $this->roundsid)->update(['is_active' => 1, 'is_approved' => 1]);
+
+        RoundsStatus::where('rounds_id', $this->roundsid)->update(['is_active' => 0]);
+
+        RoundsStatus::create([
+            'rounds_id' => $this->roundsid,
+            'is_approved' => 1,
+            'is_active' => 1,
+        ]);
     }
     public function rounds_rejected()
     {
-        Rounds::where('id', $this->roundsid)->update(['is_active' => 1, 'is_rejected' => 1]);
+        RoundsStatus::where('rounds_id', $this->roundsid)->update(['is_active' => 0]);
+
+        RoundsStatus::create([
+            'rounds_id' => $this->roundsid,
+            'is_approved' => 0,
+            'is_active' => 1,
+        ]);
     }
     public function claim_approved()
     {

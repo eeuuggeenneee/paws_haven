@@ -59,11 +59,11 @@
                                         aria-controls="v-pills-home" aria-selected="true">
                                         <i class='uil uil-images me-1'></i> Profile
                                     </a>
-                                    <a class="nav-link list-group-item list-group-item-action border-0"
+                                    {{-- <a class="nav-link list-group-item list-group-item-action border-0"
                                         id="v-pills-profile-tab" data-bs-toggle="pill" href="#v-pills-profile"
                                         role="tab" aria-controls="v-pills-profile" aria-selected="false">
                                         <i class='uil uil-comment-alt-message me-1'></i> My Post
-                                    </a>
+                                    </a> --}}
                                     <a class="nav-link list-group-item list-group-item-action border-0"
                                         data-bs-toggle="modal" data-bs-target="#request_rounds">
                                         <i class='uil uil-comment-alt-message me-1'></i> Request Rounds
@@ -413,21 +413,7 @@
 
 
         document.addEventListener('livewire:init', function() {
-            Livewire.on('saveRounds', event => {
-                closeAllModals();
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Success!',
-                    text: event[0],
-                    confirmButtonText: 'Okay'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        // Reload the page
-                        location.reload();
-                    }
-                });
-
-            });
+          
             Livewire.on('dogAdopted', event => {
                 closeAllModals();
                 Swal.fire({

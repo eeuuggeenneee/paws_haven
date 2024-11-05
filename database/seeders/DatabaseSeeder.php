@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Database\Seeder;
 use Faker\Factory as Faker;
 use App\Models\AnimalListStatus;
+use App\Models\DogBreed;
 use App\Models\Status;
 use Illuminate\Support\Str;
 
@@ -70,6 +71,32 @@ class DatabaseSeeder extends Seeder
             AnimalListStatus::create([
                 'animal_id' => $uniqueId, 
                 'status' => 1, 
+                'isActive' => 1,
+            ]);
+        }
+
+
+        $dogBreeds = [
+            "American Bully",
+            "Aspin",
+            "Beagle",
+            "Boxer",
+            "Bulldog",
+            "Chihuahua",
+            "Dachshund",
+            "Dobermann",
+            "French Bulldog",
+            "German Shepherd",
+            "Great Dane",
+            "Poodle",
+            "Shiba Inu",
+            "ShihtzFu",
+            "Siberian Husky"
+        ];
+
+        foreach($dogBreeds as $breeds){
+            DogBreed::create([
+                'name' => $breeds,
                 'isActive' => 1,
             ]);
         }

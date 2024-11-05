@@ -2,7 +2,8 @@
 
 @section('content')
     <div class="container-fluid">
-        @livewire('add-lost-dog')
+        {{-- @livewire('add-lost-dog') --}}
+        @livewire('lost-table-list')
         @livewire('modals-dogs')
     </div>
 @endsection

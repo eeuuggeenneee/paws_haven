@@ -5,13 +5,7 @@
         <div class="row">
             <div class="col-12">
                 <div class="page-title-box">
-                    <div class="page-title-right">
-                        <ol class="breadcrumb m-0">
-                            <li class="breadcrumb-item"><a href="javascript: void(0);">Dog List</a></li>
-                            <li class="breadcrumb-item active">List</li>
-                        </ol>
-                    </div>
-                    <h4 class="page-title">Dog List</h4>
+                    <h4 class="page-title">Adoption List</h4>
                 </div>
             </div>
         </div>
@@ -23,11 +17,10 @@
                     <div class="card-body">
                         <div class="row mb-2">
                             <div class="col-sm-5">
-                                <a data-bs-toggle="modal" data-bs-target="#info-header-modal"
-                                    class="btn btn-info mb-2"><i class="mdi mdi-plus-circle me-2"></i> Add Pets </a>
+                                <a data-bs-toggle="modal" data-bs-target="#info-header-modal" wire:click="$dispatch('clearData')"
+                                    class="btn btn-info mb-2"><i class="mdi mdi-plus-circle me-2" ></i> Add Pets </a>
                             </div>
                         </div>
-
                         <div class="table-responsive">
                             <table class="table table-centered w-100 dt-responsive nowrap" id="animals-datatable">
                                 <thead class="table-light">
@@ -73,7 +66,7 @@
                                                         wire:click="editDog('{{ $item['dog_id_unique'] }}')"
                                                         class="action-icon"> <i
                                                             class="mdi mdi-square-edit-outline"></i></a>
-                                                    <a wire:click="deleteDog('{{ $item['dog_id_unique'] }}')"
+                                                    <a onclick="confirmDelete('{{ $item['dog_id_unique'] }}')"
                                                         class="action-icon"> <i class="mdi mdi-delete"></i></a>
                                                 </td>
                                             </tr>
@@ -92,8 +85,39 @@
     @livewire('modals-dogs')
 
     <script>
+           function confirmDelete(dogid) {
+            Swal.fire({
+                title: 'Are you sure?',
+                text: 'Do you want to delete',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Yes, delete it!',
+                cancelButtonText: 'No, cancel!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Livewire.dispatch('deleteDogAdopt',{
+                        dog_id: dogid
+                    })
+                }
+            });
+        }
         document.addEventListener('livewire:init', function() {
             Livewire.on('dogSaved', event => {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Success!',
+                    text: event[0],
+                    confirmButtonText: 'Okay'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // Reload the page
+                        location.reload();
+                    }
+                });
+            });
+            Livewire.on('dogDeleted', event => {
                 Swal.fire({
                     icon: 'success',
                     title: 'Success!',

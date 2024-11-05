@@ -25,246 +25,25 @@
             <!-- end page title -->
             <ul class="nav nav-tabs nav-bordered mb-3" wire:ignore>
                 <li class="nav-item">
-                    <a href="#home-b1" data-bs-toggle="tab" aria-expanded="false" class="nav-link active fw-bold">
-                        <i class="mdi mdi-home-variant d-md-none d-block"></i>
-                        <span class="d-none d-md-block">Adoption Requests</span>
+                    <a href="#settings-b1" data-bs-toggle="tab" aria-expanded="false" class="nav-link fw-bold">
+                        <i class="mdi mdi-settings-outline d-md-none d-block"></i>
+                        <span class="d-none d-md-block">Lost and found</span>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a href="#profile-b1" data-bs-toggle="tab" aria-expanded="true" class="nav-link fw-bold">
                         <i class="mdi mdi-account-circle d-md-none d-block"></i>
-                        <span class="d-none d-md-block">Rounds Request</span>
+                        <span class="d-none d-md-block">Rounds </span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#settings-b1" data-bs-toggle="tab" aria-expanded="false" class="nav-link fw-bold">
-                        <i class="mdi mdi-settings-outline d-md-none d-block"></i>
-                        <span class="d-none d-md-block">Lost and found Request</span>
+                    <a href="#home-b1" data-bs-toggle="tab" aria-expanded="false" class="nav-link active fw-bold">
+                        <i class="mdi mdi-home-variant d-md-none d-block"></i>
+                        <span class="d-none d-md-block">Adoption</span>
                     </a>
                 </li>
             </ul>
-
             <div class="tab-content" wire:ignore>
-                <div class="tab-pane show active" id="home-b1">
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="row mb-2">
-                                        <div class="col-xl-8">
-                                            {{-- <form
-                                                class="row gy-2 gx-2 align-items-center justify-content-xl-start justify-content-between">
-                                                <div class="col-auto">
-                                                    <label for="inputPassword2" class="visually-hidden">Search</label>
-                                                    <input type="search" class="form-control" id="inputPassword2"
-                                                        placeholder="Search...">
-                                                </div>
-                                                <div class="col-auto">
-                                                    <div class="d-flex align-items-center">
-                                                        <label for="status-select" class="me-2">Status</label>
-                                                        <select class="form-select" id="status-select">
-                                                            <option selected>Choose...</option>
-                                                            <option value="1">Paid</option>
-                                                            <option value="2">Awaiting Authorization</option>
-                                                            <option value="3">Payment Failed</option>
-                                                            <option value="4">Cash On Delivery</option>
-                                                            <option value="5">Fulfilled</option>
-                                                            <option value="6">Unfulfilled</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                            </form> --}}
-                                        </div>
-                                        <div class="col-xl-4">
-
-                                        </div><!-- end col-->
-                                    </div>
-                                    <h3>Adoption List</h3>
-                                    <div class="table-responsive">
-                                        <table class="table table-centered table-nowrap mb-0">
-                                            <thead class="table-light">
-                                                <tr>
-                                                    <th>Name</th>
-                                                    <th>Dog Name</th>
-                                                    <th>Contact</th>
-                                                    <th>Address</th>
-                                                    <th>Date Requested</th>
-                                                    <th>Status</th>
-                                                    <th style="width: 125px;">Action</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody wire:ignore>
-                                                @if (isset($adoptionlist))
-                                                    @foreach ($adoptionlist as $data)
-                                                        @php
-                                                            $imagest = json_decode($data['animal_images']);
-                                                        @endphp
-                                                        <tr>
-                                                            <td> {{ $data['fullname'] }} </td>
-                                                            <td>
-                                                                <div class="d-flex">
-                                                                    <div class="d-flex align-items-center">
-                                                                        <div class="flex-shrink-0">
-                                                                            @if (!is_null($imagest) && isset($imagest[0]))
-                                                                                <img src="{{ asset('storage/' . $imagest[0]) }}"
-                                                                                    class="rounded-circle avatar-xs"
-                                                                                    alt="friend" wire:ignore.self>
-                                                                            @else
-                                                                                <img src="{{ asset('storage/profile_pictures/xjxxrQTF3FiMAJ92RTzIrh15XRKYVLP9rtQt6g1E.png') }}"
-                                                                                    class="rounded-circle avatar-xs"
-                                                                                    alt="default" wire:ignore.self>
-                                                                            @endif
-                                                                        </div>
-                                                                        <div class="flex-grow-1 ms-2">
-                                                                            <h5 class="my-0">{{ $data['dog_name'] }}
-                                                                            </h5>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </td>
-                                                            <td>
-                                                                <p class="mb-0 txt-muted">{{ $data['c_number'] }}</p>
-                                                            </td>
-                                                            <td>{{ $data['address'] }}</td>
-                                                            <td>{{ $data['created_at']->format('M-d-Y') }}</td>
-                                                            <td>
-                                                                <h5 class="my-0"><span
-                                                                        class="badge badge-info-lighten">
-                                                                        @if ($data['status_name'] == 'For Adoption')
-                                                                            Rejected
-                                                                        @else
-                                                                            {{ $data['status_name'] }}
-                                                                        @endif
-                                                                    </span>
-                                                                </h5>
-                                                            </td>
-                                                            <td>
-                                                                @if ($data['status_name'] == 'For Adoption')
-                                                                @else
-                                                                    <a href="javascript:void(0);"
-                                                                        wire:click="adoptionpending('{{ $data['dog_id_unique'] }}')"
-                                                                        data-bs-toggle="modal" data-bs-target="#viewdog"
-                                                                        class="action-icon"> <i
-                                                                            class="mdi mdi-square-edit-outline"></i></a>
-                                                                @endif
-
-                                                                <a href="javascript:void(0);" class="action-icon"> <i
-                                                                        class="mdi mdi-delete"></i></a>
-                                                            </td>
-                                                        </tr>
-                                                    @endforeach
-                                                @endif
-
-
-
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div> <!-- end card-body-->
-                            </div> <!-- end card-->
-                        </div> <!-- end col -->
-                    </div> <!-- end row -->
-                </div>
-                <div class="tab-pane " id="profile-b1">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="row mb-2">
-                                <div class="col-xl-8">
-                                    {{-- <form
-                                        class="row gy-2 gx-2 align-items-center justify-content-xl-start justify-content-between">
-                                        <div class="col-auto">
-                                            <label for="inputPassword2" class="visually-hidden">Search</label>
-                                            <input type="search" class="form-control" id="inputPassword2"
-                                                placeholder="Search...">
-                                        </div>
-                                        <div class="col-auto">
-                                            <div class="d-flex align-items-center">
-                                                <label for="status-select" class="me-2">Status</label>
-                                                <select class="form-select" id="status-select">
-                                                    <option selected>Choose...</option>
-                                                    <option value="1">Paid</option>
-                                                    <option value="2">Awaiting Authorization</option>
-                                                    <option value="3">Payment Failed</option>
-                                                    <option value="4">Cash On Delivery</option>
-                                                    <option value="5">Fulfilled</option>
-                                                    <option value="6">Unfulfilled</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </form> --}}
-                                </div>
-                                <div class="col-xl-4">
-
-                                </div><!-- end col-->
-                            </div>
-                            <h3>Rounds Lists</h3>
-                            <div class="table-responsive">
-                                <table class="table table-centered table-nowrap mb-0">
-                                    <thead class="table-light">
-                                        <tr>
-                                            <th>Requestor</th>
-                                            <th>Where</th>
-                                            <th>Specific Location</th>
-                                            <th>Contact</th>
-                                            <th>Preferred Schedule</th>
-                                            <th>Status</th>
-                                            <th style="width: 125px;">Action</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody wire:ignore>
-                                        @if (isset($reqrounds))
-                                            @foreach ($reqrounds as $data)
-                                                <tr>
-                                                    <td> {{ $data['name'] ?? 'N/A' }} </td>
-                                                    <td>
-                                                        {{ $data['address'] ?? 'N/A' }}
-                                                    </td>
-                                                    <td>
-                                                        <p class="mb-0 txt-muted">
-                                                            {{ $data['specific_location'] ?? 'N/A' }} </p>
-                                                    </td>
-                                                    <td>{{ $data['contact'] ?? 'N/A' }}</td>
-                                                    <td>{{ $data['schedule'] ?? 'N/A' }}</td>
-                                                    <td>
-                                                        <h5 class="my-0"><span class="badge badge-info-lighten">
-                                                                @if (isset($data['is_active']) && $data['is_active'] == 1)
-                                                                    @if ($data['is_approved'])
-                                                                        <span>Approved</span>
-                                                                    @elseif($data['is_rejected'])
-                                                                        <span>Rejected</span>
-                                                                    @else
-                                                                        <span>Pending</span>
-                                                                    @endif
-                                                                @else
-                                                                    <span>Active</span>
-                                                                @endif
-                                                            </span>
-                                                        </h5>
-                                                    </td>
-                                                    <td>
-                                                        @if ($data['is_rejected'] == 0 && $data['is_approved'] == 0)
-                                                            <a href="javascript:void(0);"
-                                                                wire:click="getrounds({{ $data['id'] ?? 0 }})"
-                                                                class="action-icon" data-bs-toggle="modal"
-                                                                data-bs-target="#primary-header-modal"> <i
-                                                                    class="mdi mdi-square-edit-outline"></i></a>
-                                                        @endif
-
-                                                        <a href="javascript:void(0);" class="action-icon"> <i
-                                                                class="mdi mdi-delete"></i></a>
-                                                    </td>
-                                                </tr>
-                                            @endforeach
-                                        @endif
-
-
-
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div> <!-- end card-body-->
-                    </div>
-                </div>
                 <div class="tab-pane" id="settings-b1">
                     <div class="card">
                         <div class="card-body">
@@ -381,6 +160,229 @@
                             </div>
                         </div> <!-- end card-body-->
                     </div>
+                </div>
+                <div class="tab-pane " id="profile-b1">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row mb-2">
+                                <div class="col-xl-8">
+                                    {{-- <form
+                                        class="row gy-2 gx-2 align-items-center justify-content-xl-start justify-content-between">
+                                        <div class="col-auto">
+                                            <label for="inputPassword2" class="visually-hidden">Search</label>
+                                            <input type="search" class="form-control" id="inputPassword2"
+                                                placeholder="Search...">
+                                        </div>
+                                        <div class="col-auto">
+                                            <div class="d-flex align-items-center">
+                                                <label for="status-select" class="me-2">Status</label>
+                                                <select class="form-select" id="status-select">
+                                                    <option selected>Choose...</option>
+                                                    <option value="1">Paid</option>
+                                                    <option value="2">Awaiting Authorization</option>
+                                                    <option value="3">Payment Failed</option>
+                                                    <option value="4">Cash On Delivery</option>
+                                                    <option value="5">Fulfilled</option>
+                                                    <option value="6">Unfulfilled</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </form> --}}
+                                </div>
+                                <div class="col-xl-4">
+
+                                </div><!-- end col-->
+                            </div>
+                            <h3>Rounds Lists</h3>
+                            <div class="table-responsive">
+                                <table class="table table-centered table-nowrap mb-0">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th>Ticket Number</th>
+                                            <th>Requestor</th>
+                                            <th>Where</th>
+                                            <th>Specific Location</th>
+                                            <th>Contact</th>
+                                            <th>Status</th>
+                                            <th>Date Requested</th>
+                                            <th style="width: 125px;">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody wire:ignore>
+                                        @if (isset($reqrounds))
+                                            @foreach ($reqrounds as $data)
+                                                <tr>
+                                                    <td> R{{ $data['created_at']->format('ym') . '-' . str_pad($data['id'], 4, '0', STR_PAD_LEFT) ?? 'N/A' }}
+                                                    </td>
+
+                                                    <td> {{ $data['name'] ?? 'N/A' }} </td>
+                                                    <td>
+                                                        {{ $data['address'] ?? 'N/A' }}
+                                                    </td>
+                                                    <td>
+                                                        <p class="mb-0 txt-muted">
+                                                            {{ $data['specific_location'] ?? 'N/A' }} </p>
+                                                    </td>
+                                                    <td>{{ $data['contact'] ?? 'N/A' }}</td>
+                                                    <td>{{ $data['created_at']->format('M d, Y h:i A') ?? 'N/A' }}</td>
+
+                                                    <td>
+                                                        <h5 class="my-0">
+                                                            @if ($data['is_approved'] == 1)
+                                                                <span class="badge bg-success">
+                                                                    <span>Approved</span>
+                                                                </span>
+                                                            @elseif ($data['is_approved'] == 0)
+                                                                <span class="badge bg-danger">
+                                                                    <span>Rejected</span>
+                                                                </span>
+                                                            @else
+                                                                <span class="badge bg-info">
+                                                                    <span>Pending</span>
+                                                                </span>
+                                                            @endif
+                                                        </h5>
+                                                    </td>
+                                                    <td>
+                                                        @if ($data['is_rejected'] == 0 && $data['is_approved'] == 0)
+                                                            <a href="javascript:void(0);"
+                                                                wire:click="getrounds({{ $data['id'] ?? 0 }})"
+                                                                class="action-icon" data-bs-toggle="modal"
+                                                                data-bs-target="#primary-header-modal"> <i
+                                                                    class="mdi mdi-square-edit-outline"></i></a>
+                                                        @endif
+
+                                                        <a href="javascript:void(0);" class="action-icon"> <i
+                                                                class="mdi mdi-delete"></i></a>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        @endif
+
+
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div> <!-- end card-body-->
+                    </div>
+                </div>
+                <div class="tab-pane show active" id="home-b1">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="row mb-2">
+                                        <div class="col-xl-8">
+                                            {{-- <form
+                                                class="row gy-2 gx-2 align-items-center justify-content-xl-start justify-content-between">
+                                                <div class="col-auto">
+                                                    <label for="inputPassword2" class="visually-hidden">Search</label>
+                                                    <input type="search" class="form-control" id="inputPassword2"
+                                                        placeholder="Search...">
+                                                </div>
+                                                <div class="col-auto">
+                                                    <div class="d-flex align-items-center">
+                                                        <label for="status-select" class="me-2">Status</label>
+                                                        <select class="form-select" id="status-select">
+                                                            <option selected>Choose...</option>
+                                                            <option value="1">Paid</option>
+                                                            <option value="2">Awaiting Authorization</option>
+                                                            <option value="3">Payment Failed</option>
+                                                            <option value="4">Cash On Delivery</option>
+                                                            <option value="5">Fulfilled</option>
+                                                            <option value="6">Unfulfilled</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </form> --}}
+                                        </div>
+                                        <div class="col-xl-4">
+
+                                        </div><!-- end col-->
+                                    </div>
+                                    <h3>Adoption List</h3>
+                                    <div class="table-responsive">
+                                        <table class="table table-centered table-nowrap mb-0">
+                                            <thead class="table-light">
+                                                <tr>
+                                                    <th>Name</th>
+                                                    <th>Dog Name</th>
+                                                    <th>Contact</th>
+                                                    <th>Address</th>
+                                                    <th>Date Requested</th>
+                                                    <th>Status</th>
+                                                    <th style="width: 125px;">Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody wire:ignore>
+                                                @if (isset($adoptionlist))
+                                                    @foreach ($adoptionlist as $data)
+                                                        @php
+                                                            $imagest = json_decode($data['animal_images']);
+                                                        @endphp
+                                                        <tr>
+                                                            <td> {{ $data['fullname'] }} </td>
+                                                            <td>
+                                                                <div class="d-flex">
+                                                                    <div class="d-flex align-items-center">
+                                                                        <div class="flex-shrink-0">
+                                                                            @if (!is_null($imagest) && isset($imagest[0]))
+                                                                                <img src="{{ asset('storage/' . $imagest[0]) }}"
+                                                                                    class="rounded-circle avatar-xs"
+                                                                                    alt="friend" wire:ignore.self>
+                                                                            @else
+                                                                                <img src="{{ asset('storage/profile_pictures/xjxxrQTF3FiMAJ92RTzIrh15XRKYVLP9rtQt6g1E.png') }}"
+                                                                                    class="rounded-circle avatar-xs"
+                                                                                    alt="default" wire:ignore.self>
+                                                                            @endif
+                                                                        </div>
+                                                                        <div class="flex-grow-1 ms-2">
+                                                                            <h5 class="my-0">{{ $data['dog_name'] }}
+                                                                            </h5>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <p class="mb-0 txt-muted">{{ $data['c_number'] }}</p>
+                                                            </td>
+                                                            <td>{{ $data['address'] }}</td>
+                                                            <td>{{ $data['created_at']->format('M-d-Y') }}</td>
+                                                            <td>
+                                                                <h5 class="my-0"><span
+                                                                        class="badge badge-info-lighten">
+                                                                        @if ($data['status_name'] == 'For Adoption')
+                                                                            Rejected
+                                                                        @else
+                                                                            {{ $data['status_name'] }}
+                                                                        @endif
+                                                                    </span>
+                                                                </h5>
+                                                            </td>
+                                                            <td>
+                                                                @if ($data['status_name'] == 'For Adoption')
+                                                                @else
+                                                                    <a href="javascript:void(0);"
+                                                                        wire:click="adoptionpending('{{ $data['dog_id_unique'] }}')"
+                                                                        data-bs-toggle="modal"
+                                                                        data-bs-target="#viewdog" class="action-icon">
+                                                                        <i class="mdi mdi-square-edit-outline"></i></a>
+                                                                @endif
+
+                                                                <a href="javascript:void(0);" class="action-icon"> <i
+                                                                        class="mdi mdi-delete"></i></a>
+                                                            </td>
+                                                        </tr>
+                                                    @endforeach
+                                                @endif
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div> <!-- end card-body-->
+                            </div> <!-- end card-->
+                        </div> <!-- end col -->
+                    </div> <!-- end row -->
                 </div>
             </div>
 
@@ -800,11 +802,11 @@
                                         <li>
                                             <p class="mb-2"><span class="fw-bold me-2">Requestor:</span>
                                                 {{ $activerounds['name'] }}</p>
+                                            <p class="mb-2"><span class="fw-bold me-2">Barangay:</span>
+                                                {{ $activerounds['barangay'] }}</p>
                                             <p class="mb-2"><span class="fw-bold me-2">Address:</span>
                                                 {{ $activerounds['address'] }}</p>
 
-                                            <p class="mb-2"><span class="fw-bold me-2">Schedule:</span>
-                                                {{ $activerounds['schedule'] }}</p>
                                             <p class="mb-2"><span class="fw-bold me-2">Specific Location:</span>
                                                 {{ $activerounds['specific_location'] }}
                                             </p>

@@ -11,6 +11,7 @@ class Rounds extends Model
 
     protected $fillable = [
         'address',
+        'barangay',
         'specific_location',
         'schedule',
         'reason',

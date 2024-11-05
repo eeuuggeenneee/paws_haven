@@ -11,6 +11,7 @@ use App\Models\AnimalListStatus;
 use App\Models\DogBreed;
 use App\Models\DogClaim;
 use App\Models\Rounds;
+use App\Models\RoundsStatus;
 use Illuminate\Support\Facades\Auth;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 
@@ -29,6 +30,7 @@ class ModalsDogs extends Component
     public $activedog;
 
     public $fulladdress;
+    public $barangay;
     public $specificloc;
     public $reason;
     public $schedule;
@@ -55,10 +57,11 @@ class ModalsDogs extends Component
 
     public $breedName;
     public $breedlist;
+    public $updatedog;
 
-    protected $listeners = ['editDoggo', 'activedog'];
-    public function addDogBreed(){
-
+    protected $listeners = ['editDoggo', 'activedog','clearData'];
+    public function addDogBreed()
+    {
         DogBreed::create([
             'name' => $this->breedName,
             'isActive' => 1,
@@ -92,14 +95,13 @@ class ModalsDogs extends Component
         ]);
 
         $formattedId = str_pad($claimgo->id, 4, '0', STR_PAD_LEFT);
-        $ticket = 'C' . $status->created_at->format('ym') . '-'. $formattedId;
+        $ticket = 'C' . $claimgo->created_at->format('ym') . '-' . $formattedId;
 
-        $this->dispatch('dogClaimed', 'Your claim request has been successfully saved! Please expect a call from the pound when your request is approved. Thank you!',$ticket);
+        $this->dispatch('dogClaimed', 'Your claim request has been successfully saved! Please expect a call from the pound when your request is approved. Thank you!', $ticket);
     }
 
     public function confirmadoption()
     {
-
         $adoptionid = AdoptionForm::create([
             'fullname' => $this->a_fname . ' ' . $this->a_lname,
             'c_number' => $this->a_contact,
@@ -117,26 +119,34 @@ class ModalsDogs extends Component
             'status' => 4,
             'isActive' => 1,
         ]);
-        
+
         $formattedId = str_pad($adoptionid->id, 4, '0', STR_PAD_LEFT);
-        $ticket = 'A' . $status->created_at->format('ym') . '-'. $formattedId;
+        $ticket = 'A' . $adoptionid->created_at->format('ym') . '-' . $formattedId;
 
         $this->dispatch('dogAdopted', 'Your adoption request has been successfully saved! Please expect a call from the pound when your request is approved. Thank you!', $ticket);
     }
     public function saveRounds()
     {
-        Rounds::create([
+        $rounds = Rounds::create([
             'address' => $this->fulladdress,
+            'barangay' => $this->barangay,
             'specific_location' => $this->specificloc,
             'reason' => $this->reason,
-            'schedule' => $this->schedule,
+            'schedule' => ' ',
             'contact' => $this->contact,
-            'is_approved' => 0,
-            'is_rejected' => 0,
             'is_active' => 1,
             'user_id' => Auth::user()->id,
         ]);
-        $this->dispatch('saveRounds', 'Your rounds request has been successfully saved! Please expect a call from the pound when your request is approved. Thank you!');
+
+        $status = RoundsStatus::create([
+            'rounds_id' => $rounds->id,
+            'is_active' => 1,
+        ]);
+
+        $formattedId = str_pad($rounds->id, 4, '0', STR_PAD_LEFT);
+        $ticket = 'R' . $rounds->created_at->format('ym') . '-' . $formattedId;
+
+        $this->dispatch('saveRounds', 'Your rounds request has been successfully saved! Please expect a call from the pound when your request is approved. Thank you!', $ticket);
     }
     public function activedog($id)
     {
@@ -146,12 +156,23 @@ class ModalsDogs extends Component
     public function editDoggo($id)
     {
         $finddog = AnimalList::where('dog_id_unique', $id)->first();
+        $this->updatedog = true;
         $this->dog_unique = $id;
         $this->dogName = $finddog->dog_name;
         $this->breed = $finddog->breed;
         $this->color = $finddog->color;
         $this->gender = $finddog->gender;
         $this->description = $finddog->description;
+    }
+    public function clearData()
+    {
+        // dd('hello');
+        $this->dog_unique = '';
+        $this->dogName = '';
+        $this->breed = '';
+        $this->color = '';
+        $this->gender = '';
+        $this->description = '';
     }
     public function saveDogData()
     {
@@ -203,7 +224,8 @@ class ModalsDogs extends Component
             }
         }
     }
-    public function mount(){
+    public function mount() {
+        $this->breedlist = DogBreed::where('isActive',1)->get();
     }
     public function render()
     {

@@ -11,8 +11,7 @@ class AnimalList extends Model
     use HasFactory;
 
     protected $fillable = [
-
-        'dog_name',      // e.g., Dog, Cat
+        'dog_name',     
         'dog_id_unique',
         'breed',
         'color',
@@ -23,7 +22,7 @@ class AnimalList extends Model
         'description',
         'animal_images',
         'contact_name',
-        'contact_person',
+        'contact_number',
         'isActive',
     ];
 

@@ -11,25 +11,19 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('rounds', function (Blueprint $table) {
+        Schema::create('rounds_statuses', function (Blueprint $table) {
             $table->id();
-            $table->string('address');
-            $table->string('barangay');
-            $table->string('specific_location');
-            $table->string('schedule');
-            $table->string('contact');
-            $table->string('reason');
+            $table->unsignedBigInteger('rounds_id');
+            $table->boolean('is_approved')->nullable();
             $table->boolean('is_active');
-            $table->unsignedBigInteger('user_id');
             $table->timestamps();
         });
     }
-
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('rounds');
+        Schema::dropIfExists('rounds_statuses');
     }
 };

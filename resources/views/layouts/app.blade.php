@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html lang="en"   @if (Auth::user()->type == 1) data-layout="dualnav" @else data-layout="topnav" @endif>
+<html lang="en" data-layout="topnav">
 
 
 <head>
@@ -19,10 +19,6 @@
     <!-- Vector Map css -->
     <link href="assets/vendor/jsvectormap/css/jsvectormap.min.css" rel="stylesheet" type="text/css">
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
-
     <!-- Theme Config Js -->
     <script src="assets/js/hyper-config.js"></script>
     <link href="assets/vendor/datatables.net-bs5/css/dataTables.bootstrap5.min.css" rel="stylesheet" type="text/css" />
@@ -40,12 +36,12 @@
         #success-alert-modal {
             z-index: 400000;
         }
-        .swal2-container{
+
+        .swal2-container {
             z-index: 400000;
         }
-    
     </style>
-    @vite(['resources/js/app.js'])
+    {{-- @vite(['resources/js/app.js']) --}}
 
     @livewireStyles
 </head>
@@ -71,50 +67,79 @@
     <div class="wrapper">
         <!-- ========== Topbar Start ========== -->
         <!-- ========== Topbar End ========== -->
-   
+
         <div class="navbar-custom">
-            <div class="topbar container-fluid">
+            <div class="topbar px-3">
                 <div class="d-flex align-items-center gap-lg-2 gap-1">
 
                     <!-- Topbar Brand Logo -->
                     <div class="logo-topbar">
                         <!-- Logo light -->
-                        <a href="{{ url('/home') }}" class="logo-light">
+                        <a href="index.html" class="logo-dark">
                             <span class="logo-lg">
-                                <img src="assets/logo2.png" alt="logo" height="100%">
+                                <img src="assets/images/logo-dark.png" alt="dark logo">
                             </span>
                             <span class="logo-sm">
-                                <h3 class="py-2 px-2 text-white">PH</h3>
-                            </span>
-                        </a>
-
-                        <!-- Logo Dark -->
-                        <a href="{{ url('/home') }}" class="logo-dark">
-                            <span class="logo-lg">
-                                <img src="assets/logo2.png" alt="logo" height="100%">
-                            </span>
-                            <span class="logo-sm">
-                                <h3 class="py-2 px-2 text-black">PH</h3>
+                                <img src="assets/images/logo-dark-sm.png" alt="small logo">
                             </span>
                         </a>
                     </div>
+                    <div class="app-search dropdown d-none d-lg-block">
 
-                    <!-- Sidebar Menu Toggle Button -->
-                    <button class="button-toggle-menu">
-                        <i class="mdi mdi-menu"></i>
-                    </button>
+                    </div>
 
-                    <!-- Horizontal Menu Toggle Button -->
-                    <button class="navbar-toggle" data-bs-toggle="collapse" data-bs-target="#topnav-menu-content">
-                        <div class="lines">
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                        </div>
-                    </button>
-                    <!-- Topbar Search Form -->
                 </div>
+                <ul class="navbar-nav d-flex flex-row align-items-center">
+                    @if (Auth::user()->type == 0)
+                        <li class="nav-item me-4">
+                            <a class="nav-link" href="{{ url('/lost-n-found') }}" role="button">
+                                <i class="uil-dashboard"></i> Lost and Found
+                            </a>
+                        </li>
+                        <li class="nav-item me-4">
+                            <a class="nav-link" href="{{ url('/adopt-a-dog') }}" role="button">
+                                <i class="uil-dashboard"></i> Adoption
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link me-4" href="{{ url('/fur-community') }}" role="button">
+                                <i class="uil-dashboard"></i> Annoucement
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link me-4" href="{{ url('/fur-community') }}" role="button">
+                                <i class="uil-dashboard"></i> About
+                            </a>
+                        </li>
+                    @else
+                        <li class="nav-item">
+                            <a class="nav-link me-4" href="{{ url('/fur-community') }}" role="button">
+                                <i class="uil-dashboard"></i> Annoucement
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ url('/report-lost-dog') }}" class="nav-link me-4">
+                                <i class="uil-comments-alt"></i>
+                                <span> Add Dog for LnF </span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ url('/animal-list') }}" class="nav-link me-4">
+                                <i class="uil-comments-alt"></i>
+                                <span> Add Dog For Adoption </span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ url('/ticket-list') }}" class="nav-link me-4">
+                                <i class="uil-comments-alt"></i>
+                                <span> Ticket Lists </span>
+                            </a>
+                        </li>
+                    @endif
+                </ul>
+
                 <ul class="topbar-menu d-flex align-items-center gap-3">
+
                     <li class="dropdown notification-list">
                         <a class="nav-link dropdown-toggle arrow-none" data-bs-toggle="dropdown" href="#"
                             role="button" aria-haspopup="false" aria-expanded="false">
@@ -135,129 +160,158 @@
                                 </div>
                             </div>
 
-                            <div class="px-2" style="max-height: 300px;" data-simplebar>
+                            <div class="px-2" style="max-height: 300px;" data-simplebar="init">
+                                <div class="simplebar-wrapper" style="margin: 0px -12px;">
+                                    <div class="simplebar-height-auto-observer-wrapper">
+                                        <div class="simplebar-height-auto-observer"></div>
+                                    </div>
+                                    <div class="simplebar-mask">
+                                        <div class="simplebar-offset" style="right: 0px; bottom: 0px;">
+                                            <div class="simplebar-content-wrapper" tabindex="0" role="region"
+                                                aria-label="scrollable content"
+                                                style="height: auto; overflow: hidden;">
+                                                <div class="simplebar-content" style="padding: 0px 12px;">
 
-                                <h5 class="text-muted font-13 fw-normal mt-2">Today</h5>
-                                <!-- item-->
+                                                    <h5 class="text-muted font-13 fw-normal mt-2">Today</h5>
+                                                    <!-- item-->
 
-                                <a href="javascript:void(0);"
-                                    class="dropdown-item p-0 notify-item card unread-noti shadow-none mb-2">
-                                    <div class="card-body">
-                                        <span class="float-end noti-close-btn text-muted"><i
-                                                class="mdi mdi-close"></i></span>
-                                        <div class="d-flex align-items-center">
-                                            <div class="flex-shrink-0">
-                                                <div class="notify-icon bg-primary">
-                                                    <i class="mdi mdi-comment-account-outline"></i>
+                                                    <a href="javascript:void(0);"
+                                                        class="dropdown-item p-0 notify-item card unread-noti shadow-none mb-2">
+                                                        <div class="card-body">
+                                                            <span class="float-end noti-close-btn text-muted"><i
+                                                                    class="mdi mdi-close"></i></span>
+                                                            <div class="d-flex align-items-center">
+                                                                <div class="flex-shrink-0">
+                                                                    <div class="notify-icon bg-primary">
+                                                                        <i class="mdi mdi-comment-account-outline"></i>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="flex-grow-1 text-truncate ms-2">
+                                                                    <h5 class="noti-item-title fw-semibold font-14">
+                                                                        Datacorp <small
+                                                                            class="fw-normal text-muted ms-1">1 min
+                                                                            ago</small></h5>
+                                                                    <small class="noti-item-subtitle text-muted">Caleb
+                                                                        Flakelar commented on Admin</small>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </a>
+
+                                                    <!-- item-->
+                                                    <a href="javascript:void(0);"
+                                                        class="dropdown-item p-0 notify-item card read-noti shadow-none mb-2">
+                                                        <div class="card-body">
+                                                            <span class="float-end noti-close-btn text-muted"><i
+                                                                    class="mdi mdi-close"></i></span>
+                                                            <div class="d-flex align-items-center">
+                                                                <div class="flex-shrink-0">
+                                                                    <div class="notify-icon bg-info">
+                                                                        <i class="mdi mdi-account-plus"></i>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="flex-grow-1 text-truncate ms-2">
+                                                                    <h5 class="noti-item-title fw-semibold font-14">
+                                                                        Admin <small
+                                                                            class="fw-normal text-muted ms-1">1 hours
+                                                                            ago</small></h5>
+                                                                    <small class="noti-item-subtitle text-muted">New
+                                                                        user registered</small>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </a>
+
+                                                    <h5 class="text-muted font-13 fw-normal mt-0">Yesterday</h5>
+
+                                                    <!-- item-->
+                                                    <a href="javascript:void(0);"
+                                                        class="dropdown-item p-0 notify-item card read-noti shadow-none mb-2">
+                                                        <div class="card-body">
+                                                            <span class="float-end noti-close-btn text-muted"><i
+                                                                    class="mdi mdi-close"></i></span>
+                                                            <div class="d-flex align-items-center">
+                                                                <div class="flex-shrink-0">
+                                                                    <div class="notify-icon">
+                                                                        <img src="assets/images/users/avatar-2.jpg"
+                                                                            class="img-fluid rounded-circle"
+                                                                            alt="">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="flex-grow-1 text-truncate ms-2">
+                                                                    <h5 class="noti-item-title fw-semibold font-14">
+                                                                        Cristina Pride <small
+                                                                            class="fw-normal text-muted ms-1">1 day
+                                                                            ago</small></h5>
+                                                                    <small class="noti-item-subtitle text-muted">Hi,
+                                                                        How are you? What about our next meeting</small>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </a>
+
+                                                    <h5 class="text-muted font-13 fw-normal mt-0">30 Dec 2021</h5>
+
+                                                    <!-- item-->
+                                                    <a href="javascript:void(0);"
+                                                        class="dropdown-item p-0 notify-item card read-noti shadow-none mb-2">
+                                                        <div class="card-body">
+                                                            <span class="float-end noti-close-btn text-muted"><i
+                                                                    class="mdi mdi-close"></i></span>
+                                                            <div class="d-flex align-items-center">
+                                                                <div class="flex-shrink-0">
+                                                                    <div class="notify-icon bg-primary">
+                                                                        <i class="mdi mdi-comment-account-outline"></i>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="flex-grow-1 text-truncate ms-2">
+                                                                    <h5 class="noti-item-title fw-semibold font-14">
+                                                                        Datacorp</h5>
+                                                                    <small class="noti-item-subtitle text-muted">Caleb
+                                                                        Flakelar commented on Admin</small>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </a>
+
+                                                    <!-- item-->
+                                                    <a href="javascript:void(0);"
+                                                        class="dropdown-item p-0 notify-item card read-noti shadow-none mb-2">
+                                                        <div class="card-body">
+                                                            <span class="float-end noti-close-btn text-muted"><i
+                                                                    class="mdi mdi-close"></i></span>
+                                                            <div class="d-flex align-items-center">
+                                                                <div class="flex-shrink-0">
+                                                                    <div class="notify-icon">
+                                                                        <img src="assets/images/users/avatar-4.jpg"
+                                                                            class="img-fluid rounded-circle"
+                                                                            alt="">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="flex-grow-1 text-truncate ms-2">
+                                                                    <h5 class="noti-item-title fw-semibold font-14">
+                                                                        Karen Robinson</h5>
+                                                                    <small class="noti-item-subtitle text-muted">Wow !
+                                                                        this admin looks good and awesome design</small>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </a>
+
+                                                    <div class="text-center">
+                                                        <i class="mdi mdi-dots-circle mdi-spin text-muted h3 mt-0"></i>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="flex-grow-1 text-truncate ms-2">
-                                                <h5 class="noti-item-title fw-semibold font-14">Datacorp <small
-                                                        class="fw-normal text-muted ms-1">1 min ago</small></h5>
-                                                <small class="noti-item-subtitle text-muted">Caleb Flakelar
-                                                    commented on
-                                                    Admin</small>
                                             </div>
                                         </div>
                                     </div>
-                                </a>
-
-                                <!-- item-->
-                                <a href="javascript:void(0);"
-                                    class="dropdown-item p-0 notify-item card read-noti shadow-none mb-2">
-                                    <div class="card-body">
-                                        <span class="float-end noti-close-btn text-muted"><i
-                                                class="mdi mdi-close"></i></span>
-                                        <div class="d-flex align-items-center">
-                                            <div class="flex-shrink-0">
-                                                <div class="notify-icon bg-info">
-                                                    <i class="mdi mdi-account-plus"></i>
-                                                </div>
-                                            </div>
-                                            <div class="flex-grow-1 text-truncate ms-2">
-                                                <h5 class="noti-item-title fw-semibold font-14">Admin <small
-                                                        class="fw-normal text-muted ms-1">1 hours ago</small></h5>
-                                                <small class="noti-item-subtitle text-muted">New user
-                                                    registered</small>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-
-                                <h5 class="text-muted font-13 fw-normal mt-0">Yesterday</h5>
-
-                                <!-- item-->
-                                <a href="javascript:void(0);"
-                                    class="dropdown-item p-0 notify-item card read-noti shadow-none mb-2">
-                                    <div class="card-body">
-                                        <span class="float-end noti-close-btn text-muted"><i
-                                                class="mdi mdi-close"></i></span>
-                                        <div class="d-flex align-items-center">
-                                            <div class="flex-shrink-0">
-                                                <div class="notify-icon">
-                                                    <img src="assets/images/users/avatar-2.jpg"
-                                                        class="img-fluid rounded-circle" alt="" />
-                                                </div>
-                                            </div>
-                                            <div class="flex-grow-1 text-truncate ms-2">
-                                                <h5 class="noti-item-title fw-semibold font-14">Cristina Pride
-                                                    <small class="fw-normal text-muted ms-1">1 day ago</small>
-                                                </h5>
-                                                <small class="noti-item-subtitle text-muted">Hi, How are you? What
-                                                    about our next meeting</small>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-
-                                <h5 class="text-muted font-13 fw-normal mt-0">30 Dec 2021</h5>
-
-                                <!-- item-->
-                                <a href="javascript:void(0);"
-                                    class="dropdown-item p-0 notify-item card read-noti shadow-none mb-2">
-                                    <div class="card-body">
-                                        <span class="float-end noti-close-btn text-muted"><i
-                                                class="mdi mdi-close"></i></span>
-                                        <div class="d-flex align-items-center">
-                                            <div class="flex-shrink-0">
-                                                <div class="notify-icon bg-primary">
-                                                    <i class="mdi mdi-comment-account-outline"></i>
-                                                </div>
-                                            </div>
-                                            <div class="flex-grow-1 text-truncate ms-2">
-                                                <h5 class="noti-item-title fw-semibold font-14">Datacorp</h5>
-                                                <small class="noti-item-subtitle text-muted">Caleb Flakelar
-                                                    commented
-                                                    on Admin</small>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-
-                                <!-- item-->
-                                <a href="javascript:void(0);"
-                                    class="dropdown-item p-0 notify-item card read-noti shadow-none mb-2">
-                                    <div class="card-body">
-                                        <span class="float-end noti-close-btn text-muted"><i
-                                                class="mdi mdi-close"></i></span>
-                                        <div class="d-flex align-items-center">
-                                            <div class="flex-shrink-0">
-                                                <div class="notify-icon">
-                                                    <img src="assets/images/users/avatar-4.jpg"
-                                                        class="img-fluid rounded-circle" alt="" />
-                                                </div>
-                                            </div>
-                                            <div class="flex-grow-1 text-truncate ms-2">
-                                                <h5 class="noti-item-title fw-semibold font-14">Karen Robinson</h5>
-                                                <small class="noti-item-subtitle text-muted">Wow ! this admin looks
-                                                    good and awesome design</small>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-
-                                <div class="text-center">
-                                    <i class="mdi mdi-dots-circle mdi-spin text-muted h3 mt-0"></i>
+                                    <div class="simplebar-placeholder" style="width: 0px; height: 0px;"></div>
+                                </div>
+                                <div class="simplebar-track simplebar-horizontal" style="visibility: hidden;">
+                                    <div class="simplebar-scrollbar" style="width: 0px; display: none;"></div>
+                                </div>
+                                <div class="simplebar-track simplebar-vertical" style="visibility: hidden;">
+                                    <div class="simplebar-scrollbar" style="height: 0px; display: none;"></div>
                                 </div>
                             </div>
 
@@ -270,188 +324,41 @@
                         </div>
                     </li>
 
-                    <li class="d-none d-sm-inline-block">
-                        <div class="nav-link" id="light-dark-mode" data-bs-toggle="tooltip" data-bs-placement="left"
-                            title="Theme Mode">
-                            <i class="ri-moon-line font-22"></i>
-                        </div>
-                    </li>
-
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle arrow-none nav-user px-2" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                    <li class="dropdown">
+                        <a class="nav-link dropdown-toggle arrow-none nav-user px-2" data-bs-toggle="dropdown"
+                            href="#" role="button" aria-haspopup="false" aria-expanded="false">
                             <span class="account-user-avatar">
-                                <img src="assets/images/users/avatar-1.jpg" alt="user-image" width="32" class="rounded-circle">
+                                <img src="assets/images/users/avatar-1.jpg" alt="user-image" width="32"
+                                    class="rounded-circle">
                             </span>
                             <span class="d-lg-flex flex-column gap-1 d-none">
-                                <h5 class="my-0">{{ Auth::user()->name }}</h5>
-                                <h6 class="my-0 fw-normal">{{ Auth::user()->email }}</h6>
+                                <h5 class="my-0">Dominic Keller</h5>
+                                <h6 class="my-0 fw-normal">Founder</h6>
                             </span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-end dropdown-menu-animated profile-dropdown">
                             <!-- item-->
-                            <div class="dropdown-header noti-title">
-                                <h6 class="text-overflow m-0">Welcome!</h6>
+                            <div class=" dropdown-header noti-title">
+                                <h6 class="text-overflow m-0">Welcome !</h6>
                             </div>
-                            <!-- item-->
-                            <a href="javascript:void(0);" class="dropdown-item">
-                                <i class="mdi mdi-account-edit me-1"></i>
-                                <span>Settings</span>
-                            </a>
+
                             <!-- item-->
                             <a href="{{ route('logout') }}" class="dropdown-item"
-                               onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                 <i class="mdi mdi-logout me-1"></i>
                                 <span>Logout</span>
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                    @csrf
-                                </form>
                             </a>
+
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                style="display: none;">
+                                @csrf
+                            </form>
                         </div>
                     </li>
-                    
                 </ul>
             </div>
         </div>
         <!-- ========== Left Sidebar Start ========== -->
-     
-
-        @if (Auth::user()->type == 0)
-            <div class="topnav">
-                <div class="container-fluid">
-                    <nav class="navbar navbar-expand-lg">
-                        <div class="collapse navbar-collapse" id="topnav-menu-content">
-                            <ul class="navbar-nav">
-                                {{-- <li class="nav-item dropdown">
-                                    <a class="nav-link" href="{{ url('/home') }}" role="button">
-                                        <i class="uil-home-alt"></i>Dashboards
-                                    </a>
-                                </li> --}}
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link" href="{{ url('/fur-community') }}" role="button">
-                                        <i class="uil-dashboard"></i>Fur Community
-                                    </a>
-                                </li>
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link" href="{{ url('/adopt-a-dog') }}" role="button">
-                                        <i class="uil-dashboard"></i>Adoption List
-                                    </a>
-                                </li>
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link" href="{{ url('/lost-n-found') }}" role="button">
-                                        <i class="uil-dashboard"></i>Lost and Found List
-                                    </a>
-                                </li>
-                            
-
-
-                                {{-- <li class="nav-item dropdown">
-                                    <a class="nav-link" href="{{ url('/request-rounds') }}" role="button">
-                                        <i class="uil-dashboard"></i>Request Rounds
-                                    </a>
-                                </li> --}}
-                            </ul>
-                        </div>
-                    </nav>
-                </div>
-            </div>
-        @else
-            <div class="leftside-menu">
-
-                <a href="{{ url('/home') }}" class="logo logo-light">
-                    <span class="logo-lg">
-                        <h3 class="py-2 px-2 text-white">PAWS HAVEN</h3>
-                    </span>
-                    <span class="logo-sm">
-                        <h3 class="mt-3 text-white">PH</h3>
-                    </span>
-                </a>
-
-                <!-- Brand Logo Dark -->
-                <a href="{{ url('/home') }}" class="logo logo-dark">
-                    <span class="logo-lg">
-                        <h3 class="py-2 px-2 text-white">PAWS HAVEN</h3>
-                    </span>
-                    <span class="logo-sm">
-                        <h3 class="mt-3 text-white">PAWS</h3>
-                    </span>
-                </a>
-
-                <!-- Sidebar Hover Menu Toggle Button -->
-                <div class="button-sm-hover" data-bs-toggle="tooltip" data-bs-placement="right"
-                    title="Show Full Sidebar">
-                    <i class="ri-checkbox-blank-circle-line align-middle"></i>
-                </div>
-
-                <!-- Full Sidebar Menu Close Button -->
-                <div class="button-close-fullsidebar">
-                    <i class="ri-close-fill align-middle"></i>
-                </div>
-
-                <!-- Sidebar -->
-                <div class="h-100" id="leftside-menu-container" data-simplebar>
-                    <div class="leftbar-user">
-                        <a href="pages-profile.html">
-                            <img src="assets/images/users/avatar-1.jpg" alt="user-image" height="42"
-                                class="rounded-circle shadow-sm">
-                            <span class="leftbar-user-name mt-2">Dominic Keller</span>
-                        </a>
-                    </div>
-
-                    <!--- Sidemenu -->
-                    <ul class="side-nav">
-                        {{-- <li class="side-nav-title">Navigation</li> --}}
-                        {{-- <li class="side-nav-item">
-                            <a href="{{ url('/home') }}" class="side-nav-link">
-                                <i class="uil-home-alt"></i>
-                                <span> Dashboards </span>
-                            </a>
-                        </li> --}}
-                        <li class="side-nav-title">Data Management</li>
-
-                        <li class="side-nav-item">
-                            <a href="{{ url('/fur-community') }}" class="side-nav-link">
-                                <i class="uil-comments-alt"></i>
-                                <span> Fur Community </span>
-                            </a>
-                        </li>
-                        <li class="side-nav-item">
-                            <a href="{{ url('/report-lost-dog') }}" class="side-nav-link">
-                                <i class="uil-comments-alt"></i>
-                                <span> Add Dog for LnF </span>
-                            </a>
-                        </li>
-                        <li class="side-nav-item">
-                            <a href="{{ url('/animal-list') }}" class="side-nav-link">
-                                <i class="uil-comments-alt"></i>
-                                <span> Add Dog For Adoption </span>
-                            </a>
-                        </li>
-                        <li class="side-nav-item">
-                            <a href="{{ url('/ticket-list') }}" class="side-nav-link">
-                                <i class="uil-comments-alt"></i>
-                                <span> Ticket Lists </span>
-                            </a>
-                        </li>
-                        <!-- Help Box -->
-                        {{-- <div class="help-box text-white text-center">
-                        <a href="javascript: void(0);" class="float-end close-btn text-white">
-                            <i class="mdi mdi-close"></i>
-                        </a>
-                        <img src="assets/images/svg/help-icon.svg" height="90" alt="Helper Icon Image" />
-                        <h5 class="mt-3">Unlimited Access</h5>
-                        <p class="mb-3">Upgrade to plan to get access to unlimited reports</p>
-                        <a href="javascript: void(0);" class="btn btn-secondary btn-sm">Upgrade</a>
-                    </div> --}}
-                        <!-- end Help Box -->
-
-
-                    </ul>
-                    <!--- End Sidemenu -->
-
-                    <div class="clearfix"></div>
-                </div>
-            </div>
-        @endif
 
         <!-- ========== Left Sidebar End ========== -->
 
