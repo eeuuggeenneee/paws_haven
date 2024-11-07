@@ -127,7 +127,7 @@
     <!-- END HERO -->
 
     <!-- START SERVICES -->
-    <section class="py-5">
+    <section class="mt-4">
         <div class="container">
             <div class="row py-4">
                 <div class="col-lg-12">
@@ -184,9 +184,104 @@
         <hr>
     </section>
     <!-- END SERVICES -->
+    <!-- START SERVICES -->
+    <div class="mt-0 py-2 px-3">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="container">
+                    <h1> Mission & Vission</h1>
+                    <h4 class="mt-2 mb-2 text-center">
+                        Our Mission
+                    </h4>
+                    <p>
+                        Adopting from the Cityland Dog Pound not only provides a loving home
+                        for a dog in need but also helps alleviate the burden on the pound, making space for more
+                        dogs to be rescued and cared for.Adopting from the Cityland Dog Pound not only provides a loving
+                        home
+                        for a dog in need but also helps alleviate the burden on the pound, making space for more
+                        dogs to be rescued and cared for.
+                    </p>
+                    <h4 class="mt-2 mb-2 text-center">
+                        Our Vission
+                    </h4>
+                    <p>
+                        Adopting from the Cityland Dog Pound not only provides a loving home
+                        for a dog in need but also helps alleviate the burden on the pound, making space for more
+                        dogs to be rescued and cared for.Adopting from the Cityland Dog Pound not only provides a loving
+                        home
+                        for a dog in need but also helps alleviate the burden on the pound, making space for more
+                        dogs to be rescued and cared for.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END SERVICES -->
+    <hr>
+    <section class="py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="text-center">
+                        <h1 class="mt-0"><i class="mdi mdi-frequently-asked-questions"></i></h1>
+                        <h3>Frequently Asked <span class="text-primary">Questions</span></h3>
+                        <p class="text-muted mt-2">Here are some of the basic types of questions for our customers. For more
+                            <br>information please contact us.
+                        </p>
 
+                        <button type="button" class="btn btn-success btn-sm mt-2"><i class="mdi mdi-email-outline me-1"></i> Email us your question</button>
+                        <button type="button" class="btn btn-info btn-sm mt-2 ms-1"><i class="mdi mdi-twitter me-1"></i> Send us a tweet</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-5">
+                <div class="col-lg-5 offset-lg-1">
+                    <!-- Question/Answer -->
+                    <div>
+                        <div class="faq-question-q-box">Q.</div>
+                        <h4 class="faq-question text-body">Can I use this template for my client?</h4>
+                        <p class="faq-answer mb-4 pb-1 text-muted">Yup, the marketplace license allows you to use this theme
+                            in any end products.
+                            For more information on licenses, please refere <a href="https://themes.getbootstrap.com/licenses/" target="_blank">here</a>.</p>
+                    </div>
+
+                    <!-- Question/Answer -->
+                    <div>
+                        <div class="faq-question-q-box">Q.</div>
+                        <h4 class="faq-question text-body">How do I get help with the theme?</h4>
+                        <p class="faq-answer mb-4 pb-1 text-muted">Use our dedicated support email (support@coderthemes.com) to send your issues or feedback. We are here to help anytime.</p>
+                    </div>
+
+                </div>
+                <!--/col-lg-5 -->
+
+                <div class="col-lg-5">
+                    <!-- Question/Answer -->
+                    <div>
+                        <div class="faq-question-q-box">Q.</div>
+                        <h4 class="faq-question text-body">Can this theme work with Wordpress?</h4>
+                        <p class="faq-answer mb-4 pb-1 text-muted">No. This is a HTML template. It won't directly with
+                            wordpress, though you can convert this into wordpress compatible theme.</p>
+                    </div>
+
+                    <!-- Question/Answer -->
+                    <div>
+                        <div class="faq-question-q-box">Q.</div>
+                        <h4 class="faq-question text-body">Will you regularly give updates of Hyper?</h4>
+                        <p class="faq-answer mb-4 pb-1 text-muted">Yes, We will update the Hyper regularly. All the
+                            future updates would be available without any cost.</p>
+                    </div>
+
+                </div>
+                <!--/col-lg-5-->
+            </div>
+            <!-- end row -->
+
+        </div> <!-- end container-->
+    </section>
     <!-- START FEATURES 2 -->
-    <section class="">
+    {{-- <section class="">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
@@ -282,6 +377,113 @@
 
                     <a class="btn btn-info rounded-pill mt-3" data-bs-toggle="modal"
                         data-bs-target="#primary-header-modal">View Dog <i class="mdi mdi-arrow-right ms-1"></i></a>
+
+                </div>
+                <div class="col-lg-5 col-md-6 offset-md-1">
+                    <div id="carouselExampleCaption" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-inner" role="listbox">
+                            <div class="carousel-item active">
+                                <img src="assets/images/small/small-1.jpg" alt="..." class="d-block img-fluid">
+                                <div class="carousel-caption d-none d-md-block">
+                                    <h3 class="text-white">First slide label</h3>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                                </div>
+                            </div>
+                            <div class="carousel-item">
+                                <img src="assets/images/small/small-3.jpg" alt="..." class="d-block img-fluid">
+                                <div class="carousel-caption d-none d-md-block">
+                                    <h3 class="text-white">Second slide label</h3>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                                </div>
+                            </div>
+                            <div class="carousel-item">
+                                <img src="assets/images/small/small-2.jpg" alt="..." class="d-block img-fluid">
+                                <div class="carousel-caption d-none d-md-block">
+                                    <h3 class="text-white">Third slide label</h3>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <a class="carousel-control-prev" href="#carouselExampleCaption" role="button"
+                            data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </a>
+                        <a class="carousel-control-next" href="#carouselExampleCaption" role="button"
+                            data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section> --}}
+    <section class="">
+        <div class="container">
+            <div class="row">
+            </div>
+            <div class="row mt-2 py-5 align-items-center">
+                <div class="col-lg-5 col-md-6">
+                    <div id="carouselExampleCaption" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-inner" role="listbox">
+                            <div class="carousel-item active">
+                                <img src="assets/images/small/small-1.jpg" alt="..." class="d-block img-fluid">
+                                <div class="carousel-caption d-none d-md-block">
+                                    <h3 class="text-white">First slide label</h3>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                                </div>
+                            </div>
+                            <div class="carousel-item">
+                                <img src="assets/images/small/small-3.jpg" alt="..." class="d-block img-fluid">
+                                <div class="carousel-caption d-none d-md-block">
+                                    <h3 class="text-white">Second slide label</h3>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                                </div>
+                            </div>
+                            <div class="carousel-item">
+                                <img src="assets/images/small/small-2.jpg" alt="..." class="d-block img-fluid">
+                                <div class="carousel-caption d-none d-md-block">
+                                    <h3 class="text-white">Third slide label</h3>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <a class="carousel-control-prev" href="#carouselExampleCaption" role="button"
+                            data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </a>
+                        <a class="carousel-control-next" href="#carouselExampleCaption" role="button"
+                            data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-6 offset-md-1 col-md-5">
+                    <h3 class="fw-normal mt-3">Mandalte</h3>
+                    <p class="text-muted mt-3">It fosters a sense of responsibility and compassion, helping to create a
+                        kinder society where animals are given the care and respect they deserve. Additionally, adopted
+                        dogs often develop a deep bond with their new families, as they sense the second chance they’ve
+                        been given.It fosters a sense of responsibility and compassion, helping to create a
+                        kinder society where animals are given the care and respect they deserve. Additionally, adopted
+                        dogs often develop a deep bond with their new families, as they sense the second chance they’ve
+                        been given.</p>
+
+                </div>
+            </div>
+
+            <div class="row pb-3 pt-5 align-items-center">
+                <div class="col-lg-6 col-md-5">
+                    <h3 class="fw-normal">Service Peldge</h3>
+                    <p class="text-muted mt-3">Owners of lost dogs can visit the pound to check if their pet has been
+                        taken in. The facility usually keeps the dogs for a specific period, allowing time for owners to
+                        reclaim their pets. After this holding period, if a dog is not claimed, it might be put up for
+                        adoption or, in some unfortunate cases, humanely euthanized, depending on local regulations.Owners of lost dogs can visit the pound to check if their pet has been
+                        taken in. The facility usually keeps the dogs for a specific period, allowing time for owners to
+                        reclaim their pets. After this holding period, if a dog is not claimed,</p>
 
                 </div>
                 <div class="col-lg-5 col-md-6 offset-md-1">
@@ -683,8 +885,7 @@
                             <p class="text-muted font-16">Sign in with</p>
                             <ul class="social-list list-inline mt-3">
                                 <li class="list-inline-item">
-                                    <a href="{{ route('google-auth') }}"
-                                        class=" text-danger"><svg
+                                    <a href="{{ route('google-auth') }}" class=" text-danger"><svg
                                             xmlns="http://www.w3.org/2000/svg" version="1.1"
                                             xmlns:xlink="http://www.w3.org/1999/xlink" width="25" height="25"
                                             x="0" y="0" viewBox="0 0 512 512"
