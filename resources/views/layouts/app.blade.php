@@ -17,12 +17,17 @@
     <link href="assets/vendor/flatpickr/flatpickr.min.css" rel="stylesheet" type="text/css" />
     <script src="https://cdn.quilljs.com/1.2.2/quill.min.js"></script>
     <link href="https://cdn.quilljs.com/1.2.2/quill.snow.css" rel="stylesheet">
+    
     <script crossorigin="anonymous"
         src="https://cdn.rawgit.com/kensnyder/quill-image-resize-module/3411c9a7/image-resize.min.js"></script>
     <!-- Vector Map css -->
     <link href="assets/vendor/jsvectormap/css/jsvectormap.min.css" rel="stylesheet" type="text/css">
     <!-- Theme Config Js -->
     <script src="assets/js/hyper-config.js"></script>
+    <script src="assets/js/js.js"></script>
+
+    <script src="assets/js/pagination/pagination.js"></script>
+
     <link href="assets/vendor/datatables.net-bs5/css/dataTables.bootstrap5.min.css" rel="stylesheet" type="text/css" />
     <link href="assets/vendor/datatables.net-responsive-bs5/css/responsive.bootstrap5.min.css" rel="stylesheet"
         type="text/css" />
@@ -30,7 +35,8 @@
     <link href="assets/css/app-saas.min.css" rel="stylesheet" type="text/css" id="app-style" />
     <!-- Icons css -->
     <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
-    <style>
+   
+   <style>
         .daterangepicker {
             z-index: 400000;
         }

@@ -20,7 +20,7 @@ class ModalsDogs extends Component
 {
     use WithFileUploads;
     use LivewireAlert;
-                                     
+
     public $texteditor;
     public $dogName;
     public $breed;
@@ -62,19 +62,20 @@ class ModalsDogs extends Component
     public $breedName;
     public $breedlist;
     public $updatedog = false;
+    public $previmages;
 
-    protected $listeners = ['editDoggo', 'activedog','clearData','saveDogData'];
-    public function saveAnnoucement(){
-        
+    protected $listeners = ['editDoggo', 'activedog', 'clearData', 'saveDogData'];
+    public function saveAnnoucement()
+    {
+
         Annoucement::create([
-            'message' => $this->texteditor,     
+            'message' => $this->texteditor,
             'title' => $this->a_title,
             'sub_title' => $this->sub_title,
             'isActive' => 1,
             'user_id' => Auth::user()->id,
         ]);
         $this->dispatch('dogSaved', 'Annoucement has been successfully saved!');
-        
     }
     public function addDogBreed()
     {
@@ -171,7 +172,7 @@ class ModalsDogs extends Component
     }
     public function editDoggo($id)
     {
-        $finddog = AnimalList::where('dog_id_unique', $id)->first();
+        $finddog = AnimalList::where('dog_id_unique', $id)->where('isActive',1)->first();
         $this->updatedog = true;
         $this->dog_unique = $id;
         $this->dogName = $finddog->dog_name;
@@ -179,6 +180,8 @@ class ModalsDogs extends Component
         $this->color = $finddog->color;
         $this->gender = $finddog->gender;
         $this->description = $finddog->description;
+        $this->previmages = $finddog->animal_images;
+
     }
     public function clearData()
     {
@@ -194,28 +197,38 @@ class ModalsDogs extends Component
     public function saveDogData()
     {
         $images = [];
+        $dog = null;
         if ($this->dogImages) {
             foreach ($this->dogImages as $image) {
                 $images[] = $image->store('dog-images', 'public'); // Save images in storage
             }
         }
-        if ($this->dogName == '' || $this->breed == '' || $this->color == '' || $this->description == "" || count($images) == 0) {
+
+        if ($this->dogName == '' || $this->breed == '' || $this->color == '' || $this->description == "") {
         } else {
             if ($this->dog_unique) {
 
                 AnimalList::where('dog_id_unique', $this->dog_unique)->update(['isActive' => 0]);
-                $dog = AnimalList::create([
+            
+                $data = [
                     'dog_name' => $this->dogName,
                     'dog_id_unique' => $this->dog_unique,
                     'breed' => $this->breed,
                     'color' => $this->color,
                     'gender' => $this->gender,
-                    'location_found' => null, // You can adjust this as per your form
-                    'date_found' => null,     // Same here
+                    'location_found' => null,  // Adjust as needed
+                    'date_found' => null,      // Adjust as needed
                     'description' => $this->description,
-                    'animal_images' => json_encode($images), // Store images as JSON
                     'isActive' => 1,
-                ]);
+                ];
+
+                if (!empty($images)) {
+                    $data['animal_images'] = json_encode($images);
+                }else{
+                    $data['animal_images'] = $this->previmages;
+                }
+                $dog = AnimalList::create($data);
+
                 $this->dispatch('editDogSave', 'Data has been successfully updated!');
             } else {
                 $uniqueId = Str::uuid();
@@ -241,8 +254,9 @@ class ModalsDogs extends Component
             }
         }
     }
-    public function mount() {
-        $this->breedlist = DogBreed::where('isActive',1)->get();
+    public function mount()
+    {
+        $this->breedlist = DogBreed::where('isActive', 1)->get();
     }
     public function render()
     {
