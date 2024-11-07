@@ -25,7 +25,7 @@ Route::get('/fur-community', function () {
     return view('furcomm');
 })->middleware('is_login');
 
-Route::get('/dashboard', function () {
+Route::get('/annoucements', function () {
     return view('dashboard');
 })->middleware('is_login');
 

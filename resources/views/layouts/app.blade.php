@@ -118,8 +118,8 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link me-4" href="{{ url('/fur-community') }}" role="button">
-                                <i class="uil-dashboard"></i> Annoucement
+                            <a class="nav-link me-4" href="{{ url('/annoucement') }}" role="button">
+                                <i class="uil-dashboard"></i> Annoucements
                             </a>
                         </li>
                         <li class="nav-item">
@@ -129,7 +129,7 @@
                         </li>
                     @else
                         <li class="nav-item">
-                            <a class="nav-link me-4" href="{{ url('/fur-community') }}" role="button">
+                            <a class="nav-link me-4" href="{{ url('/annoucements') }}" role="button">
                                 <i class="uil-dashboard"></i> Annoucement
                             </a>
                         </li>
