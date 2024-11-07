@@ -53,7 +53,8 @@
                         </div>
                         <div class="mb-3">
                             <label for="dogImages" class="form-label">Dog Images</label>
-                            <input class="form-control" type="file" id="dogImages" wire:model="dogImages" multiple @if(!$updatedog) required @endif>
+                            <input class="form-control" type="file" id="dogImages" wire:model="dogImages" multiple
+                                @if (!$updatedog) required @endif>
                         </div>
 
                     </div>
@@ -1199,6 +1200,119 @@
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
     </div>
+
+    <div id="create_aa" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="fullWidthModalLabel"
+        aria-hidden="true" wire:ignore.self>
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="fullWidthModalLabel">Create Annoucements</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                        aria-hidden="true"></button>
+                </div>
+                <form id="add_annoucment">
+                    <div class="modal-body">
+                        <label for="a_title" class="form-label">Title</label>
+                        <input type="text" id="a_title" wire:model="a_title" class="form-control" required>
+
+                        <label for="sub_title" class="form-label mt-2">Sub Title</label>
+                        <input type="text" id="sub_title" wire:model="sub_title" class="form-control mb-2"
+                            required>
+
+                        <label for="snow-editor" class="form-label mt-2">Messages</label>
+                        <div id="snow-editor" class="mt-2" style="height: auto;">
+                            <h3><span class="ql-size-large">Hello World!</span></h3>
+                            <p><br></p>
+                            <h3>This is an simple editable area.</h3>
+                            <p><br></p>
+                            <ul>
+                                <li>
+                                    Select a text to reveal the toolbar.
+                                </li>
+                                <li>
+                                    Edit rich document on-the-fly, so elastic!
+                                </li>
+                            </ul>
+                            <p><br></p>
+                            <p>
+                                End of simple area
+                            </p>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" onclick="fconfirm()">Submit</button>
+                        <button type="button" class="btn btn-primary d-none" id="saveannouce"
+                            wire:click="saveAnnoucement">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script>
+        function fconfirm() {
+            var add_annoucment = document.getElementById('add_annoucment');
+
+            add_annoucment.classList.add('was-validated');
+
+            if (!add_annoucment.checkValidity()) {
+                // Form is incomplete or invalid, prevent further action
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: 'top-end', // Position of the toast
+                    showConfirmButton: false,
+                    timer: 3000, // Duration before the toast disappears (in milliseconds)
+                    timerProgressBar: true,
+                });
+                Toast.fire({
+                    icon: 'warning',
+                    title: 'Please fill out all required fields.'
+                });
+                return false; // Stop further actions
+            }
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "Are you sure you want to save this form?",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, submit it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    var quilltext = document.getElementById('snow-editor');
+                    const htmlContent = quilltext.innerHTML;
+                    @this.set('texteditor', htmlContent);
+                    document.getElementById('saveannouce').click();
+                }
+            });
+        }
+        var quill = new Quill('#snow-editor', {
+            theme: 'snow',
+            modules: {
+                imageResize: {
+                    displaySize: true
+                },
+                toolbar: [
+                    [{
+                        'header': [1, 2, 3, 4, 5, 6, false]
+                    }],
+                    ['bold', 'italic', 'underline', 'strike'],
+                    [{
+                        'color': []
+                    }, {
+                        'background': []
+                    }],
+                    [{
+                        'align': []
+                    }],
+                    ['link', 'image'],
+
+                    ['clean']
+                ]
+            }
+        });
+    </script>
     <script>
         function saveRounds() {
             Swal.fire({
@@ -1215,6 +1329,7 @@
                 }
             });
         }
+
         function confimSaveAdd() {
             var form3 = document.getElementById('formadddog');
 
@@ -1251,7 +1366,7 @@
             });
         }
 
-        
+
         function openTerms() {
             console.log('hehe');
             $('#terms-modal').modal('show');

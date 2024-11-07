@@ -8,6 +8,7 @@ use Livewire\Component;
 use Livewire\WithFileUploads;
 use App\Models\AnimalList;
 use App\Models\AnimalListStatus;
+use App\Models\Annoucement;
 use App\Models\DogBreed;
 use App\Models\DogClaim;
 use App\Models\Rounds;
@@ -19,7 +20,8 @@ class ModalsDogs extends Component
 {
     use WithFileUploads;
     use LivewireAlert;
-
+                                     
+    public $texteditor;
     public $dogName;
     public $breed;
     public $color;
@@ -44,6 +46,8 @@ class ModalsDogs extends Component
     public $a_tos;
     public $a_reason;
 
+    public $a_title;
+    public $sub_title;
 
     public $c_fname;
     public $c_lname;
@@ -60,6 +64,18 @@ class ModalsDogs extends Component
     public $updatedog = false;
 
     protected $listeners = ['editDoggo', 'activedog','clearData','saveDogData'];
+    public function saveAnnoucement(){
+        
+        Annoucement::create([
+            'message' => $this->texteditor,     
+            'title' => $this->a_title,
+            'sub_title' => $this->sub_title,
+            'isActive' => 1,
+            'user_id' => Auth::user()->id,
+        ]);
+        $this->dispatch('dogSaved', 'Annoucement has been successfully saved!');
+        
+    }
     public function addDogBreed()
     {
         DogBreed::create([

@@ -15,10 +15,12 @@
 
     <!-- Daterangepicker css -->
     <link href="assets/vendor/flatpickr/flatpickr.min.css" rel="stylesheet" type="text/css" />
-
+    <script src="https://cdn.quilljs.com/1.2.2/quill.min.js"></script>
+    <link href="https://cdn.quilljs.com/1.2.2/quill.snow.css" rel="stylesheet">
+    <script crossorigin="anonymous"
+        src="https://cdn.rawgit.com/kensnyder/quill-image-resize-module/3411c9a7/image-resize.min.js"></script>
     <!-- Vector Map css -->
     <link href="assets/vendor/jsvectormap/css/jsvectormap.min.css" rel="stylesheet" type="text/css">
-
     <!-- Theme Config Js -->
     <script src="assets/js/hyper-config.js"></script>
     <link href="assets/vendor/datatables.net-bs5/css/dataTables.bootstrap5.min.css" rel="stylesheet" type="text/css" />
@@ -39,6 +41,20 @@
 
         .swal2-container {
             z-index: 400000;
+        }
+
+        .ql-hidden {
+            display: none !important;
+        }
+
+        /* Scrollable column */
+        .scrollable-column {
+            height: 100vh;
+            overflow-y: auto;
+        }
+
+        .scroll-content {
+            height: 90%;
         }
     </style>
     {{-- @vite(['resources/js/app.js']) --}}

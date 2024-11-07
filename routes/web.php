@@ -20,8 +20,13 @@ Route::get('/report-lost-dog', function () {
 Route::get('/adopt-a-dog', function () {
     return view('adoption');
 })->middleware('is_login');
+
 Route::get('/fur-community', function () {
     return view('furcomm');
+})->middleware('is_login');
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
 })->middleware('is_login');
 
 Route::get('/request-rounds', function () {
