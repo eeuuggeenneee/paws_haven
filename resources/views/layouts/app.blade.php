@@ -92,11 +92,11 @@
                     <div class="logo-topbar">
                         <!-- Logo light -->
                         <a href="index.html" class="logo-dark">
-                            <span class="logo-lg">
-                                <img src="assets/images/logo-dark.png" alt="dark logo">
+                            <span class="logo-lg fw-bold">
+                                PAWS HAVEN
                             </span>
                             <span class="logo-sm">
-                                <img src="assets/images/logo-dark-sm.png" alt="small logo">
+                                PH
                             </span>
                         </a>
                     </div>
@@ -348,8 +348,8 @@
                                     class="rounded-circle">
                             </span>
                             <span class="d-lg-flex flex-column gap-1 d-none">
-                                <h5 class="my-0">Dominic Keller</h5>
-                                <h6 class="my-0 fw-normal">Founder</h6>
+                                <h5 class="my-0">{{Auth::user()->name}}</h5>
+                                <h6 class="my-0 fw-normal">{{Auth::user()->email}}</h6>
                             </span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-end dropdown-menu-animated profile-dropdown">
