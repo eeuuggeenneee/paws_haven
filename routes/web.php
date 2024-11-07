@@ -3,10 +3,12 @@
 use App\Http\Controllers\GoogleAuthController;
 use Illuminate\Support\Facades\Route;
 use App\Livewire\AddLostDog;
-
+use App\Models\AnimalList;
 
 Route::get('/', function () {
-    return view('welcome');
+    // Fetch data from the model
+    $data = AnimalList::where('isActive', 1)->get(); 
+    return view('welcome', compact('data'));
 })->name('landing');
 
 

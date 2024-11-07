@@ -18,7 +18,7 @@
                         <div class="row mb-2">
                             <div class="col-sm-5">
                                 <a data-bs-toggle="modal" data-bs-target="#info-header-modal" wire:click="$dispatch('clearData')"
-                                    class="btn btn-info mb-2"><i class="mdi mdi-plus-circle me-2" ></i> Add Pets </a>
+                                    class="btn btn-info mb-2"><i class="mdi mdi-plus-circle me-2" ></i> Add Dogs </a>
                             </div>
                         </div>
                         <div class="table-responsive">
