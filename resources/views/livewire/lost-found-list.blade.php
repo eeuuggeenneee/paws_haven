@@ -258,8 +258,8 @@
                                                         </g>
                                                     </svg> </i>
                                                 <div>
-                                                    <h5 class="mt-1 font-14">
-                                                        {{ 100 }}
+                                                    <h5 class="mt-1 font-14" id="view-{{$d['dog_id_unique']}}"  wire:ignore>
+                                                        {{ $d['clicked'] ?? '0' }}
                                                     </h5>
                                                 </div>
                                             </div>
@@ -285,5 +285,13 @@
     <!-- Footer Start -->
 
     <!-- end Footer -->
-
+    <script>
+        document.addEventListener('livewire:init', function() {
+            Livewire.on('click_dogs', event => {
+                let dogid = document.getElementById('view-'+ event[0]);
+                dogid.textContent = event[1];
+                console.log(event);
+            });
+        });
+    </script>
 </div>

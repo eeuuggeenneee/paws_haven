@@ -118,7 +118,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link me-4" href="{{ url('/annoucement') }}" role="button">
+                            <a class="nav-link me-4" href="{{ url('/annoucements') }}" role="button">
                                 <i class="uil-dashboard"></i> Annoucements
                             </a>
                         </li>
