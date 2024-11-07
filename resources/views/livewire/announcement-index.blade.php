@@ -36,10 +36,12 @@
                                         role="tab" aria-controls="v-pills-timeline" aria-selected="false">
                                         <i class='uil uil-comment-alt-message me-1'></i> Annoucements
                                     </a>
+                                    @if(Auth::user()->type == 1)
                                     <a class="nav-link list-group-item list-group-item-action border-0"
                                         data-bs-toggle="modal" data-bs-target="#create_aa">
                                         <i class='uil uil-comment-alt-message me-1'></i> Create Annoucements
                                     </a>
+                                    @endif
                                     <a class="nav-link  list-group-item list-group-item-action border-0"
                                         id="v-pills-home-tab" data-bs-toggle="pill" href="#v-pills-home" role="tab"
                                         aria-controls="v-pills-home" aria-selected="true">

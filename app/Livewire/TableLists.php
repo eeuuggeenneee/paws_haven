@@ -25,7 +25,7 @@ class TableLists extends Component
     protected $listeners = ['adopted', 'rounds_accepted', 'rounds_rejected', 'r_adopted'];
     public function mount()
     {
-        $this->adoptionlist = AnimalListStatus::whereIn('status', [4, 5, 1])
+        $this->adoptionlist = AnimalListStatus::whereIn('status', [4, 5,1])
             ->join('adoption_forms', 'adoption_forms.dog_id_unique', '=', 'animal_list_statuses.animal_id')
             ->leftJoin('statuses', 'statuses.id', '=', 'animal_list_statuses.status')
             ->leftJoin('animal_lists', function ($join) {
@@ -53,7 +53,7 @@ class TableLists extends Component
             ->get();
         // dd($this->reqrounds);
 
-        $this->claimlist = AnimalListStatus::whereIn('status', [6, 7, 4])
+        $this->claimlist = AnimalListStatus::whereIn('status', [6,7,3])
             ->leftJoin('dog_claims', 'dog_claims.dog_id_unique', '=', 'animal_list_statuses.animal_id')
             ->leftJoin('statuses', 'statuses.id', '=', 'animal_list_statuses.status')
             ->leftJoin('animal_lists', function ($join) {
@@ -61,7 +61,7 @@ class TableLists extends Component
                     ->where('animal_lists.isActive', '=', 1);
             })->select('dog_claims.*', 'animal_list_statuses.status', 'animal_lists.dog_name', 'animal_lists.animal_images', 'statuses.name as status_name')
             ->where('animal_list_statuses.isActive', 1)->get();
-        // dd($this->adoptionlist);
+        // dd($this->claimlist);
     }
     public function getrounds($id)
     {

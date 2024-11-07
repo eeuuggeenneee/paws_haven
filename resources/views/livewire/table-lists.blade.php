@@ -81,6 +81,7 @@
                                 <table class="table table-centered table-nowrap mb-0">
                                     <thead class="table-light">
                                         <tr>
+                                            <th>Ticket Number</th>
                                             <th>Requestor</th>
                                             <th>Dog</th>
                                             <th>Address</th>
@@ -97,6 +98,7 @@
                                                     $imagestc = json_decode($cdata['animal_images']);
                                                 @endphp
                                                 <tr>
+                                                    <td> C{{ $cdata['created_at']->format('ym') . '-' . str_pad($cdata['id'], 4, '0', STR_PAD_LEFT) ?? 'N/A' }}
                                                     <td> {{ $cdata['fullname'] ?? 'N/A' }} </td>
                                                     <td>
                                                         <div class="d-flex">
@@ -125,14 +127,18 @@
                                                     </td>
                                                     <td>{{ $cdata['contact'] ?? 'N/A' }}</td>
                                                     <td>
-                                                        <h5 class="my-0"><span class="badge badge-info-lighten">
+                                                        <h5 class="my-0">
+                                                          
                                                                 @if ($cdata['status_name'] == 'Found Dog')
-                                                                    Rejected
+                                                                    <span class="badge bg-danger">
+                                                                        Rejected
+                                                                    </span>
                                                                 @else
-                                                                    {{ $cdata['status_name'] }}
+                                                                    <span class="badge bg-info">
+                                                                        {{ $cdata['status_name'] }}
+                                                                    </span>
                                                                 @endif
-
-                                                            </span>
+                                                        
                                                         </h5>
                                                     </td>
                                                     <td>
@@ -228,19 +234,22 @@
 
                                                     <td>
                                                         <h5 class="my-0">
-                                                            @if ($data['is_approved'] == 1)
-                                                                <span class="badge bg-success">
-                                                                    <span>Approved</span>
-                                                                </span>
-                                                            @elseif ($data['is_approved'] == 0)
-                                                                <span class="badge bg-danger">
-                                                                    <span>Rejected</span>
-                                                                </span>
+                                                            @if (isset($data['is_approved']))
+                                                                @if ($data['is_approved'] == 1)
+                                                                    <span class="badge bg-success">
+                                                                        <span>Approved</span>
+                                                                    </span>
+                                                                @elseif ($data['is_approved'] == 0)
+                                                                    <span class="badge bg-danger">
+                                                                        <span>Rejected</span>
+                                                                    </span>
+                                                                @endif
                                                             @else
                                                                 <span class="badge bg-info">
                                                                     <span>Pending</span>
                                                                 </span>
                                                             @endif
+
                                                         </h5>
                                                     </td>
                                                     <td>
@@ -306,6 +315,7 @@
                                         <table class="table table-centered table-nowrap mb-0">
                                             <thead class="table-light">
                                                 <tr>
+                                                    <th>Ticket Number</th>
                                                     <th>Name</th>
                                                     <th>Dog Name</th>
                                                     <th>Contact</th>
@@ -322,6 +332,7 @@
                                                             $imagest = json_decode($data['animal_images']);
                                                         @endphp
                                                         <tr>
+                                                            <td> A{{ $data['created_at']->format('ym') . '-' . str_pad($data['id'], 4, '0', STR_PAD_LEFT) ?? 'N/A' }}
                                                             <td> {{ $data['fullname'] }} </td>
                                                             <td>
                                                                 <div class="d-flex">
@@ -350,14 +361,18 @@
                                                             <td>{{ $data['address'] }}</td>
                                                             <td>{{ $data['created_at']->format('M-d-Y') }}</td>
                                                             <td>
-                                                                <h5 class="my-0"><span
-                                                                        class="badge badge-info-lighten">
+                                                                <h5 class="my-0">
                                                                         @if ($data['status_name'] == 'For Adoption')
-                                                                            Rejected
+                                                                            <span class="badge bg-danger">
+                                                                                Rejected
+                                                                            </span>
                                                                         @else
-                                                                            {{ $data['status_name'] }}
+                                                                            <span class="badge bg-info">
+                                                                                {{ $data['status_name'] }}
+                                                                            </span>
+                                                                            
                                                                         @endif
-                                                                    </span>
+                                                                  
                                                                 </h5>
                                                             </td>
                                                             <td>
