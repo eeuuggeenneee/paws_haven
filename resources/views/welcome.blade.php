@@ -505,24 +505,53 @@
                             @php
                                 $shuffled_data1 = collect($data->toArray())->shuffle();
                             @endphp
-                            @foreach ($shuffled_data1 as $index => $animal)
-                                @php
-                                    // Decode the animal_images JSON string into an array
-                                    $images = json_decode($animal['animal_images'], true);
-                                    $firstImage = $images[0] ?? ''; // Get the first image URL (if exists)
-                                @endphp
-
-                                @if ($firstImage)
-                                    <div class="carousel-item {{ $index === 0 ? 'active' : '' }}">
-                                        <img src="{{ asset('storage/' . $firstImage) }}" alt="..."
-                                            class="d-block img-fluid">
-                                        <div class="carousel-caption d-none d-md-block">
-                                            <h3 class="text-white">{{ $animal['dog_name'] }}</h3>
-                                            <p>{{ $animal['description'] }}</p>
-                                        </div>
+                            @if ($shuffled_data1->isEmpty())
+                                <!-- If no data, display the placeholder images -->
+                                <div class="carousel-item active">
+                                    <img src="assets/images/small/small-1.jpg" alt="..."
+                                        class="d-block img-fluid">
+                                    <div class="carousel-caption d-none d-md-block">
+                                        <h3 class="text-white">First slide label</h3>
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
                                     </div>
-                                @endif
-                            @endforeach
+                                </div>
+                                <div class="carousel-item">
+                                    <img src="assets/images/small/small-3.jpg" alt="..."
+                                        class="d-block img-fluid">
+                                    <div class="carousel-caption d-none d-md-block">
+                                        <h3 class="text-white">Second slide label</h3>
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                                    </div>
+                                </div>
+                                <div class="carousel-item">
+                                    <img src="assets/images/small/small-2.jpg" alt="..."
+                                        class="d-block img-fluid">
+                                    <div class="carousel-caption d-none d-md-block">
+                                        <h3 class="text-white">Third slide label</h3>
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                                    </div>
+                                </div>
+                            @else
+                                <!-- If data is available, display the shuffled items -->
+                                @foreach ($shuffled_data1 as $index => $animal)
+                                    @php
+                                        // Decode the animal_images JSON string into an array
+                                        $images = json_decode($animal['animal_images'], true);
+                                        $firstImage = $images[0] ?? ''; // Get the first image URL (if exists)
+                                    @endphp
+
+                                    @if ($firstImage)
+                                        <div class="carousel-item {{ $index === 0 ? 'active' : '' }}">
+                                            <img src="{{ asset('storage/' . $firstImage) }}" alt="..."
+                                                class="d-block img-fluid">
+                                            <div class="carousel-caption d-none d-md-block">
+                                                <h3 class="text-white">{{ $animal['dog_name'] }}</h3>
+                                                <p>{{ $animal['description'] }}</p>
+                                            </div>
+                                        </div>
+                                    @endif
+                                @endforeach
+                            @endif
                         </div>
                         <a class="carousel-control-prev" href="#carouselExampleCaption" role="button"
                             data-bs-slide="prev">
@@ -587,6 +616,34 @@
                             @php
                                 $shuffled_data = collect($data->toArray())->shuffle();
                             @endphp
+                            @if ($shuffled_data->isEmpty())
+                            <!-- If no data, display the placeholder images -->
+                            <div class="carousel-item active">
+                                <img src="assets/images/small/small-1.jpg" alt="..."
+                                    class="d-block img-fluid">
+                                <div class="carousel-caption d-none d-md-block">
+                                    <h3 class="text-white">First slide label</h3>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                                </div>
+                            </div>
+                            <div class="carousel-item">
+                                <img src="assets/images/small/small-3.jpg" alt="..."
+                                    class="d-block img-fluid">
+                                <div class="carousel-caption d-none d-md-block">
+                                    <h3 class="text-white">Second slide label</h3>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                                </div>
+                            </div>
+                            <div class="carousel-item">
+                                <img src="assets/images/small/small-2.jpg" alt="..."
+                                    class="d-block img-fluid">
+                                <div class="carousel-caption d-none d-md-block">
+                                    <h3 class="text-white">Third slide label</h3>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                                </div>
+                            </div>
+                        @else
+                            <!-- If data is available, display the shuffled items -->
                             @foreach ($shuffled_data as $index => $animal)
                                 @php
                                     // Decode the animal_images JSON string into an array
@@ -605,6 +662,7 @@
                                     </div>
                                 @endif
                             @endforeach
+                        @endif
                         </div>
                         <a class="carousel-control-prev" href="#carouselExampleCaption2" role="button"
                             data-bs-slide="prev">
