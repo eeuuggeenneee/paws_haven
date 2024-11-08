@@ -7,7 +7,7 @@
             layout: { mode: "fluid", position: "fixed" },
             topbar: { color: "light" },
             menu: { color: "dark" },
-            sidenav: { size: "default", user: !1 },
+            sidenav: { size: "full", user: !1 },
         },
         o =
             ((this.html = document.getElementsByTagName("html")[0]),

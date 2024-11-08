@@ -262,33 +262,7 @@
             });
         }
         document.addEventListener('livewire:init', function() {
-            Livewire.on('dogUpdate', event => {
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Success!',
-                    text: event[0],
-                    confirmButtonText: 'Okay'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        // Reload the page
-                        location.reload();
-                    }
-                });
-            });
-            Livewire.on('dogSaved', event => {
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Success!',
-                    text: event[0],
-                    confirmButtonText: 'Okay'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        // Reload the page
-                        location.reload();
-                    }
-                });
-
-            });
+         
         });
     </script>
 </div> <!-- container -->

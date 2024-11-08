@@ -139,7 +139,7 @@
                                 </a>
                             </div>
                             <div class="col-auto">
-                                <a class="nav-link text-secondary fw-semibold" href="{{ url('/annoucements') }}" role="button">
+                                <a class="nav-link text-secondary fw-semibold" href="{{ url('/announcements') }}" role="button">
                                     <i class="uil-dashboard"></i> Announcements
                                 </a>
                             </div>
@@ -150,7 +150,7 @@
                             </div>
                         @else
                             <div class="col-auto">
-                                <a class="nav-link text-secondary fw-semibold" href="{{ url('/annoucements') }}" role="button">
+                                <a class="nav-link text-secondary fw-semibold" href="{{ url('/announcements') }}" role="button">
                                     <i class="uil-dashboard"></i> Announcement
                                 </a>
                             </div>
@@ -301,7 +301,7 @@
                     </li>
 
                     <li class="side-nav-item">
-                        <a href="{{ url('/announcement')}}" class="side-nav-link text-white">
+                        <a href="{{ url('/announcements')}}" class="side-nav-link text-white">
                             <i class="uil-comments-alt"></i>
                             <span> Annoucement </span>
                         </a>

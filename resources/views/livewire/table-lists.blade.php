@@ -3,9 +3,136 @@
         .swal2-container {
             z-index: 20000 !important;
         }
+
+        .table-footer {}
+
+        .table-footer nav {
+            position: relative;
+            width: 100%;
+            text-align: center;
+        }
+
+        .table-footer nav * {
+            display: inline-block;
+        }
+
+        .table-footer nav .showing {
+            color: #b3b3b3;
+        }
+
+        @media (min-width: 1025px) {
+            .table-footer nav .showing {
+                display: inline-block;
+                position: absolute;
+                left: 14.75%;
+            }
+        }
+
+        .table-footer nav>.primary-btn {
+            vertical-align: middle;
+        }
+
+        @media (min-width: 1025px) {
+            .table-footer nav>.primary-btn {
+                position: absolute;
+                right: 1em;
+            }
+        }
+
+        .pagination .pager li {
+            display: inline-block;
+            line-height: 1.2;
+        }
+
+        .pagination .pager li.active a {
+            font-weight: 700;
+            border-bottom: 3px solid #057ed8;
+            color: #000;
+        }
+
+        .pagination a {
+            text-decoration: none;
+            color: #66696a;
+            padding: 0.3333333333ex 0.25em 0.2ex;
+            font-size: 16px;
+        }
+
+        .pagination .prev,
+        .pagination .next {
+            width: 8px;
+            height: 16px;
+        }
+
+        .search-container {
+            position: absolute;
+            max-width: 500px;
+            margin-bottom: 15px;
+        }
+
+        /* Style the search input field */
+        .search {
+            /* Add padding for the search icon */
+            border-radius: 20px;
+            /* Round the edges */
+            border: 1px solid #ddd;
+            width: 100%;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            /* Subtle shadow */
+        }
+
+        .c_search {
+            /* Add padding for the search icon */
+            border-radius: 20px;
+            /* Round the edges */
+            border: 1px solid #ddd;
+            width: 100%;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            /* Subtle shadow */
+        }
+
+        .cl_search {
+            /* Add padding for the search icon */
+            border-radius: 20px;
+            /* Round the edges */
+            border: 1px solid #ddd;
+            width: 100%;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            /* Subtle shadow */
+        }
+
+        .search-container::before {
+            content: "\1F50D";
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            width: 100% !important;
+            transform: translateY(-50%);
+            font-size: 18px;
+            color: #888;
+        }
+
+        .search-container input.c_search {
+            width: 100%;
+            /* Ensure input fills container */
+            text-align: center;
+            /* Center the placeholder and typed text */
+        }
+
+        .search-container input.cl_search {
+            width: 100%;
+            /* Ensure input fills container */
+            text-align: center;
+            /* Center the placeholder and typed text */
+        }
+
+        .search-container input.search {
+            width: 100%;
+            /* Ensure input fills container */
+            text-align: center;
+            /* Center the placeholder and typed text */
+        }
     </style>
     <div class="content">
-
         <!-- Start Content-->
         <div class="container-fluid">
 
@@ -43,75 +170,55 @@
                     </a>
                 </li>
             </ul>
-            <div class="tab-content" wire:ignore>
-                <div class="tab-pane" id="settings-b1">
+            <div class="tab-content">
+                <div class="tab-pane" id="settings-b1" wire:ignore.self>
                     <div class="card">
                         <div class="card-body">
-                            <div class="row mb-2">
-                                <div class="col-xl-8">
-                                    {{-- <form
-                                        class="row gy-2 gx-2 align-items-center justify-content-xl-start justify-content-between">
-                                        <div class="col-auto">
-                                            <label for="inputPassword2" class="visually-hidden">Search</label>
-                                            <input type="search" class="form-control" id="inputPassword2"
-                                                placeholder="Search...">
-                                        </div>
-                                        <div class="col-auto">
-                                            <div class="d-flex align-items-center">
-                                                <label for="status-select" class="me-2">Status</label>
-                                                <select class="form-select" id="status-select">
-                                                    <option selected>Choose...</option>
-                                                    <option value="1">Paid</option>
-                                                    <option value="2">Awaiting Authorization</option>
-                                                    <option value="3">Payment Failed</option>
-                                                    <option value="4">Cash On Delivery</option>
-                                                    <option value="5">Fulfilled</option>
-                                                    <option value="6">Unfulfilled</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </form> --}}
-                                </div>
-                                <div class="col-xl-4">
 
-                                </div><!-- end col-->
-                            </div>
                             <h3>Claim List</h3>
-                            <div class="table-responsive">
+                            <div class="table-responsive" id="claim_list">
+                                <div class="d-flex align-items-center">
+                                    <div class="search-container ms-auto">
+                                        <input type="text" class="cl_search form-control " id="searchtb"
+                                            style="width: 150%;" placeholder="Search for dogs...">
+                                    </div>
+                                    <h3 class="mb-4 d-flex align-items-center ms-auto"></h3>
+
+                                </div>
                                 <table class="table table-centered table-nowrap mb-0">
                                     <thead class="table-light">
                                         <tr>
                                             <th>Ticket Number</th>
                                             <th>Requestor</th>
                                             <th>Dog</th>
-                                            <th>Address</th>
                                             <th>Contact</th>
+                                            <th>Address</th>
                                             <th>Status</th>
                                             <th style="width: 125px;">Action</th>
                                         </tr>
                                     </thead>
-                                    <tbody wire:ignore>
+                                    <tbody class="list">
                                         @if (isset($claimlist))
-
                                             @foreach ($claimlist as $cdata)
                                                 @php
                                                     $imagestc = json_decode($cdata['animal_images']);
                                                 @endphp
                                                 <tr>
-                                                    <td> C{{ $cdata['created_at']->format('ym') . '-' . str_pad($cdata['id'], 4, '0', STR_PAD_LEFT) ?? 'N/A' }}
-                                                    <td> {{ $cdata['fullname'] ?? 'N/A' }} </td>
-                                                    <td>
+                                                    <td class="ticket_number">
+                                                        C{{ $cdata['created_at']->format('ym') . '-' . str_pad($cdata['id'], 4, '0', STR_PAD_LEFT) ?? 'N/A' }}
+                                                    <td class="requestor"> {{ $cdata['fullname'] ?? 'N/A' }} </td>
+                                                    <td class="dog_name">
                                                         <div class="d-flex">
                                                             <div class="d-flex align-items-center">
                                                                 <div class="flex-shrink-0">
                                                                     @if (!is_null($imagestc) && isset($imagestc[0]))
                                                                         <img src="{{ asset('storage/' . $imagestc[0]) }}"
                                                                             class="rounded-circle avatar-xs"
-                                                                            alt="friend" wire:ignore.self>
+                                                                            alt="friend">
                                                                     @else
                                                                         <img src="{{ asset('storage/profile_pictures/xjxxrQTF3FiMAJ92RTzIrh15XRKYVLP9rtQt6g1E.png') }}"
                                                                             class="rounded-circle avatar-xs"
-                                                                            alt="default" wire:ignore.self>
+                                                                            alt="default">
                                                                     @endif
                                                                 </div>
                                                                 <div class="flex-grow-1 ms-2">
@@ -121,86 +228,81 @@
                                                             </div>
                                                         </div>
                                                     </td>
-                                                    <td>
+
+                                                    <td class="contact">{{ $cdata['contact'] ?? 'N/A' }}</td>
+                                                    <td class="address">
                                                         <p class="mb-0 txt-muted">
                                                             {{ $cdata['address'] ?? 'N/A' }} </p>
                                                     </td>
-                                                    <td>{{ $cdata['contact'] ?? 'N/A' }}</td>
-                                                    <td>
+                                                    <td class="status">
                                                         <h5 class="my-0">
-                                                          
-                                                                @if ($cdata['status_name'] == 'Found Dog')
-                                                                    <span class="badge bg-danger">
-                                                                        Rejected
-                                                                    </span>
-                                                                @else
-                                                                    <span class="badge bg-info">
-                                                                        {{ $cdata['status_name'] }}
-                                                                    </span>
-                                                                @endif
-                                                        
+
+                                                            @if ($cdata['status_name'] == 'Found Dog')
+                                                                <span class="badge bg-danger">
+                                                                    Rejected
+                                                                </span>
+                                                            @else
+                                                                <span class="badge bg-info">
+                                                                    {{ $cdata['status_name'] }}
+                                                                </span>
+                                                            @endif
+
                                                         </h5>
                                                     </td>
-                                                    <td>
-                                                        @if ($cdata['status_name'] == 'Found Dog')
-                                                        @else
-                                                            <a href="javascript:void(0);"
-                                                                wire:click="getlostclaim({{ $cdata['id'] ?? 0 }})"
+                                                    <td class="action">
+                                                        @if ($cdata['status_name'] == 'Pending Claim')
+                                                            <a href="#"
+                                                                wire:click.prevent="lostclaim('{{ $cdata['dog_id_unique'] ?? 0 }}')"
                                                                 class="action-icon" data-bs-toggle="modal"
-                                                                data-bs-target="#primary-header-modal2"> <i
-                                                                    class="mdi mdi-square-edit-outline"></i>
+                                                                data-bs-target="#primary-header-modal2">
+                                                                <i class="mdi mdi-square-edit-outline"></i>
                                                             </a>
+                                                        @else
+                                                            
                                                         @endif
 
-                                                        <a href="javascript:void(0);" class="action-icon"> <i
-                                                                class="mdi mdi-delete"></i></a>
+                                                        <a href="javascript:void(0);" class="action-icon" onclick="deleteClaim('{{$cdata['dog_id_unique']}}')"> <i class="mdi mdi-delete"></i></a>
                                                     </td>
                                                 </tr>
                                             @endforeach
                                         @endif
-
-
-
                                     </tbody>
                                 </table>
+                                <div class="table-footer">
+                                    <nav>
+                                        <div class="page-item cl_jPaginateBack">
+                                            <a class="page-link" href="javascript: void(0);" aria-label="Previous">
+                                                <span aria-hidden="true">&laquo;</span>
+                                            </a>
+                                        </div>
+                                        <ul class="pagination pagination-rounded mb-0">
+
+                                        </ul>
+                                        <div class="page-item ">
+                                            <a class="page-link cl_jPaginateNext" href="javascript: void(0);"
+                                                aria-label="Next">
+                                                <span aria-hidden="true">&raquo;</span>
+                                            </a>
+                                        </div>
+                                    </nav>
+                                </div>
                             </div>
                         </div> <!-- end card-body-->
                     </div>
                 </div>
-                <div class="tab-pane " id="profile-b1">
+                <div class="tab-pane " id="profile-b1" wire:ignore.self>
                     <div class="card">
                         <div class="card-body">
-                            <div class="row mb-2">
-                                <div class="col-xl-8">
-                                    {{-- <form
-                                        class="row gy-2 gx-2 align-items-center justify-content-xl-start justify-content-between">
-                                        <div class="col-auto">
-                                            <label for="inputPassword2" class="visually-hidden">Search</label>
-                                            <input type="search" class="form-control" id="inputPassword2"
-                                                placeholder="Search...">
-                                        </div>
-                                        <div class="col-auto">
-                                            <div class="d-flex align-items-center">
-                                                <label for="status-select" class="me-2">Status</label>
-                                                <select class="form-select" id="status-select">
-                                                    <option selected>Choose...</option>
-                                                    <option value="1">Paid</option>
-                                                    <option value="2">Awaiting Authorization</option>
-                                                    <option value="3">Payment Failed</option>
-                                                    <option value="4">Cash On Delivery</option>
-                                                    <option value="5">Fulfilled</option>
-                                                    <option value="6">Unfulfilled</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </form> --}}
-                                </div>
-                                <div class="col-xl-4">
-
-                                </div><!-- end col-->
-                            </div>
                             <h3>Rounds Lists</h3>
-                            <div class="table-responsive">
+                            <div class="table-responsive" id="round_lists">
+                                <div class="d-flex align-items-center ">
+                                    <div class="search-container ms-auto">
+                                        <input type="text" class="c_search form-control " id="searchtb"
+                                            style="width: 150%;" placeholder="Search for dogs...">
+                                    </div>
+                                    <h3 class="mb-4 d-flex align-items-center ms-auto"></h3>
+
+                                </div>
                                 <table class="table table-centered table-nowrap mb-0">
                                     <thead class="table-light">
                                         <tr>
@@ -214,25 +316,26 @@
                                             <th style="width: 125px;">Action</th>
                                         </tr>
                                     </thead>
-                                    <tbody wire:ignore>
+                                    <tbody class="list">
                                         @if (isset($reqrounds))
                                             @foreach ($reqrounds as $data)
                                                 <tr>
-                                                    <td> R{{ $data['created_at']->format('ym') . '-' . str_pad($data['id'], 4, '0', STR_PAD_LEFT) ?? 'N/A' }}
+                                                    <td class="ticket_number">
+                                                        R{{ $data['created_at']->format('ym') . '-' . str_pad($data['id'], 4, '0', STR_PAD_LEFT) ?? 'N/A' }}
                                                     </td>
-
-                                                    <td> {{ $data['name'] ?? 'N/A' }} </td>
-                                                    <td>
+                                                    <td class="requestor"> {{ $data['name'] ?? 'N/A' }} </td>
+                                                    <td class="address">
                                                         {{ $data['address'] ?? 'N/A' }}
                                                     </td>
-                                                    <td>
+                                                    <td class="specific">
                                                         <p class="mb-0 txt-muted">
                                                             {{ $data['specific_location'] ?? 'N/A' }} </p>
                                                     </td>
-                                                    <td>{{ $data['contact'] ?? 'N/A' }}</td>
-                                                    <td>{{ $data['created_at']->format('M d, Y h:i A') ?? 'N/A' }}</td>
+                                                    <td class="contact">{{ $data['contact'] ?? 'N/A' }}</td>
+                                                    <td class="created">
+                                                        {{ $data['created_at']->format('M d, Y h:i A') ?? 'N/A' }}</td>
 
-                                                    <td>
+                                                    <td class="status">
                                                         <h5 class="my-0">
                                                             @if (isset($data['is_approved']))
                                                                 @if ($data['is_approved'] == 1)
@@ -252,7 +355,7 @@
 
                                                         </h5>
                                                     </td>
-                                                    <td>
+                                                    <td class="action">
                                                         @if ($data['is_rejected'] == 0 && $data['is_approved'] == 0)
                                                             <a href="javascript:void(0);"
                                                                 wire:click="getrounds({{ $data['id'] ?? 0 }})"
@@ -260,58 +363,50 @@
                                                                 data-bs-target="#primary-header-modal"> <i
                                                                     class="mdi mdi-square-edit-outline"></i></a>
                                                         @endif
-
                                                         <a href="javascript:void(0);" class="action-icon"> <i
-                                                                class="mdi mdi-delete"></i></a>
+                                                                class="mdi mdi-delete"
+                                                                onclick="deleteRounds({{ $data['id'] ?? 0 }})"></i></a>
                                                     </td>
                                                 </tr>
                                             @endforeach
                                         @endif
-
-
-
                                     </tbody>
                                 </table>
+                                <div class="table-footer">
+                                    <nav>
+                                        <div class="page-item claimjPaginateBack">
+                                            <a class="page-link" href="javascript: void(0);" aria-label="Previous">
+                                                <span aria-hidden="true">&laquo;</span>
+                                            </a>
+                                        </div>
+                                        <ul class="pagination pagination-rounded mb-0">
+
+                                        </ul>
+                                        <div class="page-item ">
+                                            <a class="page-link claimjPaginateNext" href="javascript: void(0);"
+                                                aria-label="Next">
+                                                <span aria-hidden="true">&raquo;</span>
+                                            </a>
+                                        </div>
+                                    </nav>
+                                </div>
                             </div>
                         </div> <!-- end card-body-->
                     </div>
                 </div>
-                <div class="tab-pane show active" id="home-b1">
+                <div class="tab-pane show active" id="home-b1" wire:ignore.self>
                     <div class="row">
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-body">
-                                    <div class="row mb-2">
-                                        <div class="col-xl-8">
-                                            {{-- <form
-                                                class="row gy-2 gx-2 align-items-center justify-content-xl-start justify-content-between">
-                                                <div class="col-auto">
-                                                    <label for="inputPassword2" class="visually-hidden">Search</label>
-                                                    <input type="search" class="form-control" id="inputPassword2"
-                                                        placeholder="Search...">
-                                                </div>
-                                                <div class="col-auto">
-                                                    <div class="d-flex align-items-center">
-                                                        <label for="status-select" class="me-2">Status</label>
-                                                        <select class="form-select" id="status-select">
-                                                            <option selected>Choose...</option>
-                                                            <option value="1">Paid</option>
-                                                            <option value="2">Awaiting Authorization</option>
-                                                            <option value="3">Payment Failed</option>
-                                                            <option value="4">Cash On Delivery</option>
-                                                            <option value="5">Fulfilled</option>
-                                                            <option value="6">Unfulfilled</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                            </form> --}}
-                                        </div>
-                                        <div class="col-xl-4">
-
-                                        </div><!-- end col-->
-                                    </div>
                                     <h3>Adoption List</h3>
-                                    <div class="table-responsive">
+                                    <div class="table-responsive" id="adoption_list">
+                                        <div class="search-container ms-auto">
+                                            <input type="text" class="search form-control " id="searchtb"
+                                                style="width: 150%;" placeholder="Search for dogs...">
+                                        </div>
+                                        <h3 class="mb-4 d-flex align-items-center ms-auto"></h3>
+
                                         <table class="table table-centered table-nowrap mb-0">
                                             <thead class="table-light">
                                                 <tr>
@@ -325,27 +420,28 @@
                                                     <th style="width: 125px;">Action</th>
                                                 </tr>
                                             </thead>
-                                            <tbody wire:ignore>
+                                            <tbody class="list">
                                                 @if (isset($adoptionlist))
                                                     @foreach ($adoptionlist as $data)
                                                         @php
                                                             $imagest = json_decode($data['animal_images']);
                                                         @endphp
-                                                        <tr>
-                                                            <td> A{{ $data['created_at']->format('ym') . '-' . str_pad($data['id'], 4, '0', STR_PAD_LEFT) ?? 'N/A' }}
-                                                            <td> {{ $data['fullname'] }} </td>
-                                                            <td>
+                                                        <tr id="claim-{{ $data['dog_id_unique'] }}">
+                                                            <td class="ticket_number">
+                                                                A{{ $data['created_at']->format('ym') . '-' . str_pad($data['id'], 4, '0', STR_PAD_LEFT) ?? 'N/A' }}
+                                                            <td class="requestor"> {{ $data['fullname'] }} </td>
+                                                            <td class="dog_name">
                                                                 <div class="d-flex">
                                                                     <div class="d-flex align-items-center">
                                                                         <div class="flex-shrink-0">
                                                                             @if (!is_null($imagest) && isset($imagest[0]))
                                                                                 <img src="{{ asset('storage/' . $imagest[0]) }}"
                                                                                     class="rounded-circle avatar-xs"
-                                                                                    alt="friend" wire:ignore.self>
+                                                                                    alt="friend">
                                                                             @else
                                                                                 <img src="{{ asset('storage/profile_pictures/xjxxrQTF3FiMAJ92RTzIrh15XRKYVLP9rtQt6g1E.png') }}"
                                                                                     class="rounded-circle avatar-xs"
-                                                                                    alt="default" wire:ignore.self>
+                                                                                    alt="default">
                                                                             @endif
                                                                         </div>
                                                                         <div class="flex-grow-1 ms-2">
@@ -355,44 +451,62 @@
                                                                     </div>
                                                                 </div>
                                                             </td>
-                                                            <td>
+                                                            <td class="contact">
                                                                 <p class="mb-0 txt-muted">{{ $data['c_number'] }}</p>
                                                             </td>
-                                                            <td>{{ $data['address'] }}</td>
-                                                            <td>{{ $data['created_at']->format('M-d-Y') }}</td>
-                                                            <td>
+                                                            <td class="address">{{ $data['address'] }}</td>
+                                                            <td class="date_request">
+                                                                {{ $data['created_at']->format('M-d-Y') }}</td>
+                                                            <td class="status">
                                                                 <h5 class="my-0">
-                                                                        @if ($data['status_name'] == 'For Adoption')
-                                                                            <span class="badge bg-danger">
-                                                                                Rejected
-                                                                            </span>
-                                                                        @else
-                                                                            <span class="badge bg-info">
-                                                                                {{ $data['status_name'] }}
-                                                                            </span>
-                                                                            
-                                                                        @endif
-                                                                  
+                                                                    @if ($data['status_name'] == 'For Adoption')
+                                                                        <span class="badge bg-danger">
+                                                                            Rejected
+                                                                        </span>
+                                                                    @else
+                                                                        <span class="badge bg-info">
+                                                                            {{ $data['status_name'] }}
+                                                                        </span>
+                                                                    @endif
+
                                                                 </h5>
                                                             </td>
-                                                            <td>
+                                                            <td class="actions">
                                                                 @if ($data['status_name'] == 'For Adoption')
-                                                                @else
                                                                     <a href="javascript:void(0);"
                                                                         wire:click="adoptionpending('{{ $data['dog_id_unique'] }}')"
                                                                         data-bs-toggle="modal"
                                                                         data-bs-target="#viewdog" class="action-icon">
                                                                         <i class="mdi mdi-square-edit-outline"></i></a>
                                                                 @endif
-
-                                                                <a href="javascript:void(0);" class="action-icon"> <i
-                                                                        class="mdi mdi-delete"></i></a>
+                                                                <a href="javascript:void(0);" class="action-icon"
+                                                                    onclick="deleteAdoption('{{ $data['dog_id_unique'] }}')">
+                                                                    <i class="mdi mdi-delete"></i></a>
                                                             </td>
                                                         </tr>
                                                     @endforeach
                                                 @endif
                                             </tbody>
                                         </table>
+                                        <div class="table-footer">
+                                            <nav>
+                                                <div class="page-item jPaginateBack">
+                                                    <a class="page-link" href="javascript: void(0);"
+                                                        aria-label="Previous">
+                                                        <span aria-hidden="true">&laquo;</span>
+                                                    </a>
+                                                </div>
+                                                <ul class="pagination pagination-rounded mb-0">
+
+                                                </ul>
+                                                <div class="page-item ">
+                                                    <a class="page-link jPaginateNext" href="javascript: void(0);"
+                                                        aria-label="Next">
+                                                        <span aria-hidden="true">&raquo;</span>
+                                                    </a>
+                                                </div>
+                                            </nav>
+                                        </div>
                                     </div>
                                 </div> <!-- end card-body-->
                             </div> <!-- end card-->
@@ -412,7 +526,6 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
                 </div>
                 <div class="modal-body">
-
                     <div class="row">
                         <div class="col-12">
                             <div class="">
@@ -421,7 +534,6 @@
                                         <div class="col-lg-5">
                                             <!-- Product image -->
                                             @php
-
                                                 $images = [];
                                                 if (isset($activedog)) {
                                                     $images = json_decode($activedog['animal_images']);
@@ -860,7 +972,7 @@
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
                         aria-hidden="true"></button>
                 </div>
-                @if (isset($activelostclaim))
+                @if (isset($claimdetails))
                     <div class="modal-body">
                         <div class=" d-block">
                             <div class="row">
@@ -871,19 +983,19 @@
                                             <ul class="list-unstyled mb-0">
                                                 <li>
                                                     <p class="mb-2"><span class="fw-bold me-2">Requestor:</span>
-                                                        {{ $activelostclaim['fullname'] }}</p>
+                                                        {{ $claimdetails['fullname'] }}</p>
                                                     <p class="mb-2"><span class="fw-bold me-2">Address:</span>
-                                                        {{ $activelostclaim['address'] }}</p>
+                                                        {{ $claimdetails['address'] }}</p>
                                                     </p>
                                                     <p class="mb-2"><span class="fw-bold me-2">Breed:</span>
-                                                        {{ $activelostclaim['c_breed'] }}
+                                                        {{ $claimdetails['breed'] }}
                                                     </p>
                                                     <p class="mb-2"><span class="fw-bold me-2">Gender:</span>
-                                                        {{ $activelostclaim['c_gender'] }}
+                                                        {{ $claimdetails['gender'] }}
                                                     </p>
                                                     <p class="mb-0"><span class="fw-bold me-2">Contact
                                                             Number:</span>
-                                                        {{ $activelostclaim['contact'] }} </p>
+                                                        {{ $claimdetails['contact'] }} </p>
                                                 </li>
                                             </ul>
 
@@ -894,7 +1006,7 @@
                                             <h4>Proof</h4>
                                             <div class="text-center">
                                                 <img src="" alt="">
-                                                <img src="{{ asset('storage/' . $activelostclaim['proof']) }}"
+                                                <img src="{{ asset('storage/' . $claimdetails['proof']) }}"
                                                     class="img-thumbnail" alt="friend"
                                                     style="min-width: 250px; min-height: 170px; width: 250px; height: 170px; object-fit: cover;">
 
@@ -909,8 +1021,8 @@
                                             <h4>Dog Details</h4>
                                             @php
                                                 $images = [];
-                                                if (isset($activelostclaim)) {
-                                                    $images = json_decode($activelostclaim['animal_images']);
+                                                if (isset($activedog)) {
+                                                    $images = json_decode($activedog['animal_images']);
                                                 }
                                             @endphp
                                             <div class="d-lg-flex justify-content-center">
@@ -924,10 +1036,6 @@
                                                                     alt="..." class="d-block img-fluid"
                                                                     style="min-width: 300px; min-height: 250px; width: 300px; height: 250px; object-fit: cover;">
                                                                 <div class="carousel-caption d-none d-md-block">
-                                                                    <h3 class="text-white">
-                                                                        {{ $activelostclaim['dog_name'] }}</h3>
-                                                                    <p>{{ $activelostclaim['description'] }}
-                                                                    </p>
                                                                 </div>
                                                             </div>
                                                         @endforeach
@@ -955,17 +1063,17 @@
                                             <ul class="list-unstyled mb-0">
                                                 <li>
                                                     <p class="mb-2"><span class="fw-bold me-2">Dog Name:</span>
-                                                        {{ $activelostclaim['dog_name'] ?? 'N/A' }}
+                                                        {{ $activedog['dog_name'] ?? 'N/A' }}
                                                     </p>
                                                     <p class="mb-2"><span class="fw-bold me-2">Breed:</span>
-                                                        {{ $activelostclaim['breed'] ?? 'N/A' }}
+                                                        {{ $activedog['name'] ?? 'N/A' }}
                                                     </p>
                                                     <p class="mb-2"><span class="fw-bold me-2">Gender:</span>
-                                                        {{ $activelostclaim['gender'] ?? 'N/A' }}
+                                                        {{ $activedog['gender'] ?? 'N/A' }}
                                                     </p>
                                                     <p class="mb-0"><span class="fw-bold me-2">Location
                                                             Found:</span>
-                                                        {{ $activelostclaim['location_found'] ?? 'N/A' }} </p>
+                                                        {{ $activedog['location_found'] ?? 'N/A' }} </p>
                                                 </li>
                                             </ul>
 
@@ -978,118 +1086,98 @@
                 @endif
             </div>
             <div class="modal-footer">
-                @if (isset($activelostclaim))
+                @if (isset($activedog))
                     <button type="button" class="btn btn-success" id="approve_claim"
-                        onclick="approve_claim('{{ $activelostclaim['dog_id_unique'] }}')">Approve
+                        onclick="approve_claim('{{ $activedog['dog_id_unique'] }}')">Approve
                         Claim</button>
                     <button type="button" class="btn btn-danger" id="reject_claim"
-                        onclick="reject_claim('{{ $activelostclaim['dog_id_unique'] }}')">Reject
+                        onclick="reject_claim('{{ $activedog['dog_id_unique'] }}')">Reject
                         Claim</button>
                 @endif
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
     <script>
-        document.getElementById('approve_rounds').addEventListener('click', function() {
-            Swal.fire({
-                title: 'Approve Rounds?',
-                text: "Are you sure you want to approve this rounds request?",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#28a745',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, approve rounds!'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    Livewire.dispatch('rounds_accepted')
-                    Swal.fire(
-                        'Approved!',
-                        'The rounds have been approved successfully.',
-                        'success'
-                    ).then(() => {
-                        location.reload(); // Reload the page after approval
-                    });
-                }
-            });
-        });
-
-        document.getElementById('reject_rounds').addEventListener('click', function() {
-            Swal.fire({
-                title: 'Reject Rounds?',
-                text: "Are you sure you want to approve this rounds request?",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#d33',
-                cancelButtonColor: '#28a745',
-                confirmButtonText: 'Yes, reject rounds!'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    // Emit Livewire event to handle the rejection logic
-                    Livewire.dispatch('rounds_rejected')
-
-                    Swal.fire(
-                        'Rejected!',
-                        'The rounds have been rejected successfully.',
-                        'success'
-                    ).then(() => {
-                        location.reload(); // Reload the page after rejection
-                    });
-                }
-            });
-        });
-
-        document.getElementById('approve_adoption').addEventListener('click', function() {
+         function deleteClaim(id) {
             Swal.fire({
                 title: 'Are you sure?',
-                text: "You are about to approve the adoption! Please call the Adopter first to confirm the details.",
+                text: 'Do you really want to delete this claim request?',
                 icon: 'warning',
                 showCancelButton: true,
-                confirmButtonColor: '#28a745',
+                confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, approve it!'
+                confirmButtonText: 'Yes, delete it!',
+                cancelButtonText: 'No, cancel!',
             }).then((result) => {
                 if (result.isConfirmed) {
-                    Livewire.dispatch('adopted')
-                    Swal.fire(
-                        'Approved!',
-                        'The adoption has been approved.',
-                        'success'
-                    ).then((result) => {
-                        if (result.isConfirmed) {
-                            location.reload();
-                        }
+                    // Perform the approval action here
+                    Livewire.dispatch('delete_claim', {
+                        id: id
                     });
+                    Swal.fire(
+                        'Deleted!',
+                        'The round claim has been deleted.',
+                        'success'
+                    ).then(() => {
 
+                    });
                 }
             });
-        });
-
-
-        document.getElementById('reject_adoption').addEventListener('click', function() {
+        }
+        function deleteRounds(id) {
             Swal.fire({
                 title: 'Are you sure?',
-                text: "You are about to reject the adoption!",
+                text: 'Do you really want to delete this round request?',
                 icon: 'warning',
                 showCancelButton: true,
-                confirmButtonColor: '#dc3545',
-                cancelButtonColor: '#6c757d',
-                confirmButtonText: 'Yes, reject it!'
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!',
+                cancelButtonText: 'No, cancel!',
             }).then((result) => {
                 if (result.isConfirmed) {
-                    // Perform the reject action here
-                    Livewire.dispatch('r_adopted')
+                    // Perform the approval action here
+                    Livewire.dispatch('delete_rounds', {
+                        id: id
+                    });
                     Swal.fire(
-                        'Rejected!',
-                        'The adoption has been rejected.',
+                        'Deleted!',
+                        'The round request has been deleted.',
                         'success'
-                    ).then((result) => {
-                        if (result.isConfirmed) {
-                            location.reload();
-                        }
+                    ).then(() => {
+
                     });
                 }
             });
-        });
+        }
+
+        function deleteAdoption(id) {
+            Swal.fire({
+                title: 'Are you sure?',
+                text: 'Do you really want to delete this adoption request?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!',
+                cancelButtonText: 'No, cancel!',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Perform the approval action here
+                    Livewire.dispatch('delete_adoption', {
+                        id: id
+                    });
+                    Swal.fire(
+                        'Deleted!',
+                        'The adoption request has been deleted.',
+                        'success'
+                    ).then(() => {
+                        // Reload the page after the user clicks "OK" or clicks outside the modal
+
+                    });
+                }
+            });
+        }
 
         function approve_claim(id) {
             Swal.fire({
@@ -1104,7 +1192,7 @@
             }).then((result) => {
                 if (result.isConfirmed) {
                     // Perform the approval action here
-                    Livewire.dispatch('claim_dog', {
+                    Livewire.dispatch('claim_approved', {
                         id: id
                     });
                     Swal.fire(
@@ -1113,7 +1201,7 @@
                         'success'
                     ).then(() => {
                         // Reload the page after the user clicks "OK" or clicks outside the modal
-                        location.reload();
+
                     });
                 }
             });
@@ -1140,14 +1228,283 @@
                         'success'
                     ).then(() => {
                         // Reload the page after the user clicks "OK" or clicks outside the modal
-                        location.reload();
+
                     });
                 }
             });
         }
-        document.addEventListener('livewire:init', function() {
-            Livewire.on('reload', event => {
-                location.reload();
+    </script>
+    <script>
+        var adoptionlist = [];
+        var cdoptionlist = [];
+        var cl_list = [];
+
+        var a_options = {
+            valueNames: ['ticket_number', 'requestor', 'dog_name', 'contact', 'address', 'date_request', 'status',
+                'actions'
+            ],
+            searchClass: 'search',
+            page: 5,
+            pagination: true,
+            paginationClass: 'pagination pagination-rounded', // Adds pagination classes (rounded pagination)
+            nextClass: 'next', // Custom class for the next button
+            prevClass: 'previous', // Custom class for the previous button
+            activeClass: 'active', // Custom class for active page
+            pageClass: 'page-item', // Class for each page item
+            linkClass: 'page-link' // Class for each link inside the pagination
+        };
+
+        var c_options = {
+            valueNames: ['ticket_number', 'requestor', 'address', 'specific', 'contact', 'created', 'status',
+                'actions'
+            ],
+            searchClass: 'c_search',
+            page: 5,
+            pagination: true,
+            paginationClass: 'pagination', // Adds pagination classes (rounded pagination)
+            nextClass: 'next', // Custom class for the next button
+            prevClass: 'previous', // Custom class for the previous button
+            activeClass: 'active', // Custom class for active page
+            pageClass: 'page-item', // Class for each page item
+            linkClass: 'page-link' // Class for each link inside the pagination
+        };
+
+        var cl_options = {
+            valueNames: ['ticket_number', 'requestor', 'dog_name', 'contact', 'address', 'status', 'actions'],
+            searchClass: 'cl_search',
+            page: 5,
+            pagination: true,
+            paginationClass: 'pagination', // Adds pagination classes (rounded pagination)
+            nextClass: 'next', // Custom class for the next button
+            prevClass: 'previous', // Custom class for the previous button
+            activeClass: 'active', // Custom class for active page
+            pageClass: 'page-item', // Class for each page item
+            linkClass: 'page-link' // Class for each link inside the pagination
+        };
+
+
+        document.addEventListener('DOMContentLoaded', function() {
+            document.addEventListener('livewire:init', function() {
+
+                function areinitializeList() {
+                    console.log(adoptionlist);
+                    console.log('reinit');
+                    adoptionlist = new List('adoption_list', a_options);
+                    cdoptionlist = new List('round_lists', c_options);
+                    cl_list = new List('claim_list', cl_options);
+                }
+
+
+                areinitializeList();
+
+                document.querySelector('.search').addEventListener('input', function(event) {
+                    adoptionlist.search(event.target
+                        .value); // Filter results based on the search input
+                });
+                document.querySelector('.c_search').addEventListener('input', function(event) {
+                    cdoptionlist.search(event.target
+                        .value); // Filter results based on the search input
+                });
+                document.querySelector('.cl_search').addEventListener('input', function(event) {
+                    cl_list.search(event.target
+                        .value); // Filter results based on the search input
+                });
+
+                $('.cl_PaginateNext').on('click', function() {
+                    var list = $('.pagination').find('li');
+                    $.each(list, function(position, element) {
+                        if ($(element).is('.active')) {
+                            $(list[position + 1]).trigger('click');
+                        }
+                    })
+                });
+
+                $('.cl_jPaginateBack').on('click', function() {
+                    var list = $('.pagination').find('li');
+                    $.each(list, function(position, element) {
+                        if ($(element).is('.active')) {
+                            $(list[position - 1]).trigger('click');
+                        }
+                    })
+                });
+
+                $('.claimjPaginateNext').on('click', function() {
+                    var list = $('.pagination').find('li');
+                    $.each(list, function(position, element) {
+                        if ($(element).is('.active')) {
+                            $(list[position + 1]).trigger('click');
+                        }
+                    })
+                });
+
+
+                $('.claimjPaginateBack').on('click', function() {
+                    var list = $('.pagination').find('li');
+                    $.each(list, function(position, element) {
+                        if ($(element).is('.active')) {
+                            $(list[position - 1]).trigger('click');
+                        }
+                    })
+                });
+
+                $('.cjPaginateNext').on('click', function() {
+                    var list = $('.pagination').find('li');
+                    $.each(list, function(position, element) {
+                        if ($(element).is('.active')) {
+                            $(list[position + 1]).trigger('click');
+                        }
+                    })
+                });
+
+
+                $('.cjPaginateBack').on('click', function() {
+                    var list = $('.pagination').find('li');
+                    $.each(list, function(position, element) {
+                        if ($(element).is('.active')) {
+                            $(list[position - 1]).trigger('click');
+                        }
+                    })
+                });
+
+                Livewire.on('reinit_table', event => {
+                    setTimeout(() => {
+                        areinitializeList();
+                    }, 1000);
+                });
+
+            });
+
+
+            document.getElementById('approve_rounds').addEventListener('click', function() {
+                setTimeout(() => {
+                    areinitializeList();
+                }, 1000);
+                Swal.fire({
+                    title: 'Approve Rounds?',
+                    text: "Are you sure you want to approve this rounds request?",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#28a745',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, approve rounds!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        Livewire.dispatch('rounds_accepted')
+                        Swal.fire(
+                            'Approved!',
+                            'The rounds have been approved successfully.',
+                            'success'
+                        ).then(() => {
+                            // Reload the page after approval
+                        });
+                    }
+                });
+            });
+
+            document.getElementById('reject_rounds').addEventListener('click', function() {
+                Swal.fire({
+                    title: 'Reject Rounds?',
+                    text: "Are you sure you want to approve this rounds request?",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#d33',
+                    cancelButtonColor: '#28a745',
+                    confirmButtonText: 'Yes, reject rounds!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // Emit Livewire event to handle the rejection logic
+                        Livewire.dispatch('rounds_rejected')
+
+                        Swal.fire(
+                            'Rejected!',
+                            'The rounds have been rejected successfully.',
+                            'success'
+                        ).then(() => {
+                            // Reload the page after rejection
+                        });
+                    }
+                });
+            });
+
+            document.getElementById('approve_adoption').addEventListener('click', function() {
+                setTimeout(() => {
+                    areinitializeList();
+                }, 1000);
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: "You are about to approve the adoption! Please call the Adopter first to confirm the details.",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#28a745',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, approve it!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        Livewire.dispatch('adopted')
+                        Swal.fire(
+                            'Approved!',
+                            'The adoption has been approved.',
+                            'success'
+                        ).then((result) => {
+                            if (result.isConfirmed) {
+
+                            }
+                        });
+
+                    }
+                });
+            });
+
+
+            document.getElementById('reject_adoption').addEventListener('click', function() {
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: "You are about to reject the adoption!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#dc3545',
+                    cancelButtonColor: '#6c757d',
+                    confirmButtonText: 'Yes, reject it!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // Perform the reject action here
+                        Livewire.dispatch('r_adopted')
+                        Swal.fire(
+                            'Rejected!',
+                            'The adoption has been rejected.',
+                            'success'
+                        ).then((result) => {
+                            if (result.isConfirmed) {
+
+                            }
+                        });
+                    }
+                });
+            });
+            document.getElementById('reject_adoption').addEventListener('click', function() {
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: "You are about to reject the adoption!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#dc3545',
+                    cancelButtonColor: '#6c757d',
+                    confirmButtonText: 'Yes, reject it!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // Perform the reject action here
+                        Livewire.dispatch('r_adopted')
+                        Swal.fire(
+                            'Rejected!',
+                            'The adoption has been rejected.',
+                            'success'
+                        ).then((result) => {
+                            if (result.isConfirmed) {
+
+                            }
+                        });
+                    }
+                });
             });
 
         });
