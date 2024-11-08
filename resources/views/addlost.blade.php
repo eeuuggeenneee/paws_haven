@@ -5,5 +5,7 @@
         {{-- @livewire('add-lost-dog') --}}
         @livewire('lost-table-list')
         @livewire('modals-dogs')
+        @livewire('notification')
+
     </div>
 @endsection

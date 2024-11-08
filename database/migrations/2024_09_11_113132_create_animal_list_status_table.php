@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('animal_id');
             $table->unsignedBigInteger('status');
             $table->integer('isActive')->default(1);
+            $table->unsignedBigInteger('created_by');
             $table->timestamps();
         });
     }

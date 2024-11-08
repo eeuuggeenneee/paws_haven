@@ -3,6 +3,8 @@
 @section('content')
  @livewire('fur-community')
  @livewire('modals-dogs')
+ @livewire('notification')
+
  <script>
           function appendNewComment(comment,post_id) {
         

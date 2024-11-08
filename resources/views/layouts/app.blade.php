@@ -17,7 +17,7 @@
     <link href="assets/vendor/flatpickr/flatpickr.min.css" rel="stylesheet" type="text/css" />
     <script src="https://cdn.quilljs.com/1.2.2/quill.min.js"></script>
     <link href="https://cdn.quilljs.com/1.2.2/quill.snow.css" rel="stylesheet">
-    
+
     <script crossorigin="anonymous"
         src="https://cdn.rawgit.com/kensnyder/quill-image-resize-module/3411c9a7/image-resize.min.js"></script>
     <!-- Vector Map css -->
@@ -25,6 +25,7 @@
     <!-- Theme Config Js -->
     <script src="assets/js/hyper-config.js"></script>
     <script src="assets/js/js.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/list.js/1.5.0/list.min.js"></script>
 
     <script src="assets/js/pagination/pagination.js"></script>
 
@@ -35,8 +36,8 @@
     <link href="assets/css/app-saas.min.css" rel="stylesheet" type="text/css" id="app-style" />
     <!-- Icons css -->
     <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
-   
-   <style>
+
+    <style>
         .daterangepicker {
             z-index: 400000;
         }
@@ -69,6 +70,7 @@
 </head>
 
 <body>
+
     <div id="success-alert-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-sm">
             <div class="modal-content modal-filled bg-success">
@@ -168,16 +170,48 @@
                             <i class="ri-notification-3-line font-22"></i>
                             <span class="noti-icon-badge"></span>
                         </a>
-                        <div class="dropdown-menu dropdown-menu-end dropdown-menu-animated dropdown-lg py-0">
+                        <div class="dropdown-menu dropdown-menu-end dropdown-menu-animated dropdown-lg py-0" style="width: 400px">
                             <div class="p-2 border-top-0 border-start-0 border-end-0 border-dashed border">
                                 <div class="row align-items-center">
                                     <div class="col">
                                         <h6 class="m-0 font-16 fw-semibold"> Notification</h6>
                                     </div>
+                                    <div class="px-2 simplebar-scrollable-y" style="max-height: 300px; height:auto"
+                                        data-simplebar="init">
+                                        <div class="simplebar-wrapper" style="margin: 0px -12px;">
+                                            <div class="simplebar-height-auto-observer-wrapper">
+                                                <div class="simplebar-height-auto-observer"></div>
+                                            </div>
+                                            <div class="simplebar-mask">
+                                                <div class="simplebar-offset" style="right: 0px; bottom: 0px;">
+                                                    <div class="simplebar-content-wrapper" tabindex="0"
+                                                        role="region" aria-label="scrollable content"
+                                                        style="height: auto; overflow: hidden scroll;">
+                                                        <div class="simplebar-content" style="padding: 0px 12px;" id="notification_here">
+                                                            
+                                                            @livewire('notification')
+                                                            <!-- item-->
+                                                       
+                                                            <div class="text-center">
+                                                                <i class="mdi mdi-dots-circle mdi-spin text-muted h3 mt-0"></i>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="simplebar-placeholder" style="width: 318px; height: 525px;">
+                                            </div>
+                                        </div>
+                                        <div class="simplebar-track simplebar-horizontal" style="visibility: hidden;">
+                                            <div class="simplebar-scrollbar" style="width: 0px; display: none;"></div>
+                                        </div>
+                                        <div class="simplebar-track simplebar-vertical" style="visibility: visible;">
+                                            <div class="simplebar-scrollbar"
+                                                style="height: 171px; display: block; transform: translate3d(0px, 0px, 0px);">
+                                            </div>
+                                        </div>
+                                    </div>
                                     <div class="col-auto">
-                                        <a href="javascript: void(0);" class="text-dark text-decoration-underline">
-                                            <small>Clear All</small>
-                                        </a>
                                     </div>
                                 </div>
                             </div>
@@ -354,8 +388,8 @@
                                     class="rounded-circle">
                             </span>
                             <span class="d-lg-flex flex-column gap-1 d-none">
-                                <h5 class="my-0">{{Auth::user()->name}}</h5>
-                                <h6 class="my-0 fw-normal">{{Auth::user()->email}}</h6>
+                                <h5 class="my-0">{{ Auth::user()->name }}</h5>
+                                <h6 class="my-0 fw-normal">{{ Auth::user()->email }}</h6>
                             </span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-end dropdown-menu-animated profile-dropdown">

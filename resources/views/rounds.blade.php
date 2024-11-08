@@ -2,4 +2,6 @@
 
 @section('content')
     @livewire('request-rounds')
+    @livewire('notification')
+
 @endsection
