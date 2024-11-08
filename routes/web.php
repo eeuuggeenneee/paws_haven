@@ -29,7 +29,7 @@ Route::get('/fur-community', function () {
     return view('furcomm');
 })->middleware('is_login');
 
-Route::get('/annoucements', function () {
+Route::get('/announcements', function () {
     return view('dashboard');
 })->middleware('is_login');
 
@@ -63,4 +63,4 @@ Route::post('/upload-images', [AddLostDog::class, 'uploadImages'])->name('upload
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/announcements', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

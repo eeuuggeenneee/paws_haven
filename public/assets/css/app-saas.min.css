@@ -18083,6 +18083,22 @@ input[data-switch="dark"]:checked + label {
     position: relative;
     padding: 80px 0 120px 0;
 }
+
+.hero-section3 {
+
+}
+
+.hero-section3:after {
+    background-image: -webkit-gradient(
+        linear,
+        left top,
+        left bottom,
+        from(#9cded8),
+        to(#546ee5)
+    );
+    background-image: linear-gradient(to bottom, #0396a6, #9cded8);
+}
+
 .hero-section:after {
     content: " ";
     background-image: -webkit-gradient(

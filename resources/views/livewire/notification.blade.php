@@ -53,15 +53,24 @@
             var statusP = '';
             var statusText = '';
 
-            if (element.status_name == 'For Adoption') {
-                statusText = 'Please expect a call from the pound.';
-                statusP = element.status_name;
-            } else if (element.status_name == 'Pending Claim') {
-                statusText = 'Please expect a call from the pound.';
-                statusP = 'Pending Claim';
-            } else {
-                statusP = '';
-                statusText = 'Lost Claim Rejected';
+
+            if (element.table_source == 'adoption') {
+                if (element.status_name == 'Pending Adoption') {
+                    statusText = 'Please expect a call from the pound.';
+                    statusP = element.status_name;
+                }else{
+                    statusP = 'Adoption Rejected'
+                }
+            }
+
+            if (element.table_source == 'claims') {
+                if (element.status_name == 'Pending Claim') {
+                    statusText = 'Please expect a call from the pound.';
+                    statusP = 'Pending Claim';
+                } else {
+                    statusP = '';
+                    statusText = 'Lost Claim Rejected';
+                }
             }
             if (element.table_source == 'rounds') {
                 if (element.is_approved == null) {

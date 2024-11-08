@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 
-<html lang="en" data-layout="topnav">
-
+<html lang="en" data-sidenav-size="full">
 
 <head>
     <meta charset="utf-8" />
@@ -87,81 +86,95 @@
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
     </div>
-    <!-- Begin page -->
     <div class="wrapper">
-        <!-- ========== Topbar Start ========== -->
-        <!-- ========== Topbar End ========== -->
 
+        <!-- ========== Topbar Start ========== -->
         <div class="navbar-custom">
-            <div class="topbar px-3">
+            <div class="topbar container-fluid">
                 <div class="d-flex align-items-center gap-lg-2 gap-1">
 
                     <!-- Topbar Brand Logo -->
                     <div class="logo-topbar">
                         <!-- Logo light -->
-                        <a href="index.html" class="logo-dark">
-                            <span class="logo-lg fw-bold">
-                                PAWS HAVEN
+                        <a href="index.html" class="logo-light">
+                            <span class="logo-lg">
+                                <img src="assets/images/LOGO.jpg" alt="dark logo">
                             </span>
                             <span class="logo-sm">
                                 PH
                             </span>
                         </a>
                     </div>
-                    <div class="app-search dropdown d-none d-lg-block">
 
-                    </div>
+                    <a href="index.html" class="logo-dark">
+                        <span class="logo-lg">
+                            <img src="assets/images/LOGO.jpg" alt="dark logo">
+                        </span>
+                    </a>
+
+                    <button class="button-toggle-menu d-lg-none d-sm-block">
+                        <i class="mdi mdi-menu"></i>
+                    </button>
+
+                    <button class="navbar-toggle" data-bs-toggle="collapse" data-bs-target="#topnav-menu-content">
+                        <div class="lines">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </button>
 
                 </div>
-                <ul class="navbar-nav d-flex flex-row align-items-center">
-                    @if (Auth::user()->type == 0)
-                        <li class="nav-item me-4">
-                            <a class="nav-link" href="{{ url('/lost-n-found') }}" role="button">
-                                <i class="uil-dashboard"></i> Lost and Found
-                            </a>
-                        </li>
-                        <li class="nav-item me-4">
-                            <a class="nav-link" href="{{ url('/adopt-a-dog') }}" role="button">
-                                <i class="uil-dashboard"></i> Adoption
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link me-4" href="{{ url('/annoucements') }}" role="button">
-                                <i class="uil-dashboard"></i> Annoucements
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link me-4" href="{{ url('/fur-community') }}" role="button">
-                                <i class="uil-dashboard"></i> About
-                            </a>
-                        </li>
-                    @else
-                        <li class="nav-item">
-                            <a class="nav-link me-4" href="{{ url('/annoucements') }}" role="button">
-                                <i class="uil-dashboard"></i> Annoucement
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ url('/report-lost-dog') }}" class="nav-link me-4">
-                                <i class="uil-comments-alt"></i>
-                                <span> Add Dog for LnF </span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ url('/animal-list') }}" class="nav-link me-4">
-                                <i class="uil-comments-alt"></i>
-                                <span> Add Dog For Adoption </span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ url('/ticket-list') }}" class="nav-link me-4">
-                                <i class="uil-comments-alt"></i>
-                                <span> Ticket Lists </span>
-                            </a>
-                        </li>
-                    @endif
-                </ul>
-
+                <div class="container d-none d-lg-block">
+                    <div class="row justify-content-center d-flex align-items-center">
+                        @if (Auth::user()->type == 0)
+                            <div class="col-auto">
+                                <a class="nav-link text-black fw-semibold" href="{{ url('/lost-n-found') }}" role="button">
+                                    <i class="uil-dashboard"></i> Lost and Found
+                                </a>
+                            </div>
+                            <div class="col-auto">
+                                <a class="nav-link text-secondary fw-semibold" href="{{ url('/adopt-a-dog') }}" role="button">
+                                    <i class="uil-dashboard"></i> Adoption
+                                </a>
+                            </div>
+                            <div class="col-auto">
+                                <a class="nav-link text-secondary fw-semibold" href="{{ url('/annoucements') }}" role="button">
+                                    <i class="uil-dashboard"></i> Announcements
+                                </a>
+                            </div>
+                            <div class="col-auto">
+                                <a class="nav-link text-secondary fw-semibold" href="{{ url('/fur-community') }}" role="button">
+                                    <i class="uil-dashboard"></i> About
+                                </a>
+                            </div>
+                        @else
+                            <div class="col-auto">
+                                <a class="nav-link text-secondary fw-semibold" href="{{ url('/annoucements') }}" role="button">
+                                    <i class="uil-dashboard"></i> Announcement
+                                </a>
+                            </div>
+                            <div class="col-auto">
+                                <a href="{{ url('/report-lost-dog') }}" class="nav-link text-secondary fw-semibold">
+                                    <i class="uil-comments-alt"></i>
+                                    <span> Add Dog for LnF </span>
+                                </a>
+                            </div>
+                            <div class="col-auto">
+                                <a href="{{ url('/animal-list') }}" class="nav-link text-secondary fw-semibold">
+                                    <i class="uil-comments-alt"></i>
+                                    <span> Add Dog For Adoption </span>
+                                </a>
+                            </div>
+                            <div class="col-auto">
+                                <a href="{{ url('/ticket-list') }}" class="nav-link text-secondary fw-semibold">
+                                    <i class="uil-comments-alt"></i>
+                                    <span> Ticket Lists </span>
+                                </a>
+                            </div>
+                        @endif
+                    </div>
+                </div>
                 <ul class="topbar-menu d-flex align-items-center gap-3">
 
                     <li class="dropdown notification-list">
@@ -170,207 +183,25 @@
                             <i class="ri-notification-3-line font-22"></i>
                             <span class="noti-icon-badge"></span>
                         </a>
-                        <div class="dropdown-menu dropdown-menu-end dropdown-menu-animated dropdown-lg py-0" style="width: 400px">
+                        <div class="dropdown-menu dropdown-menu-end dropdown-menu-animated dropdown-lg py-0">
                             <div class="p-2 border-top-0 border-start-0 border-end-0 border-dashed border">
                                 <div class="row align-items-center">
                                     <div class="col">
                                         <h6 class="m-0 font-16 fw-semibold"> Notification</h6>
                                     </div>
-                                    <div class="px-2 simplebar-scrollable-y" style="max-height: 300px; height:auto"
-                                        data-simplebar="init">
-                                        <div class="simplebar-wrapper" style="margin: 0px -12px;">
-                                            <div class="simplebar-height-auto-observer-wrapper">
-                                                <div class="simplebar-height-auto-observer"></div>
-                                            </div>
-                                            <div class="simplebar-mask">
-                                                <div class="simplebar-offset" style="right: 0px; bottom: 0px;">
-                                                    <div class="simplebar-content-wrapper" tabindex="0"
-                                                        role="region" aria-label="scrollable content"
-                                                        style="height: auto; overflow: hidden scroll;">
-                                                        <div class="simplebar-content" style="padding: 0px 12px;" id="notification_here">
-                                                            
-                                                            @livewire('notification')
-                                                            <!-- item-->
-                                                       
-                                                            <div class="text-center">
-                                                                <i class="mdi mdi-dots-circle mdi-spin text-muted h3 mt-0"></i>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="simplebar-placeholder" style="width: 318px; height: 525px;">
-                                            </div>
-                                        </div>
-                                        <div class="simplebar-track simplebar-horizontal" style="visibility: hidden;">
-                                            <div class="simplebar-scrollbar" style="width: 0px; display: none;"></div>
-                                        </div>
-                                        <div class="simplebar-track simplebar-vertical" style="visibility: visible;">
-                                            <div class="simplebar-scrollbar"
-                                                style="height: 171px; display: block; transform: translate3d(0px, 0px, 0px);">
-                                            </div>
-                                        </div>
-                                    </div>
                                     <div class="col-auto">
+                                        <a href="javascript: void(0);" class="text-dark text-decoration-underline">
+                                            <small>Clear All</small>
+                                        </a>
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="px-2" style="max-height: 300px;" data-simplebar="init">
-                                <div class="simplebar-wrapper" style="margin: 0px -12px;">
-                                    <div class="simplebar-height-auto-observer-wrapper">
-                                        <div class="simplebar-height-auto-observer"></div>
-                                    </div>
-                                    <div class="simplebar-mask">
-                                        <div class="simplebar-offset" style="right: 0px; bottom: 0px;">
-                                            <div class="simplebar-content-wrapper" tabindex="0" role="region"
-                                                aria-label="scrollable content"
-                                                style="height: auto; overflow: hidden;">
-                                                <div class="simplebar-content" style="padding: 0px 12px;">
+                            <div class="px-2" style="max-height: 300px;" id="notification_here" data-simplebar>
 
-                                                    <h5 class="text-muted font-13 fw-normal mt-2">Today</h5>
-                                                    <!-- item-->
-
-                                                    <a href="javascript:void(0);"
-                                                        class="dropdown-item p-0 notify-item card unread-noti shadow-none mb-2">
-                                                        <div class="card-body">
-                                                            <span class="float-end noti-close-btn text-muted"><i
-                                                                    class="mdi mdi-close"></i></span>
-                                                            <div class="d-flex align-items-center">
-                                                                <div class="flex-shrink-0">
-                                                                    <div class="notify-icon bg-primary">
-                                                                        <i class="mdi mdi-comment-account-outline"></i>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="flex-grow-1 text-truncate ms-2">
-                                                                    <h5 class="noti-item-title fw-semibold font-14">
-                                                                        Datacorp <small
-                                                                            class="fw-normal text-muted ms-1">1 min
-                                                                            ago</small></h5>
-                                                                    <small class="noti-item-subtitle text-muted">Caleb
-                                                                        Flakelar commented on Admin</small>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </a>
-
-                                                    <!-- item-->
-                                                    <a href="javascript:void(0);"
-                                                        class="dropdown-item p-0 notify-item card read-noti shadow-none mb-2">
-                                                        <div class="card-body">
-                                                            <span class="float-end noti-close-btn text-muted"><i
-                                                                    class="mdi mdi-close"></i></span>
-                                                            <div class="d-flex align-items-center">
-                                                                <div class="flex-shrink-0">
-                                                                    <div class="notify-icon bg-info">
-                                                                        <i class="mdi mdi-account-plus"></i>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="flex-grow-1 text-truncate ms-2">
-                                                                    <h5 class="noti-item-title fw-semibold font-14">
-                                                                        Admin <small
-                                                                            class="fw-normal text-muted ms-1">1 hours
-                                                                            ago</small></h5>
-                                                                    <small class="noti-item-subtitle text-muted">New
-                                                                        user registered</small>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </a>
-
-                                                    <h5 class="text-muted font-13 fw-normal mt-0">Yesterday</h5>
-
-                                                    <!-- item-->
-                                                    <a href="javascript:void(0);"
-                                                        class="dropdown-item p-0 notify-item card read-noti shadow-none mb-2">
-                                                        <div class="card-body">
-                                                            <span class="float-end noti-close-btn text-muted"><i
-                                                                    class="mdi mdi-close"></i></span>
-                                                            <div class="d-flex align-items-center">
-                                                                <div class="flex-shrink-0">
-                                                                    <div class="notify-icon">
-                                                                        <img src="assets/images/users/avatar-2.jpg"
-                                                                            class="img-fluid rounded-circle"
-                                                                            alt="">
-                                                                    </div>
-                                                                </div>
-                                                                <div class="flex-grow-1 text-truncate ms-2">
-                                                                    <h5 class="noti-item-title fw-semibold font-14">
-                                                                        Cristina Pride <small
-                                                                            class="fw-normal text-muted ms-1">1 day
-                                                                            ago</small></h5>
-                                                                    <small class="noti-item-subtitle text-muted">Hi,
-                                                                        How are you? What about our next meeting</small>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </a>
-
-                                                    <h5 class="text-muted font-13 fw-normal mt-0">30 Dec 2021</h5>
-
-                                                    <!-- item-->
-                                                    <a href="javascript:void(0);"
-                                                        class="dropdown-item p-0 notify-item card read-noti shadow-none mb-2">
-                                                        <div class="card-body">
-                                                            <span class="float-end noti-close-btn text-muted"><i
-                                                                    class="mdi mdi-close"></i></span>
-                                                            <div class="d-flex align-items-center">
-                                                                <div class="flex-shrink-0">
-                                                                    <div class="notify-icon bg-primary">
-                                                                        <i class="mdi mdi-comment-account-outline"></i>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="flex-grow-1 text-truncate ms-2">
-                                                                    <h5 class="noti-item-title fw-semibold font-14">
-                                                                        Datacorp</h5>
-                                                                    <small class="noti-item-subtitle text-muted">Caleb
-                                                                        Flakelar commented on Admin</small>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </a>
-
-                                                    <!-- item-->
-                                                    <a href="javascript:void(0);"
-                                                        class="dropdown-item p-0 notify-item card read-noti shadow-none mb-2">
-                                                        <div class="card-body">
-                                                            <span class="float-end noti-close-btn text-muted"><i
-                                                                    class="mdi mdi-close"></i></span>
-                                                            <div class="d-flex align-items-center">
-                                                                <div class="flex-shrink-0">
-                                                                    <div class="notify-icon">
-                                                                        <img src="assets/images/users/avatar-4.jpg"
-                                                                            class="img-fluid rounded-circle"
-                                                                            alt="">
-                                                                    </div>
-                                                                </div>
-                                                                <div class="flex-grow-1 text-truncate ms-2">
-                                                                    <h5 class="noti-item-title fw-semibold font-14">
-                                                                        Karen Robinson</h5>
-                                                                    <small class="noti-item-subtitle text-muted">Wow !
-                                                                        this admin looks good and awesome design</small>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </a>
-
-                                                    <div class="text-center">
-                                                        <i class="mdi mdi-dots-circle mdi-spin text-muted h3 mt-0"></i>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="simplebar-placeholder" style="width: 0px; height: 0px;"></div>
-                                </div>
-                                <div class="simplebar-track simplebar-horizontal" style="visibility: hidden;">
-                                    <div class="simplebar-scrollbar" style="width: 0px; display: none;"></div>
-                                </div>
-                                <div class="simplebar-track simplebar-vertical" style="visibility: hidden;">
-                                    <div class="simplebar-scrollbar" style="height: 0px; display: none;"></div>
-                                </div>
+                              
+                             
                             </div>
-
                             <!-- All-->
                             <a href="javascript:void(0);"
                                 class="dropdown-item text-center text-primary notify-item border-top py-2">
@@ -388,8 +219,8 @@
                                     class="rounded-circle">
                             </span>
                             <span class="d-lg-flex flex-column gap-1 d-none">
-                                <h5 class="my-0">{{ Auth::user()->name }}</h5>
-                                <h6 class="my-0 fw-normal">{{ Auth::user()->email }}</h6>
+                                <h5 class="my-0">{{Auth::user()->name}}</h5>
+                                <h6 class="my-0 fw-normal">{{Auth::user()->email}}</h6>
                             </span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-end dropdown-menu-animated profile-dropdown">
@@ -397,44 +228,110 @@
                             <div class=" dropdown-header noti-title">
                                 <h6 class="text-overflow m-0">Welcome !</h6>
                             </div>
-
                             <!-- item-->
-                            <a href="{{ route('logout') }}" class="dropdown-item"
-                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                            <a href="javascript:void(0);" class="dropdown-item">
                                 <i class="mdi mdi-logout me-1"></i>
                                 <span>Logout</span>
                             </a>
-
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST"
-                                style="display: none;">
-                                @csrf
-                            </form>
                         </div>
                     </li>
                 </ul>
             </div>
         </div>
-        <!-- ========== Left Sidebar Start ========== -->
 
+        <!-- ========== Left Sidebar Start ========== -->
+        <div class="leftside-menu text-white" style="background-image: linear-gradient(to bottom, #0396a6, #9cded8);">
+            <!-- Brand Logo Light -->
+            <a href="index.html" class="logo logo-light">
+                <span class="logo-lg fw-bold text-white fs-3">
+                    PAWS HAVEN
+                </span>
+                <span class="logo-sm fw-bold text-white fs-3">
+                    PAWS HAVEN
+                </span>
+            </a>
+
+            <!-- Brand Logo Dark -->
+            <a href="index.html" class="logo logo-dark">
+                <span class="logo-lg fw-bold text-white fs-4">
+                    PAWS HAVEN
+                </span>
+                <span class="logo-sm fw-bold text-white fs-4">
+                    PAWS HAVEN
+                </span>
+            </a>
+
+            <!-- Sidebar Hover Menu Toggle Button -->
+            <div class="button-sm-hover" data-bs-toggle="tooltip" data-bs-placement="right"
+                title="Show Full Sidebar">
+                <i class="ri-checkbox-blank-circle-line align-middle"></i>
+            </div>
+
+            <!-- Full Sidebar Menu Close Button -->
+            <div class="button-close-fullsidebar">
+                <i class="ri-close-fill align-middle text-white"></i>
+            </div>
+
+            <!-- Sidebar -->
+            <div class="h-100" id="leftside-menu-container" data-simplebar>
+                <!-- Leftbar User -->
+                <div class="leftbar-user">
+                    <a href="pages-profile.html">
+                        <img src="assets/images/users/avatar-1.jpg" alt="user-image" height="42"
+                            class="rounded-circle shadow-sm">
+                        <span class="leftbar-user-name mt-2">Dominic Keller</span>
+                    </a>
+                </div>
+
+                <!--- Sidemenu -->
+                <ul class="side-nav">
+                    <li class="side-nav-title"></li>
+                    <li class="side-nav-item">
+                        <a href="{{ url('/lost-n-found')}}" class="side-nav-link text-white">
+                            <i class="uil-calender"></i>
+                            <span> Lost And found </span>
+                        </a>
+                    </li>
+
+                    <li class="side-nav-item">
+                        <a href="{{ url('/adopt-a-dog')}}" class="side-nav-link text-white">
+                            <i class="uil-comments-alt"></i>
+                            <span> Adoption </span>
+                        </a>
+                    </li>
+
+                    <li class="side-nav-item">
+                        <a href="{{ url('/announcement')}}" class="side-nav-link text-white">
+                            <i class="uil-comments-alt"></i>
+                            <span> Annoucement </span>
+                        </a>
+                    </li>
+
+                    <li class="side-nav-item">
+                        <a href="{{ url('/about')}}" class="side-nav-link text-white">
+                            <i class="uil-comments-alt"></i>
+                            <span> About </span>
+                        </a>
+                    </li>
+                </ul>
+                <!--- End Sidemenu -->
+
+                <div class="clearfix"></div>
+            </div>
+        </div>
         <!-- ========== Left Sidebar End ========== -->
 
         <!-- ============================================================== -->
-        <!-- Start Page Content Here -->
+        <!-- Start Page Content here -->
         <!-- ============================================================== -->
 
         <div class="content-page">
             <div class="content">
                 @yield('content')
+
             </div>
-            <!-- content -->
-
-            <!-- Footer Start -->
-            <footer class="footer">
-
-            </footer>
-            <!-- end Footer -->
-
         </div>
+
         <!-- ============================================================== -->
         <!-- End Page content -->
         <!-- ============================================================== -->
@@ -443,8 +340,7 @@
     <!-- END wrapper -->
 
     <!-- Theme Settings -->
-
-
+   
     @livewireScripts
 
 
@@ -470,7 +366,6 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <!-- App js -->
-    <script src="assets/js/app.min.js"></script>
 
     <script src="assets/vendor/datatables.net/js/jquery.dataTables.min.js"></script>
     <script src="assets/vendor/datatables.net-bs5/js/dataTables.bootstrap5.min.js"></script>

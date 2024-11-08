@@ -1,43 +1,97 @@
 <div>
     <style>
-        /* Custom pagination styles */
-        .pagination-rounded {
-            display: flex;
-            justify-content: center;
-            padding: 0;
-            list-style: none;
+        .table-footer {}
+
+        .table-footer nav {
+            position: relative;
+            width: 100%;
+            text-align: center;
         }
 
-        .pagination-rounded .page-item {
-            margin: 0 5px;
-            cursor: pointer;
+        .table-footer nav * {
+            display: inline-block;
         }
 
-        .pagination-rounded .page-link {
-            display: block;
-            padding: 10px 15px;
+        .table-footer nav .showing {
+            color: #b3b3b3;
+        }
+
+        @media (min-width: 1025px) {
+            .table-footer nav .showing {
+                display: inline-block;
+                position: absolute;
+                left: 14.75%;
+            }
+        }
+
+        .table-footer nav>.primary-btn {
+            vertical-align: middle;
+        }
+
+        @media (min-width: 1025px) {
+            .table-footer nav>.primary-btn {
+                position: absolute;
+                right: 1em;
+            }
+        }
+
+        .pagination .pager li {
+            display: inline-block;
+            line-height: 1.2;
+        }
+
+        .pagination .pager li.active a {
+            font-weight: 700;
+            border-bottom: 3px solid #057ed8;
+            color: #000;
+        }
+
+        .pagination a {
             text-decoration: none;
-            color: #333;
-            background-color: #f8f9fa;
-            border: 1px solid #dee2e6;
-            border-radius: 50px;
-            /* Rounded corners */
+            color: #66696a;
+            padding: 0.3333333333ex 0.25em 0.2ex;
+            font-size: 16px;
         }
 
-        .pagination-rounded .page-item.active .page-link {
-            background-color: #007bff;
-            color: white;
-            border-color: #007bff;
+        .pagination .prev,
+        .pagination .next {
+            width: 8px;
+            height: 16px;
         }
 
-        .pagination-rounded .page-item.disabled .page-link {
-            cursor: not-allowed;
-            opacity: 0.5;
+        .search-container {
+            position: absolute;
+            max-width: 500px;
+            margin-bottom: 15px;
         }
 
-        .pagination-rounded .page-link:hover {
-            background-color: #007bff;
-            color: white;
+        /* Style the search input field */
+        .search {
+            /* Add padding for the search icon */
+            border-radius: 20px;
+            /* Round the edges */
+            border: 1px solid #ddd;
+            width: 100%;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            /* Subtle shadow */
+        }
+
+        .search-container::before {
+            content: "\1F50D";
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            width: 100% !important;
+            transform: translateY(-50%);
+            font-size: 18px;
+            color: #888;
+        }
+
+        .search-container input.search {
+            width: 100%;
+            /* Ensure input fills container */
+            text-align: center;
+            /* Center the placeholder and typed text */
         }
     </style>
     <!-- Datatable css -->
@@ -56,18 +110,19 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <div class="row mb-2">
-                            <div class="col-sm-5">
-                                <a data-bs-toggle="modal" data-bs-target="#info-header-modal"
-                                    wire:click="$dispatch('clearData')" class="btn btn-info mb-2"><i
-                                        class="mdi mdi-plus-circle me-2"></i> Add Dogs </a>
-                            </div>
-                        </div>
                         <div class="table-responsive" id="animals-datatable">
-                            <div class="mt-3">
-                                <input class="search" placeholder="Search for dogs..." />
-                            </div>
+                            <div class="d-flex align-items-center ">
 
+                                <div class="search-container ms-auto">
+                                    <input type="text" class="search form-control " id="searchtb"
+                                        style="width: 150%;" placeholder="Search for dogs...">
+                                </div>
+                                <a data-bs-toggle="modal" data-bs-target="#info-header-modal"
+                                    wire:click="$dispatch('clearData')"
+                                    class="btn btn-info mb-2 d-flex align-items-center ms-auto">
+                                    <i class="mdi mdi-plus-circle me-2"></i> Add Dogs
+                                </a>
+                            </div>
                             <table class="table table-centered w-100 dt-responsive nowrap">
                                 <thead class="table-light">
                                     <tr>
@@ -84,7 +139,7 @@
                                             @php
                                                 $images = json_decode($item['animal_images']);
                                             @endphp
-                                            <tr>
+                                            <tr id="dog-{{ $item['dog_id_unique'] }}">
                                                 <td class="dog_name">
                                                     <img src="{{ asset('storage/' . $images[0]) }}" alt="Animal Image"
                                                         title="Animal Image" class="rounded me-3" height="48" />
@@ -93,15 +148,9 @@
                                                             class="text-body">{{ $item['dog_name'] }}</a>
                                                     </p>
                                                 </td>
-                                                <td class="breed">
-                                                    {{ $item['breed'] }}
-                                                </td>
-                                                <td class="color">
-                                                    {{ $item['color'] }}
-                                                </td>
-                                                <td class="description">
-                                                    {{ $item['description'] }}
-                                                </td>
+                                                <td class="breed">{{ $item['breed'] }}</td>
+                                                <td class="color">{{ $item['color'] }}</td>
+                                                <td class="description">{{ $item['description'] }}</td>
                                                 <td class="table-action">
                                                     <a data-bs-toggle="modal" data-bs-target="#info-header-modal"
                                                         wire:click="$dispatch('editDoggo', [ '{{ $item['dog_id_unique'] }}' ])"
@@ -117,19 +166,25 @@
                                         @endforeach
                                     @endif
                                 </tbody>
+
                             </table>
-                            <div>
+                            <div class="table-footer">
+                                <nav>
+                                    <div class="page-item jPaginateBack">
+                                        <a class="page-link" href="javascript: void(0);" aria-label="Previous">
+                                            <span aria-hidden="true">&laquo;</span>
+                                        </a>
+                                    </div>
+                                    <ul class="pagination pagination-rounded mb-0">
 
-
-                                <button class="jPaginateBack paginate_button page-item previous disabled" id="basic-datatable_previous"><a
-                                        href="#" aria-controls="basic-datatable" data-dt-idx="0" tabindex="0"
-                                        class="page-link"><i class="mdi mdi-chevron-left"></i></a></button>
-                                <ul class="pagination"></ul>
-                                        
-                                <button class="jPaginateNext paginate_button page-item previous disabled" id="basic-datatable_previous"><a
-                                    href="#" aria-controls="basic-datatable" data-dt-idx="0" tabindex="0"
-                                    class="page-link"><i class="mdi mdi-chevron-right"></i></a></button>
-
+                                    </ul>
+                                    <div class="page-item ">
+                                        <a class="page-link jPaginateNext" href="javascript: void(0);"
+                                            aria-label="Next">
+                                            <span aria-hidden="true">&raquo;</span>
+                                        </a>
+                                    </div>
+                                </nav>
                             </div>
 
                             <!-- Add a search box -->
@@ -144,6 +199,8 @@
         @livewire('modals-dogs')
 
         <script>
+            var dogList = [];
+
             function confirmDelete(dogid) {
                 Swal.fire({
                     title: 'Are you sure?',
@@ -159,9 +216,24 @@
                         Livewire.dispatch('deleteDogAdopt', {
                             dog_id: dogid
                         })
+                        document.getElementById(`dog-${dogid}`).remove();
+
                     }
                 });
             }
+            var options = {
+                valueNames: ['dog_name', 'breed', 'color', 'description'],
+                searchClass: 'search',
+                page: 5,
+                pagination: true,
+                paginationClass: 'pagination pagination-rounded', // Adds pagination classes (rounded pagination)
+                nextClass: 'next', // Custom class for the next button
+                prevClass: 'previous', // Custom class for the previous button
+                activeClass: 'active', // Custom class for active page
+                pageClass: 'page-item', // Class for each page item
+                linkClass: 'page-link' // Class for each link inside the pagination
+            };
+
             document.addEventListener('DOMContentLoaded', function() {
                 document.addEventListener('livewire:init', function() {
 
@@ -178,13 +250,17 @@
                         linkClass: 'page-link' // Class for each link inside the pagination
                     };
 
-                    // Initialize the List.js instance on the table
-                    var dogList = new List('animals-datatable', options);
+                    function reinitializeList() {
+                        console.log(dogList);
+                        dogList = new List('animals-datatable', options);
+                    }
 
-                    // Handle live search input functionality
+                    reinitializeList();
+
                     document.querySelector('.search').addEventListener('input', function(event) {
                         dogList.search(event.target.value); // Filter results based on the search input
                     });
+
 
                     $('.jPaginateNext').on('click', function() {
                         var list = $('.pagination').find('li');
@@ -204,9 +280,8 @@
                             }
                         })
                     });
-                    Livewire.hook('message.processed', () => {
-                        dogList.update();
-                    });
+
+
                     Livewire.on('dogSaved', event => {
                         Swal.fire({
                             icon: 'success',
@@ -215,8 +290,8 @@
                             confirmButtonText: 'Okay'
                         }).then((result) => {
                             if (result.isConfirmed) {
-                                // Reload the page
-                                location.reload();
+                             
+                                reinitializeList();
                             }
                         });
                     });
@@ -228,22 +303,8 @@
                             confirmButtonText: 'Okay'
                         }).then((result) => {
                             if (result.isConfirmed) {
-                                // Reload the page
-                                location.reload();
-                            }
-                        });
+                                reinitializeList();
 
-                    });
-                    Livewire.on('editDogSave', event => {
-                        Swal.fire({
-                            icon: 'success',
-                            title: 'Success!',
-                            text: event[0],
-                            confirmButtonText: 'Okay'
-                        }).then((result) => {
-                            if (result.isConfirmed) {
-                                // Reload the page
-                                location.reload();
                             }
                         });
 
@@ -253,7 +314,6 @@
             });
 
             document.getElementById('closeButton').addEventListener('click', closeAllModals);
-
             function closeAllModals() {
                 location.reload();
             }

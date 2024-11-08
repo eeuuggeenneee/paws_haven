@@ -3,10 +3,10 @@
         e = document.getElementsByTagName("html")[0],
         i = {
             theme: "light",
-            nav: "horizontal",
+            nav: "vertical",
             layout: { mode: "fluid", position: "fixed" },
             topbar: { color: "light" },
-            menu: { color: "brand" },
+            menu: { color: "dark" },
             sidenav: { size: "default", user: !1 },
         },
         o =

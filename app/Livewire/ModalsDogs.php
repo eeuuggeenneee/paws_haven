@@ -229,7 +229,7 @@ class ModalsDogs extends Component
                 }
                 $dog = AnimalList::create($data);
 
-                $this->dispatch('editDogSave', 'Data has been successfully updated!');
+                $this->dispatch('dogSaved', 'Data has been successfully updated!');
             } else {
                 $uniqueId = Str::uuid();
                 $dog = AnimalList::create([

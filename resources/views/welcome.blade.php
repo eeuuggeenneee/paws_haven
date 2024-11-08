@@ -966,7 +966,7 @@
                 <div class="card">
                     <!-- Logo -->
                     <div class="card-header  text-center bg-white  " style="border-radius: 0 !important">
-                        <a href="{{ url('/home') }}">
+                        <a href="{{ url('/announcements') }}">
                             <span>
                                 <img src="assets/logo2.png" alt="logo" height="100%">
                             </span>
