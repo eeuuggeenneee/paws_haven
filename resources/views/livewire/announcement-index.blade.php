@@ -68,58 +68,25 @@
                             <div class="d-flex justify-content-between align-items-center mb-2">
                                 <h4 class="header-title">Most Clicked Dogs</h4>
                                 <div class="dropdown">
-                                    <a href="#" class="dropdown-toggle arrow-none card-drop"
-                                        data-bs-toggle="dropdown" aria-expanded="false">
-                                        <i class="mdi mdi-dots-horizontal"></i>
-                                    </a>
-                                    <div class="dropdown-menu dropdown-menu-end">
-                                        <!-- item-->
-                                        <a href="javascript:void(0);" class="dropdown-item">Today</a>
-                                        <!-- item-->
-                                        <a href="javascript:void(0);" class="dropdown-item">Yesterday</a>
-                                        <!-- item-->
-                                        <a href="javascript:void(0);" class="dropdown-item">Last Week</a>
-                                        <!-- item-->
-                                        <a href="javascript:void(0);" class="dropdown-item">Last Month</a>
+                               
+                                </div>
+                            </div>
+                            @if(isset($dogclicked))
+                                @foreach($dogclicked as $clicked)
+                                    <div class="d-flex mt-3">
+                                        <i class='uil uil-arrow-growth me-2 font-18 text-primary'></i>
+                                        <div>
+                                            <a class="mt-1 font-14" href="javascript:void(0);">
+                                                <strong>{{$clicked['dog_name']}}</strong>
+                                                <span class="text-muted"><br>
+                                                    {{$clicked['description']}}
+                                                </span>
+                                            </a>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-
-                            <div class="d-flex mt-3">
-                                <i class='uil uil-arrow-growth me-2 font-18 text-primary'></i>
-                                <div>
-                                    <a class="mt-1 font-14" href="javascript:void(0);">
-                                        <strong>Jaleel</strong>
-                                        <span class="text-muted"><br>
-                                            Iure maxime quibusdam nihil facilis sunt quia.
-                                        </span>
-                                    </a>
-                                </div>
-                            </div>
-
-                            <div class="d-flex mt-3">
-                                <i class='uil uil-arrow-growth me-2 font-18 text-primary'></i>
-                                <div>
-                                    <a class="mt-1 font-14" href="javascript:void(0);">
-                                        <strong>Gina </strong><br>
-                                        <span class="text-muted">
-                                            Omnis voluptas quam quaerat ut dolore velit.
-                                        </span>
-                                    </a>
-                                </div>
-                            </div>
-
-                            <div class="d-flex mt-3">
-                                <i class='uil uil-arrow-growth me-2 font-18 text-primary'></i>
-                                <div>
-                                    <a class="mt-1 font-14" href="javascript:void(0);">
-                                        <strong>Gracie </strong>
-                                        <span class="text-muted"><br>
-                                            Culpa ab asperiores veritatis nam ea qui.
-                                        </span>
-                                    </a>
-                                </div>
-                            </div>
+                                @endforeach
+                            @endif
+                           
 
                         </div> <!-- end card-body-->
                     </div>
@@ -152,26 +119,27 @@
                                         <div class="card-body">
                                             <div class="d-flex">
                                                 <h3 class="mt-0">{{ $announcement['title'] }}</h3>
-
-                                                <div class="dropdown card-widgets ms-auto">
-                                                    <a href="#" class="dropdown-toggle arrow-none"
-                                                        data-bs-toggle="dropdown" aria-expanded="false">
-                                                        <i class="uil uil-ellipsis-h"></i>
-                                                    </a>
-                                                    <div class="dropdown-menu dropdown-menu-end">
-                                                        <!-- item-->
-                                                        <a href="javascript:void(0);" class="dropdown-item">
-                                                            <i class="uil uil-edit me-1"></i>Edit
+                                                @if(Auth::user()->type ==1)
+                                                    {{-- <div class="dropdown card-widgets ms-auto">
+                                                        <a href="#" class="dropdown-toggle arrow-none"
+                                                            data-bs-toggle="dropdown" aria-expanded="false">
+                                                            <i class="uil uil-ellipsis-h"></i>
                                                         </a>
-                                                        <!-- item-->
-                                                        <div class="dropdown-divider"></div>
-                                                        <!-- item-->
-                                                        <a href="javascript:void(0);"
-                                                            class="dropdown-item text-danger">
-                                                            <i class="uil uil-trash-alt me-1"></i>Delete
-                                                        </a>
-                                                    </div> <!-- end dropdown menu-->
-                                                </div> <!-- end dropdown-->
+                                                        <div class="dropdown-menu dropdown-menu-end">
+                                                            <!-- item-->
+                                                            <a href="javascript:void(0);" class="dropdown-item">
+                                                                <i class="uil uil-edit me-1"></i>Edit
+                                                            </a>
+                                                            <!-- item-->
+                                                            <div class="dropdown-divider"></div>
+                                                            <!-- item-->
+                                                            <a href="javascript:void(0);"
+                                                                class="dropdown-item text-danger">
+                                                                <i class="uil uil-trash-alt me-1"></i>Delete
+                                                            </a>
+                                                        </div> <!-- end dropdown menu-->
+                                                    </div> <!-- end dropdown--> --}}
+                                                @endif
                                             </div>
                                             <p>
                                                 {!! nl2br(e($announcement['sub_title'])) !!}

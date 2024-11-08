@@ -96,7 +96,7 @@
                     <!-- Topbar Brand Logo -->
                     <div class="logo-topbar">
                         <!-- Logo light -->
-                        <a href="index.html" class="logo-light">
+                        <a href="{{url('/annoucement')}}" class="logo-light">
                             <span class="logo-lg">
                                 <img src="assets/images/LOGO.jpg" alt="dark logo">
                             </span>
@@ -106,7 +106,7 @@
                         </a>
                     </div>
 
-                    <a href="index.html" class="logo-dark">
+                    <a href="{{url('/annoucement')}}" class="logo-dark">
                         <span class="logo-lg">
                             <img src="assets/images/LOGO.jpg" alt="dark logo">
                         </span>
@@ -242,7 +242,7 @@
         <!-- ========== Left Sidebar Start ========== -->
         <div class="leftside-menu text-white" style="background-image: linear-gradient(to bottom, #0396a6, #9cded8);">
             <!-- Brand Logo Light -->
-            <a href="index.html" class="logo logo-light">
+            <a href="{{url('/annoucement')}}" class="logo logo-light">
                 <span class="logo-lg fw-bold text-white fs-3">
                     PAWS HAVEN
                 </span>
@@ -252,7 +252,7 @@
             </a>
 
             <!-- Brand Logo Dark -->
-            <a href="index.html" class="logo logo-dark">
+            <a href="{{url('/annoucement')}}" class="logo logo-dark">
                 <span class="logo-lg fw-bold text-white fs-4">
                     PAWS HAVEN
                 </span>

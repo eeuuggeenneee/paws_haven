@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Database\Seeder;
 use Faker\Factory as Faker;
 use App\Models\AnimalListStatus;
+use App\Models\Annoucement;
 use App\Models\DogBreed;
 use App\Models\Status;
 use Illuminate\Support\Str;
@@ -100,6 +101,15 @@ class DatabaseSeeder extends Seeder
                 'isActive' => 1,
             ]);
         }
+
+
+        Annoucement::create([
+            'message' => '<div class="ql-editor" contenteditable="true"><h3><span class="ql-size-large">Hello World!</span></h3><p><br></p><h3>This is an simple editable area.</h3><p><br></p><ul><li>Select a text to reveal the toolbar.</li><li>Edit rich document on-the-fly, so elastic!</li></ul><p><br></p><p>End of simple area</p></div><div class="ql-clipboard" contenteditable="true" tabindex="-1"></div><div class="ql-tooltip ql-hidden"><a class="ql-preview" target="_blank" href="about:blank"></a><input type="text" data-formula="e=mc^2" data-link="quilljs.com" data-video="Embed URL"><a class="ql-action"></a><a class="ql-remove"></a></div>',
+            'title' => 'Hello World!',
+            'sub_title' => 'This is an simple editable area.',
+            'user_id' => 1,
+            'isActive' => 1,
+        ]);
 
     }
 }
