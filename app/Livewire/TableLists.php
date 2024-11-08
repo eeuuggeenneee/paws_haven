@@ -65,7 +65,6 @@ class TableLists extends Component
                     ->where('animal_lists.isActive', '=', 1);
             })->select('dog_claims.*', 'animal_list_statuses.status', 'animal_lists.dog_name', 'animal_lists.animal_images', 'statuses.name as status_name')
             ->where('animal_list_statuses.isActive', 1)->get();
-        // dd($this->reqrounds);
     }
     public function getrounds($id)
     {

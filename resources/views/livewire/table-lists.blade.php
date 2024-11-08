@@ -200,70 +200,73 @@
                                     <tbody class="list">
                                         @if (isset($claimlist))
                                             @foreach ($claimlist as $cdata)
-                                                @php
-                                                    $imagestc = json_decode($cdata['animal_images']);
-                                                @endphp
-                                                <tr>
-                                                    <td class="ticket_number">
-                                                        C{{ $cdata['created_at']->format('ym') . '-' . str_pad($cdata['id'], 4, '0', STR_PAD_LEFT) ?? 'N/A' }}
-                                                    <td class="requestor"> {{ $cdata['fullname'] ?? 'N/A' }} </td>
-                                                    <td class="dog_name">
-                                                        <div class="d-flex">
-                                                            <div class="d-flex align-items-center">
-                                                                <div class="flex-shrink-0">
-                                                                    @if (!is_null($imagestc) && isset($imagestc[0]))
-                                                                        <img src="{{ asset('storage/' . $imagestc[0]) }}"
-                                                                            class="rounded-circle avatar-xs"
-                                                                            alt="friend">
-                                                                    @else
-                                                                        <img src="{{ asset('storage/profile_pictures/xjxxrQTF3FiMAJ92RTzIrh15XRKYVLP9rtQt6g1E.png') }}"
-                                                                            class="rounded-circle avatar-xs"
-                                                                            alt="default">
-                                                                    @endif
-                                                                </div>
-                                                                <div class="flex-grow-1 ms-2">
-                                                                    <h5 class="my-0">{{ $cdata['dog_name'] }}
-                                                                    </h5>
+                                                @if (isset($cdata['id']))
+                                                    @php
+                                                        $imagestc = json_decode($cdata['animal_images']);
+                                                    @endphp
+                                                    <tr>
+                                                        <td class="ticket_number">
+                                                            C{{ $cdata['created_at']->format('ym') . '-' . str_pad($cdata['id'], 4, '0', STR_PAD_LEFT) ?? 'N/A' }}
+                                                        <td class="requestor"> {{ $cdata['fullname'] ?? 'N/A' }} </td>
+                                                        <td class="dog_name">
+                                                            <div class="d-flex">
+                                                                <div class="d-flex align-items-center">
+                                                                    <div class="flex-shrink-0">
+                                                                        @if (!is_null($imagestc) && isset($imagestc[0]))
+                                                                            <img src="{{ asset('storage/' . $imagestc[0]) }}"
+                                                                                class="rounded-circle avatar-xs"
+                                                                                alt="friend">
+                                                                        @else
+                                                                            <img src="{{ asset('storage/profile_pictures/xjxxrQTF3FiMAJ92RTzIrh15XRKYVLP9rtQt6g1E.png') }}"
+                                                                                class="rounded-circle avatar-xs"
+                                                                                alt="default">
+                                                                        @endif
+                                                                    </div>
+                                                                    <div class="flex-grow-1 ms-2">
+                                                                        <h5 class="my-0">{{ $cdata['dog_name'] }}
+                                                                        </h5>
+                                                                    </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
-                                                    </td>
+                                                        </td>
 
-                                                    <td class="contact">{{ $cdata['contact'] ?? 'N/A' }}</td>
-                                                    <td class="address">
-                                                        <p class="mb-0 txt-muted">
-                                                            {{ $cdata['address'] ?? 'N/A' }} </p>
-                                                    </td>
-                                                    <td class="status">
-                                                        <h5 class="my-0">
+                                                        <td class="contact">{{ $cdata['contact'] ?? 'N/A' }}</td>
+                                                        <td class="address">
+                                                            <p class="mb-0 txt-muted">
+                                                                {{ $cdata['address'] ?? 'N/A' }} </p>
+                                                        </td>
+                                                        <td class="status">
+                                                            <h5 class="my-0">
 
-                                                            @if ($cdata['status_name'] == 'Found Dog')
-                                                                <span class="badge bg-danger">
-                                                                    Rejected
-                                                                </span>
+                                                                @if ($cdata['status_name'] == 'Found Dog')
+                                                                    <span class="badge bg-danger">
+                                                                        Rejected
+                                                                    </span>
+                                                                @else
+                                                                    <span class="badge bg-info">
+                                                                        {{ $cdata['status_name'] }}
+                                                                    </span>
+                                                                @endif
+
+                                                            </h5>
+                                                        </td>
+                                                        <td class="action">
+                                                            @if ($cdata['status_name'] == 'Pending Claim')
+                                                                <a href="#"
+                                                                    wire:click.prevent="lostclaim('{{ $cdata['dog_id_unique'] ?? 0 }}')"
+                                                                    class="action-icon" data-bs-toggle="modal"
+                                                                    data-bs-target="#primary-header-modal2">
+                                                                    <i class="mdi mdi-square-edit-outline"></i>
+                                                                </a>
                                                             @else
-                                                                <span class="badge bg-info">
-                                                                    {{ $cdata['status_name'] }}
-                                                                </span>
                                                             @endif
 
-                                                        </h5>
-                                                    </td>
-                                                    <td class="action">
-                                                        @if ($cdata['status_name'] == 'Pending Claim')
-                                                            <a href="#"
-                                                                wire:click.prevent="lostclaim('{{ $cdata['dog_id_unique'] ?? 0 }}')"
-                                                                class="action-icon" data-bs-toggle="modal"
-                                                                data-bs-target="#primary-header-modal2">
-                                                                <i class="mdi mdi-square-edit-outline"></i>
-                                                            </a>
-                                                        @else
-                                                            
-                                                        @endif
-
-                                                        <a href="javascript:void(0);" class="action-icon" onclick="deleteClaim('{{$cdata['dog_id_unique']}}')"> <i class="mdi mdi-delete"></i></a>
-                                                    </td>
-                                                </tr>
+                                                            <a href="javascript:void(0);" class="action-icon"
+                                                                onclick="deleteClaim('{{ $cdata['dog_id_unique'] }}')">
+                                                                <i class="mdi mdi-delete"></i></a>
+                                                        </td>
+                                                    </tr>
+                                                @endif
                                             @endforeach
                                         @endif
                                     </tbody>
@@ -1098,7 +1101,7 @@
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
     <script>
-         function deleteClaim(id) {
+        function deleteClaim(id) {
             Swal.fire({
                 title: 'Are you sure?',
                 text: 'Do you really want to delete this claim request?',
@@ -1124,6 +1127,7 @@
                 }
             });
         }
+
         function deleteRounds(id) {
             Swal.fire({
                 title: 'Are you sure?',
