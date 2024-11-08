@@ -226,6 +226,7 @@
                 }
             });
         }
+
         document.addEventListener('DOMContentLoaded', function() {
 
             document.addEventListener('livewire:init', function() {
@@ -245,6 +246,14 @@
                 function reinitializeList() {
                     console.log(dogList);
                     dogList = new List('lost_list', options);
+                    var modals = document.querySelectorAll('.modal');
+                    modals.forEach(function(modal) {
+                        var bsModal = bootstrap.Modal.getInstance(
+                            modal); // Get the modal instance
+                        if (bsModal) {
+                            bsModal.hide(); // Hide the modal
+                        }
+                    });
                 }
 
                 reinitializeList();

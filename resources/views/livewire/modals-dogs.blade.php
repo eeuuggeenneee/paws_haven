@@ -1221,22 +1221,7 @@
 
                         <label for="snow-editor" class="form-label mt-2">Messages</label>
                         <div id="snow-editor" class="mt-2" style="height: auto;">
-                            <h3><span class="ql-size-large">Hello World!</span></h3>
-                            <p><br></p>
-                            <h3>This is an simple editable area.</h3>
-                            <p><br></p>
-                            <ul>
-                                <li>
-                                    Select a text to reveal the toolbar.
-                                </li>
-                                <li>
-                                    Edit rich document on-the-fly, so elastic!
-                                </li>
-                            </ul>
-                            <p><br></p>
-                            <p>
-                                End of simple area
-                            </p>
+                            
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -1252,9 +1237,7 @@
     <script>
         function fconfirm() {
             var add_annoucment = document.getElementById('add_annoucment');
-
             add_annoucment.classList.add('was-validated');
-
             if (!add_annoucment.checkValidity()) {
                 // Form is incomplete or invalid, prevent further action
                 const Toast = Swal.mixin({
@@ -1284,6 +1267,21 @@
                     const htmlContent = quilltext.innerHTML;
                     @this.set('texteditor', htmlContent);
                     document.getElementById('saveannouce').click();
+                    closeAllModals();
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Saved Successfully',
+                        text: 'The announcement will now be posted.',
+                        confirmButtonText: 'Okay'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            // Reload the page
+                            location.reload();
+                        }
+                    });
+
+
+
                 }
             });
         }
@@ -1314,6 +1312,25 @@
         });
     </script>
     <script>
+        
+        function closeAllModals() {
+            // Select all modals
+            const modals = document.querySelectorAll('.modal.show');
+
+            // Loop through each modal and hide it
+            modals.forEach(modal => {
+                const bootstrapModal = bootstrap.Modal.getInstance(modal);
+                if (bootstrapModal) {
+                    bootstrapModal.hide();
+                }
+            });
+
+            // Remove all backdrop elements
+            const backdrops = document.querySelectorAll('.modal-backdrop');
+            backdrops.forEach(backdrop => {
+                backdrop.parentNode.removeChild(backdrop); // Remove each backdrop
+            });
+        }
         function saveRounds() {
             Swal.fire({
                 title: 'Are you sure?',
@@ -1467,24 +1484,6 @@
             });
         });
 
-        function closeAllModals() {
-            // Select all modals
-            const modals = document.querySelectorAll('.modal.show');
-
-            // Loop through each modal and hide it
-            modals.forEach(modal => {
-                const bootstrapModal = bootstrap.Modal.getInstance(modal);
-                if (bootstrapModal) {
-                    bootstrapModal.hide();
-                }
-            });
-
-            // Remove all backdrop elements
-            const backdrops = document.querySelectorAll('.modal-backdrop');
-            backdrops.forEach(backdrop => {
-                backdrop.parentNode.removeChild(backdrop); // Remove each backdrop
-            });
-        }
         document.addEventListener('livewire:init', function() {
             Livewire.on('dogAdopted', event => {
                 closeAllModals();

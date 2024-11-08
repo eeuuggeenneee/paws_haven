@@ -234,26 +234,26 @@
                 linkClass: 'page-link' // Class for each link inside the pagination
             };
 
+            function clearmodals() {
+
+            }
             document.addEventListener('DOMContentLoaded', function() {
                 document.addEventListener('livewire:init', function() {
-
-                    var options = {
-                        valueNames: ['dog_name', 'breed', 'color', 'description'],
-                        searchClass: 'search',
-                        page: 5,
-                        pagination: true,
-                        paginationClass: 'pagination pagination-rounded', // Adds pagination classes (rounded pagination)
-                        nextClass: 'next', // Custom class for the next button
-                        prevClass: 'previous', // Custom class for the previous button
-                        activeClass: 'active', // Custom class for active page
-                        pageClass: 'page-item', // Class for each page item
-                        linkClass: 'page-link' // Class for each link inside the pagination
-                    };
-
                     function reinitializeList() {
                         console.log(dogList);
+
+                        var modals = document.querySelectorAll('.modal');
+                        modals.forEach(function(modal) {
+                            var bsModal = bootstrap.Modal.getInstance(
+                                modal); // Get the modal instance
+                            if (bsModal) {
+                                bsModal.hide(); // Hide the modal
+                            }
+                        });
                         dogList = new List('animals-datatable', options);
+
                     }
+
 
                     reinitializeList();
 
@@ -290,7 +290,7 @@
                             confirmButtonText: 'Okay'
                         }).then((result) => {
                             if (result.isConfirmed) {
-                             
+                                clearmodals();
                                 reinitializeList();
                             }
                         });
@@ -303,8 +303,8 @@
                             confirmButtonText: 'Okay'
                         }).then((result) => {
                             if (result.isConfirmed) {
+                                clearmodals();
                                 reinitializeList();
-
                             }
                         });
 
@@ -313,7 +313,7 @@
 
             });
 
-            document.getElementById('closeButton').addEventListener('click', closeAllModals);
+
             function closeAllModals() {
                 location.reload();
             }

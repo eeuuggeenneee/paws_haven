@@ -475,7 +475,7 @@
                                                                 </h5>
                                                             </td>
                                                             <td class="actions">
-                                                                @if ($data['status_name'] == 'For Adoption')
+                                                                @if ($data['status_name'] == 'Pending Adoption')
                                                                     <a href="javascript:void(0);"
                                                                         wire:click="adoptionpending('{{ $data['dog_id_unique'] }}')"
                                                                         data-bs-toggle="modal"
@@ -1371,9 +1371,19 @@
                 });
 
                 Livewire.on('reinit_table', event => {
+
                     setTimeout(() => {
                         areinitializeList();
                     }, 1000);
+
+                    var modals = document.querySelectorAll('.modal');
+                    modals.forEach(function(modal) {
+                        var bsModal = bootstrap.Modal.getInstance(
+                        modal); // Get the modal instance
+                        if (bsModal) {
+                            bsModal.hide(); // Hide the modal
+                        }
+                    });
                 });
 
             });
@@ -1381,7 +1391,6 @@
 
             document.getElementById('approve_rounds').addEventListener('click', function() {
                 setTimeout(() => {
-                    areinitializeList();
                 }, 1000);
                 Swal.fire({
                     title: 'Approve Rounds?',
@@ -1431,9 +1440,6 @@
             });
 
             document.getElementById('approve_adoption').addEventListener('click', function() {
-                setTimeout(() => {
-                    areinitializeList();
-                }, 1000);
                 Swal.fire({
                     title: 'Are you sure?',
                     text: "You are about to approve the adoption! Please call the Adopter first to confirm the details.",
