@@ -18,4 +18,4 @@ yarn-error.log
 /.idea
 /.vscode
 /vendor/*
-!/vendor/livewire/livewire/src/Features/SupportMultipleRootElementDetection/SupportMultipleRootElementDetection.php
+!vendor/livewire/livewire/src/Features/SupportMultipleRootElementDetection/SupportMultipleRootElementDetection.php

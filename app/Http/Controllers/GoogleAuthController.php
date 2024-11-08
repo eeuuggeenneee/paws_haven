@@ -30,13 +30,13 @@ class GoogleAuthController extends Controller
                     'type' => 0,
                 ]);
                 Auth::login($new_user);
-                return redirect()->intended('fur-community');
+                return redirect()->intended('announcements');
             }
             Auth::login($user);
-            return redirect()->intended('fur-community');
+            return redirect()->intended('announcements');
 
         } catch (Throwable $r) {
-            dd($r);
+            abort(404);
         }
     }
 }
