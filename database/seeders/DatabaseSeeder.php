@@ -62,7 +62,7 @@ class DatabaseSeeder extends Seeder
                 'date_found' => $faker->date(),
                 'description' => $faker->sentence(),
                 'report_type' => $faker->numberBetween(1, 2), // 1 for lost, 2 for found
-                'animal_images' => json_encode([$faker->imageUrl(), $faker->imageUrl()]),
+                'animal_images' => json_encode(["dog-images\/0GfcIpDwW6ANhPDl74mvmo5lDILaliFGIoAYIMvI.jpg","dog-images\/0KJV7nuNvbHGe0s5qAu9oi1l9aKYmmDDm8G3yLID.webp"]),
                 'contact_name' => $faker->name,
                 'contact_number' => $faker->phoneNumber,
                 'isActive' => 1,
