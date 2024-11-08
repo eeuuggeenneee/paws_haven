@@ -63,4 +63,4 @@ Route::post('/upload-images', [AddLostDog::class, 'uploadImages'])->name('upload
 
 Auth::routes();
 
-Route::get('/announcements', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Route::get('/announcements', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
