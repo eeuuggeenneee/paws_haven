@@ -150,20 +150,20 @@
                     <ul class="nav nav-tabs nav-bordered mb-3" wire:ignore>
                         <li class="nav-item">
                             <a href="#settings-b1" data-bs-toggle="tab" aria-expanded="false"
-                                class="active nav-link fw-bold">
-                                <i class="mdi mdi-settings-outline d-md-none d-block"></i>
+                                class="active nav-link fw-bold text-black">
+                                <i class="mdi mdi-account-circle d-md-none d-block"></i>
                                 <span class="d-none d-md-block">Lost and found</span>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#profile-b1" data-bs-toggle="tab" aria-expanded="true" class="nav-link fw-bold">
+                            <a href="#profile-b1" data-bs-toggle="tab" aria-expanded="true" class=" text-black nav-link fw-bold">
                                 <i class="mdi mdi-account-circle d-md-none d-block"></i>
                                 <span class="d-none d-md-block">Rounds </span>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#home-b1" data-bs-toggle="tab" aria-expanded="false" class="nav-link  fw-bold">
-                                <i class="mdi mdi-home-variant d-md-none d-block"></i>
+                            <a href="#home-b1" data-bs-toggle="tab" aria-expanded="false" class=" text-black nav-link  fw-bold">
+                                <i class="mdi mdi-home-variant d-md-none d-block "></i>
                                 <span class="d-none d-md-block">Adoption</span>
                             </a>
                         </li>
