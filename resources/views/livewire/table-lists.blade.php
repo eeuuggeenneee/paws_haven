@@ -422,7 +422,7 @@
                                                                 </h5>
                                                             </td>
                                                             <td class="action text-black">
-                                                                @if ($data['is_rejected'] == 0 && $data['is_approved'] == 0)
+                                                                @if ($data['is_approved'] == null)
                                                                     <a href="javascript:void(0);"
                                                                         wire:click="getrounds({{ $data['id'] ?? 0 }})"
                                                                         class="action-icon" data-bs-toggle="modal"
