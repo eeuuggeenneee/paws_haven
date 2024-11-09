@@ -459,7 +459,7 @@
                                                         <label class="form-label" for="validationCustom02">Materials
                                                             ex. dog cage</label>
                                                         <input type="text" class="form-control"
-                                                            id="validationCustom02" placeholder="Last name"
+                                                            id="validationCustom02" placeholder="Materials"
                                                             wire:model="a_materials" required>
                                                         <div class="valid-feedback">
                                                             Looks good!
@@ -921,7 +921,7 @@
                                                                 <label class="form-label"
                                                                     for="validationCustom02">Proof of Ownership</label>
                                                                 <input type="file" class="form-control"
-                                                                    id="validationCustom02" placeholder="Last name"
+                                                                    id="validationCustom02" placeholder=""
                                                                     wire:model="c_proof">
                                                                 <div class="valid-feedback">
                                                                     Looks good!
@@ -933,7 +933,7 @@
                                                                 <label class="form-label"
                                                                     for="validationCustom02">Last Location</label>
                                                                 <input type="text" class="form-control"
-                                                                    id="validationCustom02" placeholder="Last name"
+                                                                    id="validationCustom02" placeholder="Last Location"
                                                                     wire:model="c_loc" required>
                                                                 <div class="valid-feedback">
                                                                     Looks good!
