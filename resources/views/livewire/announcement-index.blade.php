@@ -141,7 +141,7 @@
                                                 @endif
                                             </div>
                                             <p>
-                                                {!! nl2br(e($announcement['sub_title'])) !!}
+                                                {!! $announcement['sub_title'] !!}
                                             </p>
                                             <h5 class="mt-3">Overview:</h5>
                                             <p class="text-muted mb-3">

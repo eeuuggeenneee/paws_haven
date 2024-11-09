@@ -63,7 +63,7 @@
             height: 90%;
         }
 
-        .card-body{
+        .card-body {
             background-color: #f2f2f2 !important;
             border: 1px solid #0c698b;
             color: black !important;
@@ -71,6 +71,13 @@
 
         th {
             background-color: #0396a6 !important;
+        }
+
+
+        .ql-editor {
+            user-select: text;
+            /* Allows text selection */
+            pointer-events: none;
         }
     </style>
     {{-- @vite(['resources/js/app.js']) --}}
@@ -106,7 +113,7 @@
                     <!-- Topbar Brand Logo -->
                     <div class="logo-topbar">
                         <!-- Logo light -->
-                        <a href="{{url('/annoucement')}}" class="logo-light">
+                        <a href="{{ url('/annoucement') }}" class="logo-light">
                             <span class="logo-lg">
                                 <img src="assets/images/logooooo.png" alt="dark logo" width="70px">
                             </span>
@@ -116,7 +123,7 @@
                         </a>
                     </div>
 
-                    <a href="{{url('/annoucement')}}" class="logo-dark">
+                    <a href="{{ url('/annoucement') }}" class="logo-dark">
                         <span class="">
                             <img src="assets/images/logooooo.png" alt="dark logo" width="70px">
                         </span>
@@ -139,29 +146,33 @@
                     <div class="row justify-content-center d-flex align-items-center">
                         @if (Auth::user()->type == 0)
                             <div class="col-auto ">
-                                <a class="me-2 nav-link text-white fw-semibold" href="{{ url('/lost-n-found') }}" role="button">
-                                     Lost and Found
+                                <a class="me-2 nav-link text-white fw-semibold" href="{{ url('/lost-n-found') }}"
+                                    role="button">
+                                    Lost and Found
                                 </a>
                             </div>
                             <div class="col-auto">
-                                <a class="nav-link me-2 text-white fw-semibold" href="{{ url('/adopt-a-dog') }}" role="button">
-                                     Adoption
+                                <a class="nav-link me-2 text-white fw-semibold" href="{{ url('/adopt-a-dog') }}"
+                                    role="button">
+                                    Adoption
                                 </a>
                             </div>
                             <div class="col-auto">
-                                <a class="nav-link me-2 text-white fw-semibold" href="{{ url('/announcements') }}" role="button">
-                                     Announcements
+                                <a class="nav-link me-2 text-white fw-semibold" href="{{ url('/announcements') }}"
+                                    role="button">
+                                    Announcements
                                 </a>
                             </div>
                             <div class="col-auto">
-                                <a class="nav-link me-2 text-white fw-semibold"  role="button">
-                                     About
+                                <a class="nav-link me-2 text-white fw-semibold" role="button">
+                                    About
                                 </a>
                             </div>
                         @else
                             <div class="col-auto">
-                                <a class="nav-link text-white fw-semibold" href="{{ url('/announcements') }}" role="button">
-                                     Announcement
+                                <a class="nav-link text-white fw-semibold" href="{{ url('/announcements') }}"
+                                    role="button">
+                                    Announcement
                                 </a>
                             </div>
                             <div class="col-auto">
@@ -196,7 +207,7 @@
                             <span class="noti-icon-badge"></span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-end dropdown-menu-animated dropdown-lg py-0">
-                            <div class="p-2 border-top-0 border-start-0 border-end-0 border-dashed border text-white" >
+                            <div class="p-2 border-top-0 border-start-0 border-end-0 border-dashed border text-white">
                                 <div class="row align-items-center">
                                     <div class="col">
                                         <h6 class="m-0 font-16 fw-semibold text-black"> Notification</h6>
@@ -211,8 +222,8 @@
 
                             <div class="px-2" style="max-height: 300px;" id="notification_here" data-simplebar>
 
-                              
-                             
+
+
                             </div>
                             <!-- All-->
                             <a href="javascript:void(0);"
@@ -223,16 +234,17 @@
                         </div>
                     </li>
 
-                    <li class="dropdown" >
-                        <a style="background-color: #0396a6" class="nav-link dropdown-toggle arrow-none nav-user px-2" data-bs-toggle="dropdown"
-                            href="#" role="button" aria-haspopup="false" aria-expanded="false">
+                    <li class="dropdown">
+                        <a style="background-color: #0396a6" class="nav-link dropdown-toggle arrow-none nav-user px-2"
+                            data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false"
+                            aria-expanded="false">
                             <span class="account-user-avatar">
                                 <img src="assets/images/users/avatar-1.jpg" alt="user-image" width="32"
                                     class="rounded-circle">
                             </span>
                             <span class="d-lg-flex flex-column gap-1 d-none">
-                                <h5 class="my-0 text-white">{{Auth::user()->name}}</h5>
-                                <h6 class="my-0 fw-normal text-white">{{Auth::user()->email}}</h6>
+                                <h5 class="my-0 text-white">{{ Auth::user()->name }}</h5>
+                                <h6 class="my-0 fw-normal text-white">{{ Auth::user()->email }}</h6>
                             </span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-end dropdown-menu-animated profile-dropdown">
@@ -241,11 +253,14 @@
                                 <h6 class="text-overflow m-0">Welcome !</h6>
                             </div>
                             <!-- item-->
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                style="display: none;">
                                 @csrf
                             </form>
-                            
-                            <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="dropdown-item">
+
+                            <a href="#"
+                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
+                                class="dropdown-item">
                                 <i class="mdi mdi-logout me-1"></i>
                                 <span>Logout</span>
                             </a>
@@ -258,7 +273,7 @@
         <!-- ========== Left Sidebar Start ========== -->
         <div class="leftside-menu text-white" style="background-image: linear-gradient(to bottom, #0396a6, #9cded8);">
             <!-- Brand Logo Light -->
-            <a href="{{url('/annoucement')}}" class="logo logo-light">
+            <a href="{{ url('/annoucement') }}" class="logo logo-light">
                 <span class="logo-lg fw-bold text-white fs-3">
                     PAWS HAVEN
                 </span>
@@ -268,7 +283,7 @@
             </a>
 
             <!-- Brand Logo Dark -->
-            <a href="{{url('/annoucement')}}" class="logo logo-dark">
+            <a href="{{ url('/annoucement') }}" class="logo logo-dark">
                 <span class="logo-lg fw-bold text-white fs-4">
                     PAWS HAVEN
                 </span>
@@ -291,34 +306,34 @@
             <!-- Sidebar -->
             <div class="h-100" id="leftside-menu-container" data-simplebar>
                 <!-- Leftbar User -->
-         
+
 
                 <!--- Sidemenu -->
                 <ul class="side-nav">
                     <li class="side-nav-title"></li>
                     <li class="side-nav-item">
-                        <a href="{{ url('/lost-n-found')}}" class="side-nav-link text-white">
+                        <a href="{{ url('/lost-n-found') }}" class="side-nav-link text-white">
                             <i class="uil-calender"></i>
                             <span> Lost And found </span>
                         </a>
                     </li>
 
                     <li class="side-nav-item">
-                        <a href="{{ url('/adopt-a-dog')}}" class="side-nav-link text-white">
+                        <a href="{{ url('/adopt-a-dog') }}" class="side-nav-link text-white">
                             <i class="uil-comments-alt"></i>
                             <span> Adoption </span>
                         </a>
                     </li>
 
                     <li class="side-nav-item">
-                        <a href="{{ url('/announcements')}}" class="side-nav-link text-white">
+                        <a href="{{ url('/announcements') }}" class="side-nav-link text-white">
                             <i class="uil-comments-alt"></i>
                             <span> Annoucement </span>
                         </a>
                     </li>
 
                     <li class="side-nav-item">
-                        <a href="{{ url('/about')}}" class="side-nav-link text-white">
+                        <a href="{{ url('/about') }}" class="side-nav-link text-white">
                             <i class="uil-comments-alt"></i>
                             <span> About </span>
                         </a>
@@ -349,7 +364,7 @@
     <!-- END wrapper -->
 
     <!-- Theme Settings -->
-   
+
     @livewireScripts
 
 
