@@ -3454,20 +3454,20 @@ fieldset:disabled .btn {
     opacity: var(--ct-btn-disabled-opacity);
 }
 .btn-primary {
-    --ct-btn-color: #fff;
-    --ct-btn-bg: #727cf5;
-    --ct-btn-border-color: #727cf5;
-    --ct-btn-hover-color: #fff;
-    --ct-btn-hover-bg: #6973e3;
-    --ct-btn-hover-border-color: #6973e3;
+    --ct-btn-color: #000000;
+    --ct-btn-bg: #0396a6;
+    --ct-btn-border-color: #0396a6;
+    --ct-btn-hover-color: #000000;
+    --ct-btn-hover-bg: #9cded8;
+    --ct-btn-hover-border-color: #0396a6;
     --ct-btn-focus-shadow-rgb: 135, 144, 247;
     --ct-btn-active-color: #fff;
-    --ct-btn-active-bg: #6973e3;
-    --ct-btn-active-border-color: #6973e3;
+    --ct-btn-active-bg: #0396a6;
+    --ct-btn-active-border-color: #0396a6;
     --ct-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
     --ct-btn-disabled-color: #fff;
-    --ct-btn-disabled-bg: #727cf5;
-    --ct-btn-disabled-border-color: #727cf5;
+    --ct-btn-disabled-bg: #05626d;
+    --ct-btn-disabled-border-color: #05626d;
 }
 .btn-secondary {
     --ct-btn-color: #fff;
@@ -4284,9 +4284,8 @@ fieldset:disabled .btn {
 }
 .nav-tabs .nav-item.show .nav-link,
 .nav-tabs .nav-link.active {
-    color: var(--ct-nav-tabs-link-active-color);
-    background-color: var(--ct-nav-tabs-link-active-bg);
-    border-color: var(--ct-nav-tabs-link-active-border-color);
+    color: white !important;
+    background-color: #0396a6;
 }
 .nav-tabs .dropdown-menu {
     margin-top: calc(-1 * var(--ct-nav-tabs-border-width));
@@ -4304,7 +4303,7 @@ fieldset:disabled .btn {
 .nav-pills .nav-link.active,
 .nav-pills .show > .nav-link {
     color: var(--ct-nav-pills-link-active-color);
-    background-color: var(--ct-nav-pills-link-active-bg);
+    background-color: #0396a6;
 }
 .nav-underline {
     --ct-nav-underline-gap: 1rem;
@@ -9602,10 +9601,7 @@ fieldset:disabled .btn {
 }
 .bg-primary {
     --ct-bg-opacity: 1;
-    background-color: rgba(
-        var(--ct-primary-rgb),
-        var(--ct-bg-opacity)
-    ) !important;
+    background-color: #0396a6 !important;
 }
 .bg-secondary {
     --ct-bg-opacity: 1;

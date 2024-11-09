@@ -97,7 +97,7 @@ class ModalsDogs extends Component
             'breed' => $this->c_breed,
             'gender' => $this->c_gender,
             'contact' =>  $this->c_contact,
-            'proof' => $path,
+            'proof' => $path ?? null,
             'last_loc' => $this->c_loc,
             'dog_id_unique' => $this->dog_unique,
             'isActive' => 1,
@@ -168,7 +168,10 @@ class ModalsDogs extends Component
     public function activedog($id)
     {
         $this->dog_unique = $id;
-        $this->activedog = AnimalList::where('dog_id_unique', $id)->where('isActive', true)->first();
+        $this->activedog = AnimalList::where('animal_lists.dog_id_unique', $id)
+        ->leftJoin('dog_breeds','dog_breeds.id', '=','animal_lists.breed')
+        ->select('animal_lists.*','dog_breeds.name as breed_name')
+        ->where('animal_lists.isActive', true)->first();
     }
     public function editDoggo($id)
     {

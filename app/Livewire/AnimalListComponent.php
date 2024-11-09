@@ -19,8 +19,11 @@ class AnimalListComponent extends Component
     }
     public function fetchdata(){
         $dogid = AnimalListStatus::where('isActive',true)->where('status',1)->get('animal_id');
-        $this->doglist = AnimalList::whereIn('dog_id_unique',$dogid)->where('isActive',true)->orderby('created_at', 'desc')->get();
-
+        $this->doglist = AnimalList::whereIn('animal_lists.dog_id_unique',$dogid)
+        ->leftJoin('dog_breeds', 'dog_breeds.id', '=','animal_lists.breed')
+        ->select('animal_lists.*','dog_breeds.name as breed_name')
+        ->where('animal_lists.isActive',true)->orderby('animal_lists.created_at', 'desc')->get();
+        // dd($this->doglist);
         $this->dispatch('newdata', $this->doglist);
     }
     public function editDog($dogID){

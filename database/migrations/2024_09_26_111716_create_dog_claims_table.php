@@ -18,7 +18,7 @@ return new class extends Migration
             $table->text('dog_description');    // Description of the dog
             $table->string('breed')->nullable(); // Dog's breed (nullable in case of unknown)
             $table->string('gender')->nullable(); // Dog's gender (nullable if unknown)
-            $table->string('proof');            // Proof of ownership (URL to file or text)
+            $table->string('proof')->nullable();            // Proof of ownership (URL to file or text)
             $table->string('last_loc');         // Last known location where the dog was seen
             $table->string('dog_id_unique');
             $table->string('contact');

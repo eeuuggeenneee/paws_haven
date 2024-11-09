@@ -97,7 +97,7 @@
     <div class="row">
         <div class="col-12">
             <div class="page-title-box">
-                <h4 class="page-title">Lost and Found List</h4>
+                <h4 class="page-title text-black">Lost and Found List</h4>
             </div>
         </div>
     </div>
@@ -128,13 +128,13 @@
                         </div>
 
                         <table class="table table-centered w-100 dt-responsive nowrap" id="animals-datatable">
-                            <thead class="table-light">
+                            <thead style="background-color: #0396a6;">
                                 <tr>
-                                    <th class="all">Dog Name</th>
-                                    <th>Breed</th>
-                                    <th>Color</th>
-                                    <th>Description</th>
-                                    <th style="width: 120px;">Action</th>
+                                    <th class="all text-white">Dog Name</th>
+                                    <th class="text-white">Breed</th>
+                                    <th class="text-white">Color</th>
+                                    <th class="text-white">Description</th>
+                                    <th style="width: 120px;" class="text-white">Action</th>
                                 </tr>
                             </thead>
                             <tbody class="list">
@@ -151,21 +151,21 @@
 
                                                 <p class="m-0 d-inline-block align-middle font-16">
                                                     <a href="apps-ecommerce-products-details.html"
-                                                        class="text-body">{{ $item['dog_name'] }}</a>
+                                                        class="text-black">{{ $item['dog_name'] }}</a>
                                                     <br />
 
                                                 </p>
                                             </td>
-                                            <td class="breed">
+                                            <td class="breed text-black">
                                                 {{ $item['breed_name'] }}
                                             </td>
-                                            <td class="color">
+                                            <td class="color text-black">
                                                 {{ $item['color'] }}
                                             </td>
-                                            <td class="description">
+                                            <td class="description text-black">
                                                 {{ $item['description'] }}
                                             </td>
-                                            <td class="table-action action">
+                                            <td class="table-action action text-black">
 
                                                 <a data-bs-toggle="modal" data-bs-target="#lostandfounddog"
                                                     wire:click="editDog('{{ $item['dog_id_unique'] }}')"

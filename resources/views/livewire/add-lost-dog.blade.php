@@ -49,7 +49,7 @@
                                 <div class="col-6">
                                     <div class="mb-3">
                                         <label for="dog_name" class="form-label">Color</label>
-                                        <input type="text" id="dog_name" class="form-control" required
+                                        <input type="text" id="dog_name" class="form-control" 
                                             placeholder="Enter dog color" wire:model="color">
                                     </div>
                                 </div>

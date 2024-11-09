@@ -56,7 +56,7 @@ class DatabaseSeeder extends Seeder
             AnimalList::create([
                 'dog_name' => $faker->firstName,
                 'dog_id_unique' => $uniqueId,
-                'breed' => $faker->randomElement(['Labrador', 'Golden Retriever', 'Beagle', 'Bulldog']),
+                'breed' => $faker->numberBetween(1, 10),
                 'color' => $faker->randomElement(['Black', 'Brown', 'White', 'Golden']),
                 'gender' => $faker->randomElement(['Male', 'Female']),
                 'location_found' => $faker->city,
@@ -72,6 +72,34 @@ class DatabaseSeeder extends Seeder
             AnimalListStatus::create([
                 'animal_id' => $uniqueId, 
                 'status' => 1, 
+                'isActive' => 1,
+            ]);
+
+        }
+
+        foreach (range(1, 10) as $index) {
+
+            $uniqueId = Str::uuid();
+
+            AnimalList::create([
+                'dog_name' => $faker->firstName,
+                'dog_id_unique' => $uniqueId,
+                'breed' => $faker->numberBetween(1, 10),
+                'color' => $faker->randomElement(['Black', 'Brown', 'White', 'Golden']),
+                'gender' => $faker->randomElement(['Male', 'Female']),
+                'location_found' => $faker->city,
+                'date_found' => $faker->date(),
+                'description' => $faker->sentence(),
+                'report_type' => $faker->numberBetween(1, 2), // 1 for lost, 2 for found
+                'animal_images' => json_encode(["dog-images\/0KJV7nuNvbHGe0s5qAu9oi1l9aKYmmDDm8G3yLID.webp"]),
+                'contact_name' => $faker->name,
+                'contact_number' => $faker->phoneNumber,
+                'isActive' => 1,
+            ]);
+
+            AnimalListStatus::create([
+                'animal_id' => $uniqueId, 
+                'status' => 3, 
                 'isActive' => 1,
             ]);
         }

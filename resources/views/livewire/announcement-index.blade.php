@@ -16,9 +16,8 @@
 
                 <div class="col-xxl-3 col-lg-6 order-lg-1 order-xxl-1 fixed-column ">
                     <!-- start profi le info -->
-                    <div class="card " >
+                    <div class="card bg-" >
                         <div class="card-body">
-
                             <div class="d-flex align-self-start">
                                 <img class="d-flex align-self-start rounded me-2"
                                     src="{{ asset('storage/' . Auth::user()->profile_path) }}" alt="Dominic Keller"
@@ -115,7 +114,7 @@
                             aria-labelledby="v-pills-timeline-tab">
                             @if (isset($annoucements))
                                 @foreach ($annoucements as $announcement)
-                                    <div class="card">
+                                    <div class="card ">
                                         <div class="card-body">
                                             <div class="d-flex">
                                                 <h3 class="mt-0">{{ $announcement['title'] }}</h3>

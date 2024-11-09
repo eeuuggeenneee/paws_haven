@@ -16,8 +16,9 @@ class ForAdoption extends Component
         $dogid = AnimalListStatus::where('isActive',true)->where('status',1)->get('animal_id');
         $this->doglist = AnimalList::whereIn('animal_lists.dog_id_unique',$dogid)
         ->leftJoin('click_dogs', 'click_dogs.dog_id_unique', '=','animal_lists.dog_id_unique')
-        ->select('animal_lists.*','click_dogs.clicked')
-        ->where('isActive',true)->get();
+        ->leftJoin('dog_breeds', 'dog_breeds.id', '=','animal_lists.breed')
+        ->select('animal_lists.*','click_dogs.clicked','dog_breeds.name as breed_name')
+        ->where('animal_lists.isActive',true)->get();
     }
 
     public function adoptionform($id){

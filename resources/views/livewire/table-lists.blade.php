@@ -140,360 +140,149 @@
             <div class="row">
                 <div class="col-12">
                     <div class="page-title-box">
-                        <div class="page-title-right">
-                            <ol class="breadcrumb m-0">
-                                <li class="breadcrumb-item"><a href="javascript: void(0);">Home</a></li>
-                                <li class="breadcrumb-item active">Ticket</li>
-                            </ol>
-                        </div>
+                        <h4 class="page-title text-black">Ticket List</h4>
                     </div>
                 </div>
             </div>
             <!-- end page title -->
-            <ul class="nav nav-tabs nav-bordered mb-3" wire:ignore>
-                <li class="nav-item">
-                    <a href="#settings-b1" data-bs-toggle="tab" aria-expanded="false" class="nav-link fw-bold">
-                        <i class="mdi mdi-settings-outline d-md-none d-block"></i>
-                        <span class="d-none d-md-block">Lost and found</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="#profile-b1" data-bs-toggle="tab" aria-expanded="true" class="nav-link fw-bold">
-                        <i class="mdi mdi-account-circle d-md-none d-block"></i>
-                        <span class="d-none d-md-block">Rounds </span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="#home-b1" data-bs-toggle="tab" aria-expanded="false" class="nav-link active fw-bold">
-                        <i class="mdi mdi-home-variant d-md-none d-block"></i>
-                        <span class="d-none d-md-block">Adoption</span>
-                    </a>
-                </li>
-            </ul>
-            <div class="tab-content">
-                <div class="tab-pane" id="settings-b1" wire:ignore.self>
-                    <div class="card">
-                        <div class="card-body">
+            <div class="card" style="background-color: #f2f2f2">
+                <div class="card-body px-0 py-0">
+                    <ul class="nav nav-tabs nav-bordered mb-3" wire:ignore>
+                        <li class="nav-item">
+                            <a href="#settings-b1" data-bs-toggle="tab" aria-expanded="false" class="nav-link fw-bold">
+                                <i class="mdi mdi-settings-outline d-md-none d-block"></i>
+                                <span class="d-none d-md-block">Lost and found</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#profile-b1" data-bs-toggle="tab" aria-expanded="true" class="nav-link fw-bold">
+                                <i class="mdi mdi-account-circle d-md-none d-block"></i>
+                                <span class="d-none d-md-block">Rounds </span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#home-b1" data-bs-toggle="tab" aria-expanded="false"
+                                class="nav-link active fw-bold">
+                                <i class="mdi mdi-home-variant d-md-none d-block"></i>
+                                <span class="d-none d-md-block">Adoption</span>
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="tab-content" style="background-color: #f2f2f2">
+                        <div class="tab-pane" id="settings-b1" wire:ignore.self>
+                            <div class="card" style="background-color: #f2f2f2">
+                                <div class="py-3 px-3">
 
-                            <h3>Claim List</h3>
-                            <div class="table-responsive" id="claim_list">
-                                <div class="d-flex align-items-center">
-                                    <div class="search-container ms-auto">
-                                        <input type="text" class="cl_search form-control " id="searchtb"
-                                            style="width: 150%;" placeholder="Search for dogs...">
-                                    </div>
-                                    <h3 class="mb-4 d-flex align-items-center ms-auto"></h3>
+                                    <h3>Claim List</h3>
+                                    <div class="table-responsive" id="claim_list">
+                                        <div class="d-flex align-items-center">
+                                            <div class="search-container ms-auto">
+                                                <input type="text" class="cl_search form-control " id="searchtb"
+                                                    style="width: 150%;" placeholder="Search for dogs...">
+                                            </div>
+                                            <h3 class="mb-4 d-flex align-items-center ms-auto"></h3>
 
-                                </div>
-                                <table class="table table-centered table-nowrap mb-0">
-                                    <thead class="table-light">
-                                        <tr>
-                                            <th>Ticket Number</th>
-                                            <th>Requestor</th>
-                                            <th>Dog</th>
-                                            <th>Contact</th>
-                                            <th>Address</th>
-                                            <th>Status</th>
-                                            <th style="width: 125px;">Action</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody class="list">
-                                        @if (isset($claimlist))
-                                            @foreach ($claimlist as $cdata)
-                                                @if (isset($cdata['id']))
-                                                    @php
-                                                        $imagestc = json_decode($cdata['animal_images']);
-                                                    @endphp
-                                                    <tr>
-                                                        <td class="ticket_number">
-                                                            C{{ $cdata['created_at']->format('ym') . '-' . str_pad($cdata['id'], 4, '0', STR_PAD_LEFT) ?? 'N/A' }}
-                                                        <td class="requestor"> {{ $cdata['fullname'] ?? 'N/A' }} </td>
-                                                        <td class="dog_name">
-                                                            <div class="d-flex">
-                                                                <div class="d-flex align-items-center">
-                                                                    <div class="flex-shrink-0">
-                                                                        @if (!is_null($imagestc) && isset($imagestc[0]))
-                                                                            <img src="{{ asset('storage/' . $imagestc[0]) }}"
-                                                                                class="rounded-circle avatar-xs"
-                                                                                alt="friend">
-                                                                        @else
-                                                                            <img src="{{ asset('storage/profile_pictures/xjxxrQTF3FiMAJ92RTzIrh15XRKYVLP9rtQt6g1E.png') }}"
-                                                                                class="rounded-circle avatar-xs"
-                                                                                alt="default">
-                                                                        @endif
-                                                                    </div>
-                                                                    <div class="flex-grow-1 ms-2">
-                                                                        <h5 class="my-0">{{ $cdata['dog_name'] }}
-                                                                        </h5>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-
-                                                        <td class="contact">{{ $cdata['contact'] ?? 'N/A' }}</td>
-                                                        <td class="address">
-                                                            <p class="mb-0 txt-muted">
-                                                                {{ $cdata['address'] ?? 'N/A' }} </p>
-                                                        </td>
-                                                        <td class="status">
-                                                            <h5 class="my-0">
-
-                                                                @if ($cdata['status_name'] == 'Found Dog')
-                                                                    <span class="badge bg-danger">
-                                                                        Rejected
-                                                                    </span>
-                                                                @else
-                                                                    <span class="badge bg-info">
-                                                                        {{ $cdata['status_name'] }}
-                                                                    </span>
-                                                                @endif
-
-                                                            </h5>
-                                                        </td>
-                                                        <td class="action">
-                                                            @if ($cdata['status_name'] == 'Pending Claim')
-                                                                <a href="#"
-                                                                    wire:click.prevent="lostclaim('{{ $cdata['dog_id_unique'] ?? 0 }}')"
-                                                                    class="action-icon" data-bs-toggle="modal"
-                                                                    data-bs-target="#primary-header-modal2">
-                                                                    <i class="mdi mdi-square-edit-outline"></i>
-                                                                </a>
-                                                            @else
-                                                            @endif
-
-                                                            <a href="javascript:void(0);" class="action-icon"
-                                                                onclick="deleteClaim('{{ $cdata['dog_id_unique'] }}')">
-                                                                <i class="mdi mdi-delete"></i></a>
-                                                        </td>
-                                                    </tr>
-                                                @endif
-                                            @endforeach
-                                        @endif
-                                    </tbody>
-                                </table>
-                                <div class="table-footer">
-                                    <nav>
-                                        <div class="page-item cl_jPaginateBack">
-                                            <a class="page-link" href="javascript: void(0);" aria-label="Previous">
-                                                <span aria-hidden="true">&laquo;</span>
-                                            </a>
                                         </div>
-                                        <ul class="pagination pagination-rounded mb-0">
-
-                                        </ul>
-                                        <div class="page-item ">
-                                            <a class="page-link cl_jPaginateNext" href="javascript: void(0);"
-                                                aria-label="Next">
-                                                <span aria-hidden="true">&raquo;</span>
-                                            </a>
-                                        </div>
-                                    </nav>
-                                </div>
-                            </div>
-                        </div> <!-- end card-body-->
-                    </div>
-                </div>
-                <div class="tab-pane " id="profile-b1" wire:ignore.self>
-                    <div class="card">
-                        <div class="card-body">
-                            <h3>Rounds Lists</h3>
-                            <div class="table-responsive" id="round_lists">
-                                <div class="d-flex align-items-center ">
-                                    <div class="search-container ms-auto">
-                                        <input type="text" class="c_search form-control " id="searchtb"
-                                            style="width: 150%;" placeholder="Search for dogs...">
-                                    </div>
-                                    <h3 class="mb-4 d-flex align-items-center ms-auto"></h3>
-
-                                </div>
-                                <table class="table table-centered table-nowrap mb-0">
-                                    <thead class="table-light">
-                                        <tr>
-                                            <th>Ticket Number</th>
-                                            <th>Requestor</th>
-                                            <th>Where</th>
-                                            <th>Specific Location</th>
-                                            <th>Contact</th>
-                                            <th>Status</th>
-                                            <th>Date Requested</th>
-                                            <th style="width: 125px;">Action</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody class="list">
-                                        @if (isset($reqrounds))
-                                            @foreach ($reqrounds as $data)
-                                                <tr>
-                                                    <td class="ticket_number">
-                                                        R{{ $data['created_at']->format('ym') . '-' . str_pad($data['id'], 4, '0', STR_PAD_LEFT) ?? 'N/A' }}
-                                                    </td>
-                                                    <td class="requestor"> {{ $data['name'] ?? 'N/A' }} </td>
-                                                    <td class="address">
-                                                        {{ $data['address'] ?? 'N/A' }}
-                                                    </td>
-                                                    <td class="specific">
-                                                        <p class="mb-0 txt-muted">
-                                                            {{ $data['specific_location'] ?? 'N/A' }} </p>
-                                                    </td>
-                                                    <td class="contact">{{ $data['contact'] ?? 'N/A' }}</td>
-                                                    <td class="created">
-                                                        {{ $data['created_at']->format('M d, Y h:i A') ?? 'N/A' }}</td>
-
-                                                    <td class="status">
-                                                        <h5 class="my-0">
-                                                            @if (isset($data['is_approved']))
-                                                                @if ($data['is_approved'] == 1)
-                                                                    <span class="badge bg-success">
-                                                                        <span>Approved</span>
-                                                                    </span>
-                                                                @elseif ($data['is_approved'] == 0)
-                                                                    <span class="badge bg-danger">
-                                                                        <span>Rejected</span>
-                                                                    </span>
-                                                                @endif
-                                                            @else
-                                                                <span class="badge bg-info">
-                                                                    <span>Pending</span>
-                                                                </span>
-                                                            @endif
-
-                                                        </h5>
-                                                    </td>
-                                                    <td class="action">
-                                                        @if ($data['is_rejected'] == 0 && $data['is_approved'] == 0)
-                                                            <a href="javascript:void(0);"
-                                                                wire:click="getrounds({{ $data['id'] ?? 0 }})"
-                                                                class="action-icon" data-bs-toggle="modal"
-                                                                data-bs-target="#primary-header-modal"> <i
-                                                                    class="mdi mdi-square-edit-outline"></i></a>
-                                                        @endif
-                                                        <a href="javascript:void(0);" class="action-icon"> <i
-                                                                class="mdi mdi-delete"
-                                                                onclick="deleteRounds({{ $data['id'] ?? 0 }})"></i></a>
-                                                    </td>
-                                                </tr>
-                                            @endforeach
-                                        @endif
-                                    </tbody>
-                                </table>
-                                <div class="table-footer">
-                                    <nav>
-                                        <div class="page-item claimjPaginateBack">
-                                            <a class="page-link" href="javascript: void(0);" aria-label="Previous">
-                                                <span aria-hidden="true">&laquo;</span>
-                                            </a>
-                                        </div>
-                                        <ul class="pagination pagination-rounded mb-0">
-
-                                        </ul>
-                                        <div class="page-item ">
-                                            <a class="page-link claimjPaginateNext" href="javascript: void(0);"
-                                                aria-label="Next">
-                                                <span aria-hidden="true">&raquo;</span>
-                                            </a>
-                                        </div>
-                                    </nav>
-                                </div>
-                            </div>
-                        </div> <!-- end card-body-->
-                    </div>
-                </div>
-                <div class="tab-pane show active" id="home-b1" wire:ignore.self>
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="card">
-                                <div class="card-body">
-                                    <h3>Adoption List</h3>
-                                    <div class="table-responsive" id="adoption_list">
-                                        <div class="search-container ms-auto">
-                                            <input type="text" class="search form-control " id="searchtb"
-                                                style="width: 150%;" placeholder="Search for dogs...">
-                                        </div>
-                                        <h3 class="mb-4 d-flex align-items-center ms-auto"></h3>
-
                                         <table class="table table-centered table-nowrap mb-0">
-                                            <thead class="table-light">
+                                            <thead style="background-color: #0396a6;">
                                                 <tr>
-                                                    <th>Ticket Number</th>
-                                                    <th>Name</th>
-                                                    <th>Dog Name</th>
-                                                    <th>Contact</th>
-                                                    <th>Address</th>
-                                                    <th>Date Requested</th>
-                                                    <th>Status</th>
-                                                    <th style="width: 125px;">Action</th>
+                                                    <th class="text-white sort">Ticket Number</th>
+                                                    <th class="text-white">Requestor</th>
+                                                    <th class="text-white">Dog</th>
+                                                    <th class="text-white">Contact</th>
+                                                    <th class="text-white">Proof</th>
+                                                    <th class="text-white">Status</th>
+                                                    <th style="width: 125px;" class="text-white">Action</th>
                                                 </tr>
                                             </thead>
                                             <tbody class="list">
-                                                @if (isset($adoptionlist))
-                                                    @foreach ($adoptionlist as $data)
-                                                        @php
-                                                            $imagest = json_decode($data['animal_images']);
-                                                        @endphp
-                                                        <tr id="claim-{{ $data['dog_id_unique'] }}">
-                                                            <td class="ticket_number">
-                                                                A{{ $data['created_at']->format('ym') . '-' . str_pad($data['id'], 4, '0', STR_PAD_LEFT) ?? 'N/A' }}
-                                                            <td class="requestor"> {{ $data['fullname'] }} </td>
-                                                            <td class="dog_name">
-                                                                <div class="d-flex">
-                                                                    <div class="d-flex align-items-center">
-                                                                        <div class="flex-shrink-0">
-                                                                            @if (!is_null($imagest) && isset($imagest[0]))
-                                                                                <img src="{{ asset('storage/' . $imagest[0]) }}"
-                                                                                    class="rounded-circle avatar-xs"
-                                                                                    alt="friend">
-                                                                            @else
-                                                                                <img src="{{ asset('storage/profile_pictures/xjxxrQTF3FiMAJ92RTzIrh15XRKYVLP9rtQt6g1E.png') }}"
-                                                                                    class="rounded-circle avatar-xs"
-                                                                                    alt="default">
-                                                                            @endif
-                                                                        </div>
-                                                                        <div class="flex-grow-1 ms-2">
-                                                                            <h5 class="my-0">{{ $data['dog_name'] }}
-                                                                            </h5>
+                                                @if (isset($claimlist))
+                                                    @foreach ($claimlist as $cdata)
+                                                        @if (isset($cdata['id']))
+                                                            @php
+                                                                $imagestc = json_decode($cdata['animal_images']);
+                                                            @endphp
+                                                            <tr>
+                                                                <td class="ticket_number text-black">
+                                                                    C{{ $cdata['created_at']->format('ym') . '-' . str_pad($cdata['id'], 4, '0', STR_PAD_LEFT) ?? 'N/A' }}
+                                                                <td class="requestor text-black">
+                                                                    {{ $cdata['fullname'] ?? 'N/A' }}
+                                                                </td>
+                                                                <td class="dog_name">
+                                                                    <div class="d-flex">
+                                                                        <div class="d-flex align-items-center">
+                                                                            <div class="flex-shrink-0">
+                                                                                @if (!is_null($imagestc) && isset($imagestc[0]))
+                                                                                    <img src="{{ asset('storage/' . $imagestc[0]) }}"
+                                                                                        class="rounded-circle avatar-xs"
+                                                                                        alt="friend">
+                                                                                @else
+                                                                                    <img src="{{ asset('storage/profile_pictures/xjxxrQTF3FiMAJ92RTzIrh15XRKYVLP9rtQt6g1E.png') }}"
+                                                                                        class="rounded-circle avatar-xs"
+                                                                                        alt="default">
+                                                                                @endif
+                                                                            </div>
+                                                                            <div class="flex-grow-1 ms-2 text-black">
+                                                                                <h5 class="my-0">
+                                                                                    {{ $cdata['dog_name'] }}
+                                                                                </h5>
+                                                                            </div>
                                                                         </div>
                                                                     </div>
-                                                                </div>
-                                                            </td>
-                                                            <td class="contact">
-                                                                <p class="mb-0 txt-muted">{{ $data['c_number'] }}</p>
-                                                            </td>
-                                                            <td class="address">{{ $data['address'] }}</td>
-                                                            <td class="date_request">
-                                                                {{ $data['created_at']->format('M-d-Y') }}</td>
-                                                            <td class="status">
-                                                                <h5 class="my-0">
-                                                                    @if ($data['status_name'] == 'For Adoption')
-                                                                        <span class="badge bg-danger">
-                                                                            Rejected
-                                                                        </span>
+                                                                </td>
+
+                                                                <td class="contact text-black">{{ $cdata['contact'] ?? 'N/A' }}
+                                                                </td>
+                                                                <td class="address">
+                                                                    @if(isset($cdata['proof']))
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" width="20" height="20" x="0" y="0" viewBox="0 0 2.54 2.54" style="enable-background:new 0 0 512 512" xml:space="preserve" fill-rule="evenodd" class=""><g><circle cx="1.27" cy="1.27" r="1.27" fill="#00ba00" opacity="1" data-original="#00ba00" class=""></circle><path fill="#ffffff" d="M.873 1.89.41 1.391a.17.17 0 0 1 .008-.24.17.17 0 0 1 .24.009l.358.383.567-.53a.17.17 0 0 1 .016-.013l.266-.249a.17.17 0 0 1 .24.008.17.17 0 0 1-.008.24l-.815.76-.283.263-.125-.134z" opacity="1" data-original="#ffffff" class=""></path></g></svg>
                                                                     @else
-                                                                        <span class="badge bg-info">
-                                                                            {{ $data['status_name'] }}
-                                                                        </span>
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" width="20" height="20" x="0" y="0" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512" xml:space="preserve" class=""><g><g data-name="Layer 2"><circle cx="256" cy="256" r="256" fill="#f44336" opacity="1" data-original="#f44336" class=""></circle><path fill="#ffffff" d="M348.6 391a42.13 42.13 0 0 1-30-12.42L256 316l-62.6 62.61a42.41 42.41 0 1 1-60-60L196 256l-62.61-62.6a42.41 42.41 0 0 1 60-60L256 196l62.6-62.61a42.41 42.41 0 1 1 60 60L316 256l62.61 62.6a42.41 42.41 0 0 1-30 72.4z" opacity="1" data-original="#ffffff"></path></g></g></svg>
+                                                                    @endif
+                                                                    {{-- <p class="mb-0 txt-muted">
+                                                                        {{ $cdata['proof'] ?? 'N/A' }} 
+                                                                        
+                                                                        <i data-lucide="accessibility"></i> </p> --}}
+                                                                </td>
+                                                                <td class="status">
+                                                                    <h5 class="my-0">
+
+                                                                        @if ($cdata['status_name'] == 'Found Dog')
+                                                                            <span class="badge bg-danger">
+                                                                                Rejected
+                                                                            </span>
+                                                                        @else
+                                                                            <span class="badge bg-info">
+                                                                                {{ $cdata['status_name'] }}
+                                                                            </span>
+                                                                        @endif
+
+                                                                    </h5>
+                                                                </td>
+                                                                <td class="action text-black">
+                                                                    @if ($cdata['status_name'] == 'Pending Claim')
+                                                                        <a href="#"
+                                                                            wire:click.prevent="lostclaim('{{ $cdata['dog_id_unique'] ?? 0 }}')"
+                                                                            class="action-icon" data-bs-toggle="modal"
+                                                                            data-bs-target="#primary-header-modal2">
+                                                                            <i class="mdi mdi-square-edit-outline"></i>
+                                                                        </a>
+                                                                    @else
                                                                     @endif
 
-                                                                </h5>
-                                                            </td>
-                                                            <td class="actions">
-                                                                @if ($data['status_name'] == 'Pending Adoption')
-                                                                    <a href="javascript:void(0);"
-                                                                        wire:click="adoptionpending('{{ $data['dog_id_unique'] }}')"
-                                                                        data-bs-toggle="modal"
-                                                                        data-bs-target="#viewdog" class="action-icon">
-                                                                        <i class="mdi mdi-square-edit-outline"></i></a>
-                                                                @endif
-                                                                <a href="javascript:void(0);" class="action-icon"
-                                                                    onclick="deleteAdoption('{{ $data['dog_id_unique'] }}')">
-                                                                    <i class="mdi mdi-delete"></i></a>
-                                                            </td>
-                                                        </tr>
+                                                                    <a href="javascript:void(0);" class="action-icon"
+                                                                        onclick="deleteClaim('{{ $cdata['dog_id_unique'] }}')">
+                                                                        <i class="mdi mdi-delete"></i></a>
+                                                                </td>
+                                                            </tr>
+                                                        @endif
                                                     @endforeach
                                                 @endif
                                             </tbody>
                                         </table>
                                         <div class="table-footer">
                                             <nav>
-                                                <div class="page-item jPaginateBack">
+                                                <div class="page-item cl_jPaginateBack">
                                                     <a class="page-link" href="javascript: void(0);"
                                                         aria-label="Previous">
                                                         <span aria-hidden="true">&laquo;</span>
@@ -503,7 +292,7 @@
 
                                                 </ul>
                                                 <div class="page-item ">
-                                                    <a class="page-link jPaginateNext" href="javascript: void(0);"
+                                                    <a class="page-link cl_jPaginateNext" href="javascript: void(0);"
                                                         aria-label="Next">
                                                         <span aria-hidden="true">&raquo;</span>
                                                     </a>
@@ -512,12 +301,243 @@
                                         </div>
                                     </div>
                                 </div> <!-- end card-body-->
-                            </div> <!-- end card-->
-                        </div> <!-- end col -->
-                    </div> <!-- end row -->
+                            </div>
+                        </div>
+                        <div class="tab-pane " id="profile-b1" wire:ignore.self>
+                            <div class="card" style="background-color: #f2f2f2">
+                                <div class="py-3 px-3">
+                                    <h3>Rounds Lists</h3>
+                                    <div class="table-responsive" id="round_lists">
+                                        <div class="d-flex align-items-center ">
+                                            <div class="search-container ms-auto">
+                                                <input type="text" class="c_search form-control " id="searchtb"
+                                                    style="width: 150%;" placeholder="Search for dogs...">
+                                            </div>
+                                            <h3 class="mb-4 d-flex align-items-center ms-auto"></h3>
+
+                                        </div>
+                                        <table class="table table-centered table-nowrap mb-0">
+                                            <thead style="background-color: #0396a6;">
+                                                <tr>
+                                                    <th class="text-white">Ticket Number</th>
+                                                    <th class="text-white">Requestor</th>
+                                                    <th class="text-white">Where</th>
+                                                    <th class="text-white">Specific Location</th>
+                                                    <th class="text-white">Contact</th>
+                                                    <th class="text-white">Date Requested</th>
+                                                    <th class="text-white">Status</th>
+                                                    <th style="width: 125px;" class="text-white">Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody class="list">
+                                                @if (isset($reqrounds))
+                                                    @foreach ($reqrounds as $data)
+                                                        <tr>
+                                                            <td class="ticket_number text-black">
+                                                                R{{ $data['created_at']->format('ym') . '-' . str_pad($data['id'], 4, '0', STR_PAD_LEFT) ?? 'N/A' }}
+                                                            </td>
+                                                            <td class="requestor text-black"> {{ $data['name'] ?? 'N/A' }} </td>
+                                                            <td class="address text-black">
+                                                                {{ $data['address'] ?? 'N/A' }}
+                                                            </td>
+                                                            <td class="specific text-black">
+                                                                <p class="mb-0 txt-muted">
+                                                                    {{ $data['specific_location'] ?? 'N/A' }} </p>
+                                                            </td>
+                                                            <td class="contact text-black">
+                                                                {{ $data['contact'] ?? 'N/A' }}</td>
+                                                            <td class="created  text-black">
+                                                                {{ $data['created_at']->format('M d, Y h:i A') ?? 'N/A' }}
+                                                            </td>
+
+                                                            <td class="status text-black">
+                                                                <h5 class="my-0">
+                                                                    @if (isset($data['is_approved']))
+                                                                        @if ($data['is_approved'] == 1)
+                                                                            <span class="badge bg-success">
+                                                                                <span>Approved</span>
+                                                                            </span>
+                                                                        @elseif ($data['is_approved'] == 0)
+                                                                            <span class="badge bg-danger">
+                                                                                <span>Rejected</span>
+                                                                            </span>
+                                                                        @endif
+                                                                    @else
+                                                                        <span class="badge bg-info">
+                                                                            <span>Pending</span>
+                                                                        </span>
+                                                                    @endif
+
+                                                                </h5>
+                                                            </td>
+                                                            <td class="action text-black">
+                                                                @if ($data['is_rejected'] == 0 && $data['is_approved'] == 0)
+                                                                    <a href="javascript:void(0);"
+                                                                        wire:click="getrounds({{ $data['id'] ?? 0 }})"
+                                                                        class="action-icon" data-bs-toggle="modal"
+                                                                        data-bs-target="#primary-header-modal"> <i
+                                                                            class="mdi mdi-square-edit-outline"></i></a>
+                                                                @endif
+                                                                <a href="javascript:void(0);" class="action-icon"> <i
+                                                                        class="mdi mdi-delete"
+                                                                        onclick="deleteRounds({{ $data['id'] ?? 0 }})"></i></a>
+                                                            </td>
+                                                        </tr>
+                                                    @endforeach
+                                                @endif
+                                            </tbody>
+                                        </table>
+                                        <div class="table-footer">
+                                            <nav>
+                                                <div class="page-item claimjPaginateBack">
+                                                    <a class="page-link" href="javascript: void(0);"
+                                                        aria-label="Previous">
+                                                        <span aria-hidden="true">&laquo;</span>
+                                                    </a>
+                                                </div>
+                                                <ul class="pagination pagination-rounded mb-0">
+
+                                                </ul>
+                                                <div class="page-item ">
+                                                    <a class="page-link claimjPaginateNext"
+                                                        href="javascript: void(0);" aria-label="Next">
+                                                        <span aria-hidden="true">&raquo;</span>
+                                                    </a>
+                                                </div>
+                                            </nav>
+                                        </div>
+                                    </div>
+                                </div> <!-- end card-body-->
+                            </div>
+                        </div>
+                        <div class="tab-pane show active" id="home-b1" wire:ignore.self>
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="card" style="background-color: #f2f2f2">
+                                        <div class="py-3 px-3">
+                                            <h3>Adoption List</h3>
+                                            <div class="table-responsive" id="adoption_list">
+                                                <div class="search-container ms-auto">
+                                                    <input type="text" class="search form-control " id="searchtb"
+                                                        style="width: 150%;" placeholder="Search for dogs...">
+                                                </div>
+                                                <h3 class="mb-4 d-flex align-items-center ms-auto"></h3>
+
+                                                <table class="table table-centered table-nowrap mb-0">
+                                                    <thead style="background-color: #0396a6;">
+                                                        <tr>
+                                                            <th class="text-white">Ticket Number</th>
+                                                            <th class="text-white">Name</th>
+                                                            <th class="text-white">Dog Name</th>
+                                                            <th class="text-white">Contact</th>
+                                                            <th class="text-white">Address</th>
+                                                            <th class="text-white">Date Requested</th>
+                                                            <th class="text-white">Status</th>
+                                                            <th style="width: 125px;" class="text-white">Action</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody class="list">
+                                                        @if (isset($adoptionlist))
+                                                            @foreach ($adoptionlist as $data)
+                                                                @php
+                                                                    $imagest = json_decode($data['animal_images']);
+                                                                @endphp
+                                                                <tr id="claim-{{ $data['dog_id_unique'] }}">
+                                                                    <td class="ticket_number text-black">
+                                                                        A{{ $data['created_at']->format('ym') . '-' . str_pad($data['id'], 4, '0', STR_PAD_LEFT) ?? 'N/A' }}
+                                                                    <td class="requestor text-black"> {{ $data['fullname'] }}
+                                                                    </td>
+                                                                    <td class="dog_name text-black">
+                                                                        <div class="d-flex">
+                                                                            <div class="d-flex align-items-center">
+                                                                                <div class="flex-shrink-0">
+                                                                                    @if (!is_null($imagest) && isset($imagest[0]))
+                                                                                        <img src="{{ asset('storage/' . $imagest[0]) }}"
+                                                                                            class="rounded-circle avatar-xs"
+                                                                                            alt="friend">
+                                                                                    @else
+                                                                                        <img src="{{ asset('storage/profile_pictures/xjxxrQTF3FiMAJ92RTzIrh15XRKYVLP9rtQt6g1E.png') }}"
+                                                                                            class="rounded-circle avatar-xs"
+                                                                                            alt="default">
+                                                                                    @endif
+                                                                                </div>
+                                                                                <div class="flex-grow-1 ms-2">
+                                                                                    <h5 class="my-0 text-black">
+                                                                                        {{ $data['dog_name'] }}
+                                                                                    </h5>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </td>
+                                                                    <td class="contact text-black">
+                                                                        <p class="mb-0 txt-muted">
+                                                                            {{ $data['c_number'] }}</p>
+                                                                    </td>
+                                                                    <td class="address text-black">{{ $data['address'] }}</td>
+                                                                    <td class="date_request text-black">
+                                                                        {{ $data['created_at']->format('M-d-Y') }}</td>
+                                                                    <td class="status text-black">
+                                                                        <h5 class="my-0">
+                                                                            @if ($data['status_name'] == 'For Adoption')
+                                                                                <span class="badge bg-danger">
+                                                                                    Rejected
+                                                                                </span>
+                                                                            @else
+                                                                                <span class="badge bg-info">
+                                                                                    {{ $data['status_name'] }}
+                                                                                </span>
+                                                                            @endif
+
+                                                                        </h5>
+                                                                    </td>
+                                                                    <td class="actions">
+                                                                        @if ($data['status_name'] == 'Pending Adoption')
+                                                                            <a href="javascript:void(0);"
+                                                                                wire:click="adoptionpending('{{ $data['dog_id_unique'] }}')"
+                                                                                data-bs-toggle="modal"
+                                                                                data-bs-target="#viewdog"
+                                                                                class="action-icon">
+                                                                                <i
+                                                                                    class="mdi mdi-square-edit-outline"></i></a>
+                                                                        @endif
+                                                                        <a href="javascript:void(0);"
+                                                                            class="action-icon"
+                                                                            onclick="deleteAdoption('{{ $data['dog_id_unique'] }}')">
+                                                                            <i class="mdi mdi-delete"></i></a>
+                                                                    </td>
+                                                                </tr>
+                                                            @endforeach
+                                                        @endif
+                                                    </tbody>
+                                                </table>
+                                                <div class="table-footer">
+                                                    <nav>
+                                                        <div class="page-item jPaginateBack">
+                                                            <a class="page-link" href="javascript: void(0);"
+                                                                aria-label="Previous">
+                                                                <span aria-hidden="true">&laquo;</span>
+                                                            </a>
+                                                        </div>
+                                                        <ul class="pagination pagination-rounded mb-0">
+
+                                                        </ul>
+                                                        <div class="page-item ">
+                                                            <a class="page-link jPaginateNext"
+                                                                href="javascript: void(0);" aria-label="Next">
+                                                                <span aria-hidden="true">&raquo;</span>
+                                                            </a>
+                                                        </div>
+                                                    </nav>
+                                                </div>
+                                            </div>
+                                        </div> <!-- end card-body-->
+                                    </div> <!-- end card-->
+                                </div> <!-- end col -->
+                            </div> <!-- end row -->
+                        </div>
+                    </div>
                 </div>
             </div>
-
         </div> <!-- container -->
     </div>
     <div class="modal fade" id="viewdog" tabindex="-1" style="z-index: 10050 !important;" role="dialog"
@@ -1379,7 +1399,7 @@
                     var modals = document.querySelectorAll('.modal');
                     modals.forEach(function(modal) {
                         var bsModal = bootstrap.Modal.getInstance(
-                        modal); // Get the modal instance
+                            modal); // Get the modal instance
                         if (bsModal) {
                             bsModal.hide(); // Hide the modal
                         }
@@ -1390,8 +1410,7 @@
 
 
             document.getElementById('approve_rounds').addEventListener('click', function() {
-                setTimeout(() => {
-                }, 1000);
+                setTimeout(() => {}, 1000);
                 Swal.fire({
                     title: 'Approve Rounds?',
                     text: "Are you sure you want to approve this rounds request?",

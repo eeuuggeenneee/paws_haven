@@ -1,6 +1,14 @@
 <div>
     <style>
-        .table-footer {}
+        .table-footer {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 20px;
+            text-align: center;
+            width: 100%;
+        }
 
         .table-footer nav {
             position: relative;
@@ -100,7 +108,7 @@
         <div class="row">
             <div class="col-12">
                 <div class="page-title-box">
-                    <h4 class="page-title">Adoption List</h4>
+                    <h4 class="page-title text-black">Adoption List</h4>
                 </div>
             </div>
         </div>
@@ -108,11 +116,10 @@
 
         <div class="row">
             <div class="col-12">
-                <div class="card">
+                <div class="card" id="cardhe">
                     <div class="card-body">
                         <div class="table-responsive" id="animals-datatable">
                             <div class="d-flex align-items-center ">
-
                                 <div class="search-container ms-auto">
                                     <input type="text" class="search form-control " id="searchtb"
                                         style="width: 150%;" placeholder="Search for dogs...">
@@ -124,34 +131,34 @@
                                 </a>
                             </div>
                             <table class="table table-centered w-100 dt-responsive nowrap">
-                                <thead class="table-light">
+                                <thead style="background-color: #0396a6;">
                                     <tr>
-                                        <th class="all">Dog Name</th>
-                                        <th>Breed</th>
-                                        <th>Color</th>
-                                        <th>Description</th>
-                                        <th style="width: 120px;">Action</th>
+                                        <th class="text-white" class="all">Dog Name</th>
+                                        <th class="text-white">Breed</th>
+                                        <th class="text-white">Color</th>
+                                        <th class="text-white">Description</th>
+                                        <th style="width: 120px;" class="text-white">Action</th>
                                     </tr>
                                 </thead>
-                                <tbody class="list">
+                                <tbody class="list ">
                                     @if (isset($doglist))
                                         @foreach ($doglist as $item)
                                             @php
                                                 $images = json_decode($item['animal_images']);
                                             @endphp
                                             <tr id="dog-{{ $item['dog_id_unique'] }}">
-                                                <td class="dog_name">
+                                                <td class="dog_name text-black">
                                                     <img src="{{ asset('storage/' . $images[0]) }}" alt="Animal Image"
-                                                        title="Animal Image" class="rounded me-3" height="48" />
+                                                        title="Animal Image" class="rounded me-3" 
+                                                        style="min-width: 72px; min-height: 48px; width: 70px; height: 48px; object-fit: cover;"/>
                                                     <p class="m-0 d-inline-block align-middle font-16">
-                                                        <a href="apps-ecommerce-products-details.html"
-                                                            class="text-body">{{ $item['dog_name'] }}</a>
+                                                        <a class="text-black">{{ $item['dog_name'] }}</a>
                                                     </p>
                                                 </td>
-                                                <td class="breed">{{ $item['breed'] }}</td>
-                                                <td class="color">{{ $item['color'] }}</td>
-                                                <td class="description">{{ $item['description'] }}</td>
-                                                <td class="table-action">
+                                                <td class="breed text-black">{{ $item['breed_name'] }}</td>
+                                                <td class="color text-black">{{ $item['color'] }}</td>
+                                                <td class="description text-black">{{ $item['description'] }}</td>
+                                                <td class="table-action text-black">
                                                     <a data-bs-toggle="modal" data-bs-target="#info-header-modal"
                                                         wire:click="$dispatch('editDoggo', [ '{{ $item['dog_id_unique'] }}' ])"
                                                         class="action-icon">
@@ -199,6 +206,7 @@
         @livewire('modals-dogs')
 
         <script>
+         
             var dogList = [];
 
             function confirmDelete(dogid) {
@@ -271,7 +279,6 @@
                         })
                     });
 
-
                     $('.jPaginateBack').on('click', function() {
                         var list = $('.pagination').find('li');
                         $.each(list, function(position, element) {
@@ -280,7 +287,6 @@
                             }
                         })
                     });
-
 
                     Livewire.on('dogSaved', event => {
                         Swal.fire({

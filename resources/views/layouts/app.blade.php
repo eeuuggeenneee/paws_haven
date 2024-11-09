@@ -62,6 +62,16 @@
         .scroll-content {
             height: 90%;
         }
+
+        .card-body{
+            background-color: #f2f2f2 !important;
+            border: 1px solid #0c698b;
+            color: black !important;
+        }
+
+        th {
+            background-color: #0396a6 !important;
+        }
     </style>
     {{-- @vite(['resources/js/app.js']) --}}
 
@@ -89,7 +99,7 @@
     <div class="wrapper">
 
         <!-- ========== Topbar Start ========== -->
-        <div class="navbar-custom">
+        <div class="navbar-custom" style="background-color: #0396a6">
             <div class="topbar container-fluid">
                 <div class="d-flex align-items-center gap-lg-2 gap-1">
 
@@ -98,7 +108,7 @@
                         <!-- Logo light -->
                         <a href="{{url('/annoucement')}}" class="logo-light">
                             <span class="logo-lg">
-                                <img src="assets/images/LOGO.jpg" alt="dark logo">
+                                <img src="assets/images/logooooo.png" alt="dark logo" width="70px">
                             </span>
                             <span class="logo-sm">
                                 PH
@@ -107,8 +117,8 @@
                     </div>
 
                     <a href="{{url('/annoucement')}}" class="logo-dark">
-                        <span class="logo-lg">
-                            <img src="assets/images/LOGO.jpg" alt="dark logo">
+                        <span class="">
+                            <img src="assets/images/logooooo.png" alt="dark logo" width="70px">
                         </span>
                     </a>
 
@@ -128,48 +138,50 @@
                 <div class="container d-none d-lg-block">
                     <div class="row justify-content-center d-flex align-items-center">
                         @if (Auth::user()->type == 0)
-                            <div class="col-auto">
-                                <a class="nav-link text-black fw-semibold" href="{{ url('/lost-n-found') }}" role="button">
-                                    <i class="uil-dashboard"></i> Lost and Found
+                            <div class="col-auto ">
+                                <a class="me-2 nav-link text-white fw-semibold" href="{{ url('/lost-n-found') }}" role="button">
+                                     Lost and Found
                                 </a>
                             </div>
                             <div class="col-auto">
-                                <a class="nav-link text-secondary fw-semibold" href="{{ url('/adopt-a-dog') }}" role="button">
-                                    <i class="uil-dashboard"></i> Adoption
+                                <a class="nav-link me-2 text-white fw-semibold" href="{{ url('/adopt-a-dog') }}" role="button">
+                                     Adoption
                                 </a>
                             </div>
                             <div class="col-auto">
-                                <a class="nav-link text-secondary fw-semibold" href="{{ url('/announcements') }}" role="button">
-                                    <i class="uil-dashboard"></i> Announcements
+                                <a class="nav-link me-2 text-white fw-semibold" href="{{ url('/announcements') }}" role="button">
+                                     Announcements
                                 </a>
                             </div>
                             <div class="col-auto">
-                                <a class="nav-link text-secondary fw-semibold" href="{{ url('/fur-community') }}" role="button">
-                                    <i class="uil-dashboard"></i> About
+                                <a class="nav-link me-2 text-white fw-semibold"  role="button">
+                                     About
                                 </a>
                             </div>
                         @else
                             <div class="col-auto">
-                                <a class="nav-link text-secondary fw-semibold" href="{{ url('/announcements') }}" role="button">
-                                    <i class="uil-dashboard"></i> Announcement
+                                <a class="nav-link text-white fw-semibold" href="{{ url('/announcements') }}" role="button">
+                                     Announcement
                                 </a>
                             </div>
                             <div class="col-auto">
-                                <a href="{{ url('/report-lost-dog') }}" class="nav-link text-secondary fw-semibold">
-                                    <i class="uil-comments-alt"></i>
+                                <a href="{{ url('/report-lost-dog') }}" class="nav-link text-white fw-semibold">
                                     <span> Add Dog for LnF </span>
                                 </a>
                             </div>
                             <div class="col-auto">
-                                <a href="{{ url('/animal-list') }}" class="nav-link text-secondary fw-semibold">
-                                    <i class="uil-comments-alt"></i>
+                                <a href="{{ url('/animal-list') }}" class="nav-link text-white fw-semibold">
                                     <span> Add Dog For Adoption </span>
                                 </a>
                             </div>
                             <div class="col-auto">
-                                <a href="{{ url('/ticket-list') }}" class="nav-link text-secondary fw-semibold">
-                                    <i class="uil-comments-alt"></i>
+                                <a href="{{ url('/ticket-list') }}" class="nav-link text-white fw-semibold">
                                     <span> Ticket Lists </span>
+                                </a>
+                            </div>
+                            <div class="col-auto">
+                                <a href="{{ url('/ticket-list') }}" class="nav-link text-white fw-semibold">
+                                    <span> About </span>
                                 </a>
                             </div>
                         @endif
@@ -177,20 +189,20 @@
                 </div>
                 <ul class="topbar-menu d-flex align-items-center gap-3">
 
-                    <li class="dropdown notification-list">
+                    <li class="dropdown notification-list ">
                         <a class="nav-link dropdown-toggle arrow-none" data-bs-toggle="dropdown" href="#"
                             role="button" aria-haspopup="false" aria-expanded="false">
-                            <i class="ri-notification-3-line font-22"></i>
+                            <i class="ri-notification-3-line font-22 text-white"></i>
                             <span class="noti-icon-badge"></span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-end dropdown-menu-animated dropdown-lg py-0">
-                            <div class="p-2 border-top-0 border-start-0 border-end-0 border-dashed border">
+                            <div class="p-2 border-top-0 border-start-0 border-end-0 border-dashed border text-white" >
                                 <div class="row align-items-center">
                                     <div class="col">
-                                        <h6 class="m-0 font-16 fw-semibold"> Notification</h6>
+                                        <h6 class="m-0 font-16 fw-semibold text-black"> Notification</h6>
                                     </div>
                                     <div class="col-auto">
-                                        <a href="javascript: void(0);" class="text-dark text-decoration-underline">
+                                        <a href="javascript: void(0);" class="text-white text-decoration-underline">
                                             <small>Clear All</small>
                                         </a>
                                     </div>
@@ -211,16 +223,16 @@
                         </div>
                     </li>
 
-                    <li class="dropdown">
-                        <a class="nav-link dropdown-toggle arrow-none nav-user px-2" data-bs-toggle="dropdown"
+                    <li class="dropdown" >
+                        <a style="background-color: #0396a6" class="nav-link dropdown-toggle arrow-none nav-user px-2" data-bs-toggle="dropdown"
                             href="#" role="button" aria-haspopup="false" aria-expanded="false">
                             <span class="account-user-avatar">
                                 <img src="assets/images/users/avatar-1.jpg" alt="user-image" width="32"
                                     class="rounded-circle">
                             </span>
                             <span class="d-lg-flex flex-column gap-1 d-none">
-                                <h5 class="my-0">{{Auth::user()->name}}</h5>
-                                <h6 class="my-0 fw-normal">{{Auth::user()->email}}</h6>
+                                <h5 class="my-0 text-white">{{Auth::user()->name}}</h5>
+                                <h6 class="my-0 fw-normal text-white">{{Auth::user()->email}}</h6>
                             </span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-end dropdown-menu-animated profile-dropdown">
@@ -279,13 +291,7 @@
             <!-- Sidebar -->
             <div class="h-100" id="leftside-menu-container" data-simplebar>
                 <!-- Leftbar User -->
-                <div class="leftbar-user">
-                    <a href="pages-profile.html">
-                        <img src="assets/images/users/avatar-1.jpg" alt="user-image" height="42"
-                            class="rounded-circle shadow-sm">
-                        <span class="leftbar-user-name mt-2">Dominic Keller</span>
-                    </a>
-                </div>
+         
 
                 <!--- Sidemenu -->
                 <ul class="side-nav">
@@ -329,10 +335,9 @@
         <!-- Start Page Content here -->
         <!-- ============================================================== -->
 
-        <div class="content-page">
+        <div class="content-page" style="background-color: #9CDED8 ">
             <div class="content">
                 @yield('content')
-
             </div>
         </div>
 

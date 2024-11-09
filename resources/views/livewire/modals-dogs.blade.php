@@ -32,7 +32,7 @@
                             <label class="form-label" for="color">Color</label>
                             <div class="input-group">
                                 <input type="text" class="form-control" id="color" placeholder="Color"
-                                    wire:model="color" required>
+                                    wire:model="color">
                             </div>
                         </div>
                         <div class="mb-3">
@@ -138,8 +138,7 @@
                                             <form class="ps-lg-4">
                                                 <!-- Product title -->
                                                 <h3 class="mt-0">{{ $activedog['dog_name'] ?? 'N/A' }} <a
-                                                        href="javascript: void(0);" class="text-muted"><i
-                                                            class="mdi mdi-square-edit-outline ms-2"></i></a>
+                                                        href="javascript: void(0);" class="text-muted"><i class="mdi mdi-check-decagram text-success"></i></a>
                                                 </h3>
                                                 <p class="mb-1">Added Date:
                                                     {{ isset($activedog['created_at']) ? \Carbon\Carbon::parse($activedog['created_at'])->format('m/d/Y') : 'N/A' }}
@@ -154,7 +153,7 @@
                                                 <!-- Product description -->
                                                 <div class="mt-4">
                                                     <h6 class="font-14">Breed:</h6>
-                                                    <h4 class="me-3"> {{ $activedog['breed'] ?? 'N/A' }} </h4>
+                                                    <h4 class="me-3"> {{ $activedog['breed_name'] ?? 'N/A' }} </h4>
                                                 </div>
 
                                                 <!-- Quantity -->
@@ -402,13 +401,12 @@
                                         </div> <!-- end col -->
                                     </div> <!-- end row-->
                                     <div class="container mt-3 d-none" id="adoptionform">
-                                        <div class="card">
+                                        <div class="card shadow">
                                             <div class="card-header bg-info text-white">
                                                 <h5 class="card-title">Adoption Form</h5>
                                                 <h6 class="card-subtitle ">Every Information is important</h6>
                                             </div>
-                                            <div class="card-body">
-
+                                            <div class="px-3 py-3">
                                                 <form class="needs-validation" id="checkform" novalidate>
                                                     <div class="row">
                                                         <div class="mb-3 col-6">
@@ -566,8 +564,7 @@
                                             <form class="ps-lg-4">
                                                 <!-- Product title -->
                                                 <h3 class="mt-0">{{ $activedog['dog_name'] ?? 'N/A' }} <a
-                                                        href="javascript: void(0);" class="text-muted"><i
-                                                            class="mdi mdi-square-edit-outline ms-2"></i></a>
+                                                        href="javascript: void(0);" class="text-muted"><i class="mdi mdi-check-decagram text-success"></i></a>
                                                 </h3>
                                                 <p class="mb-1">Added Date:
                                                     {{ isset($activedog['created_at']) ? \Carbon\Carbon::parse($activedog['created_at'])->format('m/d/Y') : 'N/A' }}
@@ -582,7 +579,7 @@
                                                 <!-- Product description -->
                                                 <div class="mt-4">
                                                     <h6 class="font-14">Breed:</h6>
-                                                    <h4 class="me-3"> {{ $activedog['breed'] ?? 'N/A' }} </h4>
+                                                    <h4 class="me-3"> {{ $activedog['breed_name'] ?? 'N/A' }} </h4>
                                                 </div>
 
                                                 <!-- Quantity -->
@@ -831,12 +828,12 @@
                                         </div> <!-- end col -->
                                     </div> <!-- end row-->
                                     <div class="container mt-3 d-none" id="claimformtoggle" wire:ignore>
-                                        <div class="card">
+                                        <div class="card shadow">
                                             <div class="card-header bg-warning text-white">
                                                 <h5 class="card-title">Claim Form</h5>
                                                 <h6 class="card-subtitle ">Every Information is important</h6>
                                             </div>
-                                            <div class="card-body">
+                                            <div class="py-3 px-3">
 
                                                 <form class="needs-validation" id="claimcheckform" novalidate>
                                                     <div class="row">
@@ -873,7 +870,7 @@
                                                             maxlength="11"
                                                             oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 11);">
                                                         <div class="invalid-feedback">
-                                                            Please provide a valid city.
+                                                            Please provide a valid phone number.
                                                         </div>
                                                     </div>
 
@@ -892,10 +889,13 @@
                                                             <div class="mb-3">
                                                                 <label class="form-label"
                                                                     for="validationCustom02">Breed</label>
-                                                                <input type="text" class="form-control"
-                                                                    id="validationCustom02" placeholder="Last name"
-                                                                    wire:model="c_breed" required>
-                                                                <div class="valid-feedback">
+                                                                    <select id="dog-breed" name="dog-breed" class="form-select" wire:model="c_breed" required>
+                                                                        <option value="" disabled selected>Select a breed</option>
+                                                                        @foreach ($breedlist as $breed)
+                                                                            <option value="{{ $breed['id'] }}">{{ $breed['name'] }}</option>
+                                                                        @endforeach
+                                                                    </select>
+                                                                    <div class="valid-feedback">
                                                                     Looks good!
                                                                 </div>
                                                             </div>
@@ -922,7 +922,7 @@
                                                                     for="validationCustom02">Proof of Ownership</label>
                                                                 <input type="file" class="form-control"
                                                                     id="validationCustom02" placeholder="Last name"
-                                                                    wire:model="c_proof" required>
+                                                                    wire:model="c_proof">
                                                                 <div class="valid-feedback">
                                                                     Looks good!
                                                                 </div>
