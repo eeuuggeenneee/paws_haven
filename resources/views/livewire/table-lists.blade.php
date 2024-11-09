@@ -149,7 +149,8 @@
                 <div class="card-body px-0 py-0">
                     <ul class="nav nav-tabs nav-bordered mb-3" wire:ignore>
                         <li class="nav-item">
-                            <a href="#settings-b1" data-bs-toggle="tab" aria-expanded="false" class="nav-link fw-bold">
+                            <a href="#settings-b1" data-bs-toggle="tab" aria-expanded="false"
+                                class="active nav-link fw-bold">
                                 <i class="mdi mdi-settings-outline d-md-none d-block"></i>
                                 <span class="d-none d-md-block">Lost and found</span>
                             </a>
@@ -161,15 +162,14 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#home-b1" data-bs-toggle="tab" aria-expanded="false"
-                                class="nav-link active fw-bold">
+                            <a href="#home-b1" data-bs-toggle="tab" aria-expanded="false" class="nav-link  fw-bold">
                                 <i class="mdi mdi-home-variant d-md-none d-block"></i>
                                 <span class="d-none d-md-block">Adoption</span>
                             </a>
                         </li>
                     </ul>
                     <div class="tab-content" style="background-color: #f2f2f2">
-                        <div class="tab-pane" id="settings-b1" wire:ignore.self>
+                        <div class="tab-pane show active" id="settings-b1" wire:ignore.self>
                             <div class="card" style="background-color: #f2f2f2">
                                 <div class="py-3 px-3">
 
@@ -181,8 +181,19 @@
                                                     style="width: 150%;" placeholder="Search for dogs...">
                                             </div>
                                             <h3 class="mb-4 d-flex align-items-center ms-auto"></h3>
-
+                                            <div class="mb-2" style="display: flex; align-items: center; justify-content: space-between;">
+                                                <!-- Other elements on the left -->
+                                                <label for="addressFilter" style="white-space: nowrap; margin-right: 10px;">Filter by Proof</label>
+                                                <select id="addressFilter" class="form-select ">
+                                                    <option value="">All</option>
+                                                    <option value="with">With Proof</option>
+                                                    <option value="without">Without Proof</option>
+                                                </select>
+                                            </div>
+                                            
+                                            
                                         </div>
+                                      
                                         <table class="table table-centered table-nowrap mb-0">
                                             <thead style="background-color: #0396a6;">
                                                 <tr>
@@ -231,18 +242,57 @@
                                                                     </div>
                                                                 </td>
 
-                                                                <td class="contact text-black">{{ $cdata['contact'] ?? 'N/A' }}
+                                                                <td class="contact text-black">
+                                                                    {{ $cdata['contact'] ?? 'N/A' }}
                                                                 </td>
-                                                                <td class="address">
-                                                                    @if(isset($cdata['proof']))
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" width="20" height="20" x="0" y="0" viewBox="0 0 2.54 2.54" style="enable-background:new 0 0 512 512" xml:space="preserve" fill-rule="evenodd" class=""><g><circle cx="1.27" cy="1.27" r="1.27" fill="#00ba00" opacity="1" data-original="#00ba00" class=""></circle><path fill="#ffffff" d="M.873 1.89.41 1.391a.17.17 0 0 1 .008-.24.17.17 0 0 1 .24.009l.358.383.567-.53a.17.17 0 0 1 .016-.013l.266-.249a.17.17 0 0 1 .24.008.17.17 0 0 1-.008.24l-.815.76-.283.263-.125-.134z" opacity="1" data-original="#ffffff" class=""></path></g></svg>
+                                                                <td class="address"
+                                                                    data-address-status="{{ isset($cdata['proof']) ? 'with' : 'without' }}">
+                                                                    @if (isset($cdata['proof']))
+                                                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                                                            version="1.1"
+                                                                            xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                                            width="20" height="20" x="0" y="0"
+                                                                            viewBox="0 0 2.54 2.54"
+                                                                            style="enable-background:new 0 0 512 512"
+                                                                            xml:space="preserve" fill-rule="evenodd"
+                                                                            class="">
+                                                                            <g>
+                                                                                <circle cx="1.27" cy="1.27"
+                                                                                    r="1.27" fill="#00ba00"
+                                                                                    opacity="1"
+                                                                                    data-original="#00ba00"
+                                                                                    class=""></circle>
+                                                                                <path fill="#ffffff"
+                                                                                    d="M.873 1.89.41 1.391a.17.17 0 0 1 .008-.24.17.17 0 0 1 .24.009l.358.383.567-.53a.17.17 0 0 1 .016-.013l.266-.249a.17.17 0 0 1 .24.008.17.17 0 0 1-.008.24l-.815.76-.283.263-.125-.134z"
+                                                                                    opacity="1"
+                                                                                    data-original="#ffffff"
+                                                                                    class=""></path>
+                                                                            </g>
+                                                                        </svg>
                                                                     @else
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" width="20" height="20" x="0" y="0" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512" xml:space="preserve" class=""><g><g data-name="Layer 2"><circle cx="256" cy="256" r="256" fill="#f44336" opacity="1" data-original="#f44336" class=""></circle><path fill="#ffffff" d="M348.6 391a42.13 42.13 0 0 1-30-12.42L256 316l-62.6 62.61a42.41 42.41 0 1 1-60-60L196 256l-62.61-62.6a42.41 42.41 0 0 1 60-60L256 196l62.6-62.61a42.41 42.41 0 1 1 60 60L316 256l62.61 62.6a42.41 42.41 0 0 1-30 72.4z" opacity="1" data-original="#ffffff"></path></g></g></svg>
+                                                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                                                            version="1.1"
+                                                                            xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                                            width="20" height="20" x="0" y="0"
+                                                                            viewBox="0 0 512 512"
+                                                                            style="enable-background:new 0 0 512 512"
+                                                                            xml:space="preserve" class="">
+                                                                            <g>
+                                                                                <g data-name="Layer 2">
+                                                                                    <circle cx="256"
+                                                                                        cy="256" r="256"
+                                                                                        fill="#f44336" opacity="1"
+                                                                                        data-original="#f44336"
+                                                                                        class=""></circle>
+                                                                                    <path fill="#ffffff"
+                                                                                        d="M348.6 391a42.13 42.13 0 0 1-30-12.42L256 316l-62.6 62.61a42.41 42.41 0 1 1-60-60L196 256l-62.61-62.6a42.41 42.41 0 0 1 60-60L256 196l62.6-62.61a42.41 42.41 0 1 1 60 60L316 256l62.61 62.6a42.41 42.41 0 0 1-30 72.4z"
+                                                                                        opacity="1"
+                                                                                        data-original="#ffffff"></path>
+                                                                                </g>
+                                                                            </g>
+                                                                        </svg>
                                                                     @endif
-                                                                    {{-- <p class="mb-0 txt-muted">
-                                                                        {{ $cdata['proof'] ?? 'N/A' }} 
-                                                                        
-                                                                        <i data-lucide="accessibility"></i> </p> --}}
+
                                                                 </td>
                                                                 <td class="status">
                                                                     <h5 class="my-0">
@@ -336,7 +386,8 @@
                                                             <td class="ticket_number text-black">
                                                                 R{{ $data['created_at']->format('ym') . '-' . str_pad($data['id'], 4, '0', STR_PAD_LEFT) ?? 'N/A' }}
                                                             </td>
-                                                            <td class="requestor text-black"> {{ $data['name'] ?? 'N/A' }} </td>
+                                                            <td class="requestor text-black">
+                                                                {{ $data['name'] ?? 'N/A' }} </td>
                                                             <td class="address text-black">
                                                                 {{ $data['address'] ?? 'N/A' }}
                                                             </td>
@@ -410,7 +461,7 @@
                                 </div> <!-- end card-body-->
                             </div>
                         </div>
-                        <div class="tab-pane show active" id="home-b1" wire:ignore.self>
+                        <div class="tab-pane " id="home-b1" wire:ignore.self>
                             <div class="row">
                                 <div class="col-12">
                                     <div class="card" style="background-color: #f2f2f2">
@@ -421,6 +472,7 @@
                                                     <input type="text" class="search form-control " id="searchtb"
                                                         style="width: 150%;" placeholder="Search for dogs...">
                                                 </div>
+
                                                 <h3 class="mb-4 d-flex align-items-center ms-auto"></h3>
 
                                                 <table class="table table-centered table-nowrap mb-0">
@@ -445,7 +497,8 @@
                                                                 <tr id="claim-{{ $data['dog_id_unique'] }}">
                                                                     <td class="ticket_number text-black">
                                                                         A{{ $data['created_at']->format('ym') . '-' . str_pad($data['id'], 4, '0', STR_PAD_LEFT) ?? 'N/A' }}
-                                                                    <td class="requestor text-black"> {{ $data['fullname'] }}
+                                                                    <td class="requestor text-black">
+                                                                        {{ $data['fullname'] }}
                                                                     </td>
                                                                     <td class="dog_name text-black">
                                                                         <div class="d-flex">
@@ -473,7 +526,8 @@
                                                                         <p class="mb-0 txt-muted">
                                                                             {{ $data['c_number'] }}</p>
                                                                     </td>
-                                                                    <td class="address text-black">{{ $data['address'] }}</td>
+                                                                    <td class="address text-black">
+                                                                        {{ $data['address'] }}</td>
                                                                     <td class="date_request text-black">
                                                                         {{ $data['created_at']->format('M-d-Y') }}</td>
                                                                     <td class="status text-black">
@@ -1332,6 +1386,22 @@
                 document.querySelector('.cl_search').addEventListener('input', function(event) {
                     cl_list.search(event.target
                         .value); // Filter results based on the search input
+                });
+
+                document.getElementById('addressFilter').addEventListener('change', function() {
+                    var selectedOption = this.value;
+
+                    cl_list.filter(function(item) {
+                        var addressStatus = item.elm.querySelector('.address').getAttribute(
+                            'data-address-status');
+                        if (selectedOption === '') {
+                            return true;
+                        } else if (selectedOption === 'with') {
+                            return addressStatus === 'with';
+                        } else if (selectedOption === 'without') {
+                            return addressStatus === 'without';
+                        }
+                    });
                 });
 
                 $('.cl_PaginateNext').on('click', function() {
