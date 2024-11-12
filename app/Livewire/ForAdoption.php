@@ -7,6 +7,8 @@ use Livewire\Component;
 use App\Models\AnimalList;
 use App\Models\AnimalListStatus;
 use App\Models\ClickDogs;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 
 class ForAdoption extends Component
 {
@@ -29,21 +31,37 @@ class ForAdoption extends Component
 
     public function adoptionform($id)
     {
+
         $this->dispatch('activedog', $id);
     }
     public function heartDog($data)
     {
-        $click = ClickDogs::where('dog_id_unique', $data)->first();
-        if ($click) {
-            $count = $click->clicked + 1;
-            $click->update(['clicked' => $count]);
+        $user = Auth::user()->id;
+        $cacheKey = 'dog_clicks_' . $data; 
+
+        $clickedUsers = Cache::get($cacheKey, []); 
+
+        if (!in_array($user, $clickedUsers)) {
+            $click = ClickDogs::where('dog_id_unique', $data)->first();
+
+            if ($click) {
+                $count = $click->clicked + 1;
+                $click->update(['clicked' => $count]);
+            } else {
+                ClickDogs::create([
+                    'dog_id_unique' => $data,
+                    'clicked' => 1,
+                ]);
+                $count = 1;
+            }
+
+            $clickedUsers[] = $user;
+            Cache::forever($cacheKey, $clickedUsers);
+            Cache::forever($data . '_click_count', $count);
         } else {
-            ClickDogs::create([
-                'dog_id_unique' => $data,
-                'clicked' => 1,
-            ]);
-            $count = 1;
+            $count = Cache::get($data . '_click_count');
         }
+        
         $this->dispatch('heart_dog', $data, $count);
     }
     public function render()

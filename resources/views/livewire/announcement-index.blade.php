@@ -38,8 +38,9 @@
                                                 <i class='uil uil-comment-alt-message me-1'></i> Annoucements
                                             </a>
                                             @if (Auth::user()->type == 1)
-                                                <a class="nav-link list-group-item list-group-item-action border-0" id="annc_active" onclick="activeRounds()"
-                                                    data-bs-toggle="modal" data-bs-target="#create_aa">
+                                                <a class="nav-link list-group-item list-group-item-action border-0"
+                                                    id="annc_active" onclick="activeRounds()" data-bs-toggle="modal"
+                                                    data-bs-target="#create_aa">
                                                     <i class='uil uil-comment-alt-message me-1'></i> Create Annoucements
                                                 </a>
                                             @endif
@@ -80,12 +81,12 @@
                                             <div class="d-flex mt-3">
                                                 <i class='uil uil-arrow-growth me-2 font-18 text-primary'></i>
                                                 <div>
-                                                    <a class="mt-1 font-14" href="javascript:void(0);">
+                                                    <p class="mt-1 font-14" href="javascript:void(0);">
                                                         <strong>{{ $clicked['dog_name'] }}</strong>
                                                         <span class="text-muted"><br>
                                                             {{ $clicked['description'] }}
                                                         </span>
-                                                    </a>
+                                                    </p>
                                                 </div>
                                             </div>
                                         @endforeach
@@ -116,36 +117,34 @@
                 </div> <!-- end col -->
 
                 <div class="col-xxl-9 col-lg-12 order-lg-2 order-xxl-1 scrollable-column">
-                    <!-- new post -->
                     <div class="tab-content scroll-content" id="v-pills-tabContent">
                         <div class="tab-pane fade active show" id="v-pills-timeline" role="tabpanel"
                             aria-labelledby="v-pills-timeline-tab">
                             @if (isset($annoucements))
                                 @foreach ($annoucements as $announcement)
-                                    <div class="card">
+                                    <div class="card" id="annoucement-{{ $announcement['id'] }}">
                                         <div class="card-body">
                                             <div class="d-flex">
                                                 <h3 class="mt-0">{{ $announcement['title'] }}</h3>
                                                 @if (Auth::user()->type == 1)
-                                                    {{-- <div class="dropdown card-widgets ms-auto">
+                                                    <div class="dropdown card-widgets ms-auto">
                                                         <a href="#" class="dropdown-toggle arrow-none"
                                                             data-bs-toggle="dropdown" aria-expanded="false">
                                                             <i class="uil uil-ellipsis-h"></i>
                                                         </a>
                                                         <div class="dropdown-menu dropdown-menu-end">
-                                                            <!-- item-->
-                                                            <a href="javascript:void(0);" class="dropdown-item">
+                                                            <a href="javascript:void(0);" class="dropdown-item"
+                                                                wire:click="$dispatch('editAnnouncement', [ '{{ $announcement['id'] }}' ])"
+                                                                data-bs-toggle="modal" data-bs-target="#update_aa">
                                                                 <i class="uil uil-edit me-1"></i>Edit
                                                             </a>
-                                                            <!-- item-->
-                                                            <div class="dropdown-divider"></div>
-                                                            <!-- item-->
                                                             <a href="javascript:void(0);"
+                                                                onclick="deleteAnnouce('{{ $announcement['id'] }}')"
                                                                 class="dropdown-item text-danger">
                                                                 <i class="uil uil-trash-alt me-1"></i>Delete
                                                             </a>
                                                         </div> <!-- end dropdown menu-->
-                                                    </div> <!-- end dropdown--> --}}
+                                                    </div> <!-- end dropdown-->
                                                 @endif
                                             </div>
                                             <p>
@@ -163,7 +162,8 @@
                                                     </p>
                                                     <div class="d-flex">
                                                         <img src="{{ asset('storage/profile_pictures/' . basename($announcement['profile_path'])) }}"
-                                                            alt="Arya S" class="rounded-circle me-2" height="24">
+                                                            alt="Arya S" class="rounded-circle me-2"
+                                                            height="24">
                                                         <div>
                                                             <h5 class="mt-1 font-14">
                                                                 {{ $announcement['name'] }}
@@ -212,6 +212,32 @@
         });
 
         let activeElement;
+
+        function deleteAnnouce(id) {
+            Swal.fire({
+                title: 'Are you sure?',
+                text: 'Do you really want to delete this announcement?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Yes, delete it!',
+                cancelButtonText: 'No, cancel!',
+                reverseButtons: true
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    var card = document.getElementById('annoucement-' + id);
+                    if (card) {
+                        card.remove(); // Remove the card element from the DOM
+                    }
+                    Livewire.dispatch('deleteAnnoucement',{
+                        a_id: id
+                    })
+
+                    Swal.fire('Deleted!', 'The announcement has been deleted.', 'success');
+                } else if (result.dismiss === Swal.DismissReason.cancel) {
+                    Swal.fire('Cancelled', 'Your announcement is safe :)', 'error');
+                }
+            });
+        }
 
         function activeRounds() {
             activeElement = document.querySelector('#v-pills-tab .active');

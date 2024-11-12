@@ -64,7 +64,34 @@ class ModalsDogs extends Component
     public $updatedog = false;
     public $previmages;
 
-    protected $listeners = ['editDoggo', 'activedog', 'clearData', 'saveDogData'];
+    public $edit_a_title;
+    public $edit_sub_title;
+    public $edit_message;
+    public $editA_id;
+
+    protected $listeners = ['editDoggo', 'activedog', 'clearData', 'saveDogData','editAnnouncement','deleteAnnoucement'];
+
+    public function deleteAnnoucement($a_id){
+        
+        Annoucement::where('id',$a_id)->where('isActive',1)->update(['isActive' => 0]);
+    }
+    public function editAnnouncement($id)
+    {
+        $this->editA_id = Annoucement::where('id',$id)->first();
+        $this->edit_a_title = $this->editA_id->title;
+        $this->edit_sub_title = $this->editA_id->sub_title;
+        $this->edit_message = $this->editA_id->message;
+    }
+    public function saveUpdateAnnounce()
+    {
+        if ($this->editA_id) {
+            $this->editA_id->title = $this->edit_a_title;  // New title
+            $this->editA_id->sub_title = $this->edit_sub_title;  // New sub_title
+            $this->editA_id->message = $this->edit_message;  // New message
+            $this->editA_id->save();
+        }
+        // $this->dispatch('annoucementSave', 'Annoucement has been successfully updated!');
+    }
     public function saveAnnoucement()
     {
 
@@ -75,7 +102,7 @@ class ModalsDogs extends Component
             'isActive' => 1,
             'user_id' => Auth::user()->id,
         ]);
-        $this->dispatch('dogSaved', 'Annoucement has been successfully saved!');
+        $this->dispatch('annoucementSave', 'Annoucement has been successfully saved!');
     }
     public function addDogBreed()
     {
@@ -168,19 +195,18 @@ class ModalsDogs extends Component
 
         $this->dispatch('saveRounds', 'Your rounds request has been successfully saved! Please expect a call from the pound when your request is approved. Thank you!', $ticket);
         $this->dispatch('fetchdatanotif');
-        
     }
     public function activedog($id)
     {
         $this->dog_unique = $id;
         $this->activedog = AnimalList::where('animal_lists.dog_id_unique', $id)
-        ->leftJoin('dog_breeds','dog_breeds.id', '=','animal_lists.breed')
-        ->select('animal_lists.*','dog_breeds.name as breed_name')
-        ->where('animal_lists.isActive', true)->first();
+            ->leftJoin('dog_breeds', 'dog_breeds.id', '=', 'animal_lists.breed')
+            ->select('animal_lists.*', 'dog_breeds.name as breed_name')
+            ->where('animal_lists.isActive', true)->first();
     }
     public function editDoggo($id)
     {
-        $finddog = AnimalList::where('dog_id_unique', $id)->where('isActive',1)->first();
+        $finddog = AnimalList::where('dog_id_unique', $id)->where('isActive', 1)->first();
         $this->updatedog = true;
         $this->dog_unique = $id;
         $this->dogName = $finddog->dog_name;
@@ -189,7 +215,6 @@ class ModalsDogs extends Component
         $this->gender = $finddog->gender;
         $this->description = $finddog->description;
         $this->previmages = $finddog->animal_images;
-
     }
     public function clearData()
     {
@@ -217,7 +242,7 @@ class ModalsDogs extends Component
             if ($this->dog_unique) {
 
                 AnimalList::where('dog_id_unique', $this->dog_unique)->update(['isActive' => 0]);
-            
+
                 $data = [
                     'dog_name' => $this->dogName,
                     'dog_id_unique' => $this->dog_unique,
@@ -232,7 +257,7 @@ class ModalsDogs extends Component
 
                 if (!empty($images)) {
                     $data['animal_images'] = json_encode($images);
-                }else{
+                } else {
                     $data['animal_images'] = $this->previmages;
                 }
                 $dog = AnimalList::create($data);

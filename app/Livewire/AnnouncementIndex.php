@@ -17,7 +17,7 @@ class AnnouncementIndex extends Component
             ->leftJoin('users', 'users.id', '=', 'annoucements.user_id')
             ->select('annoucements.*', 'users.name', 'users.profile_path')
             ->orderBy('annoucements.created_at', 'desc')
-            ->limit(10) // Limit results to top 10
+            ->limit(5) // Limit results to top 10
             ->get();
 
         $clicked = ClickDogs::orderBy('clicked', 'desc')->take(5)->get('dog_id_unique');

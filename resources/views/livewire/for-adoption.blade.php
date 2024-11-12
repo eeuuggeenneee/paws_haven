@@ -21,18 +21,11 @@
                     <div class="col-md-6 col-xxl-3">
                         <div class="card">
                             <div class="card-body py-3 px-3">
-                                <div class="float-end position-absolute">
-                                    <button type="button" class="btn btn-danger"
-                                        wire:click="heartDog('{{ $d['dog_id_unique'] }}')" data-bs-toggle="modal"
-                                        data-bs-target="#bs-example-modal-lg"><i class="mdi mdi-heart-outline"></i>
-                                    </button>
-                                </div>
+                            
                                 <div class="text-center">
                                     <a data-bs-toggle="modal" data-bs-target="#viewdog"
                                         wire:click="adoptionform('{{ $d['dog_id_unique'] }}')">
-                                        <img src="{{ asset('storage/' . $images[0]) }}" class="img-thumbnail"
-                                            alt="friend"
-                                            style="min-width: 270px; min-height: 170px; width: 270px; height: 170px; object-fit: cover;"></a>
+                                        <img src="{{ asset('storage/' . $images[0]) }}" class="img-thumbnail" alt="friend" style="min-width: 300px; min-height: 170px; width: 300px; height: 170px; object-fit: cover;"></a>
 
                                     <h4 class="mt-2"><a href="pages-profile-2.html"
                                             class="text-reset">{{ $d['dog_name'] }} <i

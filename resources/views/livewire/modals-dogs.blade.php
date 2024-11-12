@@ -1232,7 +1232,8 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary text-white" onclick="fconfirm()">Submit</button>
+                        <button type="button" class="btn btn-primary text-white"
+                            onclick="fconfirm()">Submit</button>
                         <button type="button" class="btn btn-primary d-none" id="saveannouce"
                             wire:click="saveAnnoucement">Submit</button>
                     </div>
@@ -1240,7 +1241,94 @@
             </div>
         </div>
     </div>
+
+    <div id="update_aa" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="fullWidthModalLabel"
+        aria-hidden="true" wire:ignore.self>
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="fullWidthModalLabel">Create Annoucements</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                        aria-hidden="true"></button>
+                </div>
+                <form id="add_annoucment2">
+                    <div class="modal-body">
+                        <label for="a_title" class="form-label">Title</label>
+                        <input type="text" id="a_title" wire:model="edit_a_title" class="form-control"
+                            required value="{{ $edit_a_title ?? 'N/A' }}">
+
+                        <label for="sub_title" class="form-label mt-2">Sub Title</label>
+                        <input type="text" id="sub_title" wire:model="edit_sub_title"
+                            class="form-control mb-2" value="{{ $edit_sub_title ?? 'N/A' }}" required>
+
+                        <label for="snow-editor2" class="form-label mt-2">Messages</label>
+                        <div id="snow-editor2" class="mt-2" style="height: auto;">
+                            {!! $edit_message ?? 'N/A' !!}
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
+
+                        <button type="button" class="btn btn-primary text-white"
+                            onclick="fconfirm2()">Submit</button>
+
+                        <button type="button" class="btn btn-primary d-none" id="saveUpdateAnnounce"
+                            wire:click="saveUpdateAnnounce">Update</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
     <script>
+        function fconfirm2() {
+            var add_annoucment = document.getElementById('add_annoucment2');
+            add_annoucment.classList.add('was-validated');
+            if (!add_annoucment.checkValidity()) {
+                // Form is incomplete or invalid, prevent further action
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: 'top-end', // Position of the toast
+                    showConfirmButton: false,
+                    timer: 3000, // Duration before the toast disappears (in milliseconds)
+                    timerProgressBar: true,
+                });
+                Toast.fire({
+                    icon: 'warning',
+                    title: 'Please fill out all required fields.'
+                });
+                return false; // Stop further actions
+            }
+
+            var quilltext2 = document.getElementById('snow-editor2');
+            const htmlContent2 = quilltext2.innerHTML;
+
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "Are you sure you want to update this form?",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, update it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    @this.set('edit_message', htmlContent2);
+                    document.getElementById('saveUpdateAnnounce').click();
+                    closeAllModals();
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Saved Successfully',
+                        text: 'The announcement successfully updated',
+                        confirmButtonText: 'Okay'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            location.reload();
+                        }
+                    });
+                }
+            });
+        }
+
         function fconfirm() {
             var add_annoucment = document.getElementById('add_annoucment');
             add_annoucment.classList.add('was-validated');
@@ -1519,7 +1607,7 @@
                     confirmButtonText: 'Okay'
                 }).then((result) => {
                     if (result.isConfirmed) {
-             
+
                     }
                 });
             });
@@ -1536,6 +1624,21 @@
                     }
                 });
             });
+            Livewire.on('annoucementSave', event => {
+                closeAllModals();
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Data saved successfully!',
+                    text: event[0],
+                    confirmButtonText: 'Okay'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // Reload the page
+                        location.reload();
+                    }
+                });
+            });
+
 
             Livewire.on('saveRounds', event => {
                 closeAllModals();
@@ -1546,11 +1649,43 @@
                     confirmButtonText: 'Okay'
                 }).then((result) => {
                     if (result.isConfirmed) {
-                    
+
                     }
                 });
 
             });
+
+            Livewire.on('editAnnouncement', event => {
+                setTimeout(() => {
+                    var quill2 = new Quill('#snow-editor2', {
+                        theme: 'snow',
+                        modules: {
+                            imageResize: {
+                                displaySize: true
+                            },
+                            toolbar: [
+                                [{
+                                    'header': [1, 2, 3, 4, 5, 6, false]
+                                }],
+                                ['bold', 'italic', 'underline', 'strike'],
+                                [{
+                                    'color': []
+                                }, {
+                                    'background': []
+                                }],
+                                [{
+                                    'align': []
+                                }],
+                                ['link', 'image'],
+
+                                ['clean']
+                            ]
+                        }
+                    });
+                }, 1000);
+
+            });
+
         });
     </script>
 

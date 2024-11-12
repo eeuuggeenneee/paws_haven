@@ -147,15 +147,10 @@
                                         @endphp
                                         <tr>
                                             <td class="dog_name">
-                                                <img src="{{ asset('storage/' . $images[0]) }}" alt="Animal Image"
-                                                    title="Animal Image" class="rounded me-3" height="48" />
-
-
+                                                <img src="{{ asset('storage/' . $images[0]) }}" alt="Animal Image" title="Animal Image" class="rounded me-3" height="48" />
                                                 <p class="m-0 d-inline-block align-middle font-16">
-                                                    <a href="apps-ecommerce-products-details.html"
-                                                        class="text-black">{{ $item['dog_name'] }}</a>
+                                                    <a class="text-black">{{ $item['dog_name'] }}</a>
                                                     <br />
-
                                                 </p>
                                             </td>
                                             <td class="breed text-black">
