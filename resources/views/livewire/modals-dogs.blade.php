@@ -72,7 +72,7 @@
         <div class="modal-dialog modal-dialog-centered modal-full-width">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title" id="fullWidthModalLabel">Add Dog</h4>
+                    <h4 class="modal-title" id="fullWidthModalLabel">Report Lost Dog</h4>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 @livewire('add-lost-dog')
@@ -574,7 +574,8 @@
 
                                                 <!-- Product stock -->
                                                 <div class="mt-3">
-                                                    <h4><span class="badge badge-success-lighten"> For Adoption </span>
+                                                    <h4><span class="badge badge-success-lighten">
+                                                            {{ $activedog['status_name'] ?? 'N/A' }} </span>
                                                     </h4>
                                                 </div>
 
@@ -820,12 +821,12 @@
                                                         </div>
                                                     </div>
                                                 </div>
-
-                                                <button type="button" id="claimtoggle"
-                                                    class="mt-3 btn btn-outline-success rounded-pill w-100"><i
-                                                        class="uil-heart"></i> Claim Dog <i
-                                                        class="uil-heart"></i></button>
-
+                                                @if (Auth::user()->type == 0)
+                                                    <button type="button" id="claimtoggle"
+                                                        class="mt-3 btn btn-outline-success rounded-pill w-100"><i
+                                                            class="uil-heart"></i> Claim Dog <i
+                                                            class="uil-heart"></i></button>
+                                                @endif
                                             </form>
                                         </div> <!-- end col -->
                                     </div> <!-- end row-->
@@ -980,11 +981,22 @@
                 </div>
 
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
                     <button type="button" class="btn btn-success d-none" id="claim_dog" wire:ignore>Confirm
                         Claim</button>
                     <button type="button" class="btn btn-success d-none" id="claimhidden_dog"
                         wire:click="confirmclaim">Confirm Claim</button>
+                    @if (Auth::user()->type == 1)
+                        <button type="button" class="btn btn-success" onclick="confirmApprove()" wire:ignore>Approve
+                            Request</button>
+                        <button type="button" class="btn btn-danger" onclick="confirmReject()" wire:ignore>Reject
+                            Request</button>
+
+                        <button type="button" class="btn btn-success d-none" id="reject_fdog"
+                            wire:click="rejectDRequest">Reject Request</button>
+                        <button type="button" class="btn btn-success d-none" id="approve_fdog"
+                            wire:click="approveDRequest">Approve Request</button>
+                    @endif
+                    <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
 
                 </div>
             </div><!-- /.modal-content -->
@@ -1214,7 +1226,8 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h4 class="modal-title" id="fullWidthModalLabel">Create Annoucements</h4>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                        aria-hidden="true"></button>
                 </div>
                 <form id="add_annoucment">
                     <div class="modal-body">
@@ -1280,6 +1293,50 @@
         </div>
     </div>
     <script>
+        function confirmApprove() {
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "Do you want to approve this request?",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#28a745',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, approve it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.getElementById('approve_fdog').click();
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Approved!',
+                        text: 'The request has been approved successfully.',
+                        confirmButtonColor: '#28a745'
+                    });
+                }
+            });
+        }
+        
+        function confirmReject() {
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "Do you really want to reject this request?",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#28a745',
+                confirmButtonText: 'Yes, reject it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.getElementById('reject_fdog').click();
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Rejected!',
+                        text: 'The request has been rejected successfully.',
+                        confirmButtonColor: '#d33'
+                    });
+                }
+            });
+        }
+
         function fconfirm2() {
             var add_annoucment = document.getElementById('add_annoucment2');
             add_annoucment.classList.add('was-validated');

@@ -65,7 +65,6 @@ class LostFoundList extends Component
 
         $this->dispatch('click_dogs', $id, $count);
         $this->dispatch('activedog', $id);
-        $this->alert('success', 'Success is approaching!');
     }
     public function render()
     {

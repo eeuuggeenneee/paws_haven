@@ -11,11 +11,8 @@
                 </div>
             </div>
             <!-- end page title -->
-
             <div class="row">
-
                 <div class="col-xxl-3 col-lg-12">
-
                     <div class="row">
                         <div class="col-lg-12 col-md-12 col-xl-12">
                             <div class="card ">
@@ -61,6 +58,10 @@
                                                     <i class='uil uil-comment-alt-message me-1'></i> Request Rounds
                                                 </a>
                                             @endif
+                                            <a class="nav-link list-group-item list-group-item-action border-0" data-bs-toggle="modal"
+                                                data-bs-target="#lostandfounddog">
+                                                <i class='uil uil-comment-alt-message me-1'></i> Report Found Dog
+                                            </a>
                                         </div>
                                     </div>
                                 </div>
@@ -228,7 +229,7 @@
                     if (card) {
                         card.remove(); // Remove the card element from the DOM
                     }
-                    Livewire.dispatch('deleteAnnoucement',{
+                    Livewire.dispatch('deleteAnnoucement', {
                         a_id: id
                     })
 
@@ -238,7 +239,6 @@
                 }
             });
         }
-
         function activeRounds() {
             activeElement = document.querySelector('#v-pills-tab .active');
             if (activeElement) {
@@ -247,9 +247,44 @@
                 return activeElement.id;
             } else {
                 console.log('No active element found');
-                return null; // No active element
+                return null; 
             }
         }
+        function closeAllModals() {
+            // Select all modals
+            const modals = document.querySelectorAll('.modal.show');
+
+            // Loop through each modal and hide it
+            modals.forEach(modal => {
+                const bootstrapModal = bootstrap.Modal.getInstance(modal);
+                if (bootstrapModal) {
+                    bootstrapModal.hide();
+                }
+            });
+
+            // Remove all backdrop elements
+            const backdrops = document.querySelectorAll('.modal-backdrop');
+            backdrops.forEach(backdrop => {
+                backdrop.parentNode.removeChild(backdrop); // Remove each backdrop
+            });
+        }
+        document.addEventListener('livewire:init', function() {
+            Livewire.on('dogSaved', event => {
+                closeAllModals();
+                Swal.fire({
+                    icon: 'success',
+                    title: event[0],
+                    text: 'Your report has been submitted. Please expect a call from the pound.',
+                    confirmButtonText: 'Okay'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+
+                    }
+                });
+            });
+        });
+
+     
     </script>
 
 </div>

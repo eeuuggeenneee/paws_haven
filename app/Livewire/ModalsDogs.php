@@ -172,6 +172,9 @@ class ModalsDogs extends Component
         $this->dispatch('fetchdatanotif');
         $this->dispatch('fetchdataAdopt');
     }
+
+
+
     public function saveRounds()
     {
         $rounds = Rounds::create([
@@ -201,8 +204,34 @@ class ModalsDogs extends Component
         $this->dog_unique = $id;
         $this->activedog = AnimalList::where('animal_lists.dog_id_unique', $id)
             ->leftJoin('dog_breeds', 'dog_breeds.id', '=', 'animal_lists.breed')
-            ->select('animal_lists.*', 'dog_breeds.name as breed_name')
+            ->leftJoin('animal_list_statuses', 'animal_list_statuses.animal_id', '=', 'animal_lists.dog_id_unique')
+            ->leftJoin('statuses', 'statuses.id', '=', 'animal_list_statuses.status')
+            ->select('animal_lists.*', 'dog_breeds.name as breed_name','statuses.name as status_name')
             ->where('animal_lists.isActive', true)->first();
+        // dd($this->activedog);
+    }
+    public function rejectDRequest(){
+        AnimalListStatus::where('animal_id',$this->dog_unique)->where('isActive',1)->update(['isActive' => 0 ]);
+
+        AnimalListStatus::create([
+            'animal_id' => $this->dog_unique,
+            'status' => 9,
+            'isActive' => 1,
+        ]);
+
+        $this->dispatch('reinnitdata');
+    }
+    public function approveDRequest(){
+
+        AnimalListStatus::where('animal_id',$this->dog_unique)->where('isActive',1)->update(['isActive' => 0 ]);
+
+        AnimalListStatus::create([
+            'animal_id' => $this->dog_unique,
+            'status' => 3,
+            'isActive' => 1,
+        ]);
+
+        $this->dispatch('reinnitdata');
     }
     public function editDoggo($id)
     {

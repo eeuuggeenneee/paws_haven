@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use App\Models\AnimalListStatus;
 use App\Models\DogBreed;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
 class AddLostDog extends Component
@@ -40,7 +41,7 @@ class AddLostDog extends Component
     {
         $finddog = AnimalList::where('dog_id_unique', $this->dog_unique)->where('isActive', 1)->first();
         $dogImages = session()->get('dog_images', []);
-       
+
         if ($finddog) {
             if ($dogImages) {
                 $finddog->animal_images = json_encode($dogImages);
@@ -59,7 +60,7 @@ class AddLostDog extends Component
             $finddog->isActive = 1;
             $finddog->save();
         }
-        
+
         $this->clearDogImages();
         $this->dispatch('dogUpdate', 'Data has been successfully updated!');
     }
@@ -114,11 +115,20 @@ class AddLostDog extends Component
             'isActive' => 1,
         ]);
 
-        AnimalListStatus::create([
-            'animal_id' => $dog->dog_id_unique,
-            'status' => $this->report_type,
-            'isActive' => 1,
-        ]);
+        if (Auth::user()->type == 0) {
+            AnimalListStatus::create([
+                'animal_id' => $dog->dog_id_unique,
+                'status' => 8,
+                'isActive' => 1,
+            ]);
+
+        } else {
+            AnimalListStatus::create([
+                'animal_id' => $dog->dog_id_unique,
+                'status' => $this->report_type,
+                'isActive' => 1,
+            ]);
+        }
 
         $this->dispatch('dogSaved', 'Data has been successfully saved!');
         $this->clearDogImages();

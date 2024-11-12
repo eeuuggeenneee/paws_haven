@@ -23,15 +23,13 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         // User::factory(10)->create();
-
-        $status = ['For Adoption','Lost Dog', 'Found Dog', 'Pending Adoption', 'Adopted','Pending Claim','Claimed'];
+        $status = ['For Adoption','Lost Dog', 'Found Dog', 'Pending Adoption', 'Adopted','Pending Claim','Claimed','For Publish','Publish Rejected'];
 
         foreach($status as $s){
             Status::create([
                 'name' => $s
             ]);
         }
-
 
         User::create([
             'email' => 'admin@gmail.com',
