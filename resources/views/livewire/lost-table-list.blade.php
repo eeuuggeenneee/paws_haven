@@ -67,31 +67,33 @@
 
         /* Style the search input field */
         .search {
-            /* Add padding for the search icon */
+            width: 100%;
+            /* Ensure input fills container */
+            padding-left: 30px;
+            /* Space for the icon */
             border-radius: 20px;
             /* Round the edges */
             border: 1px solid #ddd;
-            width: 100%;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             /* Subtle shadow */
+            padding: 8px 12px;
+            /* Padding inside the input */
+            text-align: center;
         }
 
         .search-container::before {
             content: "\1F50D";
             position: absolute;
-            left: 15px;
+            left: 10px;
             top: 50%;
-            width: 100% !important;
             transform: translateY(-50%);
             font-size: 18px;
             color: #888;
         }
 
         .search-container input.search {
-            width: 100%;
-            /* Ensure input fills container */
             text-align: center;
-            /* Center the placeholder and typed text */
+            padding-left: 30px;
         }
     </style> <!-- start page title -->
     <div class="row">
@@ -122,7 +124,7 @@
 
                             <!-- Move the Add Dog button to the right -->
                             <a data-bs-toggle="modal" data-bs-target="#lostandfounddog" wire:click="$dispatch('adddog')"
-                                class="text-end btn btn-info mb-2 ms-auto">
+                                class="text-end btn text-white mb-2 ms-auto" style="background-color: #0396a6;">
                                 <i class="mdi mdi-plus-circle me-2"></i> Add Dog
                             </a>
                         </div>

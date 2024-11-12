@@ -1,6 +1,5 @@
 @extends('layouts.app')
 
 @section('content')
-@livewire('notification')
-
+    @livewire('notification')
 @endsection

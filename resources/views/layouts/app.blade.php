@@ -74,7 +74,7 @@
         }
 
 
-        .ql-editor {
+        .disabled-editor {
             user-select: text;
             /* Allows text selection */
             pointer-events: none;
@@ -145,6 +145,12 @@
                 <div class="container d-none d-lg-block">
                     <div class="row justify-content-center d-flex align-items-center">
                         @if (Auth::user()->type == 0)
+                            <div class="col-auto">
+                                <a class="nav-link me-2 text-white fw-semibold" href="{{ url('/announcements') }}"
+                                    role="button">
+                                    Home
+                                </a>
+                            </div>
                             <div class="col-auto ">
                                 <a class="me-2 nav-link text-white fw-semibold" href="{{ url('/lost-n-found') }}"
                                     role="button">
@@ -157,12 +163,7 @@
                                     Adoption
                                 </a>
                             </div>
-                            <div class="col-auto">
-                                <a class="nav-link me-2 text-white fw-semibold" href="{{ url('/announcements') }}"
-                                    role="button">
-                                    Announcements
-                                </a>
-                            </div>
+
                             <div class="col-auto">
                                 <a class="nav-link me-2 text-white fw-semibold" role="button">
                                     About
@@ -172,29 +173,29 @@
                             <div class="col-auto">
                                 <a class="nav-link text-white fw-semibold" href="{{ url('/announcements') }}"
                                     role="button">
-                                    Announcement
+                                    Dashboard
                                 </a>
                             </div>
                             <div class="col-auto">
                                 <a href="{{ url('/report-lost-dog') }}" class="nav-link text-white fw-semibold">
-                                    <span> Add Dog for LnF </span>
+                                    <span> Lost and Found </span>
                                 </a>
                             </div>
                             <div class="col-auto">
                                 <a href="{{ url('/animal-list') }}" class="nav-link text-white fw-semibold">
-                                    <span> Add Dog For Adoption </span>
+                                    <span> Adoption </span>
                                 </a>
                             </div>
                             <div class="col-auto">
                                 <a href="{{ url('/ticket-list') }}" class="nav-link text-white fw-semibold">
-                                    <span> Ticket Lists </span>
+                                    <span> Ticket </span>
                                 </a>
                             </div>
-                            <div class="col-auto">
+                            {{-- <div class="col-auto">
                                 <a href="{{ url('/ticket-list') }}" class="nav-link text-white fw-semibold">
                                     <span> About </span>
                                 </a>
-                            </div>
+                            </div> --}}
                         @endif
                     </div>
                 </div>
@@ -220,11 +221,10 @@
                                 </div>
                             </div>
 
-                            <div class="px-2" style="max-height: 300px;" id="notification_here" data-simplebar>
-
-
-
+                            <div class="" id="notification_here" style="max-height: 350px; overflow-y: auto;">
+                                <!-- Notification content goes here -->
                             </div>
+                            
                             <!-- All-->
                             <a href="javascript:void(0);"
                                 class="dropdown-item text-center text-primary notify-item border-top py-2">
@@ -239,8 +239,8 @@
                             data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false"
                             aria-expanded="false">
                             <span class="account-user-avatar">
-                                <img src="assets/images/users/avatar-1.jpg" alt="user-image" width="32"
-                                    class="rounded-circle">
+                                <img src="{{ asset('storage/' . Auth::user()->profile_path) }}" alt="user-image"
+                                    width="32" height="32" class="rounded-circle">
                             </span>
                             <span class="d-lg-flex flex-column gap-1 d-none">
                                 <h5 class="my-0 text-white">{{ Auth::user()->name }}</h5>

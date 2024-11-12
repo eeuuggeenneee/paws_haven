@@ -75,31 +75,35 @@
 
         /* Style the search input field */
         .search {
-            /* Add padding for the search icon */
+            width: 100%;
+            /* Ensure input fills container */
+            padding-left: 30px;
+            /* Space for the icon */
             border-radius: 20px;
             /* Round the edges */
             border: 1px solid #ddd;
-            width: 100%;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             /* Subtle shadow */
+            padding: 8px 12px;
+            /* Padding inside the input */
+            text-align: center;
         }
 
         .search-container::before {
             content: "\1F50D";
             position: absolute;
-            left: 15px;
+            left: 10px;
             top: 50%;
-            width: 100% !important;
             transform: translateY(-50%);
             font-size: 18px;
             color: #888;
         }
 
         .search-container input.search {
-            width: 100%;
-            /* Ensure input fills container */
             text-align: center;
-            /* Center the placeholder and typed text */
+            /* Align text to the left */
+            padding-left: 30px;
+            /* Space between text and icon */
         }
     </style>
     <!-- Datatable css -->
@@ -120,14 +124,14 @@
                     <div class="card-body">
                         <div class="table-responsive" id="animals-datatable">
                             <div class="d-flex align-items-center ">
-                                <div class="search-container ms-auto">
+                                <div class="search-container ms-auto" onclick="focusSearchInput()">
                                     <input type="text" class="search form-control " id="searchtb"
                                         style="width: 150%;" placeholder="Search for dogs...">
                                 </div>
                                 <a data-bs-toggle="modal" data-bs-target="#info-header-modal"
                                     wire:click="$dispatch('clearData')"
-                                    class="btn btn-info mb-2 d-flex align-items-center ms-auto">
-                                    <i class="mdi mdi-plus-circle me-2"></i> Add Dogs
+                                    class="btn text-white mb-2 d-flex align-items-center ms-auto" style="background-color: #0396a6;">
+                                    <i class="mdi mdi-plus-circle me-2"></i> Add Dog
                                 </a>
                             </div>
                             <table class="table table-centered w-100 dt-responsive nowrap">
@@ -149,8 +153,8 @@
                                             <tr id="dog-{{ $item['dog_id_unique'] }}">
                                                 <td class="dog_name text-black">
                                                     <img src="{{ asset('storage/' . $images[0]) }}" alt="Animal Image"
-                                                        title="Animal Image" class="rounded me-3" 
-                                                        style="min-width: 72px; min-height: 48px; width: 70px; height: 48px; object-fit: cover;"/>
+                                                        title="Animal Image" class="rounded me-3"
+                                                        style="min-width: 72px; min-height: 48px; width: 70px; height: 48px; object-fit: cover;" />
                                                     <p class="m-0 d-inline-block align-middle font-16">
                                                         <a class="text-black">{{ $item['dog_name'] }}</a>
                                                     </p>
@@ -206,7 +210,10 @@
         @livewire('modals-dogs')
 
         <script>
-         
+            function focusSearchInput() {
+                document.getElementById('searchtb').focus();
+                console.log('hehe');
+            }
             var dogList = [];
 
             function confirmDelete(dogid) {

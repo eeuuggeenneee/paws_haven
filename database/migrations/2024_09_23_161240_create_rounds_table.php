@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('address');
             $table->string('barangay');
-            $table->string('specific_location');
+            $table->string('specific_location')->nullable();
             $table->string('schedule');
             $table->string('contact');
             $table->string('reason');

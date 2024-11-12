@@ -38,7 +38,10 @@ class Profile extends Component
     }
     public function mount(){
 
-        $user = Auth::user();
+    }
+    public function fetch(){
+        $user = User::where('id',Auth::user()->id)->first();
+
         $this->cfullname = $user->name;
         $this->c_email = $user->email;
         $this->cabout_me = $user->about_me;
@@ -46,12 +49,13 @@ class Profile extends Component
         $this->c_contact = $user->contact;
         $this->cfullname = Auth::user()->name;
 
-        $this->postcount = Community::where('user_id', $user->id)->count();
-        $this->commentcount = Comment::where('user_id', $user->id)->count();
-
+        // dd($this->cabout_me);
     }
+
     public function render()
     {
+        $this->fetch();
+    
         return view('livewire.profile');
     }
 }

@@ -115,6 +115,7 @@ class ModalsDogs extends Component
         $ticket = 'C' . $claimgo->created_at->format('ym') . '-' . $formattedId;
 
         $this->dispatch('dogClaimed', 'Your claim request has been successfully saved! Please expect a call from the pound when your request is approved. Thank you!', $ticket);
+        $this->dispatch('fetchdatanotif');
     }
 
     public function confirmadoption()
@@ -141,13 +142,15 @@ class ModalsDogs extends Component
         $ticket = 'A' . $adoptionid->created_at->format('ym') . '-' . $formattedId;
 
         $this->dispatch('dogAdopted', 'Your adoption request has been successfully saved! Please expect a call from the pound when your request is approved. Thank you!', $ticket);
+        $this->dispatch('fetchdatanotif');
+        $this->dispatch('fetchdataAdopt');
     }
     public function saveRounds()
     {
         $rounds = Rounds::create([
             'address' => $this->fulladdress,
             'barangay' => $this->barangay,
-            'specific_location' => $this->specificloc,
+            // 'specific_location' => $this->specificloc,
             'reason' => $this->reason,
             'schedule' => ' ',
             'contact' => $this->contact,
@@ -164,6 +167,8 @@ class ModalsDogs extends Component
         $ticket = 'R' . $rounds->created_at->format('ym') . '-' . $formattedId;
 
         $this->dispatch('saveRounds', 'Your rounds request has been successfully saved! Please expect a call from the pound when your request is approved. Thank you!', $ticket);
+        $this->dispatch('fetchdatanotif');
+        
     }
     public function activedog($id)
     {

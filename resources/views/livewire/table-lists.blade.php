@@ -71,41 +71,55 @@
 
         /* Style the search input field */
         .search {
-            /* Add padding for the search icon */
+            width: 100%;
+            /* Ensure input fills container */
+            padding-left: 30px;
+            /* Space for the icon */
             border-radius: 20px;
             /* Round the edges */
             border: 1px solid #ddd;
-            width: 100%;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             /* Subtle shadow */
+            padding: 8px 12px;
+            /* Padding inside the input */
+            text-align: center;
         }
 
         .c_search {
-            /* Add padding for the search icon */
+            width: 100%;
+            /* Ensure input fills container */
+            padding-left: 30px;
+            /* Space for the icon */
             border-radius: 20px;
             /* Round the edges */
             border: 1px solid #ddd;
-            width: 100%;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             /* Subtle shadow */
+            padding: 8px 12px;
+            /* Padding inside the input */
+            text-align: center;
         }
 
         .cl_search {
-            /* Add padding for the search icon */
+            width: 100%;
+            /* Ensure input fills container */
+            padding-left: 30px;
+            /* Space for the icon */
             border-radius: 20px;
             /* Round the edges */
             border: 1px solid #ddd;
-            width: 100%;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             /* Subtle shadow */
+            padding: 8px 12px;
+            /* Padding inside the input */
+            text-align: center;
         }
 
         .search-container::before {
             content: "\1F50D";
             position: absolute;
-            left: 15px;
+            left: 10px;
             top: 50%;
-            width: 100% !important;
             transform: translateY(-50%);
             font-size: 18px;
             color: #888;
@@ -131,6 +145,14 @@
             text-align: center;
             /* Center the placeholder and typed text */
         }
+
+        thead {
+            position: sticky;
+            top: 0;
+            /* Keeps the header at the top of the container when scrolling */
+            z-index: 1;
+            /* Ensures the header stays above the content */
+        }
     </style>
     <div class="content">
         <!-- Start Content-->
@@ -145,7 +167,7 @@
                 </div>
             </div>
             <!-- end page title -->
-            <div class="card" style="background-color: #f2f2f2">
+            <div class="card" style="background-color: #f2f2f2;">
                 <div class="card-body px-0 py-0">
                     <ul class="nav nav-tabs nav-bordered mb-3" wire:ignore>
                         <li class="nav-item">
@@ -156,13 +178,15 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#profile-b1" data-bs-toggle="tab" aria-expanded="true" class=" text-black nav-link fw-bold">
+                            <a href="#profile-b1" data-bs-toggle="tab" aria-expanded="true"
+                                class=" text-black nav-link fw-bold">
                                 <i class="mdi mdi-account-circle d-md-none d-block"></i>
                                 <span class="d-none d-md-block">Rounds </span>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#home-b1" data-bs-toggle="tab" aria-expanded="false" class=" text-black nav-link  fw-bold">
+                            <a href="#home-b1" data-bs-toggle="tab" aria-expanded="false"
+                                class=" text-black nav-link  fw-bold">
                                 <i class="mdi mdi-home-variant d-md-none d-block "></i>
                                 <span class="d-none d-md-block">Adoption</span>
                             </a>
@@ -170,30 +194,32 @@
                     </ul>
                     <div class="tab-content" style="background-color: #f2f2f2">
                         <div class="tab-pane show active" id="settings-b1" wire:ignore.self>
-                            <div class="card" style="background-color: #f2f2f2">
-                                <div class="py-3 px-3">
-
+                            <div class="card" style="background-color: #f2f2f2;" id="claimcard">
+                                <div class="px-3">
                                     <h3>Claim List</h3>
-                                    <div class="table-responsive" id="claim_list">
+                                    <div class="table-responsive" id="claim_list" wire:ignore.self>
                                         <div class="d-flex align-items-center">
                                             <div class="search-container ms-auto">
                                                 <input type="text" class="cl_search form-control " id="searchtb"
                                                     style="width: 150%;" placeholder="Search for dogs...">
                                             </div>
                                             <h3 class="mb-4 d-flex align-items-center ms-auto"></h3>
-                                            <div class="mb-2" style="display: flex; align-items: center; justify-content: space-between;">
+                                            <div class="mb-2"
+                                                style="display: flex; align-items: center; justify-content: space-between;">
                                                 <!-- Other elements on the left -->
-                                                <label for="addressFilter" style="white-space: nowrap; margin-right: 10px;">Filter by Proof</label>
+                                                <label for="addressFilter"
+                                                    style="white-space: nowrap; margin-right: 10px;">Filter by
+                                                    Proof</label>
                                                 <select id="addressFilter" class="form-select ">
                                                     <option value="">All</option>
                                                     <option value="with">With Proof</option>
                                                     <option value="without">Without Proof</option>
                                                 </select>
                                             </div>
-                                            
-                                            
+
+
                                         </div>
-                                      
+
                                         <table class="table table-centered table-nowrap mb-0">
                                             <thead style="background-color: #0396a6;">
                                                 <tr>
@@ -330,34 +356,37 @@
                                                 @endif
                                             </tbody>
                                         </table>
-                                        <div class="table-footer">
-                                            <nav>
-                                                <div class="page-item cl_jPaginateBack">
-                                                    <a class="page-link" href="javascript: void(0);"
-                                                        aria-label="Previous">
-                                                        <span aria-hidden="true">&laquo;</span>
-                                                    </a>
-                                                </div>
-                                                <ul class="pagination pagination-rounded mb-0">
+                                        <div class="card-footer mt-3">
+                                            <div class="table-footer">
+                                                <nav>
+                                                    <div class="page-item cl_jPaginateBack">
+                                                        <a class="page-link" href="javascript: void(0);"
+                                                            aria-label="Previous">
+                                                            <span aria-hidden="true">&laquo;</span>
+                                                        </a>
+                                                    </div>
+                                                    <ul class="pagination pagination-rounded mb-0">
 
-                                                </ul>
-                                                <div class="page-item ">
-                                                    <a class="page-link cl_jPaginateNext" href="javascript: void(0);"
-                                                        aria-label="Next">
-                                                        <span aria-hidden="true">&raquo;</span>
-                                                    </a>
-                                                </div>
-                                            </nav>
+                                                    </ul>
+                                                    <div class="page-item ">
+                                                        <a class="page-link cl_jPaginateNext"
+                                                            href="javascript: void(0);" aria-label="Next">
+                                                            <span aria-hidden="true">&raquo;</span>
+                                                        </a>
+                                                    </div>
+                                                </nav>
+                                            </div>
                                         </div>
                                     </div>
                                 </div> <!-- end card-body-->
                             </div>
                         </div>
                         <div class="tab-pane " id="profile-b1" wire:ignore.self>
-                            <div class="card" style="background-color: #f2f2f2">
-                                <div class="py-3 px-3">
-                                    <h3>Rounds Lists</h3>
-                                    <div class="table-responsive" id="round_lists">
+                            <div class="card" style="background-color: #f2f2f2; overflow-y: hidden;"
+                                id="roundscard" wire:ignore.self style="">
+                                <div class=" px-3">
+                                    <h3>Rounds List</h3>
+                                    <div class="" id="round_lists" wire:ignore.self>
                                         <div class="d-flex align-items-center ">
                                             <div class="search-container ms-auto">
                                                 <input type="text" class="c_search form-control " id="searchtb"
@@ -366,6 +395,7 @@
                                             <h3 class="mb-4 d-flex align-items-center ms-auto"></h3>
 
                                         </div>
+
                                         <table class="table table-centered table-nowrap mb-0">
                                             <thead style="background-color: #0396a6;">
                                                 <tr>
@@ -429,8 +459,8 @@
                                                                         data-bs-target="#primary-header-modal"> <i
                                                                             class="mdi mdi-square-edit-outline"></i></a>
                                                                 @endif
-                                                                <a href="javascript:void(0);" class="action-icon"> <i
-                                                                        class="mdi mdi-delete"
+                                                                <a href="javascript:void(0);" class="action-icon">
+                                                                    <i class="mdi mdi-delete"
                                                                         onclick="deleteRounds({{ $data['id'] ?? 0 }})"></i></a>
                                                             </td>
                                                         </tr>
@@ -438,24 +468,27 @@
                                                 @endif
                                             </tbody>
                                         </table>
-                                        <div class="table-footer">
-                                            <nav>
-                                                <div class="page-item claimjPaginateBack">
-                                                    <a class="page-link" href="javascript: void(0);"
-                                                        aria-label="Previous">
-                                                        <span aria-hidden="true">&laquo;</span>
-                                                    </a>
-                                                </div>
-                                                <ul class="pagination pagination-rounded mb-0">
 
-                                                </ul>
-                                                <div class="page-item ">
-                                                    <a class="page-link claimjPaginateNext"
-                                                        href="javascript: void(0);" aria-label="Next">
-                                                        <span aria-hidden="true">&raquo;</span>
-                                                    </a>
-                                                </div>
-                                            </nav>
+                                        <div class="card-footer mt-3">
+                                            <div class="table-footer" wire:ignore>
+                                                <nav>
+                                                    <div class="page-item claimjPaginateBack">
+                                                        <a class="page-link" href="javascript: void(0);"
+                                                            aria-label="Previous">
+                                                            <span aria-hidden="true">&laquo;</span>
+                                                        </a>
+                                                    </div>
+                                                    <ul class="pagination pagination-rounded mb-0">
+
+                                                    </ul>
+                                                    <div class="page-item ">
+                                                        <a class="page-link claimjPaginateNext"
+                                                            href="javascript: void(0);" aria-label="Next">
+                                                            <span aria-hidden="true">&raquo;</span>
+                                                        </a>
+                                                    </div>
+                                                </nav>
+                                            </div>
                                         </div>
                                     </div>
                                 </div> <!-- end card-body-->
@@ -464,10 +497,10 @@
                         <div class="tab-pane " id="home-b1" wire:ignore.self>
                             <div class="row">
                                 <div class="col-12">
-                                    <div class="card" style="background-color: #f2f2f2">
-                                        <div class="py-3 px-3">
+                                    <div class="card" style="background-color: #f2f2f2" id="adoptcard">
+                                        <div class="px-3">
                                             <h3>Adoption List</h3>
-                                            <div class="table-responsive" id="adoption_list">
+                                            <div class="table-responsive" id="adoption_list" wire:ignore.self>
                                                 <div class="search-container ms-auto">
                                                     <input type="text" class="search form-control " id="searchtb"
                                                         style="width: 150%;" placeholder="Search for dogs...">
@@ -564,24 +597,27 @@
                                                         @endif
                                                     </tbody>
                                                 </table>
-                                                <div class="table-footer">
-                                                    <nav>
-                                                        <div class="page-item jPaginateBack">
-                                                            <a class="page-link" href="javascript: void(0);"
-                                                                aria-label="Previous">
-                                                                <span aria-hidden="true">&laquo;</span>
-                                                            </a>
-                                                        </div>
-                                                        <ul class="pagination pagination-rounded mb-0">
+                                                <div class="card-footer mt-3">
 
-                                                        </ul>
-                                                        <div class="page-item ">
-                                                            <a class="page-link jPaginateNext"
-                                                                href="javascript: void(0);" aria-label="Next">
-                                                                <span aria-hidden="true">&raquo;</span>
-                                                            </a>
-                                                        </div>
-                                                    </nav>
+                                                    <div class="table-footer">
+                                                        <nav>
+                                                            <div class="page-item jPaginateBack">
+                                                                <a class="page-link" href="javascript: void(0);"
+                                                                    aria-label="Previous">
+                                                                    <span aria-hidden="true">&laquo;</span>
+                                                                </a>
+                                                            </div>
+                                                            <ul class="pagination pagination-rounded mb-0">
+
+                                                            </ul>
+                                                            <div class="page-item ">
+                                                                <a class="page-link jPaginateNext"
+                                                                    href="javascript: void(0);" aria-label="Next">
+                                                                    <span aria-hidden="true">&raquo;</span>
+                                                                </a>
+                                                            </div>
+                                                        </nav>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div> <!-- end card-body-->
@@ -948,11 +984,10 @@
                                                             <p class="py-1 px-3">
                                                                 {{ $adoptdetails['reason'] }}
                                                             </p>
-
-
                                                         </div>
                                                     </div>
                                                 </div>
+
                                             </div>
                                         </div>
                                     @endif
@@ -987,7 +1022,7 @@
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
     </div>
-    <div id="primary-header-modal" class="modal fade" tabindex="-1" role="dialog"
+    <div id="primary-header-modal" class="modal fade" role="dialog" data-bs-focus="false"
         aria-labelledby="primary-header-modalLabel" aria-hidden="true" wire:ignore.self>
         <div class="modal-dialog">
             <div class="modal-content">
@@ -999,34 +1034,43 @@
                 <div class="modal-body">
                     <div class=" d-block">
                         @if (isset($activerounds))
-                            <div class="card">
-                                <div class="card-body">
-                                    <h4 class="header-title mb-3">Information</h4>
-                                    <ul class="list-unstyled mb-0">
-                                        <li>
-                                            <p class="mb-2"><span class="fw-bold me-2">Requestor:</span>
-                                                {{ $activerounds['name'] }}</p>
-                                            <p class="mb-2"><span class="fw-bold me-2">Barangay:</span>
-                                                {{ $activerounds['barangay'] }}</p>
-                                            <p class="mb-2"><span class="fw-bold me-2">Address:</span>
-                                                {{ $activerounds['address'] }}</p>
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="card">
+                                        <div class="px-2 py-2">
+                                            <h4 class="header-title mb-3">Information</h4>
+                                            <ul class="list-unstyled mb-0">
+                                                <li>
+                                                    <p class="mb-2"><span class="fw-bold me-2">Requestor:</span>
+                                                        {{ $activerounds['name'] }}</p>
+                                                    <p class="mb-2"><span class="fw-bold me-2">Barangay:</span>
+                                                        {{ $activerounds['barangay'] }}</p>
+                                                    <p class="mb-2"><span class="fw-bold me-2">Address:</span>
+                                                        {{ $activerounds['address'] }}</p>
 
-                                            <p class="mb-2"><span class="fw-bold me-2">Specific Location:</span>
-                                                {{ $activerounds['specific_location'] }}
-                                            </p>
-                                            <p class="mb-0"><span class="fw-bold me-2">Contact Number:</span>
-                                                {{ $activerounds['contact'] }} </p>
-                                        </li>
-                                    </ul>
+                                                    <p class="mb-2"><span class="fw-bold me-2">Specific
+                                                            Location:</span>
+                                                        {{ $activerounds['specific_location'] }}
+                                                    </p>
+                                                    <p class="mb-0"><span class="fw-bold me-2">Contact
+                                                            Number:</span>
+                                                        {{ $activerounds['contact'] }} </p>
+                                                </li>
+                                            </ul>
+
+                                        </div>
+                                    </div>
 
                                 </div>
-                            </div>
-                            <div class="card">
-                                <div class="card-body">
-                                    <h4>Reason</h4>
-                                    <div class="text-center">
-                                        <p class="mb-0">{{ $activerounds['reason'] }}</p>
+                                <div class="col-12">
+                                    <div class="card">
+                                        <div class="px-2 py-2">
+                                            <h4>Reason</h4>
+                                            <div class="text-center">
+                                                <p class="mb-0">{{ $activerounds['reason'] }}</p>
 
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -1055,7 +1099,7 @@
                             <div class="row">
                                 <div class="col-6">
                                     <div class="card">
-                                        <div class="card-body">
+                                        <div class="px-2 py-2">
                                             <h4 class="header-title mb-3">Claim Information</h4>
                                             <ul class="list-unstyled mb-0">
                                                 <li>
@@ -1079,7 +1123,7 @@
                                         </div>
                                     </div>
                                     <div class="card">
-                                        <div class="card-body">
+                                        <div class="px-2 py-2">
                                             <h4>Proof</h4>
                                             <div class="text-center">
                                                 <img src="" alt="">
@@ -1094,7 +1138,7 @@
                                 </div>
                                 <div class="col-6">
                                     <div class="card">
-                                        <div class="card-body">
+                                        <div class="px-2 py-2">
                                             <h4>Dog Details</h4>
                                             @php
                                                 $images = [];
@@ -1111,7 +1155,7 @@
                                                                 class="carousel-item {{ $loop->first ? 'active' : '' }}">
                                                                 <img src="{{ asset('storage/' . $img) }}"
                                                                     alt="..." class="d-block img-fluid"
-                                                                    style="min-width: 300px; min-height: 250px; width: 300px; height: 250px; object-fit: cover;">
+                                                                    style="min-width: 300px; min-height: 210px; width: 300px; height: 210px; object-fit: cover;">
                                                                 <div class="carousel-caption d-none d-md-block">
                                                                 </div>
                                                             </div>
@@ -1135,7 +1179,7 @@
                                         </div>
                                     </div>
                                     <div class="card">
-                                        <div class="card-body">
+                                        <div class="px-2 py-2">
                                             <h4 class="header-title mb-3">Dog Information</h4>
                                             <ul class="list-unstyled mb-0">
                                                 <li>
@@ -1175,6 +1219,31 @@
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
     <script>
+        var htmlHeight = document.documentElement.clientHeight;
+        var cardHeight = htmlHeight - 300;
+
+        document.getElementById('claimcard').style.minHeight = cardHeight + 'px';
+        document.getElementById('claimcard').style.maxHeight = cardHeight + 'px';
+
+        document.getElementById('claim_list').style.minHeight = (cardHeight - 50) + 'px';
+        document.getElementById('claim_list').style.maxHeight = (cardHeight - 50) + 'px';
+        document.getElementById('claim_list').style.overflow = 'hidden';
+
+        document.getElementById('roundscard').style.minHeight = cardHeight + 'px';
+        document.getElementById('roundscard').style.maxHeight = cardHeight + 'px';
+
+        document.getElementById('round_lists').style.minHeight = (cardHeight - 50) + 'px';
+        document.getElementById('round_lists').style.maxHeight = (cardHeight - 50) + 'px';
+        document.getElementById('round_lists').style.overflow = 'hidden';
+
+        document.getElementById('adoptcard').style.minHeight = cardHeight + 'px';
+        document.getElementById('adoptcard').style.maxHeight = cardHeight + 'px';
+
+        document.getElementById('adoption_list').style.minHeight = (cardHeight - 50) + 'px';
+        document.getElementById('adoption_list').style.maxHeight = (cardHeight - 50) + 'px';
+        document.getElementById('adoption_list').style.overflow = 'hidden';
+
+
         function deleteClaim(id) {
             Swal.fire({
                 title: 'Are you sure?',
@@ -1322,7 +1391,7 @@
                 'actions'
             ],
             searchClass: 'search',
-            page: 5,
+            page: 6,
             pagination: true,
             paginationClass: 'pagination pagination-rounded', // Adds pagination classes (rounded pagination)
             nextClass: 'next', // Custom class for the next button
@@ -1337,7 +1406,7 @@
                 'actions'
             ],
             searchClass: 'c_search',
-            page: 5,
+            page: 6,
             pagination: true,
             paginationClass: 'pagination', // Adds pagination classes (rounded pagination)
             nextClass: 'next', // Custom class for the next button
@@ -1350,7 +1419,7 @@
         var cl_options = {
             valueNames: ['ticket_number', 'requestor', 'dog_name', 'contact', 'address', 'status', 'actions'],
             searchClass: 'cl_search',
-            page: 5,
+            page: 6,
             pagination: true,
             paginationClass: 'pagination', // Adds pagination classes (rounded pagination)
             nextClass: 'next', // Custom class for the next button
@@ -1481,26 +1550,71 @@
 
             document.getElementById('approve_rounds').addEventListener('click', function() {
                 setTimeout(() => {}, 1000);
+                // Swal.fire({
+                //     title: 'Approve Rounds?',
+                //     text: "Are you sure you want to approve this rounds request?",
+                //     icon: 'warning',
+                //     showCancelButton: true,
+                //     confirmButtonColor: '#28a745',
+                //     cancelButtonColor: '#d33',
+                //     confirmButtonText: 'Yes, approve rounds!'
+                // }).then((result) => {
+                //     if (result.isConfirmed) {
+                //         Livewire.dispatch('rounds_accepted')
+                //         Swal.fire(
+                //             'Approved!',
+                //             'The rounds have been approved successfully.',
+                //             'success'
+                //         ).then(() => {
+                //             // Reload the page after approval
+                //         });
+                //     }
+                // });
+
+                // First prompt: Text input for the title
                 Swal.fire({
                     title: 'Approve Rounds?',
-                    text: "Are you sure you want to approve this rounds request?",
+                    html: `
+                                <div style="text-align: left;">
+                                <div >
+                                    <label for="title" style="display: block; font-weight: bold;">Title:</label>
+                                    <input type="text" id="titled" class="swal2-input" placeholder="Enter title here" style="width: 88%;">
+                                </div>
+                                <div>
+                                    <label for="remarks" style="display: block; font-weight: bold;">Remarks:</label>
+                                    <textarea id="remarksd" class="swal2-textarea" placeholder="Enter remarks here" style="width: 88%;"></textarea>
+                                </div>
+                                </div>
+                            `,
                     icon: 'warning',
                     showCancelButton: true,
-                    confirmButtonColor: '#28a745',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'Yes, approve rounds!'
+                    confirmButtonText: 'Submit',
+                    preConfirm: () => {
+                        const title = document.getElementById('titled').value;
+                        const remarks = document.getElementById('remarksd').value;
+                        if (!title || !remarks) {
+                            Swal.showValidationMessage('Please enter both title and remarks');
+                        }
+                        return {
+                            title,
+                            remarks
+                        };
+                    }
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        Livewire.dispatch('rounds_accepted')
-                        Swal.fire(
-                            'Approved!',
-                            'The rounds have been approved successfully.',
-                            'success'
-                        ).then(() => {
-                            // Reload the page after approval
+                        Swal.fire({
+                            title: 'Rounds Approved!',
+                            text: 'The announcement will now be posted.',
+                            icon: 'success'
+                        });
+                        Livewire.dispatch('rounds_accepted', {
+                            data: result.value
                         });
                     }
                 });
+
+
+
             });
 
             document.getElementById('reject_rounds').addEventListener('click', function() {

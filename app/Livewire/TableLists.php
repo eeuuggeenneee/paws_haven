@@ -5,9 +5,11 @@ namespace App\Livewire;
 use App\Models\AdoptionForm;
 use App\Models\AnimalList;
 use App\Models\AnimalListStatus;
+use App\Models\Annoucement;
 use App\Models\DogClaim;
 use App\Models\Rounds;
 use App\Models\RoundsStatus;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
 class TableLists extends Component
@@ -22,7 +24,7 @@ class TableLists extends Component
     public $claimlist;
     public $activelostclaim;
     public $claimdetails;
-    protected $listeners = ['adopted', 'rounds_accepted','delete_claim','claim_approved','claim_dog_rejected','rounds_rejected', 'r_adopted', 'delete_adoption', 'delete_rounds'];
+    protected $listeners = ['adopted', 'rounds_accepted', 'delete_claim', 'claim_approved', 'claim_dog_rejected', 'rounds_rejected', 'r_adopted', 'delete_adoption', 'delete_rounds'];
     public function mount()
     {
         // dd($this->claimlist);
@@ -55,7 +57,10 @@ class TableLists extends Component
                     ->where('rounds_statuses.is_active', '=', 1);
             })
             ->select('users.name', 'rounds.*', 'rounds_statuses.is_approved')
+            ->orderBy('rounds_statuses.id', 'desc')
             ->get();
+
+        // dd($this->reqrounds);
 
         $this->claimlist = AnimalListStatus::whereIn('status', [6, 7, 3])
             ->leftJoin('dog_claims', 'dog_claims.dog_id_unique', '=', 'animal_list_statuses.animal_id')
@@ -92,7 +97,7 @@ class TableLists extends Component
     }
 
 
-    public function rounds_accepted()
+    public function rounds_accepted($data)
     {
 
         RoundsStatus::where('rounds_id', $this->roundsid)->update(['is_active' => 0]);
@@ -101,6 +106,16 @@ class TableLists extends Component
             'rounds_id' => $this->roundsid,
             'is_approved' => 1,
             'is_active' => 1,
+        ]);
+
+        $html = '<div class="ql-editor"><p>'. $data['remarks'] .'</p></div>';
+
+        Annoucement::create([
+            'message' => $html,
+            'title' => $data['title'],
+            'sub_title' => $this->activerounds->address,
+            'isActive' => 1,
+            'user_id' => Auth::user()->id,
         ]);
 
         $this->dispatch('reinit_table');

@@ -14,14 +14,18 @@ class LostFoundList extends Component
     public $activedog;
     use LivewireAlert;
 
+    protected $listeners = [ 'fetchdatanotif' => 'fetchdataAdopt'];
     public function mount(){
+     
+        // dd($this->doglist);
+    }
+    public function fetchDataDog(){
         $dogid = AnimalListStatus::where('isActive',true)->whereIn('status',[3])->get('animal_id');
         $this->doglist = AnimalList::whereIn('animal_lists.dog_id_unique',$dogid)
         ->leftJoin('click_dogs', 'click_dogs.dog_id_unique', '=','animal_lists.dog_id_unique')
         ->leftJoin('dog_breeds', 'dog_breeds.id', '=','animal_lists.breed')
         ->select('animal_lists.*','click_dogs.clicked','dog_breeds.name as breed_name')
         ->where('animal_lists.isActive',true)->get();
-        // dd($this->doglist);
     }
     public function adoptionform($id){
 
@@ -42,6 +46,7 @@ class LostFoundList extends Component
     }
     public function render()
     {
+        $this->fetchDataDog();
         return view('livewire.lost-found-list');
     }
 }

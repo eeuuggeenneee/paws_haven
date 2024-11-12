@@ -138,7 +138,8 @@
                                             <form class="ps-lg-4">
                                                 <!-- Product title -->
                                                 <h3 class="mt-0">{{ $activedog['dog_name'] ?? 'N/A' }} <a
-                                                        href="javascript: void(0);" class="text-muted"><i class="mdi mdi-check-decagram text-success"></i></a>
+                                                        href="javascript: void(0);" class="text-muted"><i
+                                                            class="mdi mdi-check-decagram text-success"></i></a>
                                                 </h3>
                                                 <p class="mb-1">Added Date:
                                                     {{ isset($activedog['created_at']) ? \Carbon\Carbon::parse($activedog['created_at'])->format('m/d/Y') : 'N/A' }}
@@ -564,7 +565,8 @@
                                             <form class="ps-lg-4">
                                                 <!-- Product title -->
                                                 <h3 class="mt-0">{{ $activedog['dog_name'] ?? 'N/A' }} <a
-                                                        href="javascript: void(0);" class="text-muted"><i class="mdi mdi-check-decagram text-success"></i></a>
+                                                        href="javascript: void(0);" class="text-muted"><i
+                                                            class="mdi mdi-check-decagram text-success"></i></a>
                                                 </h3>
                                                 <p class="mb-1">Added Date:
                                                     {{ isset($activedog['created_at']) ? \Carbon\Carbon::parse($activedog['created_at'])->format('m/d/Y') : 'N/A' }}
@@ -889,13 +891,16 @@
                                                             <div class="mb-3">
                                                                 <label class="form-label"
                                                                     for="validationCustom02">Breed</label>
-                                                                    <select id="dog-breed" name="dog-breed" class="form-select" wire:model="c_breed" required>
-                                                                        <option value="" disabled selected>Select a breed</option>
-                                                                        @foreach ($breedlist as $breed)
-                                                                            <option value="{{ $breed['id'] }}">{{ $breed['name'] }}</option>
-                                                                        @endforeach
-                                                                    </select>
-                                                                    <div class="valid-feedback">
+                                                                <select id="dog-breed" name="dog-breed"
+                                                                    class="form-select" wire:model="c_breed" required>
+                                                                    <option value="" disabled selected>Select a
+                                                                        breed</option>
+                                                                    @foreach ($breedlist as $breed)
+                                                                        <option value="{{ $breed['id'] }}">
+                                                                            {{ $breed['name'] }}</option>
+                                                                    @endforeach
+                                                                </select>
+                                                                <div class="valid-feedback">
                                                                     Looks good!
                                                                 </div>
                                                             </div>
@@ -933,8 +938,9 @@
                                                                 <label class="form-label"
                                                                     for="validationCustom02">Last Location</label>
                                                                 <input type="text" class="form-control"
-                                                                    id="validationCustom02" placeholder="Last Location"
-                                                                    wire:model="c_loc" required>
+                                                                    id="validationCustom02"
+                                                                    placeholder="Last Location" wire:model="c_loc"
+                                                                    required>
                                                                 <div class="valid-feedback">
                                                                     Looks good!
                                                                 </div>
@@ -1066,7 +1072,7 @@
                             Please provide a valid phone number.
                         </div>
                     </div>
-
+                    {{-- 
                     <div class="mb-3">
                         <label class="form-label" for="validationCustom04">Specific Locations, Mention any particular
                             spots</label>
@@ -1075,7 +1081,7 @@
                         <div class="invalid-feedback">
                             Please provide a valid locations.
                         </div>
-                    </div>
+                    </div> --}}
                     <div class="mb-3">
                         <label class="form-label" for="validationCustom04">Reason for request</label>
                         <textarea class="form-control" id="description" rows="5" placeholder="Enter a reason..." wire:model="reason"></textarea>
@@ -1094,7 +1100,8 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" onclick="saveRounds()">Submit Request</button>
+                    <button type="button" class="btn btn-primary text-white" onclick="saveRounds()">Submit
+                        Request</button>
                     <button type="button " class="btn btn-primary d-none" id="real_btn_rounds"
                         wire:click="saveRounds">Submit Request</button>
 
@@ -1207,8 +1214,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h4 class="modal-title" id="fullWidthModalLabel">Create Annoucements</h4>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                        aria-hidden="true"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
                 </div>
                 <form id="add_annoucment">
                     <div class="modal-body">
@@ -1221,12 +1227,12 @@
 
                         <label for="snow-editor" class="form-label mt-2">Messages</label>
                         <div id="snow-editor" class="mt-2" style="height: auto;">
-                            
+
                         </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary" onclick="fconfirm()">Submit</button>
+                        <button type="button" class="btn btn-primary text-white" onclick="fconfirm()">Submit</button>
                         <button type="button" class="btn btn-primary d-none" id="saveannouce"
                             wire:click="saveAnnoucement">Submit</button>
                     </div>
@@ -1253,6 +1259,10 @@
                 });
                 return false; // Stop further actions
             }
+
+            var quilltext = document.getElementById('snow-editor');
+            const htmlContent = quilltext.innerHTML;
+            console.log(htmlContent);
             Swal.fire({
                 title: 'Are you sure?',
                 text: "Are you sure you want to save this form?",
@@ -1263,8 +1273,6 @@
                 confirmButtonText: 'Yes, submit it!'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    var quilltext = document.getElementById('snow-editor');
-                    const htmlContent = quilltext.innerHTML;
                     @this.set('texteditor', htmlContent);
                     document.getElementById('saveannouce').click();
                     closeAllModals();
@@ -1312,7 +1320,23 @@
         });
     </script>
     <script>
-        
+        document.getElementById('create_aa').addEventListener('show.bs.modal', function() {
+            document.getElementById('annc_active').classList.add('active')
+        });
+        document.getElementById('create_aa').addEventListener('hide.bs.modal', function() {
+            document.getElementById('annc_active').classList.remove('active')
+            activeElement.classList.add('active');
+        });
+
+        document.getElementById('request_rounds').addEventListener('show.bs.modal', function() {
+            document.getElementById('rounds_active').classList.add('active')
+        });
+
+        document.getElementById('request_rounds').addEventListener('hide.bs.modal', function() {
+            document.getElementById('rounds_active').classList.remove('active')
+            activeElement.classList.add('active');
+        });
+
         function closeAllModals() {
             // Select all modals
             const modals = document.querySelectorAll('.modal.show');
@@ -1331,6 +1355,7 @@
                 backdrop.parentNode.removeChild(backdrop); // Remove each backdrop
             });
         }
+
         function saveRounds() {
             Swal.fire({
                 title: 'Are you sure?',
@@ -1494,8 +1519,7 @@
                     confirmButtonText: 'Okay'
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        // Reload the page
-                        location.reload();
+             
                     }
                 });
             });
@@ -1509,7 +1533,6 @@
                 }).then((result) => {
                     if (result.isConfirmed) {
                         // Reload the page
-                        location.reload();
                     }
                 });
             });
@@ -1523,8 +1546,7 @@
                     confirmButtonText: 'Okay'
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        // Reload the page
-                        location.reload();
+                    
                     }
                 });
 

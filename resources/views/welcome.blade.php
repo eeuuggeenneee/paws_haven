@@ -59,9 +59,9 @@
         <div class="container">
 
             <!-- logo -->
-            <a href="" class="navbar-brand me-lg-5">
+            {{-- <a href="" class="navbar-brand me-lg-5">
                 PAWS HAVEN
-            </a>
+            </a> --}}
 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
                 aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -72,33 +72,17 @@
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
 
                 <!-- left menu -->
-                <ul class="navbar-nav me-auto align-items-center">
-                    <li class="nav-item mx-lg-1">
-                        <a class="nav-link active" href="#">Home</a>
-                    </li>
-                    <li class="nav-item mx-lg-1">
-                        <a class="nav-link" href="#">Adopt</a>
-                    </li>
-                    <li class="nav-item mx-lg-1">
-                        <a class="nav-link" href="#">Lost and Found</a>
-                    </li>
-                    <li class="nav-item mx-lg-1">
-                        <a class="nav-link" href="#">Donate</a>
-                    </li>
-                    <li class="nav-item mx-lg-1">
-                        <a class="nav-link" href="#">About Us</a>
-                    </li>
-                </ul>
+
 
                 <!-- right menu -->
-                <ul class="navbar-nav ms-auto align-items-center">
+                {{-- <ul class="navbar-nav ms-auto align-items-center">
                     <li class="nav-item me-0">
                         <a class="btn btn-sm btn-light rounded-pill d-none d-lg-inline-flex" data-bs-toggle="modal"
                             data-bs-target="#primary-header-modal">
                             <i class="uil uil-user-circle me-1"></i> Log in
                         </a>
                     </li>
-                </ul>
+                </ul> --}}
 
             </div>
         </div>
@@ -122,8 +106,7 @@
                             control facility that serves the local community by managing and caring for stray dogs and
                             other animals found within the municipality. </p>
                         <a data-bs-toggle="modal" data-bs-target="#primary-header-modal"
-                            class="btn btn-lg font-16 btn-success">View More <i
-                                class="mdi mdi-arrow-right ms-1"></i></a>
+                            class="btn btn-lg font-16 btn-success">Log in <i class="mdi mdi-arrow-right ms-1"></i></a>
 
                     </div>
                 </div>
@@ -197,7 +180,7 @@
     </section> --}}
     <!-- END SERVICES -->
     <!-- START SERVICES -->
-    <section class="py-5">
+    {{-- <section class="py-5">
         <div class="row">
             <div class="col-lg-12">
                 <div class="container">
@@ -227,9 +210,8 @@
                                     <span class="avatar-title bg-primary-lighten rounded-circle">
                                         <svg xmlns="http://www.w3.org/2000/svg" version="1.1"
                                             xmlns:xlink="http://www.w3.org/1999/xlink" width="30" height="30"
-                                            x="0" y="0" viewBox="0 0 512 512"
-                                            style="enable-background:new 0 0 512 512" xml:space="preserve"
-                                            class="">
+                                            x="0" y="0" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512"
+                                            xml:space="preserve" class="">
                                             <g>
                                                 <g fill-rule="evenodd" clip-rule="evenodd">
                                                     <path fill="#f6b600"
@@ -343,7 +325,7 @@
             </div>
         </div>
     </section>
-    <!-- END SERVICES -->
+
 
     <section class="py-5 hero-section2">
         <div class="col-lg-12">
@@ -353,9 +335,9 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> --}}
     <!-- START FEATURES 2 -->
-    {{-- <section class="">
+    <section class="mt-5">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
@@ -373,27 +355,56 @@
                 <div class="col-lg-5 col-md-6">
                     <div id="carouselExampleCaption" class="carousel slide" data-bs-ride="carousel">
                         <div class="carousel-inner" role="listbox">
-                            <div class="carousel-item active">
-                                <img src="assets/images/small/small-1.jpg" alt="..." class="d-block img-fluid">
-                                <div class="carousel-caption d-none d-md-block">
-                                    <h3 class="text-white">First slide label</h3>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                            @php
+                                $shuffled_data1 = collect($data->toArray())->shuffle();
+                            @endphp
+                            @if ($shuffled_data1->isEmpty())
+                                <!-- If no data, display the placeholder images -->
+                                <div class="carousel-item active">
+                                    <img src="assets/images/small/small-1.jpg" alt="..."
+                                        class="d-block img-fluid">
+                                    <div class="carousel-caption d-none d-md-block">
+                                        <h3 class="text-white">First slide label</h3>
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="carousel-item">
-                                <img src="assets/images/small/small-3.jpg" alt="..." class="d-block img-fluid">
-                                <div class="carousel-caption d-none d-md-block">
-                                    <h3 class="text-white">Second slide label</h3>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                                <div class="carousel-item">
+                                    <img src="assets/images/small/small-3.jpg" alt="..."
+                                        class="d-block img-fluid">
+                                    <div class="carousel-caption d-none d-md-block">
+                                        <h3 class="text-white">Second slide label</h3>
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="carousel-item">
-                                <img src="assets/images/small/small-2.jpg" alt="..." class="d-block img-fluid">
-                                <div class="carousel-caption d-none d-md-block">
-                                    <h3 class="text-white">Third slide label</h3>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                                <div class="carousel-item">
+                                    <img src="assets/images/small/small-2.jpg" alt="..."
+                                        class="d-block img-fluid">
+                                    <div class="carousel-caption d-none d-md-block">
+                                        <h3 class="text-white">Third slide label</h3>
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                                    </div>
                                 </div>
-                            </div>
+                            @else
+                                <!-- If data is available, display the shuffled items -->
+                                @foreach ($shuffled_data1 as $index => $animal)
+                                    @php
+                                        // Decode the animal_images JSON string into an array
+                                        $images = json_decode($animal['animal_images'], true);
+                                        $firstImage = $images[0] ?? ''; // Get the first image URL (if exists)
+                                    @endphp
+
+                                    @if ($firstImage)
+                                        <div class="carousel-item {{ $index === 0 ? 'active' : '' }}">
+                                            <img src="{{ asset('storage/' . $firstImage) }}" alt="..."
+                                                class="d-block img-fluid">
+                                            <div class="carousel-caption d-none d-md-block">
+                                                <h3 class="text-white">{{ $animal['dog_name'] }}</h3>
+                                                <p>{{ $animal['description'] }}</p>
+                                            </div>
+                                        </div>
+                                    @endif
+                                @endforeach
+                            @endif
                         </div>
                         <a class="carousel-control-prev" href="#carouselExampleCaption" role="button"
                             data-bs-slide="prev">
@@ -456,27 +467,56 @@
                 <div class="col-lg-5 col-md-6 offset-md-1">
                     <div id="carouselExampleCaption" class="carousel slide" data-bs-ride="carousel">
                         <div class="carousel-inner" role="listbox">
-                            <div class="carousel-item active">
-                                <img src="assets/images/small/small-1.jpg" alt="..." class="d-block img-fluid">
-                                <div class="carousel-caption d-none d-md-block">
-                                    <h3 class="text-white">First slide label</h3>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                            @php
+                                $shuffled_data = collect($data->toArray())->shuffle();
+                            @endphp
+                            @if ($shuffled_data->isEmpty())
+                                <!-- If no data, display the placeholder images -->
+                                <div class="carousel-item active">
+                                    <img src="assets/images/small/small-1.jpg" alt="..."
+                                        class="d-block img-fluid">
+                                    <div class="carousel-caption d-none d-md-block">
+                                        <h3 class="text-white">First slide label</h3>
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="carousel-item">
-                                <img src="assets/images/small/small-3.jpg" alt="..." class="d-block img-fluid">
-                                <div class="carousel-caption d-none d-md-block">
-                                    <h3 class="text-white">Second slide label</h3>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                                <div class="carousel-item">
+                                    <img src="assets/images/small/small-3.jpg" alt="..."
+                                        class="d-block img-fluid">
+                                    <div class="carousel-caption d-none d-md-block">
+                                        <h3 class="text-white">Second slide label</h3>
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="carousel-item">
-                                <img src="assets/images/small/small-2.jpg" alt="..." class="d-block img-fluid">
-                                <div class="carousel-caption d-none d-md-block">
-                                    <h3 class="text-white">Third slide label</h3>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                                <div class="carousel-item">
+                                    <img src="assets/images/small/small-2.jpg" alt="..."
+                                        class="d-block img-fluid">
+                                    <div class="carousel-caption d-none d-md-block">
+                                        <h3 class="text-white">Third slide label</h3>
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                                    </div>
                                 </div>
-                            </div>
+                            @else
+                                <!-- If data is available, display the shuffled items -->
+                                @foreach ($shuffled_data as $index => $animal)
+                                    @php
+                                        // Decode the animal_images JSON string into an array
+                                        $images = json_decode($animal['animal_images'], true);
+                                        $firstImage = $images[0] ?? ''; // Get the first image URL (if exists)
+                                    @endphp
+
+                                    @if ($firstImage)
+                                        <div class="carousel-item {{ $index === 0 ? 'active' : '' }}">
+                                            <img src="{{ asset('storage/' . $firstImage) }}" alt="..."
+                                                class="d-block img-fluid">
+                                            <div class="carousel-caption d-none d-md-block">
+                                                <h3 class="text-white">{{ $animal['dog_name'] }}</h3>
+                                                <p>{{ $animal['description'] }}</p>
+                                            </div>
+                                        </div>
+                                    @endif
+                                @endforeach
+                            @endif
                         </div>
                         <a class="carousel-control-prev" href="#carouselExampleCaption" role="button"
                             data-bs-slide="prev">
@@ -493,8 +533,10 @@
             </div>
 
         </div>
-    </section> --}}
-    <section class="">
+    </section>
+
+    {{-- MANDALTE --}}
+    {{-- <section class="">
         <div class="container">
             <div class="row">
             </div>
@@ -617,52 +659,52 @@
                                 $shuffled_data = collect($data->toArray())->shuffle();
                             @endphp
                             @if ($shuffled_data->isEmpty())
-                            <!-- If no data, display the placeholder images -->
-                            <div class="carousel-item active">
-                                <img src="assets/images/small/small-1.jpg" alt="..."
-                                    class="d-block img-fluid">
-                                <div class="carousel-caption d-none d-md-block">
-                                    <h3 class="text-white">First slide label</h3>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                                </div>
-                            </div>
-                            <div class="carousel-item">
-                                <img src="assets/images/small/small-3.jpg" alt="..."
-                                    class="d-block img-fluid">
-                                <div class="carousel-caption d-none d-md-block">
-                                    <h3 class="text-white">Second slide label</h3>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                                </div>
-                            </div>
-                            <div class="carousel-item">
-                                <img src="assets/images/small/small-2.jpg" alt="..."
-                                    class="d-block img-fluid">
-                                <div class="carousel-caption d-none d-md-block">
-                                    <h3 class="text-white">Third slide label</h3>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                                </div>
-                            </div>
-                        @else
-                            <!-- If data is available, display the shuffled items -->
-                            @foreach ($shuffled_data as $index => $animal)
-                                @php
-                                    // Decode the animal_images JSON string into an array
-                                    $images = json_decode($animal['animal_images'], true);
-                                    $firstImage = $images[0] ?? ''; // Get the first image URL (if exists)
-                                @endphp
-
-                                @if ($firstImage)
-                                    <div class="carousel-item {{ $index === 0 ? 'active' : '' }}">
-                                        <img src="{{ asset('storage/' . $firstImage) }}" alt="..."
-                                            class="d-block img-fluid">
-                                        <div class="carousel-caption d-none d-md-block">
-                                            <h3 class="text-white">{{ $animal['dog_name'] }}</h3>
-                                            <p>{{ $animal['description'] }}</p>
-                                        </div>
+                                <!-- If no data, display the placeholder images -->
+                                <div class="carousel-item active">
+                                    <img src="assets/images/small/small-1.jpg" alt="..."
+                                        class="d-block img-fluid">
+                                    <div class="carousel-caption d-none d-md-block">
+                                        <h3 class="text-white">First slide label</h3>
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
                                     </div>
-                                @endif
-                            @endforeach
-                        @endif
+                                </div>
+                                <div class="carousel-item">
+                                    <img src="assets/images/small/small-3.jpg" alt="..."
+                                        class="d-block img-fluid">
+                                    <div class="carousel-caption d-none d-md-block">
+                                        <h3 class="text-white">Second slide label</h3>
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                                    </div>
+                                </div>
+                                <div class="carousel-item">
+                                    <img src="assets/images/small/small-2.jpg" alt="..."
+                                        class="d-block img-fluid">
+                                    <div class="carousel-caption d-none d-md-block">
+                                        <h3 class="text-white">Third slide label</h3>
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                                    </div>
+                                </div>
+                            @else
+                                <!-- If data is available, display the shuffled items -->
+                                @foreach ($shuffled_data as $index => $animal)
+                                    @php
+                                        // Decode the animal_images JSON string into an array
+                                        $images = json_decode($animal['animal_images'], true);
+                                        $firstImage = $images[0] ?? ''; // Get the first image URL (if exists)
+                                    @endphp
+
+                                    @if ($firstImage)
+                                        <div class="carousel-item {{ $index === 0 ? 'active' : '' }}">
+                                            <img src="{{ asset('storage/' . $firstImage) }}" alt="..."
+                                                class="d-block img-fluid">
+                                            <div class="carousel-caption d-none d-md-block">
+                                                <h3 class="text-white">{{ $animal['dog_name'] }}</h3>
+                                                <p>{{ $animal['description'] }}</p>
+                                            </div>
+                                        </div>
+                                    @endif
+                                @endforeach
+                            @endif
                         </div>
                         <a class="carousel-control-prev" href="#carouselExampleCaption2" role="button"
                             data-bs-slide="prev">
@@ -679,7 +721,7 @@
             </div>
 
         </div>
-    </section>
+    </section> --}}
     <!-- END FEATURES 2 -->
 
     <!-- START PRICING -->
@@ -908,7 +950,7 @@
 
 
     <!-- START CONTACT -->
-    <section class="py-5 bg-light-lighten border-top border-bottom border-light">
+    {{-- <section class="py-5 bg-light-lighten border-top border-bottom border-light">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
@@ -940,7 +982,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> --}}
     <!-- END CONTACT -->
 
     <!-- START FOOTER -->
@@ -965,11 +1007,11 @@
             <div class="modal-content">
                 <div class="card">
                     <!-- Logo -->
-                    <div class="card-header  text-center bg-white  " style="border-radius: 0 !important">
-                        <a href="{{ url('/announcements') }}">
-                            <span>
-                                <img src="assets/logo2.png" alt="logo" height="100%">
-                            </span>
+                    <div class="card-header text-center py-2 px-2" style="border-radius: 0 !important; background-color: #53bbc0">
+                        <a href="" class="navbar-brand">
+                            <h3 class="text-white">
+                                PAWS HAVEN
+                            </h3>
                         </a>
                     </div>
 
@@ -1030,7 +1072,7 @@
                             </div>
 
                             <div class="mb-3 mb-0 text-center">
-                                <button class="btn btn-primary" type="submit"> Log In </button>
+                                <button class="btn btn-primary text-white" type="submit"> Log In </button>
                             </div>
 
                         </form>
@@ -1075,7 +1117,7 @@
     <!-- END FOOTER -->
     <!-- Vendor js -->
     <script src="assets/js/vendor.min.js"></script>
-    <script>
+    {{-- <script>
         var chartConfig = {
             type: 'organizational down',
             defaultTooltip_enabled: false,
@@ -1165,7 +1207,7 @@
         };
 
         var chart = JSC.chart('chartDiv', chartConfig);
-    </script>
+    </script> --}}
     <!-- App js     -->
     <script src="assets/js/app.min.js"></script>
     <script>

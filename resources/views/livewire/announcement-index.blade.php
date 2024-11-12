@@ -14,81 +14,89 @@
 
             <div class="row">
 
-                <div class="col-xxl-3 col-lg-6 order-lg-1 order-xxl-1 fixed-column ">
-                    <!-- start profi le info -->
-                    <div class="card bg-" >
-                        <div class="card-body">
-                            <div class="d-flex align-self-start">
-                                <img class="d-flex align-self-start rounded me-2"
-                                    src="{{ asset('storage/' . Auth::user()->profile_path) }}" alt="Dominic Keller"
-                                    height="48">
-                                <div class="w-100 overflow-hidden">
-                                    <h5 class="mt-1 mb-0">{{ Auth::user()->name }}</h5>
-                                    <p class="mb-1 mt-1 text-muted">User</p>
-                                </div>
-                            </div>
-                            <div class="list-group list-group-flush mt-2">
-                                <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist"
-                                    aria-orientation="vertical" wire:ignore>
-                                    <a class="nav-link active show list-group-item list-group-item-action border-0"
-                                        id="v-pills-timeline-tab" data-bs-toggle="pill" href="#v-pills-timeline"
-                                        role="tab" aria-controls="v-pills-timeline" aria-selected="false">
-                                        <i class='uil uil-comment-alt-message me-1'></i> Annoucements
-                                    </a>
-                                    @if(Auth::user()->type == 1)
-                                    <a class="nav-link list-group-item list-group-item-action border-0"
-                                        data-bs-toggle="modal" data-bs-target="#create_aa">
-                                        <i class='uil uil-comment-alt-message me-1'></i> Create Annoucements
-                                    </a>
-                                    @endif
-                                    <a class="nav-link  list-group-item list-group-item-action border-0"
-                                        id="v-pills-home-tab" data-bs-toggle="pill" href="#v-pills-home" role="tab"
-                                        aria-controls="v-pills-home" aria-selected="true">
-                                        <i class='uil uil-images me-1'></i> Profile
-                                    </a>
-                                    {{-- <a class="nav-link list-group-item list-group-item-action border-0"
-                                        id="v-pills-profile-tab" data-bs-toggle="pill" href="#v-pills-profile"
-                                        role="tab" aria-controls="v-pills-profile" aria-selected="false">
-                                        <i class='uil uil-comment-alt-message me-1'></i> My Post
-                                    </a> --}}
-                                    <a class="nav-link list-group-item list-group-item-action border-0"
-                                        data-bs-toggle="modal" data-bs-target="#request_rounds">
-                                        <i class='uil uil-comment-alt-message me-1'></i> Request Rounds
-                                    </a>
+                <div class="col-xxl-3 col-lg-12">
+
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-xl-12">
+                            <div class="card ">
+                                <div class="card-body">
+                                    <div class="d-flex align-self-start">
+                                        <img class="d-flex align-self-start rounded me-2"
+                                            src="{{ asset('storage/' . Auth::user()->profile_path) }}"
+                                            alt="Dominic Keller" height="48">
+                                        <div class="w-100 overflow-hidden">
+                                            <h5 class="mt-1 mb-0">{{ Auth::user()->name }}</h5>
+                                            <p class="mb-1 mt-1 text-muted">User</p>
+                                        </div>
+                                    </div>
+                                    <div class="list-group list-group-flush mt-2">
+                                        <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist"
+                                            aria-orientation="vertical" wire:ignore>
+                                            <a class="nav-link active show list-group-item list-group-item-action border-0"
+                                                id="v-pills-timeline-tab" data-bs-toggle="pill" href="#v-pills-timeline"
+                                                role="tab" aria-controls="v-pills-timeline" aria-selected="false">
+                                                <i class='uil uil-comment-alt-message me-1'></i> Annoucements
+                                            </a>
+                                            @if (Auth::user()->type == 1)
+                                                <a class="nav-link list-group-item list-group-item-action border-0" id="annc_active" onclick="activeRounds()"
+                                                    data-bs-toggle="modal" data-bs-target="#create_aa">
+                                                    <i class='uil uil-comment-alt-message me-1'></i> Create Annoucements
+                                                </a>
+                                            @endif
+                                            <a class="nav-link  list-group-item list-group-item-action border-0"
+                                                id="v-pills-home-tab" data-bs-toggle="pill" href="#v-pills-home"
+                                                role="tab" aria-controls="v-pills-home" aria-selected="true">
+                                                <i class='uil uil-images me-1'></i> Profile
+                                            </a>
+                                            {{-- <a class="nav-link list-group-item list-group-item-action border-0"
+                                                id="v-pills-profile-tab" data-bs-toggle="pill" href="#v-pills-profile"
+                                                role="tab" aria-controls="v-pills-profile" aria-selected="false">
+                                                <i class='uil uil-comment-alt-message me-1'></i> My Post
+                                            </a> --}}
+                                            @if (Auth::user()->type == 0)
+                                                <a class="nav-link list-group-item list-group-item-action border-0"
+                                                    onclick="activeRounds()" id="rounds_active" data-bs-toggle="modal"
+                                                    data-bs-target="#request_rounds">
+                                                    <i class='uil uil-comment-alt-message me-1'></i> Request Rounds
+                                                </a>
+                                            @endif
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <!-- end profile info -->
+                        <div class="col-lg-12 col-md-12 col-xl-12">
 
-                    <!-- event info -->
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="d-flex justify-content-between align-items-center mb-2">
-                                <h4 class="header-title">Most Clicked Dogs</h4>
-                                <div class="dropdown">
-                               
-                                </div>
-                            </div>
-                            @if(isset($dogclicked))
-                                @foreach($dogclicked as $clicked)
-                                    <div class="d-flex mt-3">
-                                        <i class='uil uil-arrow-growth me-2 font-18 text-primary'></i>
-                                        <div>
-                                            <a class="mt-1 font-14" href="javascript:void(0);">
-                                                <strong>{{$clicked['dog_name']}}</strong>
-                                                <span class="text-muted"><br>
-                                                    {{$clicked['description']}}
-                                                </span>
-                                            </a>
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between align-items-center mb-2">
+                                        <h4 class="header-title">Most Clicked Dogs</h4>
+                                        <div class="dropdown">
+
                                         </div>
                                     </div>
-                                @endforeach
-                            @endif
-                           
+                                    @if (isset($dogclicked))
+                                        @foreach ($dogclicked as $clicked)
+                                            <div class="d-flex mt-3">
+                                                <i class='uil uil-arrow-growth me-2 font-18 text-primary'></i>
+                                                <div>
+                                                    <a class="mt-1 font-14" href="javascript:void(0);">
+                                                        <strong>{{ $clicked['dog_name'] }}</strong>
+                                                        <span class="text-muted"><br>
+                                                            {{ $clicked['description'] }}
+                                                        </span>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        @endforeach
+                                    @endif
 
-                        </div> <!-- end card-body-->
+
+                                </div> <!-- end card-body-->
+                            </div>
+                        </div>
                     </div>
+
                     {{-- <div class="card">
                         <div class="card-body p-2">
                             <div class="list-group list-group-flush my-2">
@@ -114,11 +122,11 @@
                             aria-labelledby="v-pills-timeline-tab">
                             @if (isset($annoucements))
                                 @foreach ($annoucements as $announcement)
-                                    <div class="card ">
+                                    <div class="card">
                                         <div class="card-body">
                                             <div class="d-flex">
                                                 <h3 class="mt-0">{{ $announcement['title'] }}</h3>
-                                                @if(Auth::user()->type ==1)
+                                                @if (Auth::user()->type == 1)
                                                     {{-- <div class="dropdown card-widgets ms-auto">
                                                         <a href="#" class="dropdown-toggle arrow-none"
                                                             data-bs-toggle="dropdown" aria-expanded="false">
@@ -155,8 +163,7 @@
                                                     </p>
                                                     <div class="d-flex">
                                                         <img src="{{ asset('storage/profile_pictures/' . basename($announcement['profile_path'])) }}"
-                                                            alt="Arya S" class="rounded-circle me-2"
-                                                            height="24">
+                                                            alt="Arya S" class="rounded-circle me-2" height="24">
                                                         <div>
                                                             <h5 class="mt-1 font-14">
                                                                 {{ $announcement['name'] }}
@@ -199,5 +206,24 @@
             </div> <!--end row -->
         </div> <!-- container -->
     </div> <!-- content -->
+    <script>
+        document.querySelectorAll('[contenteditable="true"]').forEach(element => {
+            element.removeAttribute('contenteditable');
+        });
+
+        let activeElement;
+
+        function activeRounds() {
+            activeElement = document.querySelector('#v-pills-tab .active');
+            if (activeElement) {
+                activeElement.classList.remove('active');
+                console.log('Active element ID:', activeElement.id);
+                return activeElement.id;
+            } else {
+                console.log('No active element found');
+                return null; // No active element
+            }
+        }
+    </script>
 
 </div>

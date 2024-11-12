@@ -1,13 +1,6 @@
 <div>
     <script>
-        var notif_adoption = @json($notif_adoption);
-        var notif_rounds = @json($notif_rounds);
-        var notif_claims = @json($notif_claims);
-
-        var notifications = @json($notifications);
-
         var connotif = document.getElementById('notification_here');
-        console.log(notifications);
         var notif = [];
 
         function timeAgo(createdAt) {
@@ -36,202 +29,102 @@
             }
         }
 
-        notifications.forEach((element, index) => {
-            var createdAt = new Date(element.created_at);
-            var year = createdAt.getFullYear().toString().slice(-2);
-            var month = (createdAt.getMonth() + 1).toString().padStart(2, '0');
-            if (element.table_source == 'adoption') {
-                var formattedDate = 'A' + year + '' + month;
-            } else if (element.table_source == 'rounds') {
-                var formattedDate = 'R' + year + '' + month;
-            } else if (element.table_source == 'claims') {
-                var formattedDate = 'C' + year + '' + month;
-            }
+        document.addEventListener('livewire:init', function() {
 
-            var myid = (element.id).toString().padStart(4, '0');
-            var timeAgoText = timeAgo(element.created_at);
-            var statusP = '';
-            var statusText = '';
+            var connotif = document.getElementById('notification_here');
 
+            Livewire.on('notif', event => {
+                connotif.innerHTML = '';
 
-            if (element.table_source == 'adoption') {
-                if (element.status_name == 'Pending Adoption') {
-                    statusText = 'Please expect a call from the pound.';
-                    statusP = element.status_name;
-                }else{
-                    statusP = 'Adoption Rejected'
-                }
-            }
+                let notif = [];
 
-            if (element.table_source == 'claims') {
-                if (element.status_name == 'Pending Claim') {
-                    statusText = 'Please expect a call from the pound.';
-                    statusP = 'Pending Claim';
-                } else {
-                    statusP = '';
-                    statusText = 'Lost Claim Rejected';
-                }
-            }
-            if (element.table_source == 'rounds') {
-                if (element.is_approved == null) {
-                    statusText = 'Please wait for the announcement';
-                    statusP = 'Rounds Pending';
-                } else if (element.is_approved == 1) {
-                    statusText = 'Rounds Approved';
-                    statusP = '';
-                } else {
-                    statusText = 'Rounds Rejected';
-                    statusP = '';
-                }
-            }
+                event[0].forEach((element, index) => {
+                    console.log(element);
+                    var createdAt = new Date(element.created_at);
+                    var year = createdAt.getFullYear().toString().slice(-2);
+                    var month = (createdAt.getMonth() + 1).toString().padStart(2, '0');
+                    let formattedDate = '';
 
-            notif.push(`
-                <a wire:key="${element.dog_id_unique}" href="javascript:void(0);" class="dropdown-item p-0 notify-item card unread-noti shadow-none mb-2">
-                    <div class="card-body">
-                        <div class="d-flex align-items-center">
-                            <div class="flex-shrink-0">
-                                <div class="notify-icon bg-primary">
-                                    <i class="mdi mdi-comment-account-outline"></i>
-                                </div>
-                            </div>
-                            <div class="flex-grow-1 text-truncate ms-2">
-                                <h5 class="noti-item-title fw-semibold font-14">Ticket #
-                                    ${formattedDate}-${myid} <small class="fw-normal text-muted ms-1">${timeAgoText}</small>
-                                </h5>
-                                <small class="noti-item-subtitle text-muted">${statusText}</small>   <br>
-                                <small class="noti-item-subtitle text-muted">${statusP}</small>
+                    if (element.table_source == 'adoption') {
+                        formattedDate = 'A' + year + '' + month;
+                    } else if (element.table_source == 'rounds') {
+                        formattedDate = 'R' + year + '' + month;
+                    } else if (element.table_source == 'claims') {
+                        formattedDate = 'C' + year + '' + month;
+                    }
+
+                    var myid = (element.id).toString().padStart(4, '0');
+                    var timeAgoText = timeAgo(element.date_notif);
+                    var statusP = '';
+                    var statusText = '';
+
+                    if (element.table_source == 'adoption') {
+                        if (element.status_name == 'Pending Adoption') {
+                            statusText = 'Please expect a call from the pound.';
+                            statusP = element.status_name;
+                        }else if(element.status_name == "Adopted" ){
+                            statusText = 'Adoption Approved';
+                            statusP = '';
+                        } else {
+                            statusP = 'Adoption Rejected';
+                        }
+                    }
+
+                    if (element.table_source == 'claims') {
+                        if (element.status_name == 'Pending Claim') {
+                            statusText = 'Please expect a call from the pound.';
+                            statusP = 'Pending Claim';
+                        }else if(element.status_name == 'Claimed' ){
+                            statusText = 'Claim Approved';
+                            statusP = '';
+                        }
+                        else {
+                            statusP = '';
+                            statusText = 'Lost Claim Rejected';
+                        }
+                    }
+
+                    if (element.table_source == 'rounds') {
+                        if (element.is_approved == null) {
+                            statusText = 'Please wait for the announcement';
+                            statusP = 'Rounds Pending';
+                        } else if (element.is_approved == 1) {
+                            statusText = 'Rounds Approved';
+                            statusP = '';
+                        } else {
+                            statusText = 'Rounds Rejected';
+                            statusP = '';
+                        }
+                    }
+
+                    // Push the formatted notification HTML string to the notif array
+                    notif.push(`
+            <a wire:key="${element.dog_id_unique}" href="javascript:void(0);" class="dropdown-item p-0 notify-item card unread-noti shadow-none mb-2">
+                <div class="py-1 px-1">
+                    <div class="d-flex align-items-center">
+                        <div class="flex-shrink-0">
+                            <div class="notify-icon bg-primary">
+                                <i class="mdi mdi-comment-account-outline"></i>
                             </div>
                         </div>
+                        <div class="flex-grow-1 text-truncate ms-2">
+                            <h5 class="noti-item-title fw-semibold font-14">Ticket #
+                                ${formattedDate}-${myid} <small class="fw-normal text-muted ms-1">${timeAgoText}</small>
+                            </h5>
+                            <small class="noti-item-subtitle text-muted">${statusText}</small>   <br>
+                            <small class="noti-item-subtitle text-muted">${statusP}</small>
+                        </div>
                     </div>
-                </a>
-            `);
+                </div>
+            </a>
+        `);
+                });
+
+                // After looping, set the innerHTML to the notifications list
+                connotif.innerHTML = notif.join('');
+            });
+
         });
-        // notif_adoption.forEach((element, index) => {
-
-        //     var createdAt = new Date(element.created_at);
-
-        //     var year = createdAt.getFullYear().toString().slice(-2);
-        //     var month = (createdAt.getMonth() + 1).toString().padStart(2, '0');
-        //     var formattedDate = 'A' + year + '' + month;
-
-        //     var myid = (element.id).toString().padStart(4, '0');
-        //     var timeAgoText = timeAgo(element.created_at);
-
-        //     var statusText = '';
-        //     if (element.status_name == 'For Adoption') {
-        //         statusText = 'Please expect a call from the pound.';
-        //     }
-        //     notif.push(`
-    //         <a wire:key="${element.dog_id_unique}" href="javascript:void(0);" class="dropdown-item p-0 notify-item card unread-noti shadow-none mb-2">
-    //             <div class="card-body">
-    //                 <div class="d-flex align-items-center">
-    //                     <div class="flex-shrink-0">
-    //                         <div class="notify-icon bg-primary">
-    //                             <i class="mdi mdi-comment-account-outline"></i>
-    //                         </div>
-    //                     </div>
-    //                     <div class="flex-grow-1 text-truncate ms-2">
-    //                         <h5 class="noti-item-title fw-semibold font-14">Ticket #
-    //                             ${formattedDate}-${myid} <small class="fw-normal text-muted ms-1">${timeAgoText}</small>
-    //                         </h5>
-    //                         <small class="noti-item-subtitle text-muted">${statusText}</small>   <br>
-    //                         <small class="noti-item-subtitle text-muted">${element.status_name}</small>
-    //                     </div>
-    //                 </div>
-    //             </div>
-    //         </a>
-    //     `);
-        // });
-        // notif_rounds.forEach((element, index) => {
-
-        //     var createdAt = new Date(element.created_at);
-
-        //     var year = createdAt.getFullYear().toString().slice(-2);
-        //     var month = (createdAt.getMonth() + 1).toString().padStart(2, '0');
-        //     var formattedDate = 'R' + year + '' + month;
-
-        //     var myid = (element.id).toString().padStart(4, '0');
-        //     var timeAgoText = timeAgo(element.created_at);
-
-        //     var statusText = '';
-        //     var statusP = '';
-        //     if (element.is_approved == null) {
-        //         statusText = 'Please wait for the announcement';
-        //         statusP = 'Rounds Pending';
-        //     } else if (element.is_approved == 1) {
-        //         statusText = 'Rounds Approved';
-        //     } else {
-        //         statusText = 'Rounds Rejected';
-        //     }
-
-        //     notif.push(`
-    //                 <a wire:key="${element.dog_id_unique}" href="javascript:void(0);" class="dropdown-item p-0 notify-item card unread-noti shadow-none mb-2">
-    //                     <div class="card-body">
-    //                         <div class="d-flex align-items-center">
-    //                             <div class="flex-shrink-0">
-    //                                 <div class="notify-icon bg-primary">
-    //                                     <i class="mdi mdi-comment-account-outline"></i>
-    //                                 </div>
-    //                             </div>
-    //                             <div class="flex-grow-1 text-truncate ms-2">
-    //                                 <h5 class="noti-item-title fw-semibold font-14">Ticket #
-    //                                     ${formattedDate}-${myid} <small class="fw-normal text-muted ms-1">${timeAgoText}</small>
-    //                                 </h5>
-    //                                 <small class="noti-item-subtitle text-muted">${statusText}</small>
-    //                                 <br>
-    //                                 <small class="noti-item-subtitle text-muted">${statusP}</small>
-    //                             </div>
-    //                         </div>
-    //                     </div>
-    //                 </a>
-    //             `);
-        // });
-        // notif_claims.forEach((element, index) => {
-        //     var createdAt = new Date(element.created_at);
-
-        //     var year = createdAt.getFullYear().toString().slice(-2);
-        //     var month = (createdAt.getMonth() + 1).toString().padStart(2, '0');
-        //     var formattedDate = 'A' + year + '' + month;
-
-        //     var myid = (element.id).toString().padStart(4, '0');
-        //     var timeAgoText = timeAgo(element.created_at);
-
-        //     var statusText = '';
-        //     var statusP = '';
-        //     if (element.status_name == 'Pending Claim') {
-        //         statusText = 'Please expect a call from the pound.';
-        //         statusP = 'Pending Claim';
-        //     }else{
-        //         statusP = '';
-        //         statusText = 'Lost Claim Rejected';
-        //     }
-        //     notif.push(`
-    //         <a wire:key="${element.dog_id_unique}" href="javascript:void(0);" class="dropdown-item p-0 notify-item card unread-noti shadow-none mb-2">
-    //             <div class="card-body">
-
-    //                 <div class="d-flex align-items-center">
-    //                     <div class="flex-shrink-0">
-    //                         <div class="notify-icon bg-primary">
-    //                             <i class="mdi mdi-comment-account-outline"></i>
-    //                         </div>
-    //                     </div>
-    //                     <div class="flex-grow-1 text-truncate ms-2">
-    //                         <h5 class="noti-item-title fw-semibold font-14">Ticket #
-    //                             ${formattedDate}-${myid} <small class="fw-normal text-muted ms-1">${timeAgoText}</small>
-    //                         </h5>
-    //                         <small class="noti-item-subtitle text-muted">${statusText}</small><br>
-    //                         <small class="noti-item-subtitle text-muted">${statusP}</small>
-    //                     </div>
-    //                 </div>
-    //             </div>
-    //         </a>
-    //     `);
-        //     });
-
-
-
-        // Once all notifications are collected, join them into a string and insert into the container
-        connotif.innerHTML = notif.join('');
     </script>
 
 </div>
