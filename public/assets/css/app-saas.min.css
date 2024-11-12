@@ -18126,7 +18126,7 @@ input[data-switch="dark"]:checked + label {
         from(#0295a5),
         to(#9bd2d7)
     );
-    background-image: linear-gradient(to bottom, #9cded8, #0396a6);
+    background-image: linear-gradient(to bottom, #9cded8, #0396a6) !important;
     position: absolute;
     top: -40px;
     right: 0;

@@ -45,6 +45,11 @@ Route::get('/lost-n-found', function () {
     return view('lostfound');
 })->middleware('is_login');
 
+Route::get('/about', function () {
+    return view('aboutus');
+})->middleware('is_login');
+
+
 
 
 Route::get('/test', function () {

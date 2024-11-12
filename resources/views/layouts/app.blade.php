@@ -35,6 +35,7 @@
     <link href="assets/css/app-saas.min.css" rel="stylesheet" type="text/css" id="app-style" />
     <!-- Icons css -->
     <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://code.jscharting.com/latest/jscharting.js"></script>
 
     <style>
         .daterangepicker {
@@ -165,7 +166,7 @@
                             </div>
 
                             <div class="col-auto">
-                                <a class="nav-link me-2 text-white fw-semibold" role="button">
+                                <a class="nav-link me-2 text-white fw-semibold" role="button" href="{{ url('/about') }}">
                                     About
                                 </a>
                             </div>
@@ -350,8 +351,8 @@
         <!-- Start Page Content here -->
         <!-- ============================================================== -->
 
-        <div class="content-page" style="background-color: #9CDED8 ">
-            <div class="content">
+        <div class="content-page" style="background-color: #9CDED8" id="whitebg">
+            <div class="content" >
                 @yield('content')
             </div>
         </div>
