@@ -67,7 +67,7 @@ class Notification extends Component
             ->whereBetween('animal_list_statuses.created_at', [Carbon::now()->subWeek(), Carbon::now()])
             ->get();
 
-        $foundreq = AnimalListStatus::whereIn('status', [8, 9])
+        $foundreq = AnimalListStatus::whereIn('status', [8, 9,3])
             ->leftJoin('statuses', 'statuses.id', '=', 'animal_list_statuses.status')
             ->leftJoin('animal_lists', function ($join) {
                 $join->on('animal_lists.dog_id_unique', '=', 'animal_list_statuses.animal_id')
@@ -94,7 +94,7 @@ class Notification extends Component
 
             ->whereBetween('animal_list_statuses.created_at', [Carbon::now()->subWeek(), Carbon::now()])
             ->get();
-
+        
         $notif_rounds = Rounds::where('rounds.is_active', 1)
             ->leftJoin('users', 'users.id', '=', 'rounds.user_id')
             ->leftJoin('rounds_statuses', function ($join) {
@@ -111,8 +111,9 @@ class Notification extends Component
                 DB::raw("'rounds' as table_source")
             )
             ->get();
+        // dd($notif_rounds);
 
-        $notif_claims = AnimalListStatus::whereIn('status', [6, 7, 3])
+        $notif_claims = AnimalListStatus::whereIn('status', [6, 7, 10])
             ->leftJoin('dog_claims', 'dog_claims.dog_id_unique', '=', 'animal_list_statuses.animal_id')
             ->leftJoin('statuses', 'statuses.id', '=', 'animal_list_statuses.status')
             ->leftJoin('animal_lists', function ($join) {
@@ -135,7 +136,7 @@ class Notification extends Component
             ->where('animal_list_statuses.isActive', 1)
             ->whereBetween('animal_list_statuses.created_at', [Carbon::now()->subWeek(), Carbon::now()])
             ->get();
-        // dd($this->notif_rounds);
+        // dd($notif_claims);
 
         $this->notifModal = array_merge(
             $foundreq->toArray(),
@@ -158,7 +159,7 @@ class Notification extends Component
     }
     public function fetchdatanotif()
     {
-        $this->notif_adoption = AnimalListStatus::whereIn('status', [4, 5, 1])
+        $this->notif_adoption = AnimalListStatus::whereIn('status', [4, 5,1])
             ->join('adoption_forms', 'adoption_forms.dog_id_unique', '=', 'animal_list_statuses.animal_id')
             ->leftJoin('statuses', 'statuses.id', '=', 'animal_list_statuses.status')
             ->leftJoin('animal_lists', function ($join) {
@@ -179,7 +180,7 @@ class Notification extends Component
             ->whereBetween('animal_list_statuses.created_at', [Carbon::now()->subWeek(), Carbon::now()])
             ->get();
 
-        $foundreq = AnimalListStatus::whereIn('status', [8, 9])
+        $foundreq = AnimalListStatus::whereIn('status', [8, 9, 3])
             ->leftJoin('statuses', 'statuses.id', '=', 'animal_list_statuses.status')
             ->leftJoin('animal_lists', function ($join) {
                 $join->on('animal_lists.dog_id_unique', '=', 'animal_list_statuses.animal_id')
@@ -198,7 +199,7 @@ class Notification extends Component
             ->where('animal_lists.user_id', Auth::user()->id)
             ->whereBetween('animal_list_statuses.created_at', [Carbon::now()->subWeek(), Carbon::now()])
             ->get();
-
+           
         $this->notif_rounds = Rounds::where('rounds.is_active', 1)
             ->leftJoin('users', 'users.id', '=', 'rounds.user_id')
             ->leftJoin('rounds_statuses', function ($join) {
@@ -215,7 +216,7 @@ class Notification extends Component
             )
             ->get();
 
-        $this->notif_claims = AnimalListStatus::whereIn('status', [6, 7, 3])
+        $this->notif_claims = AnimalListStatus::whereIn('status', [6, 7, 10])
             ->leftJoin('dog_claims', 'dog_claims.dog_id_unique', '=', 'animal_list_statuses.animal_id')
             ->leftJoin('statuses', 'statuses.id', '=', 'animal_list_statuses.status')
             ->leftJoin('animal_lists', function ($join) {
@@ -233,11 +234,12 @@ class Notification extends Component
             )
             ->where('dog_claims.user_id', Auth::user()->id)
             ->where('dog_claims.isActive', 1)
-
+            ->where('animal_lists.isActive', 1)
+            ->where('dog_claims.created_at', '>=', 'animal_list_statuses.created_at')
+            ->distinct()
             ->whereBetween('animal_list_statuses.created_at', [Carbon::now()->subWeek(), Carbon::now()])
             ->get();
-        // dd($this->notif_rounds);
-
+                // dd($this->notif_claims);
         $this->notifications = array_merge(
             $foundreq->toArray(),
             $this->notif_adoption->toArray(),

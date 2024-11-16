@@ -50,7 +50,6 @@ class TableLists extends Component
             ->where('animal_list_statuses.isActive', 1)
             ->get();
 
-
         $this->reqrounds = Rounds::where('rounds.is_active', 1)
             ->leftJoin('users', 'users.id', '=', 'rounds.user_id')
             ->leftJoin('rounds_statuses', function ($join) {
@@ -63,7 +62,7 @@ class TableLists extends Component
 
         // dd($this->reqrounds);
 
-        $this->claimlist = AnimalListStatus::whereIn('status', [6, 7, 3])
+        $this->claimlist = AnimalListStatus::whereIn('status', [6, 7, 10])
             ->leftJoin('dog_claims', 'dog_claims.dog_id_unique', '=', 'animal_list_statuses.animal_id')
             ->leftJoin('statuses', 'statuses.id', '=', 'animal_list_statuses.status')
             ->leftJoin('animal_lists', function ($join) {
@@ -73,6 +72,8 @@ class TableLists extends Component
             ->where('dog_claims.isActive', 1)
 
             ->where('animal_list_statuses.isActive', 1)->get();
+
+        // dd($this->claimlist);
     }
     public function getrounds($id)
     {
@@ -155,7 +156,7 @@ class TableLists extends Component
 
         AnimalListStatus::create([
             'animal_id' => $this->dog_unique,
-            'status' => 3,
+            'status' => 10,
             'isActive' => 1,
         ]);
 

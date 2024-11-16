@@ -24,7 +24,7 @@ class LostFoundList extends Component
     }
     public function fetchDataDog()
     {
-        $dogid = AnimalListStatus::where('isActive', true)->whereIn('status', [3])->get('animal_id');
+        $dogid = AnimalListStatus::where('isActive', true)->whereIn('status', [3,10])->get('animal_id');
         $this->doglist = AnimalList::whereIn('animal_lists.dog_id_unique', $dogid)
             ->leftJoin('click_dogs', 'click_dogs.dog_id_unique', '=', 'animal_lists.dog_id_unique')
             ->leftJoin('dog_breeds', 'dog_breeds.id', '=', 'animal_lists.breed')

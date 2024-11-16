@@ -1008,10 +1008,7 @@
                                                     </div>
                                                 </div>
 
-                                                <button type="button" id="adoptiontoggle"
-                                                    class="mt-3 btn btn-outline-success rounded-pill w-100"><i
-                                                        class="uil-heart"></i> Adopt the dog <i
-                                                        class="uil-heart"></i></button>
+                                              
                                             </form>
                                         </div> <!-- end col -->
                                     </div> <!-- end row-->

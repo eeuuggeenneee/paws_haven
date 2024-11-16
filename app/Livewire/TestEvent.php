@@ -23,16 +23,7 @@ class TestEvent extends Component
             'isActive' => 1,
         ]);
     }
-    public function claim_dog_rejected($id){
 
-        AnimalListStatus::where('animal_id', $id)->update(['isActive' => 0]);
-
-        AnimalListStatus::create([
-            'animal_id' => $id,
-            'status' => 3,
-            'isActive' => 1,
-        ]);
-    }
 
 
     #[On('echo:newpost_received,NewPostEvent')]
