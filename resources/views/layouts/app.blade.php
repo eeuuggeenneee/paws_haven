@@ -223,9 +223,7 @@
                                         <h6 class="m-0 font-16 fw-semibold text-black"> Notification</h6>
                                     </div>
                                     <div class="col-auto">
-                                        <a href="javascript: void(0);" class="text-white text-decoration-underline">
-                                            <small>Clear All</small>
-                                        </a>
+                                    
                                     </div>
                                 </div>
                             </div>

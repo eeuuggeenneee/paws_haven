@@ -5,22 +5,25 @@
         }
 
         @media (min-width: 1200px) {
+
             /* For large screens (XL and above) */
             .responsive-div {
                 min-height: 500px;
                 max-height: 500px;
-                display: flex; 
+                display: flex;
                 flex-direction: row;
                 overflow-y: auto;
                 padding: 0;
             }
         }
+
         @media (max-width: 576px) {
+
             /* For small screens (SM and below) */
             .responsive-div {
                 min-height: 100px;
                 max-height: 100px;
-                display: flex; 
+                display: flex;
                 flex-direction: column;
                 overflow-x: auto;
             }
@@ -39,7 +42,8 @@
                         <div class="col-xl-3 col-sm-12 border-end ">
                             <h5 class="text-center">Ticket Number</h5>
                             <hr class="mt-1 mb-1">
-                            <ul class="nav nav-tabs nav-bordered responsive-div d-flex justify-content-center align-items-center" role="tablist">
+                            <ul class="nav nav-tabs nav-bordered responsive-div d-flex justify-content-center align-items-center"
+                                role="tablist">
                                 @if (isset($notifModal))
                                     @foreach ($notifModal as $notif)
                                         @php
@@ -78,7 +82,7 @@
                                             }
                                         @endphp
                                         <li class="nav-item" role="presentation">
-                                            <a href="#{{ $ticketno }}"
+                                            <a href="#{{ $ticketno }}" id="click-{{ $ticketno }}"
                                                 class="bordered text-black nav-link @if ($loop->first) active @endif"
                                                 data-bs-toggle="tab" role="tab" aria-controls="nav-preview"
                                                 aria-selected="true">
@@ -128,13 +132,12 @@
                                             id="{{ $ticketno }}" role="tabpanel">
                                             <div class="d-flex mb-2 justify-content-between align-items-center">
                                                 <h4 class="mb-0">Ticket Number : {{ $ticketno }}</h4>
-
                                                 <button type="button"
                                                     class="btn btn-danger mt-1 btn-sm d-flex align-items-center"
                                                     onclick="cancelR('{{ $notif['id'] }}','{{ $notif['table_source'] }}','{{ $ticketno }}')">
-                                                    <i class="uil uil-cancel"></i> <span class="d-lg-block d-none ms-2">Cancel</span>
+                                                    <i class="uil uil-cancel"></i> <span
+                                                        class="d-lg-block d-none ms-2">Cancel</span>
                                                 </button>
-
                                             </div>
                                             @if ($notif['table_source'] == 'rounds')
                                                 <div class="row text-black">
@@ -551,6 +554,10 @@
             }
         }
 
+        function moveActive(id) {
+            document.getElementById('click-' + id).click();
+        }
+
         document.addEventListener('livewire:init', function() {
 
             var connotif = document.getElementById('notification_here');
@@ -636,7 +643,7 @@
 
                     // Push the formatted notification HTML string to the notif array
                     notif.push(`
-            <a wire:key="${element.dog_id_unique}" href="javascript:void(0);" class="dropdown-item p-0 notify-item card unread-noti shadow-none mb-2">
+            <a id="show-${formattedDate}-${myid}" wire:key="${element.dog_id_unique}" onclick="moveActive('${formattedDate}-${myid}')" href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#ticketlist" class="dropdown-item p-0 notify-item card unread-noti shadow-none mb-2">
                 <div class="py-1 px-1">
                     <div class="d-flex align-items-center">
                         <div class="flex-shrink-0">
