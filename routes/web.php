@@ -10,7 +10,7 @@ Route::get('/', function () {
     // Fetch data from the model
     $data = AnimalList::where('isActive', 1)->get(); 
     return view('welcome', compact('data'));
-})->name('landing');
+})->name('landing')->middleware('check_login');
 
 
 
@@ -67,4 +67,4 @@ Route::post('/upload-images', [AddLostDog::class, 'uploadImages'])->name('upload
 
 Auth::routes();
 
-Route::get('/annoucements', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

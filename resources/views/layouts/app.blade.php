@@ -120,7 +120,7 @@
                     <!-- Topbar Brand Logo -->
                     <div class="logo-topbar px-0 py-0">
                         <!-- Logo light -->
-                        <a href="{{ url('/annoucements') }}" class="logo-light">
+                        <a href="{{ url('/announcements') }}" class="logo-light">
                             <span class="logo-lg">
                                 <img src="assets/images/logooooo.png" alt="dark logo" width="70px">
                             </span>
@@ -130,7 +130,7 @@
                         </a>
                     </div>
 
-                    <a href="{{ url('/annoucements') }}" class="logo-dark">
+                    <a href="{{ url('/announcements') }}" class="logo-dark">
                         <span class="">
                             <img src="assets/images/logooooo.png" alt="dark logo" width="70px">
                         </span>
