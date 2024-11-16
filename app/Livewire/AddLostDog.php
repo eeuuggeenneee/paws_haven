@@ -113,6 +113,7 @@ class AddLostDog extends Component
             'contact_name' => $this->contact_name,
             'contact_number' => $this->contact_number,
             'isActive' => 1,
+            'user_id' => Auth::user()->id,
         ]);
 
         if (Auth::user()->type == 0) {
@@ -122,15 +123,20 @@ class AddLostDog extends Component
                 'isActive' => 1,
             ]);
 
+            $formattedId = str_pad($dog->id, 4, '0', STR_PAD_LEFT);
+            $ticket = 'F' . $dog->created_at->format('ym') . '-' . $formattedId;
+    
+            $this->dispatch('dogSaved', $ticket);
         } else {
             AnimalListStatus::create([
                 'animal_id' => $dog->dog_id_unique,
                 'status' => $this->report_type,
                 'isActive' => 1,
             ]);
+            $this->dispatch('dogSaved', 'Data has been successfully saved!');
         }
-
-        $this->dispatch('dogSaved', 'Data has been successfully saved!');
+        
+        $this->dispatch('fetchdatanotif');
         $this->clearDogImages();
         $this->resetForm();
     }

@@ -1,10 +1,49 @@
 <div>
     <style>
+        .responsive-div {
+            overflow-y: auto;
+        }
+
+        @media (min-width: 1200px) {
+            /* For large screens (XL and above) */
+            .responsive-div {
+                min-height: 500px;
+                max-height: 500px;
+                display: flex; 
+                flex-direction: row;
+                overflow-y: auto;
+                padding: 0;
+            }
+        }
+        @media (max-width: 576px) {
+            /* For small screens (SM and below) */
+            .responsive-div {
+                min-height: 100px;
+                max-height: 100px;
+                display: flex; 
+                flex-direction: column;
+                overflow-x: auto;
+            }
+        }
         .swal2-container {
             z-index: 20000 !important;
         }
 
         .table-footer {}
+
+        .table-container {
+            overflow-x: auto;
+            /* Enables horizontal scrolling */
+            -webkit-overflow-scrolling: touch;
+            /* Smooth scrolling for iOS devices */
+            margin-bottom: 20px;
+            /* Adjust as needed */
+        }
+
+        .table-container table {
+            min-width: 100%;
+            /* Makes sure the table takes up at least the full width of its container */
+        }
 
         .table-footer nav {
             position: relative;
@@ -64,9 +103,12 @@
         }
 
         .search-container {
+            flex: 1 1 auto;
+            /* Allow the search container to grow and shrink, but it won’t force overflow */
             position: absolute;
-            max-width: 500px;
             margin-bottom: 15px;
+            flex-grow: 1;
+            /* Allows the search container to grow to use available space */
         }
 
         /* Style the search input field */
@@ -153,6 +195,11 @@
             z-index: 1;
             /* Ensures the header stays above the content */
         }
+
+
+        .dog_name {
+            white-space: nowrap;
+        }
     </style>
     <div class="content">
         <!-- Start Content-->
@@ -173,22 +220,20 @@
                         <li class="nav-item">
                             <a href="#settings-b1" data-bs-toggle="tab" aria-expanded="false"
                                 class="active nav-link fw-bold text-black">
-                                <i class="mdi mdi-account-circle d-md-none d-block"></i>
+                                <svg class="d-md-none d-block" xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" width="20" height="20" x="0" y="0" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512" xml:space="preserve" class="hovered-paths"><g><path fill="#2b4d66" d="M435.033 438.933H334.391c-4.143 0-7.501-3.358-7.501-7.501s3.358-7.501 7.501-7.501h100.642c4.143 0 7.501 3.358 7.501 7.501s-3.358 7.501-7.501 7.501z" opacity="1" data-original="#2b4d66"></path><path fill="#407093" d="M382.683 372.854H124.647c-24.853 0-45-20.147-45-45V69.819c0-24.853 20.147-45 45-45h258.035c24.853 0 45 20.147 45 45v258.035c.001 24.853-20.147 45-44.999 45z" opacity="1" data-original="#407093" class="hovered-path"></path><path fill="#365e7d" d="M382.677 24.819h-24.76V263.47c0 24.856-20.15 45.006-45.006 45.006H79.647v19.372c0 24.856 20.15 45.006 45.006 45.006h258.024c24.856 0 45.006-20.15 45.006-45.006V69.825c-.001-24.856-20.15-45.006-45.006-45.006z" opacity="1" data-original="#365e7d"></path><path fill="#f6e266" d="M382.677 387.856H124.653c-33.088 0-60.008-26.919-60.008-60.008V69.825c0-33.088 26.92-60.008 60.008-60.008h258.024c33.088 0 60.008 26.92 60.008 60.008v258.024c0 33.088-26.92 60.007-60.008 60.007zM124.653 39.821c-16.544 0-30.004 13.46-30.004 30.004v258.024c0 16.544 13.46 30.004 30.004 30.004h258.024c16.544 0 30.004-13.46 30.004-30.004V69.825c0-16.544-13.46-30.004-30.004-30.004z" opacity="1" data-original="#f6e266"></path><path fill="#f1d333" d="M417.152 20.753a59.71 59.71 0 0 1 10.829 34.367v272.715c0 25.028-20.289 45.317-45.316 45.317H109.949a59.71 59.71 0 0 1-34.367-10.829c10.87 15.427 28.807 25.533 49.071 25.533h258.024c33.088 0 60.008-26.919 60.008-60.008V69.825c0-20.264-10.107-38.201-25.533-49.072z" opacity="1" data-original="#f1d333"></path><path fill="#2b4d66" d="M74.281 438.933H7.501c-4.143 0-7.501-3.358-7.501-7.501s3.358-7.501 7.501-7.501h66.78c4.143 0 7.501 3.358 7.501 7.501s-3.358 7.501-7.501 7.501z" opacity="1" data-original="#2b4d66"></path><path fill="#90d8f9" d="M198.607 409.696h-89.041c-8.284 0-15-6.716-15-15V220.54c0-8.284 6.716-15 15-15h89.041c8.284 0 15 6.716 15 15v174.156c0 8.284-6.716 15-15 15z" opacity="1" data-original="#90d8f9"></path><path fill="#6bbef6" d="M198.605 205.54h-11.311v162.841c0 8.285-6.717 15.002-15.002 15.002H94.566v11.311c0 8.285 6.717 15.002 15.002 15.002h89.037c8.285 0 15.002-6.717 15.002-15.002V220.541c0-8.285-6.716-15.001-15.002-15.001z" opacity="1" data-original="#6bbef6"></path><path fill="#407093" d="M198.605 205.54h-89.037a15 15 0 0 0-3.446.413l14.929 25.858a14.265 14.265 0 0 0 12.353 7.132h41.366c5.096 0 9.805-2.719 12.353-7.132l14.929-25.858a15.009 15.009 0 0 0-3.447-.413z" opacity="1" data-original="#407093" class="hovered-path"></path><path fill="#365e7d" d="M198.605 205.54h-19.49l-14.484 25.088a16.629 16.629 0 0 1-14.401 8.314h24.54c5.096 0 9.805-2.719 12.353-7.132l14.929-25.858a15.064 15.064 0 0 0-3.447-.412z" opacity="1" data-original="#365e7d"></path><path fill="#2b4d66" d="M198.605 417.197h-89.037c-12.408 0-22.503-10.095-22.503-22.503V220.541c0-12.408 10.095-22.503 22.503-22.503h89.037c12.408 0 22.503 10.095 22.503 22.503v174.153c0 12.408-10.095 22.503-22.503 22.503zM109.568 213.04c-4.136 0-7.501 3.365-7.501 7.501v174.153c0 4.136 3.365 7.501 7.501 7.501h89.037c4.136 0 7.501-3.365 7.501-7.501V220.541c0-4.136-3.365-7.501-7.501-7.501z" opacity="1" data-original="#2b4d66"></path><path fill="#e48e81" d="M140.469 291.521h-11.637a7.86 7.86 0 0 1-7.86-7.86v-11.637a7.86 7.86 0 0 1 7.86-7.86h11.637a7.86 7.86 0 0 1 7.86 7.86v11.637a7.861 7.861 0 0 1-7.86 7.86z" opacity="1" data-original="#e48e81"></path><path fill="#f6e266" d="m170.952 291.629-8.228-8.228a7.86 7.86 0 0 1 0-11.115l8.228-8.228a7.86 7.86 0 0 1 11.115 0l8.228 8.228a7.86 7.86 0 0 1 0 11.115l-8.228 8.228a7.858 7.858 0 0 1-11.115 0z" opacity="1" data-original="#f6e266"></path><path fill="#f1d333" d="M187.294 269.284v17.118l3.001-3.001a7.86 7.86 0 0 0 0-11.115z" opacity="1" data-original="#f1d333"></path><path fill="#e2dfe2" d="M140.469 373.45h-11.637a7.86 7.86 0 0 1-7.86-7.86v-11.637a7.86 7.86 0 0 1 7.86-7.86h11.637a7.86 7.86 0 0 1 7.86 7.86v11.637a7.861 7.861 0 0 1-7.86 7.86z" opacity="1" data-original="#e2dfe2"></path><path fill="#78d0b1" d="M134.652 332.384h-.004c-7.553 0-13.676-6.123-13.676-13.676v-.004c0-7.553 6.123-13.676 13.676-13.676h.004c7.553 0 13.676 6.123 13.676 13.676v.004c0 7.553-6.123 13.676-13.676 13.676z" opacity="1" data-original="#78d0b1"></path><path fill="#407093" d="M469.545 498.173v-22.288a3.988 3.988 0 0 1 3.019-3.871c5.779-1.445 9.972-6.94 9.375-13.282-.608-6.451-6.28-11.251-12.76-11.251h-44.558a5.001 5.001 0 0 1-5.001-5.001v-20.003a5.001 5.001 0 0 1 5.001-5.001h44.17c23.756 0 43.609 19.44 43.202 43.193-.37 21.59-16.937 39.306-38.045 41.491-2.354.246-4.403-1.619-4.403-3.987z" opacity="1" data-original="#407093" class="hovered-path"></path><path fill="#365e7d" d="M484.754 420.545c8.731 7.914 14.208 19.29 13.992 31.879-.316 18.464-12.483 34.085-29.201 39.591v6.158c0 2.368 2.048 4.232 4.404 3.989 21.108-2.185 37.675-19.901 38.045-41.491.31-18.141-11.202-33.756-27.24-40.126z" opacity="1" data-original="#365e7d"></path><path fill="#e48e81" d="m350.127 438.73 3.377-5.37a3.622 3.622 0 0 0 0-3.856l-3.377-5.37a38.838 38.838 0 0 1 0-41.347l4.319-6.868c1.668-2.652-.591-6.028-3.679-5.498L78.199 417.192a14.448 14.448 0 0 0 0 28.48l272.568 46.771c3.088.53 5.346-2.845 3.679-5.498l-4.319-6.868a38.836 38.836 0 0 1 0-41.347z" opacity="1" data-original="#e48e81"></path><path fill="#dd636e" d="M350.127 480.077a38.838 38.838 0 0 1 0-41.347l3.377-5.37a3.622 3.622 0 0 0 0-3.856l-3.377-5.37a38.838 38.838 0 0 1 0-41.347l4.319-6.868c1.668-2.652-.591-6.028-3.679-5.498l-36.366 6.24a38.77 38.77 0 0 0 4.992 12.123l3.377 5.37a3.622 3.622 0 0 1 0 3.856l-3.377 5.37a38.838 38.838 0 0 0 0 41.347l4.319 6.868c1.668 2.652-.591 6.028-3.679 5.498l-237.186-40.7-4.648.798a14.448 14.448 0 0 0 0 28.48l272.568 46.771c3.088.53 5.346-2.845 3.679-5.498z" opacity="1" data-original="#dd636e"></path><circle cx="258.966" cy="290.863" r="8.485" fill="#f6f1f1" opacity="1" data-original="#f6f1f1"></circle><path fill="#f6f1f1" d="M258.966 253.95a7.5 7.5 0 0 1-7.501-7.501v-52.974a7.5 7.5 0 0 1 7.501-7.501c11.946 0 23.061-4.778 31.298-13.453 8.232-8.671 12.423-20.039 11.801-32.012-1.165-22.45-19.704-40.391-42.206-40.844-21.868-.432-40.621 15.518-43.637 37.121a43.795 43.795 0 0 0-.416 6.029c0 4.143-3.358 7.501-7.501 7.501s-7.501-3.358-7.501-7.501c0-2.713.189-5.439.561-8.103 4.063-29.124 29.299-50.633 58.797-50.046 30.327.611 55.314 24.799 56.885 55.065.836 16.122-4.812 31.436-15.904 43.119-9.353 9.851-21.462 15.972-34.676 17.654v45.946a7.5 7.5 0 0 1-7.501 7.5z" opacity="1" data-original="#f6f1f1"></path></g></svg>
                                 <span class="d-none d-md-block">Lost and found</span>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="#profile-b1" data-bs-toggle="tab" aria-expanded="true"
                                 class=" text-black nav-link fw-bold">
-                                <i class="mdi mdi-account-circle d-md-none d-block"></i>
-                                <span class="d-none d-md-block">Rounds </span>
+                                <svg class="d-md-none d-block"  xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" width="20" height="20" x="0" y="0" viewBox="0 0 100 100" style="enable-background:new 0 0 512 512" xml:space="preserve" class=""><g><path d="M33.333 63.333c-6.426 0-11.667 5.219-11.667 11.667 0 6.426 5.241 11.667 11.667 11.667S45 81.426 45 75c0-6.448-5.241-11.667-11.667-11.667zm0 16.667a5.01 5.01 0 0 1-5-5c0-2.764 2.246-5 5-5s5 2.236 5 5c0 2.754-2.246 5-5 5zM90 86.667V73.333l-16.667-6.666V50H70l-3.333 6.667L60 58.333v5h6.667v23.334h6.666V73.848l10 4.001v8.818z" fill="#000000" opacity="1" data-original="#000000" class=""></path><path d="M61.667 76.667v-8.334H55V54.431l8.223-2.058L66.907 45h11.426v18.281L90 67.949V20H53.333v-6.667h-6.667V20H40L26.667 43.333 10 50v26.667h6.667V75c0-9.189 7.478-16.667 16.667-16.667S50 65.811 50 75v1.667zM34.346 43.333l9.523-16.666h12.798v16.666z" fill="#000000" opacity="1" data-original="#000000" class=""></path></g></svg>                                <span class="d-none d-md-block">Rounds </span>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="#home-b1" data-bs-toggle="tab" aria-expanded="false"
                                 class=" text-black nav-link  fw-bold">
-                                <i class="mdi mdi-home-variant d-md-none d-block "></i>
-                                <span class="d-none d-md-block">Adoption</span>
+                                <svg class="d-md-none d-block" xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" width="20" height="20" x="0" y="0" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512" xml:space="preserve" class=""><g><path d="M294.763 367.838h-56.187V145.736h30.628c49.88 0 90.315 40.435 90.315 90.315v67.031c0 35.763-28.992 64.756-64.756 64.756z" style="" fill="#d46b5c" data-original="#d46b5c"></path><path d="M75.041 367.838h56.187V145.736H100.6c-49.88 0-90.315 40.435-90.315 90.315v67.031c0 35.763 28.992 64.756 64.756 64.756z" style="" fill="#b55348" data-original="#b55348"></path><path d="M63.424 353.176V246.908c0-67.163 54.388-112.865 121.478-112.865 67.091 0 121.478 45.702 121.478 112.865v106.268H63.424z" style="" fill="#fde0be" data-original="#fde0be"></path><path d="M160.22 293.134c0-58.507 17.708-112.878 48.057-158.047-5.676-.691-17.474-1.045-23.375-1.045-67.091 0-121.478 45.702-121.478 112.865v106.268h103.161c-4.169-19.353-6.365-39.441-6.365-60.041z" style="" fill="#f7b073" data-original="#f7b073"></path><path d="M113.018 392.782h143.768v97.783H113.018z" style="" fill="#fde0be" data-original="#fde0be"></path><path d="M172.215 392.782h-59.197v97.783h121.157c-26.875-27.736-48.139-60.94-61.96-97.783z" style="" fill="#f7b073" data-original="#f7b073"></path><ellipse cx="184.902" cy="410.749" rx="46.916" ry="47.03" style="" fill="#db4b86" data-original="#db4b86"></ellipse><path d="M184.902 405.844a8.982 8.982 0 0 1 8.525 6.136c8.786 26.418 30.493 38.602 61.089 38.602 38.447 0 69.614-31.201 69.614-69.69s-31.167-69.69-69.614-69.69H115.288c-38.447 0-69.614 31.201-69.614 69.69s31.168 69.69 69.614 69.69c30.596 0 52.303-12.184 61.089-38.602a8.983 8.983 0 0 1 8.525-6.136z" style="" fill="#ffffff" data-original="#ffffff"></path><path d="M160.786 311.203h-45.498c-38.447 0-69.614 31.202-69.614 69.69s31.167 69.69 69.614 69.69c30.596 0 52.303-12.184 61.089-38.602.461-1.387 7.237-2.602 8.235-3.576-13.36-30.014-21.662-62.776-23.826-97.202z" style="" fill="#d2dcfd" data-original="#d2dcfd"></path><path d="M480.064 248.168c-16.59 0-22.999 10.467-24.966 14.944-1.967-4.477-8.376-14.944-24.966-14.944-16.977 0-31.936 11.722-31.936 33.126 0 8.661 1.733 16.081 6.577 24.362 9.948 17.008 43.64 38.148 50.325 42.438 6.685-4.29 40.377-25.431 50.325-42.438 4.844-8.281 6.577-15.701 6.577-24.362 0-21.405-14.959-33.126-31.936-33.126z" style="" fill="#fd7da0" data-original="#fd7da0"></path><ellipse cx="184.902" cy="338.783" rx="27.514" ry="27.58" style="" fill="#fd7da0" data-original="#fd7da0"></ellipse><path d="M256.786 452.376v38.189H113.018v-38.189M242.277 145.736h26.927c49.88 0 90.316 40.435 90.316 90.314v67.033c0 25.191-14.385 47.022-35.388 57.728M127.006 145.736h-26.405c-49.88 0-90.316 40.435-90.316 90.314v67.033c0 25.191 14.384 47.022 35.388 57.728" style="stroke-width:20;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;" fill="none" stroke="#052a75" stroke-width="20" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" data-original="#052a75"></path><path d="M63.424 333.188v-86.28c0-67.163 54.388-112.865 121.478-112.865h0c67.091 0 121.478 45.702 121.478 112.865v86.28" style="stroke-width:20;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;" fill="none" stroke="#052a75" stroke-width="20" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" data-original="#052a75"></path><path d="M184.902 405.844a8.982 8.982 0 0 1 8.525 6.136c8.786 26.418 30.493 38.602 61.089 38.602 38.447 0 69.614-31.201 69.614-69.69s-31.167-69.69-69.614-69.69H115.288c-38.447 0-69.614 31.201-69.614 69.69s31.168 69.69 69.614 69.69c30.596 0 52.303-12.184 61.089-38.602a8.983 8.983 0 0 1 8.525-6.136h0zM228.016 236.431v26.581M141.788 236.431v26.581" style="stroke-width:20;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;" fill="none" stroke="#052a75" stroke-width="20" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" data-original="#052a75"></path><path d="m10 88.747 25.029-66.228c.511-1.26 2.282-1.262 2.796-.003l24.802 66.231M17.806 78.754h37.141M422.603 22.186h-27.83v66.561h27.83M420.551 55.466h-25.778M136.032 56.153c0 17.961-9.892 32.174-25.586 32.45-5.224.092-18.725.144-18.725.144L91.59 23.56h18.32c17.214-.001 26.122 14.632 26.122 32.593zM501.721 54.94c0 18.463-10.168 33.073-26.3 33.357-5.37.095-19.248.148-19.248.148l-.135-67.008h18.832c17.694-.002 26.851 15.04 26.851 33.503zM327.751 21.573h36.811M346.082 23.718v65.029M262.542 21.573v67.174M300.281 40.529c0 10.469-8.79 18.957-19.179 18.957-5.152 0-18.431.084-18.431.084s-.083-13.763-.083-19.04c0-4.334-.046-18.957-.046-18.957h18.56c10.388 0 19.179 8.487 19.179 18.956z" style="stroke-width:20;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;" fill="none" stroke="#fd6050" stroke-width="20" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" data-original="#fd6050"></path><ellipse cx="197.673" cy="55.16" rx="33.328" ry="33.587" style="stroke-width:20;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;" fill="none" stroke="#fd6050" stroke-width="20" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" data-original="#fd6050"></ellipse></g></svg>                                <span class="d-none d-md-block">Adoption</span>
                             </a>
                         </li>
                     </ul>
@@ -197,14 +242,14 @@
                             <div class="card" style="background-color: #f2f2f2;" id="claimcard">
                                 <div class="px-3">
                                     <h3>Claim List</h3>
-                                    <div class="table-responsive" id="claim_list" wire:ignore.self>
+                                    <div class="table-responsive-xl" id="claim_list" wire:ignore.self>
                                         <div class="d-flex align-items-center">
                                             <div class="search-container ms-auto">
                                                 <input type="text" class="cl_search form-control " id="searchtb"
                                                     style="width: 150%;" placeholder="Search for dogs...">
                                             </div>
                                             <h3 class="mb-4 d-flex align-items-center ms-auto"></h3>
-                                            <div class="mb-2"
+                                            <div class="mb-2 d-lg-block d-none"
                                                 style="display: flex; align-items: center; justify-content: space-between;">
                                                 <!-- Other elements on the left -->
                                                 <label for="addressFilter"
@@ -216,146 +261,165 @@
                                                     <option value="without">Without Proof</option>
                                                 </select>
                                             </div>
-
-
+                                        </div>
+                                        <div class="mb-2  d-sm-block d-lg-none"
+                                            style="display: flex; align-items: center; justify-content: space-between;">
+                                            <!-- Other elements on the left -->
+                                            <label for="addressFilter"
+                                                style="white-space: nowrap; margin-right: 10px;">Filter by
+                                                Proof</label>
+                                            <select id="addressFilter2" class="form-select ">
+                                                <option value="">All</option>
+                                                <option value="with">With Proof</option>
+                                                <option value="without">Without Proof</option>
+                                            </select>
                                         </div>
 
-                                        <table class="table table-centered table-nowrap mb-0">
-                                            <thead style="background-color: #0396a6;">
-                                                <tr>
-                                                    <th class="text-white sort">Ticket Number</th>
-                                                    <th class="text-white">Requestor</th>
-                                                    <th class="text-white">Dog</th>
-                                                    <th class="text-white">Contact</th>
-                                                    <th class="text-white">Proof</th>
-                                                    <th class="text-white">Status</th>
-                                                    <th style="width: 125px;" class="text-white">Action</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody class="list">
-                                                @if (isset($claimlist))
-                                                    @foreach ($claimlist as $cdata)
-                                                        @if (isset($cdata['id']))
-                                                            @php
-                                                                $imagestc = json_decode($cdata['animal_images']);
-                                                            @endphp
-                                                            <tr>
-                                                                <td class="ticket_number text-black">
-                                                                    C{{ $cdata['created_at']->format('ym') . '-' . str_pad($cdata['id'], 4, '0', STR_PAD_LEFT) ?? 'N/A' }}
-                                                                <td class="requestor text-black">
-                                                                    {{ $cdata['fullname'] ?? 'N/A' }}
-                                                                </td>
-                                                                <td class="dog_name">
-                                                                    <div class="d-flex">
-                                                                        <div class="d-flex align-items-center">
-                                                                            <div class="flex-shrink-0">
-                                                                                @if (!is_null($imagestc) && isset($imagestc[0]))
-                                                                                    <img src="{{ asset('storage/' . $imagestc[0]) }}"
-                                                                                        class="rounded-circle avatar-xs"
-                                                                                        alt="friend">
-                                                                                @else
-                                                                                    <img src="{{ asset('storage/profile_pictures/xjxxrQTF3FiMAJ92RTzIrh15XRKYVLP9rtQt6g1E.png') }}"
-                                                                                        class="rounded-circle avatar-xs"
-                                                                                        alt="default">
-                                                                                @endif
-                                                                            </div>
-                                                                            <div class="flex-grow-1 ms-2 text-black">
-                                                                                <h5 class="my-0">
-                                                                                    {{ $cdata['dog_name'] }}
-                                                                                </h5>
+                                        <div class="table-container">
+
+                                            <table class="table table-centered table-nowrap mb-0">
+                                                <thead style="background-color: #0396a6;">
+                                                    <tr>
+                                                        <th class="text-white sort">Ticket Number</th>
+                                                        <th class="text-white">Requestor</th>
+                                                        <th class="text-white">Dog</th>
+                                                        <th class="text-white">Contact</th>
+                                                        <th class="text-white">Proof</th>
+                                                        <th class="text-white">Status</th>
+                                                        <th style="width: 125px;" class="text-white">Action</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody class="list">
+                                                    @if (isset($claimlist))
+                                                        @foreach ($claimlist as $cdata)
+                                                            @if (isset($cdata['id']))
+                                                                @php
+                                                                    $imagestc = json_decode($cdata['animal_images']);
+                                                                @endphp
+                                                                <tr>
+                                                                    <td class="ticket_number text-black">
+                                                                        C{{ $cdata['created_at']->format('ym') . '-' . str_pad($cdata['id'], 4, '0', STR_PAD_LEFT) ?? 'N/A' }}
+                                                                    <td class="requestor text-black">
+                                                                        {{ $cdata['fullname'] ?? 'N/A' }}
+                                                                    </td>
+                                                                    <td class="dog_name">
+                                                                        <div class="d-flex">
+                                                                            <div class="d-flex align-items-center">
+                                                                                <div class="flex-shrink-0">
+                                                                                    @if (!is_null($imagestc) && isset($imagestc[0]))
+                                                                                        <img src="{{ asset('storage/' . $imagestc[0]) }}"
+                                                                                            class="rounded-circle avatar-xs"
+                                                                                            alt="friend">
+                                                                                    @else
+                                                                                        <img src="{{ asset('storage/profile_pictures/xjxxrQTF3FiMAJ92RTzIrh15XRKYVLP9rtQt6g1E.png') }}"
+                                                                                            class="rounded-circle avatar-xs"
+                                                                                            alt="default">
+                                                                                    @endif
+                                                                                </div>
+                                                                                <div
+                                                                                    class="flex-grow-1 ms-2 text-black">
+                                                                                    <h5 class="my-0">
+                                                                                        {{ $cdata['dog_name'] }}
+                                                                                    </h5>
+                                                                                </div>
                                                                             </div>
                                                                         </div>
-                                                                    </div>
-                                                                </td>
+                                                                    </td>
 
-                                                                <td class="contact text-black">
-                                                                    {{ $cdata['contact'] ?? 'N/A' }}
-                                                                </td>
-                                                                <td class="address"
-                                                                    data-address-status="{{ isset($cdata['proof']) ? 'with' : 'without' }}">
-                                                                    @if (isset($cdata['proof']))
-                                                                        <svg xmlns="http://www.w3.org/2000/svg"
-                                                                            version="1.1"
-                                                                            xmlns:xlink="http://www.w3.org/1999/xlink"
-                                                                            width="20" height="20" x="0" y="0"
-                                                                            viewBox="0 0 2.54 2.54"
-                                                                            style="enable-background:new 0 0 512 512"
-                                                                            xml:space="preserve" fill-rule="evenodd"
-                                                                            class="">
-                                                                            <g>
-                                                                                <circle cx="1.27" cy="1.27"
-                                                                                    r="1.27" fill="#00ba00"
-                                                                                    opacity="1"
-                                                                                    data-original="#00ba00"
-                                                                                    class=""></circle>
-                                                                                <path fill="#ffffff"
-                                                                                    d="M.873 1.89.41 1.391a.17.17 0 0 1 .008-.24.17.17 0 0 1 .24.009l.358.383.567-.53a.17.17 0 0 1 .016-.013l.266-.249a.17.17 0 0 1 .24.008.17.17 0 0 1-.008.24l-.815.76-.283.263-.125-.134z"
-                                                                                    opacity="1"
-                                                                                    data-original="#ffffff"
-                                                                                    class=""></path>
-                                                                            </g>
-                                                                        </svg>
-                                                                    @else
-                                                                        <svg xmlns="http://www.w3.org/2000/svg"
-                                                                            version="1.1"
-                                                                            xmlns:xlink="http://www.w3.org/1999/xlink"
-                                                                            width="20" height="20" x="0" y="0"
-                                                                            viewBox="0 0 512 512"
-                                                                            style="enable-background:new 0 0 512 512"
-                                                                            xml:space="preserve" class="">
-                                                                            <g>
-                                                                                <g data-name="Layer 2">
-                                                                                    <circle cx="256"
-                                                                                        cy="256" r="256"
-                                                                                        fill="#f44336" opacity="1"
-                                                                                        data-original="#f44336"
+                                                                    <td class="contact text-black">
+                                                                        {{ $cdata['contact'] ?? 'N/A' }}
+                                                                    </td>
+                                                                    <td class="address"
+                                                                        data-address-status="{{ isset($cdata['proof']) ? 'with' : 'without' }}">
+                                                                        @if (isset($cdata['proof']))
+                                                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                                                version="1.1"
+                                                                                xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                                                width="20" height="20" x="0"
+                                                                                y="0" viewBox="0 0 2.54 2.54"
+                                                                                style="enable-background:new 0 0 512 512"
+                                                                                xml:space="preserve"
+                                                                                fill-rule="evenodd" class="">
+                                                                                <g>
+                                                                                    <circle cx="1.27"
+                                                                                        cy="1.27" r="1.27"
+                                                                                        fill="#00ba00" opacity="1"
+                                                                                        data-original="#00ba00"
                                                                                         class=""></circle>
                                                                                     <path fill="#ffffff"
-                                                                                        d="M348.6 391a42.13 42.13 0 0 1-30-12.42L256 316l-62.6 62.61a42.41 42.41 0 1 1-60-60L196 256l-62.61-62.6a42.41 42.41 0 0 1 60-60L256 196l62.6-62.61a42.41 42.41 0 1 1 60 60L316 256l62.61 62.6a42.41 42.41 0 0 1-30 72.4z"
+                                                                                        d="M.873 1.89.41 1.391a.17.17 0 0 1 .008-.24.17.17 0 0 1 .24.009l.358.383.567-.53a.17.17 0 0 1 .016-.013l.266-.249a.17.17 0 0 1 .24.008.17.17 0 0 1-.008.24l-.815.76-.283.263-.125-.134z"
                                                                                         opacity="1"
-                                                                                        data-original="#ffffff"></path>
+                                                                                        data-original="#ffffff"
+                                                                                        class=""></path>
                                                                                 </g>
-                                                                            </g>
-                                                                        </svg>
-                                                                    @endif
-
-                                                                </td>
-                                                                <td class="status">
-                                                                    <h5 class="my-0">
-
-                                                                        @if ($cdata['status_name'] == 'Found Dog')
-                                                                            <span class="badge bg-danger">
-                                                                                Rejected
-                                                                            </span>
+                                                                            </svg>
                                                                         @else
-                                                                            <span class="badge bg-info">
-                                                                                {{ $cdata['status_name'] }}
-                                                                            </span>
+                                                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                                                version="1.1"
+                                                                                xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                                                width="20" height="20" x="0"
+                                                                                y="0" viewBox="0 0 512 512"
+                                                                                style="enable-background:new 0 0 512 512"
+                                                                                xml:space="preserve" class="">
+                                                                                <g>
+                                                                                    <g data-name="Layer 2">
+                                                                                        <circle cx="256"
+                                                                                            cy="256" r="256"
+                                                                                            fill="#f44336"
+                                                                                            opacity="1"
+                                                                                            data-original="#f44336"
+                                                                                            class=""></circle>
+                                                                                        <path fill="#ffffff"
+                                                                                            d="M348.6 391a42.13 42.13 0 0 1-30-12.42L256 316l-62.6 62.61a42.41 42.41 0 1 1-60-60L196 256l-62.61-62.6a42.41 42.41 0 0 1 60-60L256 196l62.6-62.61a42.41 42.41 0 1 1 60 60L316 256l62.61 62.6a42.41 42.41 0 0 1-30 72.4z"
+                                                                                            opacity="1"
+                                                                                            data-original="#ffffff">
+                                                                                        </path>
+                                                                                    </g>
+                                                                                </g>
+                                                                            </svg>
                                                                         @endif
 
-                                                                    </h5>
-                                                                </td>
-                                                                <td class="action text-black">
-                                                                    @if ($cdata['status_name'] == 'Pending Claim')
-                                                                        <a href="#"
-                                                                            wire:click.prevent="lostclaim('{{ $cdata['dog_id_unique'] ?? 0 }}')"
-                                                                            class="action-icon" data-bs-toggle="modal"
-                                                                            data-bs-target="#primary-header-modal2">
-                                                                            <i class="mdi mdi-square-edit-outline"></i>
-                                                                        </a>
-                                                                    @else
-                                                                    @endif
+                                                                    </td>
+                                                                    <td class="status">
+                                                                        <h5 class="my-0">
 
-                                                                    <a href="javascript:void(0);" class="action-icon"
-                                                                        onclick="deleteClaim('{{ $cdata['dog_id_unique'] }}')">
-                                                                        <i class="mdi mdi-delete"></i></a>
-                                                                </td>
-                                                            </tr>
-                                                        @endif
-                                                    @endforeach
-                                                @endif
-                                            </tbody>
-                                        </table>
+                                                                            @if ($cdata['status_name'] == 'Found Dog')
+                                                                                <span class="badge bg-danger">
+                                                                                    Rejected
+                                                                                </span>
+                                                                            @else
+                                                                                <span class="badge bg-info">
+                                                                                    {{ $cdata['status_name'] }}
+                                                                                </span>
+                                                                            @endif
+
+                                                                        </h5>
+                                                                    </td>
+                                                                    <td class="action text-black">
+                                                                        @if ($cdata['status_name'] == 'Pending Claim')
+                                                                            <a href="#"
+                                                                                wire:click.prevent="lostclaim('{{ $cdata['dog_id_unique'] ?? 0 }}')"
+                                                                                class="action-icon"
+                                                                                data-bs-toggle="modal"
+                                                                                data-bs-target="#primary-header-modal2">
+                                                                                <i
+                                                                                    class="mdi mdi-square-edit-outline"></i>
+                                                                            </a>
+                                                                        @else
+                                                                        @endif
+
+                                                                        <a href="javascript:void(0);"
+                                                                            class="action-icon"
+                                                                            onclick="deleteClaim('{{ $cdata['dog_id_unique'] }}')">
+                                                                            <i class="mdi mdi-delete"></i></a>
+                                                                    </td>
+                                                                </tr>
+                                                            @endif
+                                                        @endforeach
+                                                    @endif
+                                                </tbody>
+                                            </table>
+                                        </div>
                                         <div class="card-footer mt-3">
                                             <div class="table-footer">
                                                 <nav>
@@ -390,85 +454,83 @@
                                         <div class="d-flex align-items-center ">
                                             <div class="search-container ms-auto">
                                                 <input type="text" class="c_search form-control " id="searchtb"
-                                                    style="width: 150%;" placeholder="Search for dogs...">
+                                                    style="width: 150%;" placeholder="Search rounds...">
                                             </div>
                                             <h3 class="mb-4 d-flex align-items-center ms-auto"></h3>
 
                                         </div>
+                                        <div class="table-container">
 
-                                        <table class="table table-centered table-nowrap mb-0">
-                                            <thead style="background-color: #0396a6;">
-                                                <tr>
-                                                    <th class="text-white">Ticket Number</th>
-                                                    <th class="text-white">Requestor</th>
-                                                    <th class="text-white">Where</th>
-                                                    <th class="text-white">Specific Location</th>
-                                                    <th class="text-white">Contact</th>
-                                                    <th class="text-white">Date Requested</th>
-                                                    <th class="text-white">Status</th>
-                                                    <th style="width: 125px;" class="text-white">Action</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody class="list">
-                                                @if (isset($reqrounds))
-                                                    @foreach ($reqrounds as $data)
-                                                        <tr>
-                                                            <td class="ticket_number text-black">
-                                                                R{{ $data['created_at']->format('ym') . '-' . str_pad($data['id'], 4, '0', STR_PAD_LEFT) ?? 'N/A' }}
-                                                            </td>
-                                                            <td class="requestor text-black">
-                                                                {{ $data['name'] ?? 'N/A' }} </td>
-                                                            <td class="address text-black">
-                                                                {{ $data['address'] ?? 'N/A' }}
-                                                            </td>
-                                                            <td class="specific text-black">
-                                                                <p class="mb-0 txt-muted">
-                                                                    {{ $data['specific_location'] ?? 'N/A' }} </p>
-                                                            </td>
-                                                            <td class="contact text-black">
-                                                                {{ $data['contact'] ?? 'N/A' }}</td>
-                                                            <td class="created  text-black">
-                                                                {{ $data['created_at']->format('M d, Y h:i A') ?? 'N/A' }}
-                                                            </td>
+                                            <table class="table table-centered table-nowrap mb-0">
+                                                <thead style="background-color: #0396a6;">
+                                                    <tr>
+                                                        <th class="text-white">Ticket Number</th>
+                                                        <th class="text-white">Requestor</th>
+                                                        <th class="text-white">Where</th>
 
-                                                            <td class="status text-black">
-                                                                <h5 class="my-0">
-                                                                    @if (isset($data['is_approved']))
-                                                                        @if ($data['is_approved'] == 1)
-                                                                            <span class="badge bg-success">
-                                                                                <span>Approved</span>
-                                                                            </span>
-                                                                        @elseif ($data['is_approved'] == 0)
-                                                                            <span class="badge bg-danger">
-                                                                                <span>Rejected</span>
+                                                        <th class="text-white">Contact</th>
+                                                        <th class="text-white">Date Requested</th>
+                                                        <th class="text-white">Status</th>
+                                                        <th style="width: 125px;" class="text-white">Action</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody class="list">
+                                                    @if (isset($reqrounds))
+                                                        @foreach ($reqrounds as $data)
+                                                            <tr>
+                                                                <td class="ticket_number text-black">
+                                                                    R{{ $data['created_at']->format('ym') . '-' . str_pad($data['id'], 4, '0', STR_PAD_LEFT) ?? 'N/A' }}
+                                                                </td>
+                                                                <td class="requestor text-black">
+                                                                    {{ $data['name'] ?? 'N/A' }} </td>
+                                                                <td class="address text-black">
+                                                                    {{ $data['address'] ?? 'N/A' }}
+                                                                </td>
+
+                                                                <td class="contact text-black">
+                                                                    {{ $data['contact'] ?? 'N/A' }}</td>
+                                                                <td class="created  text-black">
+                                                                    {{ $data['created_at']->format('M d, Y h:i A') ?? 'N/A' }}
+                                                                </td>
+
+                                                                <td class="status text-black">
+                                                                    <h5 class="my-0">
+                                                                        @if (isset($data['is_approved']))
+                                                                            @if ($data['is_approved'] == 1)
+                                                                                <span class="badge bg-success">
+                                                                                    <span>Approved</span>
+                                                                                </span>
+                                                                            @elseif ($data['is_approved'] == 0)
+                                                                                <span class="badge bg-danger">
+                                                                                    <span>Rejected</span>
+                                                                                </span>
+                                                                            @endif
+                                                                        @else
+                                                                            <span class="badge bg-info">
+                                                                                <span>Pending</span>
                                                                             </span>
                                                                         @endif
-                                                                    @else
-                                                                        <span class="badge bg-info">
-                                                                            <span>Pending</span>
-                                                                        </span>
+
+                                                                    </h5>
+                                                                </td>
+                                                                <td class="action text-black">
+                                                                    @if ($data['is_approved'] == null)
+                                                                        <a href="javascript:void(0);"
+                                                                            wire:click="getrounds({{ $data['id'] ?? 0 }})"
+                                                                            class="action-icon" data-bs-toggle="modal"
+                                                                            data-bs-target="#primary-header-modal"> <i
+                                                                                class="mdi mdi-square-edit-outline"></i></a>
                                                                     @endif
-
-                                                                </h5>
-                                                            </td>
-                                                            <td class="action text-black">
-                                                                @if ($data['is_approved'] == null)
-                                                                    <a href="javascript:void(0);"
-                                                                        wire:click="getrounds({{ $data['id'] ?? 0 }})"
-                                                                        class="action-icon" data-bs-toggle="modal"
-                                                                        data-bs-target="#primary-header-modal"> <i
-                                                                            class="mdi mdi-square-edit-outline"></i></a>
-                                                                @endif
-                                                                <a href="javascript:void(0);" class="action-icon">
-                                                                    <i class="mdi mdi-delete"
-                                                                        onclick="deleteRounds({{ $data['id'] ?? 0 }})"></i></a>
-                                                            </td>
-                                                        </tr>
-                                                    @endforeach
-                                                @endif
-                                            </tbody>
-                                        </table>
-
+                                                                    <a href="javascript:void(0);" class="action-icon">
+                                                                        <i class="mdi mdi-delete"
+                                                                            onclick="deleteRounds({{ $data['id'] ?? 0 }})"></i></a>
+                                                                </td>
+                                                            </tr>
+                                                        @endforeach
+                                                    @endif
+                                                </tbody>
+                                            </table>
+                                        </div>
                                         <div class="card-footer mt-3">
                                             <div class="table-footer" wire:ignore>
                                                 <nav>
@@ -500,103 +562,107 @@
                                     <div class="card" style="background-color: #f2f2f2" id="adoptcard">
                                         <div class="px-3">
                                             <h3>Adoption List</h3>
-                                            <div class="table-responsive" id="adoption_list" wire:ignore.self>
+                                            <div class="table-responsive-xl" id="adoption_list" wire:ignore.self>
                                                 <div class="search-container ms-auto">
                                                     <input type="text" class="search form-control " id="searchtb"
                                                         style="width: 150%;" placeholder="Search for dogs...">
                                                 </div>
 
                                                 <h3 class="mb-4 d-flex align-items-center ms-auto"></h3>
+                                                <div class="table-container">
 
-                                                <table class="table table-centered table-nowrap mb-0">
-                                                    <thead style="background-color: #0396a6;">
-                                                        <tr>
-                                                            <th class="text-white">Ticket Number</th>
-                                                            <th class="text-white">Name</th>
-                                                            <th class="text-white">Dog Name</th>
-                                                            <th class="text-white">Contact</th>
-                                                            <th class="text-white">Address</th>
-                                                            <th class="text-white">Date Requested</th>
-                                                            <th class="text-white">Status</th>
-                                                            <th style="width: 125px;" class="text-white">Action</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody class="list">
-                                                        @if (isset($adoptionlist))
-                                                            @foreach ($adoptionlist as $data)
-                                                                @php
-                                                                    $imagest = json_decode($data['animal_images']);
-                                                                @endphp
-                                                                <tr id="claim-{{ $data['dog_id_unique'] }}">
-                                                                    <td class="ticket_number text-black">
-                                                                        A{{ $data['created_at']->format('ym') . '-' . str_pad($data['id'], 4, '0', STR_PAD_LEFT) ?? 'N/A' }}
-                                                                    <td class="requestor text-black">
-                                                                        {{ $data['fullname'] }}
-                                                                    </td>
-                                                                    <td class="dog_name text-black">
-                                                                        <div class="d-flex">
-                                                                            <div class="d-flex align-items-center">
-                                                                                <div class="flex-shrink-0">
-                                                                                    @if (!is_null($imagest) && isset($imagest[0]))
-                                                                                        <img src="{{ asset('storage/' . $imagest[0]) }}"
-                                                                                            class="rounded-circle avatar-xs"
-                                                                                            alt="friend">
-                                                                                    @else
-                                                                                        <img src="{{ asset('storage/profile_pictures/xjxxrQTF3FiMAJ92RTzIrh15XRKYVLP9rtQt6g1E.png') }}"
-                                                                                            class="rounded-circle avatar-xs"
-                                                                                            alt="default">
-                                                                                    @endif
-                                                                                </div>
-                                                                                <div class="flex-grow-1 ms-2">
-                                                                                    <h5 class="my-0 text-black">
-                                                                                        {{ $data['dog_name'] }}
-                                                                                    </h5>
+                                                    <table class="table table-centered table-nowrap mb-0">
+                                                        <thead style="background-color: #0396a6;">
+                                                            <tr>
+                                                                <th class="text-white">Ticket Number</th>
+                                                                <th class="text-white">Name</th>
+                                                                <th class="text-white">Dog Name</th>
+                                                                <th class="text-white">Contact</th>
+                                                                <th class="text-white">Address</th>
+                                                                <th class="text-white">Date Requested</th>
+                                                                <th class="text-white">Status</th>
+                                                                <th style="width: 125px;" class="text-white">Action
+                                                                </th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody class="list">
+                                                            @if (isset($adoptionlist))
+                                                                @foreach ($adoptionlist as $data)
+                                                                    @php
+                                                                        $imagest = json_decode($data['animal_images']);
+                                                                    @endphp
+                                                                    <tr id="claim-{{ $data['dog_id_unique'] }}">
+                                                                        <td class="ticket_number text-black">
+                                                                            A{{ $data['created_at']->format('ym') . '-' . str_pad($data['id'], 4, '0', STR_PAD_LEFT) ?? 'N/A' }}
+                                                                        <td class="requestor text-black">
+                                                                            {{ $data['fullname'] }}
+                                                                        </td>
+                                                                        <td class="dog_name text-black">
+                                                                            <div class="d-flex">
+                                                                                <div class="d-flex align-items-center">
+                                                                                    <div class="flex-shrink-0">
+                                                                                        @if (!is_null($imagest) && isset($imagest[0]))
+                                                                                            <img src="{{ asset('storage/' . $imagest[0]) }}"
+                                                                                                class="rounded-circle avatar-xs"
+                                                                                                alt="friend">
+                                                                                        @else
+                                                                                            <img src="{{ asset('storage/profile_pictures/xjxxrQTF3FiMAJ92RTzIrh15XRKYVLP9rtQt6g1E.png') }}"
+                                                                                                class="rounded-circle avatar-xs"
+                                                                                                alt="default">
+                                                                                        @endif
+                                                                                    </div>
+                                                                                    <div class="flex-grow-1 ms-2">
+                                                                                        <h5 class="my-0 text-black">
+                                                                                            {{ $data['dog_name'] }}
+                                                                                        </h5>
+                                                                                    </div>
                                                                                 </div>
                                                                             </div>
-                                                                        </div>
-                                                                    </td>
-                                                                    <td class="contact text-black">
-                                                                        <p class="mb-0 txt-muted">
-                                                                            {{ $data['c_number'] }}</p>
-                                                                    </td>
-                                                                    <td class="address text-black">
-                                                                        {{ $data['address'] }}</td>
-                                                                    <td class="date_request text-black">
-                                                                        {{ $data['created_at']->format('M-d-Y') }}</td>
-                                                                    <td class="status text-black">
-                                                                        <h5 class="my-0">
-                                                                            @if ($data['status_name'] == 'For Adoption')
-                                                                                <span class="badge bg-danger">
-                                                                                    Rejected
-                                                                                </span>
-                                                                            @else
-                                                                                <span class="badge bg-info">
-                                                                                    {{ $data['status_name'] }}
-                                                                                </span>
-                                                                            @endif
+                                                                        </td>
+                                                                        <td class="contact text-black">
+                                                                            <p class="mb-0 txt-muted">
+                                                                                {{ $data['c_number'] }}</p>
+                                                                        </td>
+                                                                        <td class="address text-black">
+                                                                            {{ $data['address'] }}</td>
+                                                                        <td class="date_request text-black">
+                                                                            {{ $data['created_at']->format('M-d-Y') }}
+                                                                        </td>
+                                                                        <td class="status text-black">
+                                                                            <h5 class="my-0">
+                                                                                @if ($data['status_name'] == 'For Adoption')
+                                                                                    <span class="badge bg-danger">
+                                                                                        Rejected
+                                                                                    </span>
+                                                                                @else
+                                                                                    <span class="badge bg-info">
+                                                                                        {{ $data['status_name'] }}
+                                                                                    </span>
+                                                                                @endif
 
-                                                                        </h5>
-                                                                    </td>
-                                                                    <td class="actions">
-                                                                        @if ($data['status_name'] == 'Pending Adoption')
+                                                                            </h5>
+                                                                        </td>
+                                                                        <td class="actions">
+                                                                            @if ($data['status_name'] == 'Pending Adoption')
+                                                                                <a href="javascript:void(0);"
+                                                                                    wire:click="adoptionpending('{{ $data['dog_id_unique'] }}')"
+                                                                                    data-bs-toggle="modal"
+                                                                                    data-bs-target="#viewdog"
+                                                                                    class="action-icon">
+                                                                                    <i
+                                                                                        class="mdi mdi-square-edit-outline"></i></a>
+                                                                            @endif
                                                                             <a href="javascript:void(0);"
-                                                                                wire:click="adoptionpending('{{ $data['dog_id_unique'] }}')"
-                                                                                data-bs-toggle="modal"
-                                                                                data-bs-target="#viewdog"
-                                                                                class="action-icon">
-                                                                                <i
-                                                                                    class="mdi mdi-square-edit-outline"></i></a>
-                                                                        @endif
-                                                                        <a href="javascript:void(0);"
-                                                                            class="action-icon"
-                                                                            onclick="deleteAdoption('{{ $data['dog_id_unique'] }}')">
-                                                                            <i class="mdi mdi-delete"></i></a>
-                                                                    </td>
-                                                                </tr>
-                                                            @endforeach
-                                                        @endif
-                                                    </tbody>
-                                                </table>
+                                                                                class="action-icon"
+                                                                                onclick="deleteAdoption('{{ $data['dog_id_unique'] }}')">
+                                                                                <i class="mdi mdi-delete"></i></a>
+                                                                        </td>
+                                                                    </tr>
+                                                                @endforeach
+                                                            @endif
+                                                        </tbody>
+                                                    </table>
+                                                </div>
                                                 <div class="card-footer mt-3">
 
                                                     <div class="table-footer">
@@ -659,10 +725,9 @@
                                                         @foreach ($images as $img)
                                                             <div
                                                                 class="carousel-item {{ $loop->first ? 'active' : '' }}">
-                                                                <img class="d-block img-fluid img-thumbnail"
+                                                                <img class="d-block img-fluid img-thumbnail responsive-img"
                                                                     src="{{ asset('storage/' . $img) }}"
-                                                                    alt="Slide {{ $loop->iteration }}"
-                                                                    style="min-width: 420px; min-height: 320px; width: 420px; height: 320px; object-fit: cover;">
+                                                                    alt="Slide {{ $loop->iteration }}">
                                                             </div>
                                                         @endforeach
                                                     </div>
@@ -688,7 +753,7 @@
                                                 <!-- Product title -->
                                                 <h3 class="mt-0">{{ $activedog['dog_name'] ?? 'N/A' }} <a
                                                         href="javascript: void(0);" class="text-muted"><i
-                                                            class="mdi mdi-square-edit-outline ms-2"></i></a>
+                                                            class="mdi mdi-check-decagram text-success"></i></a>
                                                 </h3>
                                                 <p class="mb-1">Added Date:
                                                     {{ isset($activedog['created_at']) ? \Carbon\Carbon::parse($activedog['created_at'])->format('m/d/Y') : 'N/A' }}
@@ -703,7 +768,7 @@
                                                 <!-- Product description -->
                                                 <div class="mt-4">
                                                     <h6 class="font-14">Breed:</h6>
-                                                    <h4 class="me-3"> {{ $activedog['breed'] ?? 'N/A' }} </h4>
+                                                    <h4 class="me-3"> {{ $activedog['breed_name'] ?? 'N/A' }} </h4>
                                                 </div>
 
                                                 <!-- Quantity -->
@@ -935,13 +1000,18 @@
                                                                     </svg> </i>
                                                                 <div>
                                                                     <h5 class="mt-1 font-14">
-                                                                        {{ $activedog['contact'] ?? 'N/A' }}
+                                                                        {{ $activedog['contact_number'] ?? 'N/A' }}
                                                                     </h5>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
+
+                                                <button type="button" id="adoptiontoggle"
+                                                    class="mt-3 btn btn-outline-success rounded-pill w-100"><i
+                                                        class="uil-heart"></i> Adopt the dog <i
+                                                        class="uil-heart"></i></button>
                                             </form>
                                         </div> <!-- end col -->
                                     </div> <!-- end row-->
@@ -952,11 +1022,10 @@
                                     @if (isset($adoptdetails))
                                         <div class="mt-3">
                                             <div class="row">
-                                                <div class="col-6">
+                                                <div class="col-xl-6 col-sm-12 mb-2">
                                                     <div class="card h-100">
                                                         <div class="card-body">
                                                             <h4 class="header-title mb-3">Adoption Details</h4>
-
                                                             <ul class="list-unstyled mb-0">
                                                                 <li>
                                                                     <p class="mb-2"><span
@@ -977,7 +1046,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-6">
+                                                <div class="col-xl-6 col-sm-12 mb-2">
                                                     <div class="card h-100">
                                                         <div class="card-body">
                                                             <h4 class="header-title mb-3 ">Reason for adoption</h4>
@@ -1048,10 +1117,6 @@
                                                     <p class="mb-2"><span class="fw-bold me-2">Address:</span>
                                                         {{ $activerounds['address'] }}</p>
 
-                                                    <p class="mb-2"><span class="fw-bold me-2">Specific
-                                                            Location:</span>
-                                                        {{ $activerounds['specific_location'] }}
-                                                    </p>
                                                     <p class="mb-0"><span class="fw-bold me-2">Contact
                                                             Number:</span>
                                                         {{ $activerounds['contact'] }} </p>
@@ -1097,7 +1162,7 @@
                     <div class="modal-body">
                         <div class=" d-block">
                             <div class="row">
-                                <div class="col-6">
+                                <div class="col-xl-6 col-sm-12">
                                     <div class="card">
                                         <div class="px-2 py-2">
                                             <h4 class="header-title mb-3">Claim Information</h4>
@@ -1136,7 +1201,7 @@
                                     </div>
 
                                 </div>
-                                <div class="col-6">
+                                <div class="col-xl-6 col-sm-12">
                                     <div class="card">
                                         <div class="px-2 py-2">
                                             <h4>Dog Details</h4>
@@ -1458,6 +1523,22 @@
                 });
 
                 document.getElementById('addressFilter').addEventListener('change', function() {
+                    var selectedOption = this.value;
+
+                    cl_list.filter(function(item) {
+                        var addressStatus = item.elm.querySelector('.address').getAttribute(
+                            'data-address-status');
+                        if (selectedOption === '') {
+                            return true;
+                        } else if (selectedOption === 'with') {
+                            return addressStatus === 'with';
+                        } else if (selectedOption === 'without') {
+                            return addressStatus === 'without';
+                        }
+                    });
+                });
+
+                document.getElementById('addressFilter2').addEventListener('change', function() {
                     var selectedOption = this.value;
 
                     cl_list.filter(function(item) {

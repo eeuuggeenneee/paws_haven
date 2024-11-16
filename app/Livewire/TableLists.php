@@ -46,6 +46,7 @@ class TableLists extends Component
                 'animal_lists.animal_images',
                 'statuses.name as status_name'
             )
+            ->where('adoption_forms.is_active', 1)
             ->where('animal_list_statuses.isActive', 1)
             ->get();
 
@@ -69,6 +70,8 @@ class TableLists extends Component
                 $join->on('animal_lists.dog_id_unique', '=', 'animal_list_statuses.animal_id')
                     ->where('animal_lists.isActive', '=', 1);
             })->select('dog_claims.*', 'animal_list_statuses.status', 'animal_lists.dog_name', 'animal_lists.animal_images', 'statuses.name as status_name')
+            ->where('dog_claims.isActive', 1)
+
             ->where('animal_list_statuses.isActive', 1)->get();
     }
     public function getrounds($id)
@@ -89,8 +92,9 @@ class TableLists extends Component
 
         $this->activedog = AnimalList::where('dog_id_unique', $dog_id)->where('animal_lists.isActive', true)
             ->leftJoin('dog_breeds', 'dog_breeds.id', '=', 'animal_lists.breed')
-            ->select('animal_lists.*', 'dog_breeds.name')
+            ->select('animal_lists.*', 'dog_breeds.name as breed_name')
             ->first();
+
         $this->claimdetails = DogClaim::where('dog_id_unique', $dog_id)->where('isActive', true)->first();
         // dd($this->activedog,$this->claimdetails);
         $this->dispatch('reinit_table');
@@ -202,8 +206,11 @@ class TableLists extends Component
     {
         $this->dog_unique = $id;
 
-        $this->activedog = AnimalList::where('dog_id_unique', $id)->where('isActive', true)->first();
-        $this->adoptdetails = AdoptionForm::where('dog_id_unique', $id)->where('is_active', true)->first();
+        $this->activedog = AnimalList::where('dog_id_unique', $id)->where('animal_lists.isActive', true)
+            ->leftJoin('dog_breeds', 'dog_breeds.id', '=', 'animal_lists.breed')
+            ->select('animal_lists.*', 'dog_breeds.name as breed_name')
+            ->first();  
+       $this->adoptdetails = AdoptionForm::where('dog_id_unique', $id)->where('is_active', true)->first();
         // dd($this->adoptdetails);
         $this->dispatch('reinit_table');
     }

@@ -50,22 +50,21 @@ Route::get('/about', function () {
 })->middleware('is_login');
 
 
-
-
 Route::get('/test', function () {
     return view('testevent');
 })->middleware('is_login');
 
 
 Route::get('auth/google', [GoogleAuthController::class,'redirect'])->name('google-auth');
-Route::get('auth/google/callback', [GoogleAuthController::class,'callbackGoogle']);
+Route::get('auth/google/callback', [GoogleAuthController::class, 'callbackGoogle'])->name('google.callback');
 
 
 
 Route::post('/upload-images', [AddLostDog::class, 'uploadImages'])->name('upload.images');
 
+// Route::post('/login', [AuthController::class, 'login'])->name('login');
 
 
 Auth::routes();
 
-// Route::get('/announcements', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/annoucements', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

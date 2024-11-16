@@ -24,6 +24,7 @@ class AnimalList extends Model
         'contact_name',
         'contact_number',
         'isActive',
+        'user_id'
     ];
 
     public function statuses()

@@ -26,6 +26,8 @@ return new class extends Migration
             $table->string('contact_name')->nullable();
             $table->string('contact_number')->nullable();
             $table->integer('isActive')->default(1);
+            $table->unsignedBigInteger('user_id')->nullable();
+
             $table->timestamps();
         });
     }

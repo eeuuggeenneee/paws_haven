@@ -31,7 +31,7 @@ class ForAdoption extends Component
 
     public function adoptionform($id)
     {
-
+        $this->heartDog($id);
         $this->dispatch('activedog', $id);
     }
     public function heartDog($data)

@@ -35,6 +35,16 @@
             }
         }
 
+        .table td,
+        .table th {
+            white-space: nowrap;
+            /* Prevent text from wrapping */
+            overflow: hidden;
+            /* Prevent overflow beyond cell boundary */
+            text-overflow: ellipsis;
+            /* Add ellipsis (...) for overflowing content */
+        }
+
         .pagination .pager li {
             display: inline-block;
             line-height: 1.2;
@@ -106,6 +116,14 @@
             color: #888;
         }
 
+        @media (max-width: 576px) {
+            /* For small screens (SM and below) */
+            .search-container {
+                margin-top: 20px;
+                margin-bottom: 20px;
+            }
+        }
+
         .search-container input.search {
             text-align: center;
             padding-left: 30px;
@@ -122,8 +140,8 @@
     <div class="card" style="background-color: #f2f2f2">
         <ul class="nav nav-tabs nav-bordered mb-3" role="tablist" wire:ignore>
             <li class="nav-item" role="presentation" wire:ignore.self>
-                <a href="#collapse-horizontal-preview" class="nav-link active text-black" data-bs-toggle="tab" role="tab"
-                    aria-controls="nav-preview" aria-selected="true">
+                <a href="#collapse-horizontal-preview" class="nav-link active text-black" data-bs-toggle="tab"
+                    role="tab" aria-controls="nav-preview" aria-selected="true">
                     Lost and Found
                 </a>
             </li>
@@ -138,7 +156,7 @@
             <div class="tab-pane active show" id="collapse-horizontal-preview" role="tabpanel" wire:ignore.self>
                 <div class="card" style="background-color: #f2f2f2">
                     <div class="px-2">
-                        <div class="table-responsive" id="lost_list" wire:ignore.self>
+                        <div class="table-responsive-xl" id="lost_list" wire:ignore.self>
                             <div class="d-flex align-items-center w-100">
                                 <div class="search-container">
                                     <input type="text" class="search form-control" id="searchtb"
@@ -147,19 +165,24 @@
 
                                 <!-- Move the Add Dog button to the right -->
                                 <a data-bs-toggle="modal" data-bs-target="#lostandfounddog"
-                                    wire:click="$dispatch('adddog')" class="text-end btn text-white mb-2 ms-auto"
+                                    wire:click="$dispatch('adddog')"
+                                    class="d-lg-block d-none text-end btn text-white mb-2 ms-auto"
                                     style="background-color: #0396a6;">
                                     <i class="mdi mdi-plus-circle me-2"></i> Add Dog
                                 </a>
-                            </div>
 
+                            </div>
+                            <a data-bs-toggle="modal" data-bs-target="#lostandfounddog" wire:click="$dispatch('adddog')"
+                                class="d-sm-block d-lg-none mt-3 text-end btn text-white mb-2 ms-auto"
+                                style="background-color: #0396a6;">
+                                <i class="mdi mdi-plus-circle me-2"></i> Add Dog
+                            </a>
                             <table class="table table-centered w-100 dt-responsive nowrap" id="animals-datatable">
                                 <thead style="background-color: #0396a6;">
                                     <tr>
                                         <th class="all text-white">Dog Name</th>
                                         <th class="text-white">Breed</th>
                                         <th class="text-white">Color</th>
-                                        <th class="text-white">Description</th>
                                         <th class="text-white">Status</th>
 
                                         <th style="width: 120px;" class="text-white">Action</th>
@@ -185,9 +208,6 @@
                                                 </td>
                                                 <td class="color text-black">
                                                     {{ $item['color'] }}
-                                                </td>
-                                                <td class="description text-black">
-                                                    {{ $item['description'] }}
                                                 </td>
                                                 <td class="description text-black">
                                                     {{ $item['status_name'] }}
@@ -232,7 +252,7 @@
             <div class="tab-pane " id="collapse-horizontal-code" role="tabpanel" wire:ignore.self>
                 <div class="card" style="background-color: #f2f2f2">
                     <div class="px-2">
-                        <div class="table-responsive" id="lost_list_dog2" wire:ignore.self>
+                        <div class="table-responsive-xl" id="lost_list_dog2" wire:ignore.self>
                             <div class="d-flex align-items-center w-100">
                                 <div class="search-container">
                                     <input type="text" class="search_dog2 form-control" id="searchtb"
@@ -247,7 +267,6 @@
                                         <th class="all text-white">Dog Name</th>
                                         <th class="text-white">Breed</th>
                                         <th class="text-white">Color</th>
-                                        <th class="text-white">Description</th>
                                         <th class="text-white">Status</th>
                                         <th style="width: 120px;" class="text-white">Action</th>
                                     </tr>
@@ -274,22 +293,18 @@
                                                     {{ $item['color'] }}
                                                 </td>
                                                 <td class="description text-black">
-                                                    {{ $item['description'] }}
-                                                </td>
-                                                <td class="description text-black">
                                                     {{ $item['status_name'] }}
                                                 </td>
                                                 <td class="table-action action text-black">
-                                                    @if($item['status_name'] == 8)
+                                                    @if ($item['status_name'] == 'For Publish')
                                                         <a data-bs-toggle="modal" data-bs-target="#lostdog"
                                                             wire:click="$dispatch('activedog', [ '{{ $item['dog_id_unique'] }}' ])"
-                                                            class="action-icon"> <i
-                                                                class="mdi mdi-eye-outline"></i>
+                                                            class="action-icon"> <i class="mdi mdi-eye-outline"></i>
                                                         </a>
                                                         <a data-bs-toggle="modal" data-bs-target="#lostandfounddog"
-                                                        wire:click="editDog('{{ $item['dog_id_unique'] }}')"
-                                                        class="action-icon"> <i
-                                                            class="mdi mdi-square-edit-outline"></i></a>
+                                                            wire:click="editDog('{{ $item['dog_id_unique'] }}')"
+                                                            class="action-icon"> <i
+                                                                class="mdi mdi-square-edit-outline"></i></a>
                                                     @endif
                                                     <a onclick="confirmDelete('{{ $item['dog_id_unique'] }}')"
                                                         class="action-icon"> <i class="mdi mdi-delete"></i></a>
@@ -369,7 +384,7 @@
                 };
 
                 var options2 = {
-                    valueNames: ['dog_name', 'breed', 'color', 'description', 'status','action'],
+                    valueNames: ['dog_name', 'breed', 'color', 'description', 'status', 'action'],
                     searchClass: 'search',
                     page: 5,
                     pagination: true,
@@ -382,7 +397,7 @@
                 };
 
                 function reinitializeList() {
-                    
+
                     dogList = new List('lost_list', options);
                     dogList2 = new List('lost_list_dog2', options2);
 
@@ -454,7 +469,7 @@
                 Livewire.on('reinnitdata', event => {
                     reinitializeList();
                 });
-                
+
                 Livewire.on('dogUpdate', event => {
                     Swal.fire({
                         icon: 'success',
@@ -480,20 +495,7 @@
                     });
 
                 });
-                Livewire.on('dogSaved', event => {
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Success!',
-                        text: event[0],
-                        confirmButtonText: 'Okay'
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            // Reload the page
-                            reinitializeList();
 
-                        }
-                    });
-                });
 
                 Livewire.on('dogDeleted', event => {
                     Swal.fire({

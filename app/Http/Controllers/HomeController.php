@@ -11,7 +11,7 @@ class HomeController extends Controller
      *
      * @return void
      */
-    protected $redirectTo = '/announcements';
+    protected $redirectTo = '/dashboard';
 
     public function __construct()
     {
@@ -25,6 +25,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('annoucements');
+        return view('dashboard');
     }
 }

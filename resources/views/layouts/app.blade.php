@@ -10,7 +10,7 @@
     <meta content="" name="author" />
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- App favicon -->
-    <link rel="shortcut icon" href="assets/images/favicon.ico">
+    <link rel="shortcut icon" href="icon_logo.png" type="image/png">
 
     <!-- Daterangepicker css -->
     <link href="assets/vendor/flatpickr/flatpickr.min.css" rel="stylesheet" type="text/css" />
@@ -60,6 +60,13 @@
             overflow-y: auto;
         }
 
+        @media (max-width: 770px) {
+            .scrollable-column {
+                height: auto;
+                overflow-y: auto;
+            }
+        }
+
         .scroll-content {
             height: 90%;
         }
@@ -107,14 +114,13 @@
     <div class="wrapper">
 
         <!-- ========== Topbar Start ========== -->
-        <div class="navbar-custom" style="background-color: #0396a6">
-            <div class="topbar container-fluid">
-                <div class="d-flex align-items-center gap-lg-2 gap-1">
-
+        <div class="navbar-custom py-0 px-0" style="background-color: #0396a6">
+            <div class="topbar ">
+                <div class="d-flex align-items-center">
                     <!-- Topbar Brand Logo -->
-                    <div class="logo-topbar">
+                    <div class="logo-topbar px-0 py-0">
                         <!-- Logo light -->
-                        <a href="{{ url('/annoucement') }}" class="logo-light">
+                        <a href="{{ url('/annoucements') }}" class="logo-light">
                             <span class="logo-lg">
                                 <img src="assets/images/logooooo.png" alt="dark logo" width="70px">
                             </span>
@@ -124,17 +130,18 @@
                         </a>
                     </div>
 
-                    <a href="{{ url('/annoucement') }}" class="logo-dark">
+                    <a href="{{ url('/annoucements') }}" class="logo-dark">
                         <span class="">
                             <img src="assets/images/logooooo.png" alt="dark logo" width="70px">
                         </span>
                     </a>
 
-                    <button class="button-toggle-menu d-lg-none d-sm-block">
+                    <button class="button-toggle-menu d-lg-none d-sm-block text-white">
                         <i class="mdi mdi-menu"></i>
                     </button>
 
-                    <button class="navbar-toggle" data-bs-toggle="collapse" data-bs-target="#topnav-menu-content">
+                    <button class="navbar-toggle text-white" data-bs-toggle="collapse"
+                        data-bs-target="#topnav-menu-content">
                         <div class="lines">
                             <span></span>
                             <span></span>
@@ -166,7 +173,8 @@
                             </div>
 
                             <div class="col-auto">
-                                <a class="nav-link me-2 text-white fw-semibold" role="button" href="{{ url('/about') }}">
+                                <a class="nav-link me-2 text-white fw-semibold" role="button"
+                                    href="{{ url('/about') }}">
                                     About
                                 </a>
                             </div>
@@ -225,9 +233,9 @@
                             <div class="" id="notification_here" style="max-height: 350px; overflow-y: auto;">
                                 <!-- Notification content goes here -->
                             </div>
-                            
+
                             <!-- All-->
-                            <a href="javascript:void(0);"
+                            <a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#ticketlist"
                                 class="dropdown-item text-center text-primary notify-item border-top py-2">
                                 View All
                             </a>
@@ -251,7 +259,6 @@
                         <div class="dropdown-menu dropdown-menu-end dropdown-menu-animated profile-dropdown">
                             <!-- item-->
                             <div class=" dropdown-header noti-title">
-                                <h6 class="text-overflow m-0">Welcome !</h6>
                             </div>
                             <!-- item-->
                             <form id="logout-form" action="{{ route('logout') }}" method="POST"
@@ -274,7 +281,7 @@
         <!-- ========== Left Sidebar Start ========== -->
         <div class="leftside-menu text-white" style="background-image: linear-gradient(to bottom, #0396a6, #9cded8);">
             <!-- Brand Logo Light -->
-            <a href="{{ url('/annoucement') }}" class="logo logo-light">
+            <a href="{{ url('/annoucements') }}" class="logo logo-light">
                 <span class="logo-lg fw-bold text-white fs-3">
                     PAWS HAVEN
                 </span>
@@ -284,7 +291,7 @@
             </a>
 
             <!-- Brand Logo Dark -->
-            <a href="{{ url('/annoucement') }}" class="logo logo-dark">
+            <a href="{{ url('/annoucements') }}" class="logo logo-dark">
                 <span class="logo-lg fw-bold text-white fs-4">
                     PAWS HAVEN
                 </span>
@@ -311,34 +318,64 @@
 
                 <!--- Sidemenu -->
                 <ul class="side-nav">
-                    <li class="side-nav-title"></li>
-                    <li class="side-nav-item">
-                        <a href="{{ url('/lost-n-found') }}" class="side-nav-link text-white">
-                            <i class="uil-calender"></i>
-                            <span> Lost And found </span>
-                        </a>
-                    </li>
 
-                    <li class="side-nav-item">
-                        <a href="{{ url('/adopt-a-dog') }}" class="side-nav-link text-white">
-                            <i class="uil-comments-alt"></i>
-                            <span> Adoption </span>
-                        </a>
-                    </li>
+                    @if (Auth::user()->type == 0)
+                        <li class="side-nav-item">
+                            <a class="side-nav-link text-white me-2 text-white fw-semibold"
+                                href="{{ url('/announcements') }}" role="button"> <i class="uil-calender"></i>
 
-                    <li class="side-nav-item">
-                        <a href="{{ url('/announcements') }}" class="side-nav-link text-white">
-                            <i class="uil-comments-alt"></i>
-                            <span> Annoucement </span>
-                        </a>
-                    </li>
+                                Home
+                            </a>
+                        </li>
+                        <li class="side-nav-item">
+                            <a class="me-2 side-nav-link text-white fw-semibold" href="{{ url('/lost-n-found') }}"
+                                role="button">
+                                <i class="uil-calender"></i>
+                                Lost and Found
+                            </a>
+                        </li>
+                        <li class="side-nav-item">
+                            <a class="side-nav-link me-2 text-white fw-semibold" href="{{ url('/adopt-a-dog') }}"
+                                role="button"> <i class="uil-calender"></i>
 
-                    <li class="side-nav-item">
-                        <a href="{{ url('/about') }}" class="side-nav-link text-white">
-                            <i class="uil-comments-alt"></i>
-                            <span> About </span>
-                        </a>
-                    </li>
+                                Adoption
+                            </a>
+                        </li>
+
+                        <li class="side-nav-item">
+                            <a class="side-nav-link me-2 text-white fw-semibold" role="button"
+                                href="{{ url('/about') }}">
+                                <i class="uil-calender"></i>
+                                About
+                            </a>
+                        </li>
+                    @else
+                        <li class="side-nav-item">
+                            <a class="side-nav-link text-white fw-semibold" href="{{ url('/announcements') }}"
+                                role="button">
+                                <i class="uil-calender"></i>
+                                Dashboard
+                            </a>
+                        </li>
+                        <li class="side-nav-item">
+                            <a href="{{ url('/report-lost-dog') }}" class="side-nav-link text-white fw-semibold">
+                                <i class="uil-calender"></i>
+                                <span> Lost and Found </span>
+                            </a>
+                        </li>
+                        <li class="side-nav-item">
+                            <a href="{{ url('/animal-list') }}" class="side-nav-link text-white fw-semibold">
+                                <i class="uil-calender"></i>
+                                <span> Adoption </span>
+                            </a>
+                        </li>
+                        <li class="side-nav-item">
+                            <a href="{{ url('/ticket-list') }}" class="side-nav-link text-white fw-semibold">
+                                <i class="uil-calender"></i>
+                                <span> Ticket </span>
+                            </a>
+                        </li>
+                    @endif
                 </ul>
                 <!--- End Sidemenu -->
 
@@ -352,7 +389,7 @@
         <!-- ============================================================== -->
 
         <div class="content-page" style="background-color: #9CDED8" id="whitebg">
-            <div class="content" >
+            <div class="content">
                 @yield('content')
             </div>
         </div>
@@ -368,7 +405,8 @@
 
     @livewireScripts
 
-
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <x-livewire-alert::scripts />
 
 
 
@@ -388,7 +426,7 @@
 
     <!-- Timepicker Demo js -->
     <script src="assets/js/pages/demo.timepicker.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    {{-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> --}}
 
     <!-- App js -->
 

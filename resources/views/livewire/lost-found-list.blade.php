@@ -6,8 +6,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="page-title-box">
-
-                        <h4 class="page-title">Dogs List</h4>
+                        <h4 class="page-title text-black">Dogs List</h4>
                     </div>
                 </div>
             </div>
@@ -35,7 +34,8 @@
                                             alt="friend"
                                             style="min-width: 300px; min-height: 170px; width: 300px; height: 170px; object-fit: cover;"></a>
 
-                                    <h4 class="mt-2"><a href="pages-profile-2.html"
+                                    <h4 class="mt-2"><a data-bs-toggle="modal" data-bs-target="#lostdog"
+                                        wire:click="adoptionform('{{ $d['dog_id_unique'] }}')"
                                             class="text-reset">{{ $d['dog_name'] }} <i
                                                 class="mdi mdi-check-decagram text-success"></i></a></h4>
 

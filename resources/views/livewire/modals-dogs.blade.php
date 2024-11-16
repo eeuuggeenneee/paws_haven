@@ -1,5 +1,23 @@
 <div>
+    <style>
+        .responsive-img {
+            min-width: 100%;
+            min-height: 250px;
+            width: 300px;
+            height: 300px;
+            object-fit: cover;
+        }
 
+        @media (min-width: 1200px) {
+            /* For large screens (XL and above) */
+            .responsive-img {
+                min-width: 420px;
+                min-height: 320px;
+                width: 420px;
+                height: 320px;
+            }
+        }
+    </style>
     <div id="info-header-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="info-header-modalLabel"
         aria-hidden="true" wire:ignore.self>
         <div class="modal-dialog modal-dialog-centered">
@@ -108,13 +126,11 @@
                                                     data-bs-ride="carousel">
                                                     <div class="carousel-inner" role="listbox">
                                                         @foreach ($images as $img)
-                                                            <div
-                                                                class="carousel-item {{ $loop->first ? 'active' : '' }}">
-                                                                <img class="d-block img-fluid img-thumbnail"
-                                                                    src="{{ asset('storage/' . $img) }}"
-                                                                    alt="Slide {{ $loop->iteration }}"
-                                                                    style="min-width: 420px; min-height: 320px; width: 420px; height: 320px; object-fit: cover;">
-                                                            </div>
+                                                        <div class="carousel-item {{ $loop->first ? 'active' : '' }}">
+                                                            <img class="d-block img-fluid img-thumbnail responsive-img"
+                                                                src="{{ asset('storage/' . $img) }}"
+                                                                alt="Slide {{ $loop->iteration }}">
+                                                        </div>
                                                         @endforeach
                                                     </div>
                                                     <div class="text-center mt-3">
@@ -537,10 +553,9 @@
                                                         @foreach ($images as $img)
                                                             <div
                                                                 class="carousel-item {{ $loop->first ? 'active' : '' }}">
-                                                                <img class="d-block img-fluid img-thumbnail"
+                                                                <img class="d-block img-fluid img-thumbnail responsive-img"
                                                                     src="{{ asset('storage/' . $img) }}"
-                                                                    alt="Slide {{ $loop->iteration }}"
-                                                                    style="min-width: 420px; min-height: 320px; width: 420px; height: 320px; object-fit: cover;">
+                                                                    alt="Slide {{ $loop->iteration }}">
                                                             </div>
                                                         @endforeach
                                                     </div>
@@ -863,19 +878,6 @@
                                                         </div>
                                                     </div>
 
-                                                    <div class="mb-3">
-                                                        <label class="form-label" for="validationCustom03">Contact
-                                                            Number</label>
-                                                        <input type="tel" class="form-control"
-                                                            id="validationCustom03" placeholder="09123456789" required
-                                                            wire:model="c_contact" pattern="09[0-9]{9}"
-                                                            title="Phone number must start with 09 and contain exactly 11 digits."
-                                                            maxlength="11"
-                                                            oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 11);">
-                                                        <div class="invalid-feedback">
-                                                            Please provide a valid phone number.
-                                                        </div>
-                                                    </div>
 
                                                     <div class="mb-3">
                                                         <label class="form-label"
@@ -888,24 +890,6 @@
                                                         </div>
                                                     </div>
                                                     <div class="row">
-                                                        <div class="col-6">
-                                                            <div class="mb-3">
-                                                                <label class="form-label"
-                                                                    for="validationCustom02">Breed</label>
-                                                                <select id="dog-breed" name="dog-breed"
-                                                                    class="form-select" wire:model="c_breed" required>
-                                                                    <option value="" disabled selected>Select a
-                                                                        breed</option>
-                                                                    @foreach ($breedlist as $breed)
-                                                                        <option value="{{ $breed['id'] }}">
-                                                                            {{ $breed['name'] }}</option>
-                                                                    @endforeach
-                                                                </select>
-                                                                <div class="valid-feedback">
-                                                                    Looks good!
-                                                                </div>
-                                                            </div>
-                                                        </div>
 
                                                         <div class="col-6">
                                                             <div class="mb-3">
@@ -946,6 +930,24 @@
                                                                     Looks good!
                                                                 </div>
                                                             </div>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <div class="mb-3">
+                                                                <label class="form-label"
+                                                                    for="validationCustom03">Contact
+                                                                    Number</label>
+                                                                <input type="tel" class="form-control"
+                                                                    id="validationCustom03" placeholder="09123456789"
+                                                                    required wire:model="c_contact"
+                                                                    pattern="09[0-9]{9}"
+                                                                    title="Phone number must start with 09 and contain exactly 11 digits."
+                                                                    maxlength="11"
+                                                                    oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 11);">
+                                                                <div class="invalid-feedback">
+                                                                    Please provide a valid phone number.
+                                                                </div>
+                                                            </div>
+
                                                         </div>
                                                     </div>
 
@@ -1208,13 +1210,15 @@
                 <div class="modal-body">
                     <div class="mb-3">
                         <label for="simpleinput" class="form-label">Breed name</label>
-                        <input type="text" id="simpleinput" class="form-control" wire:model="breedName">
+                        <input type="text" id="breed_name_add" class="form-control" wire:model="breedName">
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" wire:click="addDogBreed"
+                    <button type="button" class="btn btn-primary text-white" onclick="addbreed()"
                         data-bs-dismiss="modal">Submit</button>
+                    <button type="button" class="btn btn-primary text-white d-none" id="confirmedBreed"
+                        wire:click="addDogBreed" data-bs-dismiss="modal">Submit</button>
                 </div>
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
@@ -1314,7 +1318,7 @@
                 }
             });
         }
-        
+
         function confirmReject() {
             Swal.fire({
                 title: 'Are you sure?',
@@ -1482,6 +1486,16 @@
             activeElement.classList.add('active');
         });
 
+        document.getElementById('lostandfounddog').addEventListener('show.bs.modal', function() {
+            document.getElementById('lostandfoudSelect').classList.add('active')
+        });
+
+        document.getElementById('lostandfounddog').addEventListener('hide.bs.modal', function() {
+            document.getElementById('lostandfoudSelect').classList.remove('active')
+            activeElement.classList.add('active');
+        });
+
+
         function closeAllModals() {
             // Select all modals
             const modals = document.querySelectorAll('.modal.show');
@@ -1512,10 +1526,38 @@
                 confirmButtonText: 'Yes, submit it!'
             }).then((result) => {
                 if (result.isConfirmed) {
+
                     document.getElementById('real_btn_rounds').click();
                 }
             });
         }
+
+        function addbreed() {
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "Are you sure you want to add this breed to the list?",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.getElementById('confirmedBreed').click();
+                    let newBreedId = "new-breed-id";
+                    let newBreedName = "New Breed Name";
+
+                    let newOption = document.createElement('option');
+                    newOption.value = newBreedId;
+                    newOption.textContent = newBreedName;
+
+                    document.getElementById('dog-breed').appendChild(newOption);
+                    breed_name_add
+                }
+            });
+        }
+
+
 
         function confimSaveAdd() {
             var form3 = document.getElementById('formadddog');

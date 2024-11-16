@@ -106,11 +106,13 @@ class ModalsDogs extends Component
     }
     public function addDogBreed()
     {
-        DogBreed::create([
+        $dataDog = DogBreed::create([
             'name' => $this->breedName,
             'isActive' => 1,
         ]);
-        $this->dispatch('dogSaved', 'Data has been successfully saved!');
+        $this->dispatch('newdogbreed',$dataDog);
+
+        $this->alert('success', 'New dog breed has been added');
     }
     public function confirmclaim()
     {
@@ -195,7 +197,7 @@ class ModalsDogs extends Component
 
         $formattedId = str_pad($rounds->id, 4, '0', STR_PAD_LEFT);
         $ticket = 'R' . $rounds->created_at->format('ym') . '-' . $formattedId;
-
+        $this->reset(['fulladdress', 'barangay', 'contact', 'reason']);
         $this->dispatch('saveRounds', 'Your rounds request has been successfully saved! Please expect a call from the pound when your request is approved. Thank you!', $ticket);
         $this->dispatch('fetchdatanotif');
     }

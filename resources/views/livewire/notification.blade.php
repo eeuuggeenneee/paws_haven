@@ -1,7 +1,529 @@
 <div>
+    <style>
+        .responsive-div {
+            overflow-y: auto;
+        }
+
+        @media (min-width: 1200px) {
+            /* For large screens (XL and above) */
+            .responsive-div {
+                min-height: 500px;
+                max-height: 500px;
+                display: flex; 
+                flex-direction: row;
+                overflow-y: auto;
+                padding: 0;
+            }
+        }
+        @media (max-width: 576px) {
+            /* For small screens (SM and below) */
+            .responsive-div {
+                min-height: 100px;
+                max-height: 100px;
+                display: flex; 
+                flex-direction: column;
+                overflow-x: auto;
+            }
+        }
+    </style>
+    <div class="modal fade" id="ticketlist" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+        aria-hidden="true" wire:ignore.self>
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myLargeModalLabel">Ticket Lists</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-xl-3 col-sm-12 border-end ">
+                            <h5 class="text-center">Ticket Number</h5>
+                            <hr class="mt-1 mb-1">
+                            <ul class="nav nav-tabs nav-bordered responsive-div d-flex justify-content-center align-items-center" role="tablist">
+                                @if (isset($notifModal))
+                                    @foreach ($notifModal as $notif)
+                                        @php
+                                            $ticketno = '';
+                                            $statusP = '';
+                                            if ($notif['table_source'] == 'claims') {
+                                                $ticketno =
+                                                    'C' .
+                                                    (new DateTime($notif['created_at']))->format('ym') .
+                                                    '-' .
+                                                    str_pad($notif['id'], 4, '0', STR_PAD_LEFT);
+                                                $statusP = $notif['status_name'];
+                                            } elseif ($notif['table_source'] == 'adoption') {
+                                                $ticketno =
+                                                    'A' .
+                                                    (new DateTime($notif['created_at']))->format('ym') .
+                                                    '-' .
+                                                    str_pad($notif['id'], 4, '0', STR_PAD_LEFT);
+                                                $statusP = $notif['status_name'];
+                                            } elseif ($notif['table_source'] == 'rounds') {
+                                                $ticketno =
+                                                    'R' .
+                                                    (new DateTime($notif['created_at']))->format('ym') .
+                                                    '-' .
+                                                    str_pad($notif['id'], 4, '0', STR_PAD_LEFT);
+                                                if ($notif['is_approved'] == null) {
+                                                    $statusP = 'Rounds Pending';
+                                                }
+                                            } elseif ($notif['table_source'] == 'found_form') {
+                                                $ticketno =
+                                                    'F' .
+                                                    (new DateTime($notif['created_at']))->format('ym') .
+                                                    '-' .
+                                                    str_pad($notif['id'], 4, '0', STR_PAD_LEFT);
+                                                $statusP = $notif['status_name'];
+                                            }
+                                        @endphp
+                                        <li class="nav-item" role="presentation">
+                                            <a href="#{{ $ticketno }}"
+                                                class="bordered text-black nav-link @if ($loop->first) active @endif"
+                                                data-bs-toggle="tab" role="tab" aria-controls="nav-preview"
+                                                aria-selected="true">
+                                                {{ $ticketno }}<br>
+                                                <small><span class="badge rounded-pill text-black"
+                                                        style="background-color: #9cddd7">{{ $statusP }}</span></small>
+                                            </a>
+                                        </li>
+                                    @endforeach
+                                @endif
+                            </ul>
+                        </div>
+                        <div class="col-xl-9 col-sm-12"
+                            style="min-height: 500px; max-height: 500px;  overflow-y: auto;">
+                            <div class="tab-content">
+                                @if (isset($notifModal))
+                                    @foreach ($notifModal as $notif)
+                                        @php
+                                            $ticketno = '';
+                                            if ($notif['table_source'] == 'claims') {
+                                                $ticketno =
+                                                    'C' .
+                                                    (new DateTime($notif['created_at']))->format('ym') .
+                                                    '-' .
+                                                    str_pad($notif['id'], 4, '0', STR_PAD_LEFT);
+                                            } elseif ($notif['table_source'] == 'adoption') {
+                                                $ticketno =
+                                                    'A' .
+                                                    (new DateTime($notif['created_at']))->format('ym') .
+                                                    '-' .
+                                                    str_pad($notif['id'], 4, '0', STR_PAD_LEFT);
+                                            } elseif ($notif['table_source'] == 'rounds') {
+                                                $ticketno =
+                                                    'R' .
+                                                    (new DateTime($notif['created_at']))->format('ym') .
+                                                    '-' .
+                                                    str_pad($notif['id'], 4, '0', STR_PAD_LEFT);
+                                            } elseif ($notif['table_source'] == 'found_form') {
+                                                $ticketno =
+                                                    'F' .
+                                                    (new DateTime($notif['created_at']))->format('ym') .
+                                                    '-' .
+                                                    str_pad($notif['id'], 4, '0', STR_PAD_LEFT);
+                                            }
+                                        @endphp
+                                        <div class="tab-pane @if ($loop->first) active show @endif"
+                                            id="{{ $ticketno }}" role="tabpanel">
+                                            <div class="d-flex mb-2 justify-content-between align-items-center">
+                                                <h4 class="mb-0">Ticket Number : {{ $ticketno }}</h4>
+
+                                                <button type="button"
+                                                    class="btn btn-danger mt-1 btn-sm d-flex align-items-center"
+                                                    onclick="cancelR('{{ $notif['id'] }}','{{ $notif['table_source'] }}','{{ $ticketno }}')">
+                                                    <i class="uil uil-cancel"></i> <span class="d-lg-block d-none ms-2">Cancel</span>
+                                                </button>
+
+                                            </div>
+                                            @if ($notif['table_source'] == 'rounds')
+                                                <div class="row text-black">
+                                                    <div class="col-12">
+                                                        <div class="card">
+                                                            <div class="px-2 py-2">
+                                                                <h4 class="header-title mb-3">Information</h4>
+                                                                <ul class="list-unstyled mb-0">
+                                                                    <li>
+                                                                        <p class="mb-2"><span
+                                                                                class="fw-bold me-2">Requestor:</span>
+                                                                            {{ $notif['name'] }}</p>
+                                                                        <p class="mb-2"><span
+                                                                                class="fw-bold me-2">Barangay:</span>
+                                                                            {{ $notif['barangay'] }}</p>
+                                                                        <p class="mb-2"><span
+                                                                                class="fw-bold me-2">Address:</span>
+                                                                            {{ $notif['address'] }}</p>
+
+                                                                        <p class="mb-0"><span
+                                                                                class="fw-bold me-2">Contact
+                                                                                Number:</span>
+                                                                            {{ $notif['contact'] }} </p>
+                                                                    </li>
+                                                                </ul>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <div class="card">
+                                                            <div class="px-2 py-2">
+                                                                <h4>Reason</h4>
+                                                                <div class="text-center">
+                                                                    <p class="mb-0">{{ $notif['reason'] }}</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            @elseif($notif['table_source'] == 'claims')
+                                                <div class="row text-black">
+                                                    <div class="col-12">
+                                                        <div class="card">
+                                                            <div class="px-2 py-2">
+                                                                <h4 class="header-title mb-3">Claim Information</h4>
+                                                                <ul class="list-unstyled mb-0">
+                                                                    <li>
+                                                                        <p class="mb-2"><span
+                                                                                class="fw-bold me-2">Requestor:</span>
+                                                                            {{ $notif['fullname'] }}</p>
+                                                                        <p class="mb-2"><span
+                                                                                class="fw-bold me-2">Address:</span>
+                                                                            {{ $notif['address'] }}</p>
+                                                                        </p>
+                                                                        <p class="mb-2"><span
+                                                                                class="fw-bold me-2">Breed:</span>
+                                                                            {{ $notif['breed'] }}
+                                                                        </p>
+                                                                        <p class="mb-2"><span
+                                                                                class="fw-bold me-2">Gender:</span>
+                                                                            {{ $notif['gender'] }}
+                                                                        </p>
+                                                                        <p class="mb-0"><span
+                                                                                class="fw-bold me-2">Contact
+                                                                                Number:</span>
+                                                                            {{ $notif['contact'] }} </p>
+                                                                    </li>
+                                                                </ul>
+
+                                                            </div>
+                                                        </div>
+                                                        <div class="card">
+                                                            <div class="px-2 py-2">
+                                                                <h4>Proof</h4>
+                                                                <div class="text-center">
+                                                                    <img src="{{ asset('storage/' . $notif['proof']) }}"
+                                                                        class="img-thumbnail" alt="friend"
+                                                                        style="min-width: 250px; min-height: 170px; width: 250px; height: 170px; object-fit: cover;">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <div class="card">
+                                                            <div class="px-2 py-2">
+                                                                <h4>Dog Details</h4>
+                                                                @php
+                                                                    $images = [];
+                                                                    if (isset($notif)) {
+                                                                        $images = json_decode($notif['animal_images']);
+                                                                    }
+                                                                @endphp
+                                                                <div class="d-lg-flex justify-content-center">
+                                                                    <div id="carouselExampleCaption"
+                                                                        class="carousel slide" data-bs-ride="carousel">
+                                                                        <div class="carousel-inner" role="listbox">
+                                                                            @foreach ($images as $img)
+                                                                                <div
+                                                                                    class="carousel-item {{ $loop->first ? 'active' : '' }}">
+                                                                                    <img src="{{ asset('storage/' . $img) }}"
+                                                                                        alt="..."
+                                                                                        class="d-block img-fluid w-100"
+                                                                                        style="height: 200px; object-fit: cover; border-radius: 10px;">
+                                                                                </div>
+                                                                            @endforeach
+                                                                        </div>
+                                                                        <a class="carousel-control-prev"
+                                                                            href="#carouselExampleCaption"
+                                                                            role="button" data-bs-slide="prev">
+                                                                            <span class="carousel-control-prev-icon"
+                                                                                aria-hidden="true"></span>
+                                                                            <span
+                                                                                class="visually-hidden">Previous</span>
+                                                                        </a>
+                                                                        <a class="carousel-control-next"
+                                                                            href="#carouselExampleCaption"
+                                                                            role="button" data-bs-slide="next">
+                                                                            <span class="carousel-control-next-icon"
+                                                                                aria-hidden="true"></span>
+                                                                            <span class="visually-hidden">Next</span>
+                                                                        </a>
+                                                                    </div>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="card">
+                                                            <div class="px-2 py-2">
+                                                                <h4 class="header-title mb-3">Dog Information</h4>
+                                                                <ul class="list-unstyled mb-0">
+                                                                    <li>
+                                                                        <p class="mb-2"><span
+                                                                                class="fw-bold me-2">Dog Name:</span>
+                                                                            {{ $notif['dog_name'] ?? 'N/A' }}
+                                                                        </p>
+
+                                                                        <p class="mb-2"><span
+                                                                                class="fw-bold me-2">Gender:</span>
+                                                                            {{ $notif['gender'] ?? 'N/A' }}
+                                                                        </p>
+                                                                        <p class="mb-2"><span
+                                                                                class="fw-bold me-2">Description:</span>
+                                                                            {{ $notif['description'] ?? 'N/A' }}
+                                                                        </p>
+                                                                    </li>
+                                                                </ul>
+
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>
+                                            @elseif($notif['table_source'] == 'adoption')
+                                                <div class="row text-black">
+                                                    <div class="col-12">
+                                                        <div class="card">
+                                                            <div class="px-2 py-2">
+                                                                <h4 class="header-title mb-3">Adoption Information</h4>
+                                                                <ul class="list-unstyled mb-0">
+                                                                    <li>
+                                                                        <p class="mb-2"><span
+                                                                                class="fw-bold me-2">Requestor:</span>
+                                                                            {{ $notif['fullname'] ?? 'N/A' }}</p>
+                                                                        <p class="mb-2"><span
+                                                                                class="fw-bold me-2">Address:</span>
+                                                                            {{ $notif['address'] ?? 'N/A' }}</p>
+                                                                        </p>
+                                                                        <p class="mb-2"><span
+                                                                                class="fw-bold me-2">Contact
+                                                                                Number:</span>
+                                                                            {{ $notif['c_number'] ?? 'N/A' }}
+                                                                        </p>
+                                                                        <p class="mb-2"><span
+                                                                                class="fw-bold me-2">Materials:</span>
+                                                                            {{ $notif['materials'] ?? 'N/A' }}
+                                                                        </p>
+                                                                    </li>
+                                                                </ul>
+
+                                                            </div>
+                                                        </div>
+                                                        <div class="card">
+                                                            <div class="px-2 py-2">
+                                                                <h4>Reason for adoption</h4>
+                                                                <div class="text-center">
+                                                                    <p class="mb-0">{{ $notif['reason'] }}</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <div class="card">
+                                                            <div class="px-2 py-2">
+                                                                <h4>Dog Details</h4>
+                                                                @php
+                                                                    $images = [];
+                                                                    if (isset($notif)) {
+                                                                        $images = json_decode($notif['animal_images']);
+                                                                    }
+                                                                @endphp
+                                                                <div class="d-lg-flex justify-content-center">
+                                                                    <div id="carouselExampleCaption"
+                                                                        class="carousel slide"
+                                                                        data-bs-ride="carousel">
+                                                                        <div class="carousel-inner" role="listbox">
+                                                                            @foreach ($images as $img)
+                                                                                <div
+                                                                                    class="carousel-item {{ $loop->first ? 'active' : '' }}">
+                                                                                    <img src="{{ asset('storage/' . $img) }}"
+                                                                                        alt="..."
+                                                                                        class="d-block img-fluid w-100"
+                                                                                        style="height: 200px; object-fit: cover; border-radius: 10px;">
+                                                                                </div>
+                                                                            @endforeach
+                                                                        </div>
+                                                                        <a class="carousel-control-prev"
+                                                                            href="#carouselExampleCaption"
+                                                                            role="button" data-bs-slide="prev">
+                                                                            <span class="carousel-control-prev-icon"
+                                                                                aria-hidden="true"></span>
+                                                                            <span
+                                                                                class="visually-hidden">Previous</span>
+                                                                        </a>
+                                                                        <a class="carousel-control-next"
+                                                                            href="#carouselExampleCaption"
+                                                                            role="button" data-bs-slide="next">
+                                                                            <span class="carousel-control-next-icon"
+                                                                                aria-hidden="true"></span>
+                                                                            <span class="visually-hidden">Next</span>
+                                                                        </a>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="card">
+                                                            <div class="px-2 py-2">
+                                                                <h4 class="header-title mb-3">Dog Information</h4>
+                                                                <ul class="list-unstyled mb-0">
+                                                                    <li>
+                                                                        <p class="mb-2"><span
+                                                                                class="fw-bold me-2">Dog Name:</span>
+                                                                            {{ $notif['dog_name'] ?? 'N/A' }}
+                                                                        </p>
+                                                                        <p class="mb-2"><span
+                                                                                class="fw-bold me-2">Gender:</span>
+                                                                            {{ $notif['gender'] ?? 'N/A' }}
+                                                                        </p>
+                                                                        <p class="mb-2"><span
+                                                                                class="fw-bold me-2">Description:</span>
+                                                                            {{ $notif['description'] ?? 'N/A' }}
+                                                                        </p>
+
+                                                                    </li>
+                                                                </ul>
+
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>
+                                            @elseif($notif['table_source'] == 'found_form')
+                                                <div class="row text-black">
+                                                    <div class="col-12">
+                                                        <div class="card">
+                                                            <div class="px-2 py-2">
+                                                                <h4 class="header-title mb-3">Lost Dog Information</h4>
+                                                                <ul class="list-unstyled mb-0">
+                                                                    <li>
+                                                                        <p class="mb-2"><span
+                                                                                class="fw-bold me-2">Requested
+                                                                                by:</span>
+                                                                            {{ $notif['fullname'] ?? 'N/A' }}</p>
+                                                                        <p class="mb-2"><span
+                                                                                class="fw-bold me-2">Dog Name:</span>
+                                                                            {{ $notif['dog_name'] ?? 'N/A' }}</p>
+                                                                        </p>
+                                                                        <p class="mb-2"><span
+                                                                                class="fw-bold me-2">Contact
+                                                                                Number:</span>
+                                                                            {{ $notif['contact_number'] ?? 'N/A' }}
+                                                                        </p>
+                                                                        <p class="mb-2"><span
+                                                                                class="fw-bold me-2">Description:</span>
+                                                                            {{ $notif['description'] ?? 'N/A' }}
+                                                                        </p>
+                                                                    </li>
+                                                                </ul>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <div class="card">
+                                                            <div class="px-2 py-2">
+                                                                <h4>Dog Images</h4>
+                                                                @php
+                                                                    $images = [];
+                                                                    if (isset($notif)) {
+                                                                        $images = json_decode($notif['animal_images']);
+                                                                    }
+                                                                @endphp
+                                                                <div class="d-lg-flex justify-content-center">
+                                                                    <div id="carouselExampleCaption"
+                                                                        class="carousel slide"
+                                                                        data-bs-ride="carousel">
+                                                                        <div class="carousel-inner" role="listbox">
+                                                                            @foreach ($images as $img)
+                                                                                <div
+                                                                                    class="carousel-item {{ $loop->first ? 'active' : '' }}">
+                                                                                    <img src="{{ asset('storage/' . $img) }}"
+                                                                                        alt="..."
+                                                                                        class="d-block img-fluid w-100"
+                                                                                        style="height: 200px; object-fit: cover; border-radius: 10px;">
+                                                                                </div>
+                                                                            @endforeach
+                                                                        </div>
+                                                                        <a class="carousel-control-prev"
+                                                                            href="#carouselExampleCaption"
+                                                                            role="button" data-bs-slide="prev">
+                                                                            <span class="carousel-control-prev-icon"
+                                                                                aria-hidden="true"></span>
+                                                                            <span
+                                                                                class="visually-hidden">Previous</span>
+                                                                        </a>
+                                                                        <a class="carousel-control-next"
+                                                                            href="#carouselExampleCaption"
+                                                                            role="button" data-bs-slide="next">
+                                                                            <span class="carousel-control-next-icon"
+                                                                                aria-hidden="true"></span>
+                                                                            <span class="visually-hidden">Next</span>
+                                                                        </a>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>
+                                            @endif
+                                        </div> <!-- end preview-->
+                                    @endforeach
+                                @endif
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div>
+
+
     <script>
+        function cancelR(id, form, ticketN) {
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, cancel it!',
+                cancelButtonText: 'No, keep it'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Livewire.dispatch('cancelRequest', {
+                        id: id,
+                        source: form,
+                        ticketN: ticketN
+                    })
+                    Swal.fire(
+                        'Ticket #' + ticketN + ' Cancelled!',
+                        'Your request has been cancelled.',
+                        'success'
+                    );
+                }
+            });
+        }
         var connotif = document.getElementById('notification_here');
         var notif = [];
+
+
+
 
         function timeAgo(createdAt) {
             var now = new Date();
@@ -39,7 +561,6 @@
                 let notif = [];
 
                 event[0].forEach((element, index) => {
-                    console.log(element);
                     var createdAt = new Date(element.created_at);
                     var year = createdAt.getFullYear().toString().slice(-2);
                     var month = (createdAt.getMonth() + 1).toString().padStart(2, '0');
@@ -51,6 +572,8 @@
                         formattedDate = 'R' + year + '' + month;
                     } else if (element.table_source == 'claims') {
                         formattedDate = 'C' + year + '' + month;
+                    } else if (element.table_source == "found_form") {
+                        formattedDate = 'F' + year + '' + month;
                     }
 
                     var myid = (element.id).toString().padStart(4, '0');
@@ -62,7 +585,7 @@
                         if (element.status_name == 'Pending Adoption') {
                             statusText = 'Please expect a call from the pound.';
                             statusP = element.status_name;
-                        }else if(element.status_name == "Adopted" ){
+                        } else if (element.status_name == "Adopted") {
                             statusText = 'Adoption Approved';
                             statusP = '';
                         } else {
@@ -74,11 +597,10 @@
                         if (element.status_name == 'Pending Claim') {
                             statusText = 'Please expect a call from the pound.';
                             statusP = 'Pending Claim';
-                        }else if(element.status_name == 'Claimed' ){
+                        } else if (element.status_name == 'Claimed') {
                             statusText = 'Claim Approved';
                             statusP = '';
-                        }
-                        else {
+                        } else {
                             statusP = '';
                             statusText = 'Lost Claim Rejected';
                         }
@@ -96,6 +618,21 @@
                             statusP = '';
                         }
                     }
+
+                    if (element.table_source == 'found_form') {
+                        if (element.status_name == 'For Publish') {
+                            statusText = 'Please expect a call from the pound.';
+                            statusP = 'Request Pending';
+                        } else if (element.status_name == 'For Adoption') {
+                            statusText = 'Request Approved';
+                            statusP = '';
+                        } else {
+                            statusP = '';
+                            statusText = 'Request Rejected';
+                        }
+                    }
+
+
 
                     // Push the formatted notification HTML string to the notif array
                     notif.push(`

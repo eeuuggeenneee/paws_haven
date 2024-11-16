@@ -23,7 +23,15 @@
         .table-footer nav .showing {
             color: #b3b3b3;
         }
-
+        .table td,
+        .table th {
+            white-space: nowrap;
+            /* Prevent text from wrapping */
+            overflow: hidden;
+            /* Prevent overflow beyond cell boundary */
+            text-overflow: ellipsis;
+            /* Add ellipsis (...) for overflowing content */
+        }
         @media (min-width: 1025px) {
             .table-footer nav .showing {
                 display: inline-block;
@@ -98,7 +106,13 @@
             font-size: 18px;
             color: #888;
         }
-
+        @media (max-width: 576px) {
+            .search-container {
+                margin-right: 20px;
+                margin-top: 35px;
+                margin-bottom: 25px;
+            }
+        }
         .search-container input.search {
             text-align: center;
             /* Align text to the left */
@@ -122,7 +136,7 @@
             <div class="col-12">
                 <div class="card" id="cardhe">
                     <div class="card-body">
-                        <div class="table-responsive" id="animals-datatable">
+                        <div class="table-responsive-xl" id="animals-datatable">
                             <div class="d-flex align-items-center ">
                                 <div class="search-container ms-auto" onclick="focusSearchInput()">
                                     <input type="text" class="search form-control " id="searchtb"
@@ -130,17 +144,21 @@
                                 </div>
                                 <a data-bs-toggle="modal" data-bs-target="#info-header-modal"
                                     wire:click="$dispatch('clearData')"
-                                    class="btn text-white mb-2 d-flex align-items-center ms-auto" style="background-color: #0396a6;">
+                                    class="btn d-lg-block d-none text-white mb-2 d-flex align-items-center ms-auto" style="background-color: #0396a6;">
                                     <i class="mdi mdi-plus-circle me-2"></i> Add Dog
                                 </a>
                             </div>
+                            <a data-bs-toggle="modal" data-bs-target="#info-header-modal"
+                                wire:click="$dispatch('clearData')"
+                                class="btn d-sm-block d-lg-none col-5 mt-4  text-white mb-2 d-flex align-items-center ms-auto" style="background-color: #0396a6;">
+                                <i class="mdi mdi-plus-circle me-2"></i> Add Dog
+                             </a>
                             <table class="table table-centered w-100 dt-responsive nowrap">
                                 <thead style="background-color: #0396a6;">
                                     <tr>
                                         <th class="text-white" class="all">Dog Name</th>
                                         <th class="text-white">Breed</th>
                                         <th class="text-white">Color</th>
-                                        <th class="text-white">Description</th>
                                         <th style="width: 120px;" class="text-white">Action</th>
                                     </tr>
                                 </thead>
@@ -161,7 +179,6 @@
                                                 </td>
                                                 <td class="breed text-black">{{ $item['breed_name'] }}</td>
                                                 <td class="color text-black">{{ $item['color'] }}</td>
-                                                <td class="description text-black">{{ $item['description'] }}</td>
                                                 <td class="table-action text-black">
                                                     <a data-bs-toggle="modal" data-bs-target="#info-header-modal"
                                                         wire:click="$dispatch('editDoggo', [ '{{ $item['dog_id_unique'] }}' ])"

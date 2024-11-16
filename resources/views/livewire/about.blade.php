@@ -3,7 +3,7 @@
     <section class="py-5 hero-section2">
         <div class="row">
             <div class="col-lg-12">
-                <div class="px-5 py-5">
+                <div class="px-xl-5 py-xl-5">
                     <h1 class="mt-0 text-center">
                         <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink"
                             width="80" height="80" x="0" y="0" viewBox="0 0 64 64"
@@ -11,8 +11,8 @@
                             <g>
                                 <linearGradient id="a" x1="4" x2="60" y1="32"
                                     y2="32" gradientUnits="userSpaceOnUse">
-                                    <stop offset="0" stop-color="#00c0ff"></stop>
-                                    <stop offset="1" stop-color="#5558ff"></stop>
+                                    <stop offset="0" stop-color="#9cded8"></stop>
+                                    <stop offset="1" stop-color="#0894a4"></stop>
                                 </linearGradient>
                                 <path fill="url(#a)"
                                     d="M45.509 54.098v2.83a.86.86 0 0 1-.01.16 2.557 2.557 0 0 1-2.56 2.41H21.031a2.57 2.57 0 0 1-2.57-2.57v-2.83a6.504 6.504 0 0 1 4.43-6.15c.662-.196 2.091-.706 2.76-.92a9.574 9.574 0 0 0 12.678 0c.421.135 1.822.616 2.26.76a6.561 6.561 0 0 1 4.92 6.31zm10.779-6.72-1.51-.5a8.314 8.314 0 0 1-9.26 1.76 8.372 8.372 0 0 1 1.99 5.46v2.83a.86.86 0 0 1-.01.16h10.24a2.272 2.272 0 0 0 2.26-2.27v-2.28a5.442 5.442 0 0 0-3.71-5.16zM15.122 34.83a6.264 6.264 0 1 0 6.259 6.27 6.273 6.273 0 0 0-6.26-6.27zm9.339 5.11a7.524 7.524 0 1 0 7.529-7.52 7.532 7.532 0 0 0-7.53 7.52zm24.417 7.419a6.264 6.264 0 1 0-6.259-6.26 6.271 6.271 0 0 0 6.26 6.26zm-39.656-.48-1.51.5a5.442 5.442 0 0 0-3.71 5.16v2.279a2.272 2.272 0 0 0 2.26 2.27h10.21a.865.865 0 0 1-.01-.16c-.092-2.89-.09-6.03 1.98-8.27a8.32 8.32 0 0 1-9.22-1.78zm-1.37-9.73a8.612 8.612 0 0 1 1.2-1.65 26.673 26.673 0 0 1-2.91-3.999A29.941 29.941 0 0 1 32 17.071 29.941 29.941 0 0 1 57.858 31.5a26.673 26.673 0 0 1-2.91 4 8.612 8.612 0 0 1 1.2 1.65 27.394 27.394 0 0 0 3.74-5.2.956.956 0 0 0 0-.9A31.9 31.9 0 0 0 32 15.071 31.9 31.9 0 0 0 4.112 31.05a.956.956 0 0 0 0 .9 27.394 27.394 0 0 0 3.74 5.2zM32 11.502a1 1 0 0 0 1-1v-5a1 1 0 0 0-2 0v5a1 1 0 0 0 1 1zm-17.798 2.6a1 1 0 1 0 1.6-1.2l-3-4a1 1 0 0 0-1.6 1.2zm34.795.4a.998.998 0 0 0 .801-.4l3-4a1 1 0 0 0-1.6-1.2l-3 4a1.006 1.006 0 0 0 .8 1.6zM43.53 34.81a11.985 11.985 0 0 0-1.87-10.43 1 1 0 0 0-1.49-.12 1.483 1.483 0 0 1-1.01.39 1.497 1.497 0 0 1-1.24-2.34 1.003 1.003 0 0 0-.36-1.439c-7.75-4.24-17.713 1.78-17.558 10.63a11.657 11.657 0 0 0 .47 3.309 8.12 8.12 0 0 1 2.23 3.01 9.531 9.531 0 0 1 3.84-5.68 5.498 5.498 0 1 1 10.919.01 9.57 9.57 0 0 1 3.82 5.71 8.31 8.31 0 0 1 2.249-3.05zm-8.06-3.73a3.495 3.495 0 0 0-6.939-.01 9.518 9.518 0 0 1 6.94.01z"
@@ -20,8 +20,8 @@
                             </g>
                         </svg>
                     </h1>
-                    <h3 class="text-center"> <span class="text-primary">Mission</span> & <span
-                            class="text-primary">Vission</span></h3>
+                    <h3 class="text-center"> <span class="" style="color: #0894a4">Mission</span> & <span
+                            class="" style="color: #0894a4">Vission</span></h3>
                     <div class="row">
                         <div class="col-lg-6 col-md-6">
                             <div class="text-center p-2 p-sm-3">
@@ -153,7 +153,7 @@
     </section>
     <hr>
     <section class="">
-        <div class="px-5 py-5">
+        <div class="px-xl-5 py-xl-5">
             <div class="row">
             </div>
             <div class="row mt-2 py-5 align-items-center">
@@ -240,7 +240,7 @@
 
             <div class="row pb-3 pt-5 align-items-center">
                 <div class="col-lg-6 col-md-5 text-black">
-                    <h3 class="fw-normal text-black fw-bold">Service Peldge</h3>
+                    <h3 class="fw-normal text-black fw-bold">Service Pledge</h3>
                     <p class="text-black mt-3 fw-semibold">We the Officials and employees of Local Government Unit of Santa Maria,
                         commit to:*</p>
 
@@ -342,7 +342,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="text-center">
-                        <h3><span class="text-primary">About</span> us</h3>
+                        <h3><span class="" style="color: #0894a4">About</span> us</h3>
                         <p class="mt-2 text-black"> For more information please contact us.
                         </p>
                     </div>

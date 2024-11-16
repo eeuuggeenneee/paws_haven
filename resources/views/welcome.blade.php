@@ -63,10 +63,6 @@
                 PAWS HAVEN
             </a> --}}
 
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
-                aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-                <i class="mdi mdi-menu"></i>
-            </button>
 
             <!-- menus -->
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
@@ -112,7 +108,7 @@
                 </div>
                 <div class="col-md-5 offset-md-2">
                     <div class="text-md-end mt-3 mt-md-0">
-                        <img src="assets/images/dogfound.png" alt="" class="img-fluid responsive-img" />
+                        <img src="assets/images/dogfound.png" alt="" class="img-fluid responsive-img" style="max-width: 100%; height: auto;" />
 
                     </div>
                 </div>
@@ -342,7 +338,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="text-center">
-                        <h1 class="mt-0"><i class="mdi mdi-heart-multiple-outline"></i></h1>
+                        <h1 class="mt-0"><i class="mdi mdi-heart-multiple-outline" style="color: #0396a6"></i></h1>
                         <h3>Adoptable dogs you'll <span class="text-danger">love</span></h3>
                         <p class="text-muted mt-2">Adopting from the Cityland Dog Pound not only provides a loving home
                             for a dog in need but also helps alleviate the burden on the pound, making space for more
@@ -439,7 +435,7 @@
                 </div>
             </div>
 
-            <div class="row pb-3 pt-5 align-items-center">
+            <div class="row pb-3 align-items-center">
                 <div class="col-lg-6 col-md-5">
                     <h3 class="fw-normal">Lost Dogs</h3>
                     <p class="text-muted mt-3">Owners of lost dogs can visit the pound to check if their pet has been
@@ -460,7 +456,7 @@
                             Opportunities </p>
                     </div>
 
-                    <a class="btn btn-info rounded-pill mt-3" data-bs-toggle="modal"
+                    <a class="btn btn-info rounded-pill mt-3 mb-4" data-bs-toggle="modal"
                         data-bs-target="#primary-header-modal">View Dog <i class="mdi mdi-arrow-right ms-1"></i></a>
 
                 </div>
@@ -737,13 +733,13 @@
                                 <g>
                                     <path
                                         d="M239.698 173.953c7.719 0 14-6.281 14-14s-6.281-14-14-14-14 6.281-14 14 6.281 14 14 14zm0-20c3.309 0 6 2.691 6 6s-2.691 6-6 6-6-2.691-6-6 2.691-6 6-6zM262.026 112.621a4.276 4.276 0 1 0 0-8.553 4.276 4.276 0 0 0 0 8.553zM53.542 62.115h.078a4.003 4.003 0 0 0 3.922-4.08l-.16-8a4.001 4.001 0 0 0-4-3.92h-.078a4.003 4.003 0 0 0-3.922 4.08l.16 8a4 4 0 0 0 4 3.92zM53.858 70.111h-.082a4.002 4.002 0 0 0-3.918 4.08l.16 7.998a4.001 4.001 0 0 0 4 3.92h.078a4.003 4.003 0 0 0 3.922-4.08l-.16-7.998a4.002 4.002 0 0 0-4-3.92zM45.698 69.953c2.211 0 4-1.791 4-4s-1.789-4-4-4h-8c-2.211 0-4 1.791-4 4s1.789 4 4 4zM61.698 69.953h.082l8-.16c2.207-.045 3.961-1.871 3.918-4.08s-1.809-3.811-4.082-3.92l-8 .16a4.001 4.001 0 0 0 .082 8zM102.589 42.6a4.276 4.276 0 1 0 0-8.552 4.276 4.276 0 0 0 0 8.552zM229.698 193.953h-156c-19.852 0-36 16.15-36 36s16.148 36 36 36h156c19.852 0 36-16.15 36-36s-16.149-36-36-36zm0 64h-156c-15.438 0-28-12.561-28-28s12.562-28 28-28h156c15.438 0 28 12.561 28 28s-12.563 28-28 28z"
-                                        fill="#727cf5" opacity="1" data-original="#000000" class=""></path>
+                                        fill="#0396a6" opacity="1" data-original="#000000" class=""></path>
                                     <path
                                         d="M79.698 213.953h-10c-2.211 0-4 1.791-4 4v24c0 2.209 1.789 4 4 4h10c7.719 0 14-7.178 14-16s-6.281-16-14-16zm0 24h-6v-16h6c3.254 0 6 3.664 6 8s-2.746 8-6 8zM153.698 214.365c-2.211 0-4 1.791-4 4v10.564l-8.691-12.811a3.999 3.999 0 0 0-7.308 2.246v23.588c0 2.209 1.789 4 4 4s4-1.791 4-4v-10.564l8.691 12.811a4 4 0 0 0 7.309-2.246v-23.588a4 4 0 0 0-4.001-4zM179.042 216.371c-.668-1.539-2.262-2.52-3.891-2.412a3.998 3.998 0 0 0-3.609 2.818l-7.383 24a3.999 3.999 0 0 0 2.648 4.998c.391.121.789.18 1.176.18a4.005 4.005 0 0 0 3.824-2.826l4.184-13.605 6.031 14.012a4.005 4.005 0 0 0 5.258 2.092 4.005 4.005 0 0 0 2.094-5.256zM233.698 221.953c2.211 0 4-1.791 4-4s-1.789-4-4-4h-12c-2.211 0-4 1.791-4 4v24c0 2.209 1.789 4 4 4h12c2.211 0 4-1.791 4-4s-1.789-4-4-4h-8v-3.795h4c2.211 0 4-1.791 4-4s-1.789-4-4-4h-4v-4.205zM113.924 214.365c-7.625 0-13.828 6.203-13.828 13.828v3.932c0 7.625 6.203 13.828 13.828 13.828 7.629 0 13.832-6.203 13.832-13.828v-3.932c0-7.625-6.203-13.828-13.832-13.828zm5.832 17.76c0 3.213-2.617 5.828-5.832 5.828s-5.828-2.615-5.828-5.828v-3.932c0-3.213 2.613-5.828 5.828-5.828s5.832 2.615 5.832 5.828zM209.698 213.953h-16c-2.211 0-4 1.791-4 4s1.789 4 4 4h4v20c0 2.209 1.789 4 4 4s4-1.791 4-4v-20h4c2.211 0 4-1.791 4-4s-1.789-4-4-4zM132.991 115.377l-4.488 5.727c-4.027 5.135-8.945 9.453-13.66 13.357-6.113 5.062-8.863 12.791-7.355 20.674 1.605 8.393 8.316 15.139 16.695 16.789 8.367 1.645 16.629-1.564 21.594-8.379 1.273-1.752 3.488-2.799 5.922-2.799s4.648 1.045 5.926 2.799c4.109 5.639 10.465 8.805 17.266 8.805 1.457 0 2.938-.146 4.418-.443 8.109-1.631 14.734-8.146 16.488-16.211 1.727-7.943-1.035-16.066-7.203-21.201-3.281-2.725-7.07-6.02-10.332-9.791 0-.002 0-.002-.004-.002l-8.828-10.205a23.594 23.594 0 0 0-17.855-8.164c-7.303-.001-14.076 3.296-18.584 9.044zm6.297 4.936a15.516 15.516 0 0 1 12.285-5.98c4.535 0 8.84 1.967 11.809 5.398l8.828 10.205c3.641 4.211 7.738 7.777 11.266 10.709 3.926 3.268 5.609 8.258 4.5 13.352-1.086 5.008-5.203 9.053-10.246 10.066-5.285 1.072-10.512-.934-13.641-5.227-2.777-3.814-7.406-6.09-12.391-6.09s-9.617 2.277-12.387 6.09c-3.113 4.27-8.309 6.277-13.582 5.24-5.129-1.012-9.398-5.307-10.383-10.445-.953-4.973.766-9.836 4.598-13.008 5.059-4.188 10.359-8.854 14.855-14.584zM107.217 129.803c8.605 0 15.605-7 15.605-15.604s-7-15.602-15.605-15.602c-8.602 0-15.602 6.998-15.602 15.602s7.001 15.604 15.602 15.604zm0-23.205c4.195 0 7.605 3.41 7.605 7.602 0 4.193-3.41 7.604-7.605 7.604-4.191 0-7.602-3.41-7.602-7.604.001-4.192 3.411-7.602 7.602-7.602zM180.573 114.199c0 8.604 7 15.604 15.605 15.604 8.602 0 15.602-7 15.602-15.604s-7-15.602-15.602-15.602c-8.605.001-15.605 6.999-15.605 15.602zm15.605-7.601c4.191 0 7.602 3.41 7.602 7.602 0 4.193-3.41 7.604-7.602 7.604-4.195 0-7.605-3.41-7.605-7.604 0-4.192 3.41-7.602 7.605-7.602zM169.104 103.748c9.164 0 16.621-7.457 16.621-16.623s-7.457-16.623-16.621-16.623c-9.168 0-16.625 7.457-16.625 16.623s7.457 16.623 16.625 16.623zm0-25.246c4.754 0 8.621 3.869 8.621 8.623s-3.867 8.623-8.621 8.623-8.625-3.869-8.625-8.623 3.871-8.623 8.625-8.623zM134.292 103.748c9.168 0 16.625-7.457 16.625-16.623s-7.457-16.623-16.625-16.623c-9.164 0-16.621 7.457-16.621 16.623s7.456 16.623 16.621 16.623zm0-25.246c4.754 0 8.625 3.869 8.625 8.623s-3.871 8.623-8.625 8.623-8.621-3.869-8.621-8.623 3.867-8.623 8.621-8.623z"
-                                        fill="#727cf5" opacity="1" data-original="#000000" class=""></path>
+                                        fill="#0396a6" opacity="1" data-original="#000000" class=""></path>
                                 </g>
                             </svg></h1>
-                        <h3>How you can <span class="text-primary">help </span>us:</h3>
+                        <h3>How you can <span class=" " style="color: #0396a6">help </span>us:</h3>
                         <p class="text-muted mt-2">Reminder: We do not accept Cash Donation
                         </p>
                     </div>
@@ -754,7 +750,7 @@
                 <div class="col-md-6">
                     <div class="card card-pricing h-100">
                         <div class="card-body text-center">
-                            <p class="card-pricing-plan-name fw-bold text-uppercase">Medical Care and Rehabilitation
+                            <p class="card-pricing-plan-name fw-bold text-uppercase" style="color: #0396a6">Medical Care and Rehabilitation
                             </p>
                             <svg xmlns="http://www.w3.org/2000/svg" version="1.1"
                                 xmlns:xlink="http://www.w3.org/1999/xlink" width="90" height="90" x="0" y="0"
@@ -804,11 +800,10 @@
                     <!-- end Pricing_card -->
                 </div>
                 <!-- end col -->
-
                 <div class="col-md-6 ">
                     <div class="card card-pricing h-100">
                         <div class="card-body text-center">
-                            <p class="card-pricing-plan-name fw-bold text-uppercase">Shelter and Daily Care</p>
+                            <p class="card-pricing-plan-name fw-bold text-uppercase" style="color: #0396a6">Shelter and Daily Care</p>
                             <svg xmlns="http://www.w3.org/2000/svg" version="1.1"
                                 xmlns:xlink="http://www.w3.org/1999/xlink" width="90" height="90" x="0" y="0"
                                 viewBox="0 0 512 512" style="enable-background:new 0 0 512 512" xml:space="preserve"

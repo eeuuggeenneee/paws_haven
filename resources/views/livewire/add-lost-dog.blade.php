@@ -34,11 +34,15 @@
                             <div class="row">
                                 <div class="col-6">
                                     <div class="mb-3">
-                                        <label for="dog_name" class="form-label">Breed <small> (missing dog breed?
-                                                <a data-bs-toggle="modal" data-bs-target="#addmorebreed"
-                                                    class="text-primary">click here)</a></small></label>
-                                        <select id="dog-breed" name="dog-breed" class="form-select" wire:model="breed"
-                                            required>
+                                        <label for="dog_name" class="form-label">Breed
+                                            @if (Auth::user()->type == 1)
+                                                <small> (missing dog breed?
+                                                    <a onclick="clickDogbreed()" class="text-primary">click
+                                                        here)</a></small>
+                                            @endif
+                                        </label>
+                                        <select id="dog_breed" name="dog-breed" class="form-select" wire:model="breed"
+                                            required wire:ignore>
                                             <option value="" disabled selected>Select a breed</option>
                                             @foreach ($breedlist as $breed)
                                                 <option value="{{ $breed['id'] }}">{{ $breed['name'] }}</option>
@@ -49,7 +53,7 @@
                                 <div class="col-6">
                                     <div class="mb-3">
                                         <label for="dog_name" class="form-label">Color</label>
-                                        <input type="text" id="dog_name" class="form-control" 
+                                        <input type="text" id="dog_name" class="form-control"
                                             placeholder="Enter dog color" wire:model="color">
                                     </div>
                                 </div>
@@ -65,14 +69,52 @@
                             <div class="mb-3">
                                 <label class="form-label">Date Lost</label>
                                 <input class="form-control" type="date" name="date_found" required
-                                    wire:model="date_found">
+                                    wire:model="date_found" min="2024-01-01" max="{{ date('Y-m-d') }}">
                             </div>
 
-                            <div class="mb-3">
-                                <label for="location_found" class="form-label">Last Location</label>
-                                <input type="text" id="location_found" class="form-control" required
-                                    placeholder="Enter last location" wire:model="location_found">
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="mb-3">
+                                        <label class="form-label" for="validationCustom03">Barangay</label>
+                                        <select class="form-select mb-3" wire:model="location_found" required>
+                                            <option selected>Select a Barangay</option>
+                                            <option value="Bagbaguin">Bagbaguin</option>
+                                            <option value="Bulac">Bulac</option>
+                                            <option value="Balasing">Balasing</option>
+                                            <option value="Beunavista">Beunavista</option>
+                                            <option value="Camangyanan">Camangyanan</option>
+                                            <option value="Catmon">Catmon</option>
+                                            <option value="Caypombo">Caypombo</option>
+                                            <option value="Caysio">Caysio</option>
+                                            <option value="Guyong">Guyong</option>
+                                            <option value="Lalakhan">Lalakhan</option>
+                                            <option value="Mag-asawang sapa">Mag-asawang Sapa</option>
+                                            <option value="Mahabang parang">Mahabang Parang</option>
+                                            <option value="Manggahan">Manggahan</option>
+                                            <option value="Parada">Parada</option>
+                                            <option value="Poblacion">Poblacion</option>
+                                            <option value="Pulong Buhangin">Pulong Buhangin</option>
+                                            <option value="San Gabriel">San Gabriel</option>
+                                            <option value="San Jose Patag">San Jose Patag</option>
+                                            <option value="San Vicente">San Vicente</option>
+                                            <option value="Santa Clara">Santa Clara</option>
+                                            <option value="Santa Cruz">Santa Cruz</option>
+                                            <option value="Silangan">Silangan</option>
+                                            <option value="Tabing Bakod">Tabing Bakod</option>
+                                            <option value="Tumana">Tumana</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="mb-3">
+                                        <label for="location_found" class="form-label">Specific Location</label>
+                                        <input type="text" id="location_found" class="form-control" required
+                                            placeholder="Enter specific location (optional)" wire:model="location_found">
+                                    </div>
+                                </div>
                             </div>
+
+
                             <div class="mb-3 d-none">
                                 <label class="form-label">What Are You Reporting?</label>
                                 <br>
@@ -94,9 +136,9 @@
                                 <p class="text-muted font-14">Recommended thumbnail size 800x400 (px).</p>
 
                                 <!-- File Upload -->
-                                <form action="{{ route('upload.images') }}" method="post" enctype="multipart/form-data"
-                                    class="dropzone" id="myAwesomeDropzone" data-plugin="dropzone"
-                                    data-previews-container="#file-previews"
+                                <form action="{{ route('upload.images') }}" method="post"
+                                    enctype="multipart/form-data" class="dropzone" id="myAwesomeDropzone"
+                                    data-plugin="dropzone" data-previews-container="#file-previews"
                                     data-upload-preview-template="#uploadPreviewTemplate">
                                     @csrf
                                     <div class="fallback">
@@ -169,7 +211,7 @@
                         @endif
                         <button type="button" class="btn btn-info me-2 d-none " wire:click="submitForm"
                             id="add_dog_form"><i class="uil-exit"></i> Submit</button>
-                        <button type="button" class="me-1 btn btn-outline-primary "><i class="uil-cloud-times"></i>
+                        <button type="reset" class="me-1 btn btn-outline-primary " data-bs-dismiss="modal" aria-label="Close"><i class="uil-cloud-times"></i>
                             Cancel</button>
                     </div>
                 </div> <!-- end card-body -->
@@ -178,12 +220,16 @@
     </div>
     <!-- end row-->
     <script>
+        function clickDogbreed() {
+            $('#addmorebreed').modal('show');
+        }
+
         function confirmSave() {
             var div = document.getElementById('add_dog_lost');
             div.classList.add('was-validated');
             var inputs = div.querySelectorAll(
                 'input[required], select[required], textarea[required]'
-                );
+            );
             var isValid = true;
 
             inputs.forEach(function(input) {
@@ -261,8 +307,20 @@
                 }
             });
         }
+
         document.addEventListener('livewire:init', function() {
-         
+            Livewire.on('newdogbreed', event => {
+                let newbreed = event[0];
+                console.log(event[0])
+
+                let newBreedId = newbreed.id;
+                let newBreedName = newbreed.name;
+
+                let newOption = document.createElement('option');
+                newOption.value = newBreedId;
+                newOption.textContent = newBreedName;
+                document.getElementById('dog_breed').appendChild(newOption);
+            });
         });
     </script>
 </div> <!-- container -->

@@ -1,7 +1,7 @@
 <div>
     <div class="content">
         <!-- Start Content-->
-        <div class="px-4">
+        <div class="px-xl-4">
             <!-- start page title -->
             <div class="row first">
                 <div class="col-12 first">
@@ -15,7 +15,7 @@
                 <div class="col-xxl-3 col-lg-12">
                     <div class="row">
                         <div class="col-lg-12 col-md-12 col-xl-12">
-                            <div class="card ">
+                            <div class="card">
                                 <div class="card-body">
                                     <div class="d-flex align-self-start">
                                         <img class="d-flex align-self-start rounded me-2"
@@ -57,48 +57,48 @@
                                                     data-bs-target="#request_rounds">
                                                     <i class='uil uil-comment-alt-message me-1'></i> Request Rounds
                                                 </a>
-                                            @endif
-                                            <a class="nav-link list-group-item list-group-item-action border-0" data-bs-toggle="modal"
-                                                data-bs-target="#lostandfounddog">
-                                                <i class='uil uil-comment-alt-message me-1'></i> Report Found Dog
+                                        
+                                            <a class="nav-link list-group-item list-group-item-action border-0"
+                                                data-bs-toggle="modal" href="#" data-bs-target="#lostandfounddog"
+                                                id="lostandfoudSelect" onclick="activeRounds()">
+                                                <i class='uil uil-comment-alt-message me-1'></i> Report Lost Dog
                                             </a>
+                                            @endif
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-lg-12 col-md-12 col-xl-12">
-
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="d-flex justify-content-between align-items-center mb-2">
-                                        <h4 class="header-title">Most Clicked Dogs</h4>
-                                        <div class="dropdown">
-
-                                        </div>
-                                    </div>
-                                    @if (isset($dogclicked))
-                                        @foreach ($dogclicked as $clicked)
-                                            <div class="d-flex mt-3">
-                                                <i class='uil uil-arrow-growth me-2 font-18 text-primary'></i>
-                                                <div>
-                                                    <p class="mt-1 font-14" href="javascript:void(0);">
-                                                        <strong>{{ $clicked['dog_name'] }}</strong>
-                                                        <span class="text-muted"><br>
-                                                            {{ $clicked['description'] }}
-                                                        </span>
-                                                    </p>
+                            <div class="row">
+                                <div class="col-lg-12 col-md-12 col-xl-12 d-lg-block d-none">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                                <h4 class="header-title">Most Clicked Dogs</h4>
+                                                <div class="dropdown">
+        
                                                 </div>
                                             </div>
-                                        @endforeach
-                                    @endif
-
-
-                                </div> <!-- end card-body-->
+                                            @if (isset($dogclicked))
+                                                @foreach ($dogclicked as $clicked)
+                                                    <div class="d-flex mt-1">
+                                                        <i class='uil uil-arrow-growth me-2 font-18 text-primary'></i>
+                                                        <div>
+                                                            <p class="mt-1 font-14" href="javascript:void(0);">
+                                                                <strong>{{ $clicked['dog_name'] }}</strong>
+                                                                <span class="text-muted"><br>
+                                                                    {{ $clicked['description'] }}
+                                                                </span>
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                @endforeach
+                                            @endif
+                                        </div> <!-- end card-body-->
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-
                     {{-- <div class="card">
                         <div class="card-body p-2">
                             <div class="list-group list-group-flush my-2">
@@ -116,8 +116,7 @@
                     <!-- news -->
                     <!-- end card-->
                 </div> <!-- end col -->
-
-                <div class="col-xxl-9 col-lg-12 order-lg-2 order-xxl-1 scrollable-column">
+                <div class="col-xxl-9 col-lg-12 scrollable-column">
                     <div class="tab-content scroll-content" id="v-pills-tabContent">
                         <div class="tab-pane fade active show" id="v-pills-timeline" role="tabpanel"
                             aria-labelledby="v-pills-timeline-tab">
@@ -204,6 +203,37 @@
                         </div>
                     </div> <!-- end tab-content-->
                 </div>
+                <div class="col-xxl-3 col-lg-12 d-md-none d-block">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-xl-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between align-items-center mb-2">
+                                        <h4 class="header-title">Most Clicked Dogs</h4>
+                                        <div class="dropdown">
+
+                                        </div>
+                                    </div>
+                                    @if (isset($dogclicked))
+                                        @foreach ($dogclicked as $clicked)
+                                            <div class="d-flex mt-1">
+                                                <i class='uil uil-arrow-growth  font-18 text-primary'></i>
+                                                <div>
+                                                    <p class="mt-1 font-14" href="javascript:void(0);">
+                                                        <strong>{{ $clicked['dog_name'] }}</strong>
+                                                        <span class="text-muted"><br>
+                                                            {{ $clicked['description'] }}
+                                                        </span>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        @endforeach
+                                    @endif
+                                </div> <!-- end card-body-->
+                            </div>
+                        </div>
+                    </div>
+                </div> 
             </div> <!--end row -->
         </div> <!-- container -->
     </div> <!-- content -->
@@ -239,6 +269,7 @@
                 }
             });
         }
+
         function activeRounds() {
             activeElement = document.querySelector('#v-pills-tab .active');
             if (activeElement) {
@@ -247,9 +278,10 @@
                 return activeElement.id;
             } else {
                 console.log('No active element found');
-                return null; 
+                return null;
             }
         }
+
         function closeAllModals() {
             // Select all modals
             const modals = document.querySelectorAll('.modal.show');
@@ -273,7 +305,7 @@
                 closeAllModals();
                 Swal.fire({
                     icon: 'success',
-                    title: event[0],
+                    title: 'Ticket Number : ' + event[0],
                     text: 'Your report has been submitted. Please expect a call from the pound.',
                     confirmButtonText: 'Okay'
                 }).then((result) => {
@@ -283,8 +315,6 @@
                 });
             });
         });
-
-     
     </script>
 
 </div>
