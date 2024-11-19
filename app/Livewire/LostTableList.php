@@ -14,7 +14,7 @@ class LostTableList extends Component
     public function mount() {}
     public function fetchdata()
     {
-        $dogid = AnimalListStatus::where('isActive', true)->where('status', 3)->get('animal_id');
+        $dogid = AnimalListStatus::where('isActive', true)->whereIn('status', [3,2])->get('animal_id');
         $dogid2 = AnimalListStatus::where('isActive', true)->whereIn('status',[8,9])->get('animal_id');
 
         $this->doglist =  AnimalList::whereIn('dog_id_unique', $dogid)->where('animal_lists.isActive', true)

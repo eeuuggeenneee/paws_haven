@@ -1,25 +1,53 @@
 <div>
     <div class="content">
         <!-- Start Content-->
-        <div class="container-fluid">
+        <div class="container-fluid" id="lost_found_list">
             <!-- start page title -->
-            <div class="row">
-                <div class="col-12">
-                    <div class="page-title-box">
-                        <h4 class="page-title text-black">Dogs List</h4>
+            <div class=" d-flex">
+                <div class="page-title-box">
+                    <h4 class="page-title text-black mb-0">Lost and Found List</h4>
+                </div>
+                <div class="ms-auto d-flex">
+
+                    <nav class="d-none">
+                        <div class="page-item claimjPaginateBack">
+                            <a class="page-item" href="javascript: void(0);" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </div>
+                        <ul class="pagination pagination-rounded mb-0">
+
+                        </ul>
+                        <div class="page-item">
+                            <a class="page-item claimjPaginateNext" href="javascript: void(0);" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </div>
+                    </nav>
+
+
+                    <div class="mt-3 me-3">
+                        <ul id="pagination-list" class="pagination pagination-rounded mb-0">
+                        </ul>
                     </div>
+
+                    <select class="form-select mt-3 me-3" style=" height: 40px" id="sortstatus">
+                        <option selected="">Sort By Status</option>
+                        <option value="Lost Dog">Lost Dog</option>
+                        <option value="Found Dog">Found Dog</option>
+                    </select>
+                    <input type="search" class="mt-3 form-control search" style="width:300px; height: 40px"
+                        placeholder="Search name,breed..." id="top-search">
                 </div>
             </div>
             <!-- end page title -->
-
-            <div class="row">
+            <div class="row list">
                 @foreach ($doglist as $d)
                     @php
                         $images = json_decode($d['animal_images']);
                     @endphp
-
                     <div class="col-md-6 col-xxl-3">
-                        <div class="card ">
+                        <div class="card status" data-address-status="{{ $d['status_name'] ?? 'N/A' }}">
                             <div class="card-body py-3 px-3">
                                 <div class="float-end position-absolute">
                                     {{-- <button type="button" class="btn btn-danger"
@@ -34,10 +62,185 @@
                                             alt="friend"
                                             style="min-width: 300px; min-height: 170px; width: 300px; height: 170px; object-fit: cover;"></a>
 
-                                    <h4 class="mt-2"><a data-bs-toggle="modal" data-bs-target="#lostdog"
-                                        wire:click="adoptionform('{{ $d['dog_id_unique'] }}')"
-                                            class="text-reset">{{ $d['dog_name'] }} <i
-                                                class="mdi mdi-check-decagram text-success"></i></a></h4>
+                                    <h4 class="mt-2 dogname"><a data-bs-toggle="modal" data-bs-target="#lostdog"
+                                            wire:click="adoptionform('{{ $d['dog_id_unique'] }}')"
+                                            class="text-reset">{{ $d['dog_name'] }}
+                                            @if (isset($d))
+                                                @if ($d['status_name'] == 'Lost Dog')
+                                                    <svg xmlns="http://www.w3.org/2000/svg" version="1.1"
+                                                        xmlns:xlink="http://www.w3.org/1999/xlink" width="24"
+                                                        height="24" x="0" y="0" viewBox="0 0 512 512"
+                                                        style="enable-background:new 0 0 512 512" xml:space="preserve"
+                                                        class="">
+                                                        <g>
+                                                            <path
+                                                                d="M512 256c0 69.141-27.408 131.897-71.962 177.946C393.488 482.074 328.244 512 256 512s-137.498-29.926-184.048-78.064C27.408 387.887 0 325.13 0 256S27.408 124.113 71.952 78.064C118.502 29.926 183.756 0 256 0c36.456 0 71.126 7.617 102.505 21.347l.01.01C448.867 60.886 512 151.071 512 256z"
+                                                                style="" fill="#005572" data-original="#60c5e8"
+                                                                class="" opacity="0"></path>
+                                                            <path
+                                                                d="M440.043 102.881v331.065C393.493 482.074 328.249 512 256.005 512s-137.498-29.926-184.048-78.064V0h265.216l21.337 21.347 81.533 81.534z"
+                                                                style="" fill="#ea5a52" data-original="#ea5a52"
+                                                                class=""></path>
+                                                            <path d="M119.118 87.803h273.763v273.763H119.118z"
+                                                                style="" fill="#ffffff" data-original="#ffffff"
+                                                                class="" opacity="1"></path>
+                                                            <path
+                                                                d="m317.143 178.775-4.104-70.989c-.271-4.679-6.195-6.523-9.074-2.825l-34.036 43.717"
+                                                                style="" fill="#a03510" data-original="#a03510"
+                                                                class=""></path>
+                                                            <path
+                                                                d="M327.747 362.129h-164.77c-.251-.178-.491-.376-.742-.564l12.309-212.888h126.589c8.004 0 14.629 6.248 15.088 14.242l.919 15.851 10.607 183.359z"
+                                                                style="" fill="#ba4c20" data-original="#ba4c20">
+                                                            </path>
+                                                            <path
+                                                                d="M209.517 362.129h-46.54c-.251-.178-.491-.376-.742-.564l12.309-212.888h30.71l4.263 213.452z"
+                                                                style="" fill="#a03510" data-original="#a03510"
+                                                                class=""></path>
+                                                            <ellipse cx="299.426" cy="196.305" rx="11.546"
+                                                                ry="17.975" style="" fill="#3c363f"
+                                                                data-original="#3c363f"></ellipse>
+                                                            <ellipse cx="303.512" cy="194.79" rx="3.769"
+                                                                ry="9.172" style="" fill="#5c5560"
+                                                                data-original="#5c5560" class=""></ellipse>
+                                                            <path
+                                                                d="m220.017 148.68-20.512 13.072-6.529 4.161-5.006 3.196c-6.332 4.003-14.565-.837-14.127-8.33l3.061-52.996c.272-4.674 6.196-6.521 9.076-2.826l34.037 43.723z"
+                                                                style="" fill="#ba4c20"
+                                                                data-original="#ba4c20">
+                                                            </path>
+                                                            <ellipse cx="251.361" cy="196.305" rx="11.546"
+                                                                ry="17.975" style="" fill="#3c363f"
+                                                                data-original="#3c363f"></ellipse>
+                                                            <ellipse cx="255.446" cy="194.79" rx="3.769"
+                                                                ry="9.172" style="" fill="#5c5560"
+                                                                data-original="#5c5560" class=""></ellipse>
+                                                            <path
+                                                                d="M240.453 218.536h115.331v69.128a25.66 25.66 0 0 1-15.406 23.522l-42.752 18.636c-16.02 6.983-34.554-1.516-39.714-18.213l-25.429-82.268c-1.66-5.366 2.353-10.805 7.97-10.805z"
+                                                                style="" fill="#d8d8d8" data-original="#d8d8d8"
+                                                                class=""></path>
+                                                            <path
+                                                                d="M338.01 239.739v53.018a29.709 29.709 0 0 1-17.821 27.229c-.007 0-.007.007-.015.007l-22.548 9.83c-16.019 6.981-34.557-1.515-39.713-18.213l-25.428-82.268c-1.658-5.368 2.352-10.811 7.968-10.811h92.844l4.713 21.208z"
+                                                                style="" fill="#eaeaea" data-original="#eaeaea"
+                                                                class=""></path>
+                                                            <path
+                                                                d="M352.015 218.536H317.84c-6.522 0-11.811 5.287-11.811 11.81 0 6.522 5.287 11.81 11.811 11.81h34.174c6.522 0 11.81-5.287 11.81-11.81 0-6.523-5.287-11.81-11.809-11.81z"
+                                                                style="" fill="#3c363f"
+                                                                data-original="#3c363f"></path>
+                                                            <path
+                                                                d="M354.149 222.305h-17.087a5.905 5.905 0 0 0 0 11.81h17.087a5.905 5.905 0 1 0 0-11.81z"
+                                                                style="" fill="#5c5560" data-original="#5c5560"
+                                                                class=""></path>
+                                                            <circle cx="272.781" cy="275.425" r="9.047"
+                                                                style="" fill="#d8d8d8" data-original="#d8d8d8"
+                                                                class=""></circle>
+                                                            <circle cx="305.455" cy="275.425" r="9.047"
+                                                                style="" fill="#d8d8d8" data-original="#d8d8d8"
+                                                                class=""></circle>
+                                                            <circle cx="290.377" cy="295.027" r="9.047"
+                                                                style="" fill="#d8d8d8" data-original="#d8d8d8"
+                                                                class=""></circle>
+                                                            <path
+                                                                d="m199.507 161.751-6.533 4.164-5.003 3.195a7.488 7.488 0 0 1-.537.313c-.029.018-.06.029-.089.047-6.231 3.325-13.927-1.441-13.502-8.695l3.059-52.992c.272-4.678 6.196-6.52 9.078-2.83 2.628 6.408 6.462 16.455 10.071 26.07 1.016 2.705 2.008 5.369 2.959 7.914a5126.72 5126.72 0 0 1 4.288 11.594 9.442 9.442 0 0 1-3.791 11.22z"
+                                                                style="" fill="#f9b7d2" data-original="#f9b7d2"
+                                                                class=""></path>
+                                                            <path d="M440.039 102.875H337.163V0z" style=""
+                                                                fill="#d33531" data-original="#d33531"
+                                                                class=""></path>
+                                                            <path
+                                                                d="M163.662 444.454c-.796 2.385-3.738 3.499-6.76 3.499-2.941 0-6.044-1.113-6.601-3.499l-5.09-21.473-5.169 21.473c-.556 2.385-3.658 3.499-6.6 3.499-3.023 0-6.045-1.113-6.76-3.499l-15.747-50.023a3.432 3.432 0 0 1-.159-.954c0-2.307 3.659-4.136 6.601-4.136 1.59 0 3.023.557 3.42 2.068l12.565 43.104 6.759-27.675c.478-1.988 2.784-2.863 5.09-2.863 2.228 0 4.534.875 5.01 2.863l6.76 27.675 12.565-43.104c.398-1.511 1.83-2.068 3.42-2.068 2.941 0 6.6 1.829 6.6 4.136 0 .318-.079.716-.158.954l-15.746 50.023zM178.696 443.182c0-.159.079-.478.159-.795l15.348-50.023c.717-2.387 3.658-3.499 6.601-3.499 3.023 0 5.964 1.113 6.681 3.499l15.349 50.023c.079.319.159.557.159.795 0 2.465-3.738 4.294-6.521 4.294-1.75 0-3.102-.557-3.5-2.068l-3.022-10.577h-18.21l-3.022 10.577c-.398 1.511-1.75 2.068-3.5 2.068-2.784 0-6.522-1.75-6.522-4.294zm29.029-16.462-6.919-24.415-6.918 24.415h13.837zM256.717 444.215l-17.099-31.971v31.971c0 2.147-2.625 3.261-5.169 3.261-2.625 0-5.169-1.113-5.169-3.261v-51.614c0-2.227 2.545-3.261 5.169-3.261 3.738 0 5.249.795 7.714 5.488l15.348 29.664v-31.971c0-2.227 2.545-3.181 5.169-3.181 2.545 0 5.169.955 5.169 3.181v51.693c0 2.147-2.625 3.261-5.169 3.261-2.464.001-4.611-.795-5.963-3.26zM311.274 389.34c2.228 0 3.261 2.387 3.261 4.613 0 2.465-1.193 4.693-3.261 4.693h-11.611v45.569c0 2.147-2.625 3.261-5.169 3.261-2.625 0-5.169-1.113-5.169-3.261v-45.569h-11.69c-2.068 0-3.261-2.147-3.261-4.693 0-2.227 1.033-4.613 3.261-4.613h33.639zM331.317 414.312h12.088c2.068 0 3.26 1.988 3.26 4.136 0 1.829-1.033 3.976-3.26 3.976h-12.088v15.985h22.506c2.068 0 3.261 2.147 3.261 4.613 0 2.147-1.033 4.453-3.261 4.453h-28.312c-2.306 0-4.534-1.113-4.534-3.261V392.6c0-2.147 2.228-3.261 4.534-3.261h28.312c2.228 0 3.261 2.307 3.261 4.453 0 2.465-1.193 4.613-3.261 4.613h-22.506v15.907zM382.535 389.34c10.497 0 18.689 4.931 18.689 18.213v21.711c0 13.281-8.192 18.212-18.689 18.212h-14.077c-2.704 0-4.534-1.511-4.534-3.181v-51.773c0-1.67 1.83-3.181 4.534-3.181h14.077v-.001zm-8.271 9.067v40.003h8.271c5.247 0 8.35-2.942 8.35-9.145v-21.711c0-6.204-3.102-9.146-8.35-9.146h-8.271v-.001z"
+                                                                style="" fill="#ffffff" data-original="#ffffff"
+                                                                class="" opacity="1"></path>
+                                                        </g>
+                                                    </svg>
+                                                @else
+                                                    <svg xmlns="http://www.w3.org/2000/svg" version="1.1"
+                                                        xmlns:xlink="http://www.w3.org/1999/xlink" width="24"
+                                                        height="24" x="0" y="0" viewBox="0 0 512 512"
+                                                        style="enable-background:new 0 0 512 512" xml:space="preserve"
+                                                        class="">
+                                                        <g>
+                                                            <path
+                                                                d="M512 256c0 69.141-27.408 131.897-71.962 177.946C393.488 482.074 328.244 512 256 512s-137.498-29.926-184.048-78.064C27.408 387.887 0 325.13 0 256S27.408 124.113 71.952 78.064C118.502 29.926 183.756 0 256 0c36.456 0 71.126 7.617 102.505 21.347l.01.01C448.867 60.886 512 151.071 512 256z"
+                                                                style="" fill="#60c5e8" data-original="#60c5e8"
+                                                                class="" opacity="0"></path>
+                                                            <path
+                                                                d="M440.043 102.881v331.065C393.493 482.074 328.249 512 256.005 512s-137.498-29.926-184.048-78.064V0h265.216l21.337 21.347 81.533 81.534z"
+                                                                style="" fill="#ea5a52" data-original="#ea5a52"
+                                                                class=""></path>
+                                                            <path d="M119.118 87.803h273.763v273.763H119.118z"
+                                                                style="" fill="#ffffff" data-original="#ffffff"
+                                                                class="" opacity="0"></path>
+                                                            <path
+                                                                d="m317.143 178.775-4.104-70.989c-.271-4.679-6.195-6.523-9.074-2.825l-34.036 43.717"
+                                                                style="" fill="#a03510" data-original="#a03510"
+                                                                class=""></path>
+                                                            <path
+                                                                d="M327.747 362.129h-164.77c-.251-.178-.491-.376-.742-.564l12.309-212.888h126.589c8.004 0 14.629 6.248 15.088 14.242l.919 15.851 10.607 183.359z"
+                                                                style="" fill="#ba4c20" data-original="#ba4c20"
+                                                                class=""></path>
+                                                            <path
+                                                                d="M209.517 362.129h-46.54c-.251-.178-.491-.376-.742-.564l12.309-212.888h30.71l4.263 213.452z"
+                                                                style="" fill="#a03510" data-original="#a03510"
+                                                                class=""></path>
+                                                            <ellipse cx="299.426" cy="196.305" rx="11.546"
+                                                                ry="17.975" style="" fill="#3c363f"
+                                                                data-original="#3c363f"></ellipse>
+                                                            <ellipse cx="303.512" cy="194.79" rx="3.769"
+                                                                ry="9.172" style="" fill="#5c5560"
+                                                                data-original="#5c5560" class=""></ellipse>
+                                                            <path
+                                                                d="m220.017 148.68-20.512 13.072-6.529 4.161-5.006 3.196c-6.332 4.003-14.565-.837-14.127-8.33l3.061-52.996c.272-4.674 6.196-6.521 9.076-2.826l34.037 43.723z"
+                                                                style="" fill="#ba4c20" data-original="#ba4c20"
+                                                                class=""></path>
+                                                            <ellipse cx="251.361" cy="196.305" rx="11.546"
+                                                                ry="17.975" style="" fill="#3c363f"
+                                                                data-original="#3c363f"></ellipse>
+                                                            <ellipse cx="255.446" cy="194.79" rx="3.769"
+                                                                ry="9.172" style="" fill="#5c5560"
+                                                                data-original="#5c5560" class=""></ellipse>
+                                                            <path
+                                                                d="M240.453 218.536h115.331v69.128a25.66 25.66 0 0 1-15.406 23.522l-42.752 18.636c-16.02 6.983-34.554-1.516-39.714-18.213l-25.429-82.268c-1.66-5.366 2.353-10.805 7.97-10.805z"
+                                                                style="" fill="#d8d8d8" data-original="#d8d8d8"
+                                                                class=""></path>
+                                                            <path
+                                                                d="M338.01 239.739v53.018a29.709 29.709 0 0 1-17.821 27.229c-.007 0-.007.007-.015.007l-22.548 9.83c-16.019 6.981-34.557-1.515-39.713-18.213l-25.428-82.268c-1.658-5.368 2.352-10.811 7.968-10.811h92.844l4.713 21.208z"
+                                                                style="" fill="#eaeaea" data-original="#eaeaea"
+                                                                class=""></path>
+                                                            <path
+                                                                d="M352.015 218.536H317.84c-6.522 0-11.811 5.287-11.811 11.81 0 6.522 5.287 11.81 11.811 11.81h34.174c6.522 0 11.81-5.287 11.81-11.81 0-6.523-5.287-11.81-11.809-11.81z"
+                                                                style="" fill="#3c363f"
+                                                                data-original="#3c363f"></path>
+                                                            <path
+                                                                d="M354.149 222.305h-17.087a5.905 5.905 0 0 0 0 11.81h17.087a5.905 5.905 0 1 0 0-11.81z"
+                                                                style="" fill="#5c5560" data-original="#5c5560"
+                                                                class=""></path>
+                                                            <circle cx="272.781" cy="275.425" r="9.047"
+                                                                style="" fill="#d8d8d8" data-original="#d8d8d8"
+                                                                class=""></circle>
+                                                            <circle cx="305.455" cy="275.425" r="9.047"
+                                                                style="" fill="#d8d8d8" data-original="#d8d8d8"
+                                                                class=""></circle>
+                                                            <circle cx="290.377" cy="295.027" r="9.047"
+                                                                style="" fill="#d8d8d8" data-original="#d8d8d8"
+                                                                class=""></circle>
+                                                            <path
+                                                                d="m199.507 161.751-6.533 4.164-5.003 3.195a7.488 7.488 0 0 1-.537.313c-.029.018-.06.029-.089.047-6.231 3.325-13.927-1.441-13.502-8.695l3.059-52.992c.272-4.678 6.196-6.52 9.078-2.83 2.628 6.408 6.462 16.455 10.071 26.07 1.016 2.705 2.008 5.369 2.959 7.914a5126.72 5126.72 0 0 1 4.288 11.594 9.442 9.442 0 0 1-3.791 11.22z"
+                                                                style="" fill="#f9b7d2" data-original="#f9b7d2"
+                                                                class=""></path>
+                                                            <path d="M440.039 102.875H337.163V0z" style=""
+                                                                fill="#d33531" data-original="#d33531"
+                                                                class=""></path>
+                                                            <path
+                                                                d="M163.662 444.454c-.796 2.385-3.738 3.499-6.76 3.499-2.941 0-6.044-1.113-6.601-3.499l-5.09-21.473-5.169 21.473c-.556 2.385-3.658 3.499-6.6 3.499-3.023 0-6.045-1.113-6.76-3.499l-15.747-50.023a3.432 3.432 0 0 1-.159-.954c0-2.307 3.659-4.136 6.601-4.136 1.59 0 3.023.557 3.42 2.068l12.565 43.104 6.759-27.675c.478-1.988 2.784-2.863 5.09-2.863 2.228 0 4.534.875 5.01 2.863l6.76 27.675 12.565-43.104c.398-1.511 1.83-2.068 3.42-2.068 2.941 0 6.6 1.829 6.6 4.136 0 .318-.079.716-.158.954l-15.746 50.023zM178.696 443.182c0-.159.079-.478.159-.795l15.348-50.023c.717-2.387 3.658-3.499 6.601-3.499 3.023 0 5.964 1.113 6.681 3.499l15.349 50.023c.079.319.159.557.159.795 0 2.465-3.738 4.294-6.521 4.294-1.75 0-3.102-.557-3.5-2.068l-3.022-10.577h-18.21l-3.022 10.577c-.398 1.511-1.75 2.068-3.5 2.068-2.784 0-6.522-1.75-6.522-4.294zm29.029-16.462-6.919-24.415-6.918 24.415h13.837zM256.717 444.215l-17.099-31.971v31.971c0 2.147-2.625 3.261-5.169 3.261-2.625 0-5.169-1.113-5.169-3.261v-51.614c0-2.227 2.545-3.261 5.169-3.261 3.738 0 5.249.795 7.714 5.488l15.348 29.664v-31.971c0-2.227 2.545-3.181 5.169-3.181 2.545 0 5.169.955 5.169 3.181v51.693c0 2.147-2.625 3.261-5.169 3.261-2.464.001-4.611-.795-5.963-3.26zM311.274 389.34c2.228 0 3.261 2.387 3.261 4.613 0 2.465-1.193 4.693-3.261 4.693h-11.611v45.569c0 2.147-2.625 3.261-5.169 3.261-2.625 0-5.169-1.113-5.169-3.261v-45.569h-11.69c-2.068 0-3.261-2.147-3.261-4.693 0-2.227 1.033-4.613 3.261-4.613h33.639zM331.317 414.312h12.088c2.068 0 3.26 1.988 3.26 4.136 0 1.829-1.033 3.976-3.26 3.976h-12.088v15.985h22.506c2.068 0 3.261 2.147 3.261 4.613 0 2.147-1.033 4.453-3.261 4.453h-28.312c-2.306 0-4.534-1.113-4.534-3.261V392.6c0-2.147 2.228-3.261 4.534-3.261h28.312c2.228 0 3.261 2.307 3.261 4.453 0 2.465-1.193 4.613-3.261 4.613h-22.506v15.907zM382.535 389.34c10.497 0 18.689 4.931 18.689 18.213v21.711c0 13.281-8.192 18.212-18.689 18.212h-14.077c-2.704 0-4.534-1.511-4.534-3.181v-51.773c0-1.67 1.83-3.181 4.534-3.181h14.077v-.001zm-8.271 9.067v40.003h8.271c5.247 0 8.35-2.942 8.35-9.145v-21.711c0-6.204-3.102-9.146-8.35-9.146h-8.271v-.001z"
+                                                                style="" fill="#ffffff" data-original="#ffffff"
+                                                                class="" opacity="0"></path>
+                                                        </g>
+                                                    </svg>
+                                                @endif
+                                            @endif
+                                        </a>
+
+
+                                    </h4>
 
                                     <div class="row" wire:ignore>
                                         <div class="" style="width: 15%">
@@ -51,7 +254,8 @@
                                                         <g>
                                                             <path fill="#f95353"
                                                                 d="M88.365 12.2A32.548 32.548 0 0 0 64 23.133 32.636 32.636 0 0 0 9.623 57.667s.862 1.888 1.332 2.75C30.545 95.592 64 115.8 64 115.8s33.455-20.208 53.045-55.383c.471-.862 1.332-2.75 1.332-2.75A32.646 32.646 0 0 0 88.365 12.2z"
-                                                                opacity="1" data-original="#f95353" class="">
+                                                                opacity="1" data-original="#f95353"
+                                                                class="">
                                                             </path>
                                                             <g fill="#ffd3c2">
                                                                 <path
@@ -74,7 +278,7 @@
                                                         </g>
                                                     </svg> </i>
                                                 <div>
-                                                    <h5 class="mt-1 font-14" id="view-{{ $d['dog_id_unique'] }}"
+                                                    <h5 class="mt-1 font-14 " id="view-{{ $d['dog_id_unique'] }}"
                                                         wire:ignore>
                                                         {{ $d['clicked'] ?? '0' }}
                                                     </h5>
@@ -93,23 +297,28 @@
                                                         <g>
                                                             <path fill="#49e849"
                                                                 d="M163.3 102.3c-25.5 0-46.3-20.8-46.3-46.3s20.8-46.3 46.3-46.3 46.3 20.8 46.3 46.3-20.7 46.3-46.3 46.3zm0-83.2c-20.3 0-36.9 16.5-36.9 36.9 0 20.3 16.5 36.9 36.9 36.9s36.9-16.5 36.9-36.9c0-20.3-16.5-36.9-36.9-36.9z"
-                                                                opacity="1" data-original="#49e849" class="">
+                                                                opacity="1" data-original="#49e849"
+                                                                class="">
                                                             </path>
                                                             <path fill="#49e849"
                                                                 d="M157 74.9c-1.3 0-2.6-.5-3.5-1.5l-12.4-13.2c-1.8-1.9-1.7-5 .2-6.8s5-1.7 6.8.2l9.2 9.9 21.5-18.6c2-1.7 5-1.5 6.8.5 1.7 2 1.5 5-.5 6.8l-25 21.6c-.8.7-2 1.1-3.1 1.1z"
-                                                                opacity="1" data-original="#49e849" class="">
+                                                                opacity="1" data-original="#49e849"
+                                                                class="">
                                                             </path>
                                                             <path fill="#e2b471"
                                                                 d="M63.7 167.6s2.4 8.6 4.9 16 5 36.6 3.9 41.6-6.3 5.8-8.8 6.3-7.6 2.7-7.6 5.9 2.9 5.6 8.9 5.3c6.1-.3 13.9-2.4 13.9-2.4l5.8-9.6 2.3-34.5-13.7-22.8zM150.2 190.1s5.5 11.8 21.4 16.6 11.3 3.5 14.1 5.5c2.7 1.9 11.5 8 11.5 9.9s-.8 9.3-4.6 10.4-9.9 3.1-10.2 7.4c-.2 4.3 3.7 5.4 7.4 5.1s15.3-1.4 15.3-1.4l7.3-11.2-.5-19.3-33.6-20.8s-15.4-13.6-16-13.5-12.8 6.6-12.8 6.6z"
-                                                                opacity="1" data-original="#e2b471" class="">
+                                                                opacity="1" data-original="#e2b471"
+                                                                class="">
                                                             </path>
                                                             <path fill="#f7ce94"
                                                                 d="M193 136.9s16.3-4.2 17.1-16.5c.8-13.2-1.4-22.1.6-32s7.3-15.2 9.1-14.5c1.8.8.2 9.9 1.4 25s3.4 19.2 0 29.9-11.1 18.4-17.2 20.4z"
-                                                                opacity="1" data-original="#f7ce94" class="">
+                                                                opacity="1" data-original="#f7ce94"
+                                                                class="">
                                                             </path>
                                                             <path fill="#ffdd99"
                                                                 d="M220.4 206.9c-7.5-4.2-11.1-8-11.2-13.7-.1-4.2 3.4-12 3.8-21.3.5-9.4-.7-19.5-11.3-30.3-13.1-13.4-36.4-8.7-48.9-6.9s-28 .8-39.1-6.1c-12.1-7.4-11.1-32.1-21.8-44-9.1-10.1-30.9-7.2-35.1-4.8-6.9 3.8-5.5 9.9-7.9 12.6-1.4 1.6-4.6 1.4-7.1 1-.2 2.1-1.4 7.4-7.7 9.8 1.2 1.8 2.5 2.6 2.5 2.6-1.8 8.5 5.2 12.3 10.1 12.9 6.4.8 9.7 3.2 13.6 12.6 4.6 11.4.3 19 2.9 33.2 1.9 10.5 10.7 13.1 16.1 23.2 4.5 8.2 5.3 22.2 5.3 36.1 0 8.2-4.6 11.3-9.3 12.2-3.3.6-9.1 4-7 8.1 1.3 2.5 24 3.2 27.4.6 3.7-2.7 8.1-43.6 8.1-43.6 10.8-9.4 30.2-10.9 41.1-10 9.6.8 17.1-6.8 17.1-6.8 4.8 12.7 17 18.4 26.3 20.4 7.2 1.5 17.5 8.5 20 12.8 2.4 4.3 1.7 11.6 1.2 13.9-.9 4.5-9.9-.2-11.4 10.7-.6 4.4 20 3 21.6 1.2 1.9-2 3.6-20.8 4.4-29.8 0-2.7-1.3-5.3-3.7-6.6z"
-                                                                opacity="1" data-original="#ffdd99" class="">
+                                                                opacity="1" data-original="#ffdd99"
+                                                                class="">
                                                             </path>
                                                             <path fill="#efc889"
                                                                 d="M92.4 101.1c3-3.3 7.1-10.6 3.3-23.4-.4-1.3-1.7-2.1-3.1-1.8-4 .8-10.2 2.5-13.8 13.2-.4 1.1.1 2.2 1.1 2.7 2.2 1.1 6 3.5 8.8 8.8.7 1.4 2.6 1.6 3.7.5z"
@@ -133,7 +342,7 @@
                                                     </svg>
                                                 </i>
                                                 <div>
-                                                    <h5 class="mt-1 font-14">
+                                                    <h5 class="mt-1 font-14 color">
                                                         {{ $d['color'] ?? 'N/A' }}
                                                     </h5>
                                                 </div>
@@ -184,7 +393,7 @@
                                                         </g>
                                                     </svg> </i>
                                                 <div>
-                                                    <h5 class="mt-1 font-14">
+                                                    <h5 class="mt-1 font-14 gender">
                                                         {{ $d['gender'] ?? 'N/A' }}
                                                     </h5>
                                                 </div>
@@ -239,10 +448,10 @@
                                                                     data-original="#143441" class=""></path>
                                                             </g>
                                                         </g>
-                                                    </svg> 
+                                                    </svg>
                                                 </i>
                                                 <div>
-                                                    <h5 class="mt-1 font-14 text-start">
+                                                    <h5 class="mt-1 font-14 text-start breed">
                                                         {{ $d['breed_name'] ?? 'N/A' }}
                                                     </h5>
                                                 </div>
@@ -253,6 +462,7 @@
 
                                 </div>
                             </div>
+
                         </div>
                     </div>
                 @endforeach
@@ -266,7 +476,138 @@
 
     <!-- end Footer -->
     <script>
+        var adoptionlist;
+
+
+
         document.addEventListener('livewire:init', function() {
+            function areinitializeList() {
+                console.log('reinit');
+
+                var options = {
+                    valueNames: ['dogname', 'color', 'gender', 'breed', 'status'],
+                    searchClass: 'search',
+                    page: 8,
+                    pagination: true,
+                    paginationClass: 'pagination', // Adds pagination classes (rounded pagination)
+                    nextClass: 'next', // Custom class for the next button
+                    prevClass: 'previous', // Custom class for the previous button
+                    activeClass: 'active', // Custom class for active page
+                    pageClass: 'page-item', // Class for each page item
+                    linkClass: 'page-link' // Class for each link inside the pagination
+                };
+
+                var adoptionlist = new List('lost_found_list', options);
+
+                // Initialize pagination update
+
+                // Update pagination links dynamically based on List.js
+                function updatePagination(list) {
+                    const totalPages = list.pages;
+                    const currentPage = list.page;
+
+                    // Clear existing pagination
+                    const pagination = document.getElementById('pagination-list');
+                    pagination.innerHTML = '';
+
+                    // Add Previous page button
+                    const prevDiv = document.createElement('div');
+                    prevDiv.classList.add('page-item', 'claimjPaginateBack');
+
+                    const prevButton = document.createElement('li');
+                    prevButton.classList.add('page-link');
+                    prevButton.innerHTML =
+                        `<a class="" href="javascript:void(0);" id="previous-page" aria-label="Previous">&laquo;</a>`;
+
+                    prevDiv.appendChild(prevButton);
+                    pagination.appendChild(prevDiv);
+
+
+                    const nextDiv = document.createElement('div');
+                    nextDiv.classList.add('page-item', 'claimjPaginateNext');
+
+                    const nextButton = document.createElement('li');
+                    nextButton.classList.add('page-link');
+                    nextButton.innerHTML =
+                        `<a class="" href="javascript:void(0);" id="next-page" aria-label="Next">&raquo;</a>`;
+                    nextDiv.appendChild(nextButton);
+                    pagination.appendChild(nextDiv);
+
+
+                    $('.claimjPaginateNext').on('click', function() {
+                        var list = $('.pagination').find('li');
+                        $.each(list, function(position, element) {
+                            if ($(element).is('.active')) {
+                                $(list[position + 1]).trigger('click');
+                            }
+                        })
+                    });
+
+
+                    $('.claimjPaginateBack').on('click', function() {
+                        var list = $('.pagination').find('li');
+                        $.each(list, function(position, element) {
+                            if ($(element).is('.active')) {
+                                $(list[position - 1]).trigger('click');
+                            }
+                        })
+                    });
+
+                    document.getElementById('sortstatus').addEventListener('change', function() {
+                        var selectedOption = this.value;
+                        adoptionlist.filter(function(item) {
+                            var addressStatus = item.elm.querySelector('.status').getAttribute(
+                                'data-address-status');
+                            if (selectedOption === '') {
+                                return true;
+                            } else if (selectedOption === 'Found Dog') {
+                                return addressStatus === 'Found Dog';
+                            } else if (selectedOption === 'Lost Dog') {
+                                return addressStatus === 'Lost Dog';
+                            }
+                        });
+                    });
+                }
+
+                updatePagination(adoptionlist);
+
+            }
+
+            areinitializeList();
+
+            Livewire.hook('commit', ({
+                component,
+                commit,
+                respond,
+                succeed,
+                fail
+            }) => {
+                // Equivalent of 'message.sent'
+                succeed(({
+                    snapshot,
+                    effect
+                }) => {
+                    // Equivalent of 'message.received'
+                    queueMicrotask(() => {
+                        
+                        console.log(component);
+                        if(component.effects.dispatches[0].name == 'activedogModal' || component.effects.dispatches[0].name == 'notif'){
+                            areinitializeList();
+                        }
+                        console.log('loading done')
+                    })
+                })
+                fail(() => {
+                    // Equivalent of 'message.failed'
+                })
+            })
+            $('.modal').on('hidden.bs.modal', function() {
+                console.log('Modal closed');
+                if(toggledclaim){
+                    document.getElementById('claimtoggle').click();
+                    toggledclaim = false;
+                }
+            });
             Livewire.on('click_dogs', event => {
                 let dogid = document.getElementById('view-' + event[0]);
                 dogid.textContent = event[1];

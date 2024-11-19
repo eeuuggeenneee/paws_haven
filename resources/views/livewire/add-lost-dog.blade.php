@@ -76,7 +76,7 @@
                                 <div class="col-6">
                                     <div class="mb-3">
                                         <label class="form-label" for="validationCustom03">Barangay</label>
-                                        <select class="form-select mb-3" wire:model="location_found" required>
+                                        <select class="form-select mb-3" wire:model="barangay_f" required>
                                             <option selected>Select a Barangay</option>
                                             <option value="Bagbaguin">Bagbaguin</option>
                                             <option value="Bulac">Bulac</option>
@@ -200,7 +200,7 @@
                     <!-- end row -->
                     <div class="d-flex">
                         @if ($updatedog)
-                            <button type="button" class="btn btn-primary me-2" onclick="updateSave()"><i
+                            <button type="button" class="btn btn-primary me-2 text-white" onclick="updateSave()"><i
                                     class="uil-exit"></i> Update </button>
 
                             <button type="button" class="btn btn-info  me-2 d-none" id="update_dog"

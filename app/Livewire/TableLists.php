@@ -62,7 +62,7 @@ class TableLists extends Component
 
         // dd($this->reqrounds);
 
-        $this->claimlist = AnimalListStatus::whereIn('status', [6, 7, 10])
+        $this->claimlist = AnimalListStatus::whereIn('status', [6, 7, 10, 11])
             ->leftJoin('dog_claims', 'dog_claims.dog_id_unique', '=', 'animal_list_statuses.animal_id')
             ->leftJoin('statuses', 'statuses.id', '=', 'animal_list_statuses.status')
             ->leftJoin('animal_lists', function ($join) {
@@ -118,7 +118,7 @@ class TableLists extends Component
         Annoucement::create([
             'message' => $html,
             'title' => $data['title'],
-            'sub_title' => $this->activerounds->address,
+            'sub_title' => $this->activerounds->barangay,
             'isActive' => 1,
             'user_id' => Auth::user()->id,
         ]);

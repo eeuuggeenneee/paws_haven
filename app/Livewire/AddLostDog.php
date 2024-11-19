@@ -30,6 +30,7 @@ class AddLostDog extends Component
     public $breedlist;
     public $dog_images = [];
     public $dog_unique;
+    public $barangay_f;
     public $updatedog = false;
     protected $listeners = ['editDoggo', 'adddog'];
     public function mount()
@@ -52,6 +53,7 @@ class AddLostDog extends Component
             $finddog->color = $this->color;
             $finddog->gender = $this->gender;
             $finddog->report_type = $this->report_type;
+            $finddog->barangay = $this->barangay_f;
             $finddog->location_found = $this->location_found;
             $finddog->date_found = $this->date_found;
             $finddog->description = $this->description;
@@ -73,6 +75,7 @@ class AddLostDog extends Component
         $this->breed = null;
         $this->color = null;
         $this->gender = null;
+        $this->barangay_f = null;
         $this->description = null;
         $this->date_found = null;
         $this->location_found = null;
@@ -88,6 +91,7 @@ class AddLostDog extends Component
         $this->breed = $finddog->breed;
         $this->color = $finddog->color;
         $this->gender = $finddog->gender;
+        $this->barangay_f = $finddog->barangay;
         $this->description = $finddog->description;
         $this->date_found = $finddog->date_found;
         $this->location_found = $finddog->location_found;
@@ -107,6 +111,7 @@ class AddLostDog extends Component
             'description' => $this->description,
             'date_found' => $this->date_found,
             'dog_id_unique' => $uniqueId,
+            'barangay' => $this->barangay_f,
             'location_found' => $this->location_found,
             'report_type' => $this->report_type,
             'animal_images' => json_encode($dogImages),
@@ -122,7 +127,6 @@ class AddLostDog extends Component
                 'status' => 8,
                 'isActive' => 1,
             ]);
-
             $formattedId = str_pad($dog->id, 4, '0', STR_PAD_LEFT);
             $ticket = 'F' . $dog->created_at->format('ym') . '-' . $formattedId;
     

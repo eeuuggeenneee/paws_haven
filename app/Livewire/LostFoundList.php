@@ -24,12 +24,17 @@ class LostFoundList extends Component
     }
     public function fetchDataDog()
     {
-        $dogid = AnimalListStatus::where('isActive', true)->whereIn('status', [3,10])->get('animal_id');
+        $dogid = AnimalListStatus::where('isActive', true)->whereIn('status', [3,2])->get('animal_id');
         $this->doglist = AnimalList::whereIn('animal_lists.dog_id_unique', $dogid)
             ->leftJoin('click_dogs', 'click_dogs.dog_id_unique', '=', 'animal_lists.dog_id_unique')
             ->leftJoin('dog_breeds', 'dog_breeds.id', '=', 'animal_lists.breed')
-            ->select('animal_lists.*', 'click_dogs.clicked', 'dog_breeds.name as breed_name')
+            ->leftJoin('animal_list_statuses', function ($join) {
+                $join->on('animal_list_statuses.animal_id', '=', 'animal_lists.dog_id_unique')
+                    ->where('animal_list_statuses.isActive', '=', 1);
+            })
+            ->leftJoin('statuses', 'statuses.id', '=', 'animal_list_statuses.status')
             ->where('animal_lists.isActive', true)
+            ->select('animal_lists.*', 'click_dogs.clicked', 'dog_breeds.name as breed_name','statuses.name as status_name')
             ->orderBy('click_dogs.clicked', 'desc')
             ->get();
 

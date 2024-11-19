@@ -51,47 +51,29 @@
                                             $statusP = '';
                                             $statusExtact = '';
                                             if ($notif['table_source'] == 'claims') {
-                                                $ticketno =
-                                                    'C' .
-                                                    (new DateTime($notif['created_at']))->format('ym') .
-                                                    '-' .
-                                                    str_pad($notif['id'], 4, '0', STR_PAD_LEFT);
-                                                    $statusP = $notif['status_name'];
+                                                $ticketno = 'C' . (new DateTime($notif['created_at']))->format('ym') .   '-' .  str_pad($notif['id'], 4, '0', STR_PAD_LEFT);
+                                                $statusP = $notif['status_name'];
                                             } elseif ($notif['table_source'] == 'adoption') {
-                                                $ticketno =
-                                                    'A' .
-                                                    (new DateTime($notif['created_at']))->format('ym') .
-                                                    '-' .
-                                                    str_pad($notif['id'], 4, '0', STR_PAD_LEFT);
-                                                if($notif['status_name'] == 'For Adoption'){
+                                                $ticketno =  'A' . (new DateTime($notif['created_at']))->format('ym') .  '-' . str_pad($notif['id'], 4, '0', STR_PAD_LEFT);
+                                                if ($notif['status_name'] == 'For Adoption') {
                                                     $statusP = 'Adoption Rejected';
-                                                }else{
+                                                } else {
                                                     $statusP = $notif['status_name'];
                                                 }
-
-                                               
                                             } elseif ($notif['table_source'] == 'rounds') {
-                                                $ticketno =
-                                                    'R' .(new DateTime($notif['created_at']))->format('ym') .
-                                                    '-' .
-                                                    str_pad($notif['id'], 4, '0', STR_PAD_LEFT);
-                                                if ($notif['is_approved'] == null && $notif['is_approved'] != 0) {
+                                                $ticketno =  'R' . (new DateTime($notif['created_at']))->format('ym') . '-' .  str_pad($notif['id'], 4, '0', STR_PAD_LEFT);
+                                                if ($notif['is_approved'] == null || $notif['is_approved'] != 0) {
                                                     $statusP = 'Rounds Pending';
-                                                }else if($notif['is_approved'] == 0){
+                                                } elseif ($notif['is_approved'] == 0) {
                                                     $statusP = 'Rounds Rejected';
-                                                }else{
+                                                } else {
                                                     $statusP = 'Rounds Approved';
                                                 }
-
                                             } elseif ($notif['table_source'] == 'found_form') {
-                                                $ticketno =
-                                                    'F' .
-                                                    (new DateTime($notif['created_at']))->format('ym') .
-                                                    '-' .
-                                                    str_pad($notif['id'], 4, '0', STR_PAD_LEFT);
-                                                if($notif['status_name'] == 'Found Dog'){
+                                                $ticketno = 'F' . (new DateTime($notif['created_at']))->format('ym') . '-' . str_pad($notif['id'], 4, '0', STR_PAD_LEFT);
+                                                if ($notif['status_name'] == 'Found Dog') {
                                                     $statusP = 'Request Approved';
-                                                }else{
+                                                } else {
                                                     $statusP = $notif['status_name'];
                                                 }
                                             }
@@ -120,57 +102,49 @@
                                             $statusP = '';
                                             $statusExtact = '';
                                             if ($notif['table_source'] == 'claims') {
-                                                $ticketno =
-                                                    'C' .
-                                                    (new DateTime($notif['created_at']))->format('ym') .
-                                                    '-' .
-                                                    str_pad($notif['id'], 4, '0', STR_PAD_LEFT);
+                                                $ticketno = 'C' . (new DateTime($notif['created_at']))->format('ym') . '-' . str_pad($notif['id'], 4, '0', STR_PAD_LEFT);
                                                 $statusP = $notif['status_name'];
-                                                if($notif['status_name'] == 'Adoption Rejected'){
+                                            } elseif ($notif['table_source'] == 'adoption') {
+                                                $ticketno = 'A' . (new DateTime($notif['created_at']))->format('ym') . '-' .str_pad($notif['id'], 4, '0', STR_PAD_LEFT);
+                                                if ($notif['status_name'] == 'For Adoption') {
+                                                    $statusP = 'Adoption Rejected';
+                                                } else {
                                                     $statusP = $notif['status_name'];
                                                 }
-                                        
-                                            } elseif ($notif['table_source'] == 'adoption') {
-                                                $ticketno =
-                                                    'A' .
-                                                    (new DateTime($notif['created_at']))->format('ym') .
-                                                    '-' .
-                                                    str_pad($notif['id'], 4, '0', STR_PAD_LEFT);
-                                                $statusP = $notif['status_name'];
                                             } elseif ($notif['table_source'] == 'rounds') {
-                                                $ticketno =
-                                                    'R' .(new DateTime($notif['created_at']))->format('ym') .
-                                                    '-' .
-                                                    str_pad($notif['id'], 4, '0', STR_PAD_LEFT);
-                                                if ($notif['is_approved'] == null && $notif['is_approved'] != 0) {
+                                                $ticketno =  'R' . (new DateTime($notif['created_at']))->format('ym') . '-' . str_pad($notif['id'], 4, '0', STR_PAD_LEFT);
+
+                                                if ($notif['is_approved'] == null || $notif['is_approved'] != 0) {
                                                     $statusP = 'Rounds Pending';
-                                                }else if($notif['is_approved'] == 0){
+                                                } elseif ($notif['is_approved'] == 0) {
                                                     $statusP = 'Rounds Rejected';
+                                                } else {
+                                                    $statusP = 'Rounds Approved';
                                                 }
                                             } elseif ($notif['table_source'] == 'found_form') {
-                                                $ticketno =
-                                                    'F' .
-                                                    (new DateTime($notif['created_at']))->format('ym') .
-                                                    '-' .
+                                                $ticketno =  'F' . (new DateTime($notif['created_at']))->format('ym') . '-' . str_pad($notif['id'], 4, '0', STR_PAD_LEFT);
+                                                if ($notif['status_name'] == 'Found Dog') {
+                                                    $statusP = 'Request Approved';
+                                                } else {
+                                                    $statusP = $notif['status_name'];
+                                                }            '-' .
                                                     str_pad($notif['id'], 4, '0', STR_PAD_LEFT);
-                                                $statusP = $notif['status_name'];
+
                                             }
                                         @endphp
                                         <div class="tab-pane @if ($loop->first) active show @endif"
                                             id="{{ $ticketno }}" role="tabpanel">
                                             <div class="d-flex mb-2 justify-content-between align-items-center">
                                                 <h4 class="mb-0">Ticket Number : {{ $ticketno }}</h4>
-                                                @if($statusP != 'Rounds Rejected')
-                                                <button type="button"
-                                                    class="btn btn-danger mt-1 btn-sm d-flex align-items-center"
-                                                    onclick="cancelR('{{ $notif['id'] }}','{{ $notif['table_source'] }}','{{ $ticketno }}')">
-                                                    <i class="uil uil-cancel"></i> <span
-                                                        class="d-lg-block d-none ms-2">Cancel</span>
-                                                </button>
-                                                
-
+                                                @if ($statusP = 'Rounds Pending' || $statusP = 'For Publish' || $statusP = 'Pending Claim' || $statusP = 'Pending Adoption')
+                                                    <button type="button"
+                                                        class="btn btn-danger mt-1 btn-sm d-flex align-items-center"
+                                                        onclick="cancelR('{{ $notif['id'] }}','{{ $notif['table_source'] }}','{{ $ticketno }}')">
+                                                        <i class="uil uil-cancel"></i> <span
+                                                            class="d-lg-block d-none ms-2">Cancel</span>
+                                                    </button>
                                                 @endif
-                                               
+
                                             </div>
                                             @if ($notif['table_source'] == 'rounds')
                                                 <div class="row text-black">
@@ -597,7 +571,7 @@
 
             Livewire.on('notif', event => {
                 connotif.innerHTML = '';
-              
+
                 let notif = [];
 
                 event[0].forEach((element, index) => {

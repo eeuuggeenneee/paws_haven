@@ -1,19 +1,42 @@
 <div>
     <div class="content">
         <!-- Start Content-->
-        <div class="container-fluid">
+        <div class="container-fluid" id="adoption_list">
             <!-- start page title -->
-            <div class="row">
-                <div class="col-12">
-                    <div class="page-title-box">
-                      
-                        <h4 class="page-title">Dogs List</h4>
+            <div class=" d-flex">
+                <div class="page-title-box">
+                    <h4 class="page-title text-black mb-0">Adoption List</h4>
+                </div>
+                <div class="ms-auto d-flex">
+
+                    <nav class="d-none">
+                        <div class="page-item claimjPaginateBack">
+                            <a class="page-item" href="javascript: void(0);" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </div>
+                        <ul class="pagination pagination-rounded mb-0">
+
+                        </ul>
+                        <div class="page-item">
+                            <a class="page-item claimjPaginateNext" href="javascript: void(0);" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </div>
+                    </nav>
+
+                    <div class="mt-3 me-3">
+                        <ul id="pagination-list" class="pagination pagination-rounded mb-0">
+                        </ul>
                     </div>
+
+                    <input type="search" class="mt-3 form-control search" style="width:300px; height: 40px"
+                        placeholder="Search name,breed..." id="top-search">
                 </div>
             </div>
             <!-- end page title -->
 
-            <div class="row">
+            <div class="row list">
                 @foreach ($doglist as $d)
                     @php
                         $images = json_decode($d['animal_images']);
@@ -21,14 +44,15 @@
                     <div class="col-md-6 col-xxl-3">
                         <div class="card">
                             <div class="card-body py-3 px-3">
-                            
                                 <div class="text-center">
-                                    <a  data-bs-toggle="modal" data-bs-target="#viewdog"
-                                    wire:click="adoptionform('{{ $d['dog_id_unique'] }}')"> 
-                                        <img src="{{ asset('storage/' . $images[0]) }}" class="img-thumbnail" alt="friend" style="min-width: 300px; min-height: 170px; width: 300px; height: 170px; object-fit: cover;"></a>
+                                    <a data-bs-toggle="modal" data-bs-target="#viewdog"
+                                        wire:click="adoptionform('{{ $d['dog_id_unique'] }}')">
+                                        <img src="{{ asset('storage/' . $images[0]) }}" class="img-thumbnail"
+                                            alt="friend"
+                                            style="min-width: 300px; min-height: 170px; width: 300px; height: 170px; object-fit: cover;"></a>
 
-                                    <h4 class="mt-2"><a data-bs-toggle="modal" data-bs-target="#viewdog"
-                                        wire:click="adoptionform('{{ $d['dog_id_unique'] }}')"
+                                    <h4 class="mt-2 dogname"><a data-bs-toggle="modal" data-bs-target="#viewdog"
+                                            wire:click="adoptionform('{{ $d['dog_id_unique'] }}')"
                                             class="text-reset">{{ $d['dog_name'] }} <i
                                                 class="mdi mdi-check-decagram text-success"></i></a></h4>
 
@@ -91,15 +115,18 @@
                                                             </path>
                                                             <path fill="#49e849"
                                                                 d="M157 74.9c-1.3 0-2.6-.5-3.5-1.5l-12.4-13.2c-1.8-1.9-1.7-5 .2-6.8s5-1.7 6.8.2l9.2 9.9 21.5-18.6c2-1.7 5-1.5 6.8.5 1.7 2 1.5 5-.5 6.8l-25 21.6c-.8.7-2 1.1-3.1 1.1z"
-                                                                opacity="1" data-original="#49e849" class="">
+                                                                opacity="1" data-original="#49e849"
+                                                                class="">
                                                             </path>
                                                             <path fill="#e2b471"
                                                                 d="M63.7 167.6s2.4 8.6 4.9 16 5 36.6 3.9 41.6-6.3 5.8-8.8 6.3-7.6 2.7-7.6 5.9 2.9 5.6 8.9 5.3c6.1-.3 13.9-2.4 13.9-2.4l5.8-9.6 2.3-34.5-13.7-22.8zM150.2 190.1s5.5 11.8 21.4 16.6 11.3 3.5 14.1 5.5c2.7 1.9 11.5 8 11.5 9.9s-.8 9.3-4.6 10.4-9.9 3.1-10.2 7.4c-.2 4.3 3.7 5.4 7.4 5.1s15.3-1.4 15.3-1.4l7.3-11.2-.5-19.3-33.6-20.8s-15.4-13.6-16-13.5-12.8 6.6-12.8 6.6z"
-                                                                opacity="1" data-original="#e2b471" class="">
+                                                                opacity="1" data-original="#e2b471"
+                                                                class="">
                                                             </path>
                                                             <path fill="#f7ce94"
                                                                 d="M193 136.9s16.3-4.2 17.1-16.5c.8-13.2-1.4-22.1.6-32s7.3-15.2 9.1-14.5c1.8.8.2 9.9 1.4 25s3.4 19.2 0 29.9-11.1 18.4-17.2 20.4z"
-                                                                opacity="1" data-original="#f7ce94" class="">
+                                                                opacity="1" data-original="#f7ce94"
+                                                                class="">
                                                             </path>
                                                             <path fill="#ffdd99"
                                                                 d="M220.4 206.9c-7.5-4.2-11.1-8-11.2-13.7-.1-4.2 3.4-12 3.8-21.3.5-9.4-.7-19.5-11.3-30.3-13.1-13.4-36.4-8.7-48.9-6.9s-28 .8-39.1-6.1c-12.1-7.4-11.1-32.1-21.8-44-9.1-10.1-30.9-7.2-35.1-4.8-6.9 3.8-5.5 9.9-7.9 12.6-1.4 1.6-4.6 1.4-7.1 1-.2 2.1-1.4 7.4-7.7 9.8 1.2 1.8 2.5 2.6 2.5 2.6-1.8 8.5 5.2 12.3 10.1 12.9 6.4.8 9.7 3.2 13.6 12.6 4.6 11.4.3 19 2.9 33.2 1.9 10.5 10.7 13.1 16.1 23.2 4.5 8.2 5.3 22.2 5.3 36.1 0 8.2-4.6 11.3-9.3 12.2-3.3.6-9.1 4-7 8.1 1.3 2.5 24 3.2 27.4.6 3.7-2.7 8.1-43.6 8.1-43.6 10.8-9.4 30.2-10.9 41.1-10 9.6.8 17.1-6.8 17.1-6.8 4.8 12.7 17 18.4 26.3 20.4 7.2 1.5 17.5 8.5 20 12.8 2.4 4.3 1.7 11.6 1.2 13.9-.9 4.5-9.9-.2-11.4 10.7-.6 4.4 20 3 21.6 1.2 1.9-2 3.6-20.8 4.4-29.8 0-2.7-1.3-5.3-3.7-6.6z"
@@ -127,7 +154,7 @@
                                                     </svg>
                                                 </i>
                                                 <div>
-                                                    <h5 class="mt-1 font-14">
+                                                    <h5 class="mt-1 font-14 color">
                                                         {{ $d['color'] ?? 'N/A' }}
                                                     </h5>
                                                 </div>
@@ -136,7 +163,7 @@
                                         </div>
                                         <div style="width: 23%">
                                             <div class="d-flex">
-                                                <i class="font-18 text-success me-1">
+                                                <i class="font-18 text-success me-1 ">
                                                     <svg xmlns="http://www.w3.org/2000/svg" version="1.1"
                                                         xmlns:xlink="http://www.w3.org/1999/xlink" width="18"
                                                         height="18" x="0" y="0" viewBox="0 0 488 488.33"
@@ -178,7 +205,7 @@
                                                         </g>
                                                     </svg> </i>
                                                 <div>
-                                                    <h5 class="mt-1 font-14">
+                                                    <h5 class="mt-1 font-14 gender">
                                                         {{ $d['gender'] ?? 'N/A' }}
                                                     </h5>
                                                 </div>
@@ -187,7 +214,7 @@
                                         </div>
                                         <div style="width: 40%">
                                             <div class="d-flex">
-                                                <i class="font-18 text-success me-1">
+                                                <i class="font-18 text-success me-1 ">
                                                     <svg xmlns="http://www.w3.org/2000/svg" version="1.1"
                                                         xmlns:xlink="http://www.w3.org/1999/xlink" width="18"
                                                         height="18" x="0" y="0" viewBox="0 0 64 64"
@@ -235,7 +262,7 @@
                                                         </g>
                                                     </svg> </i>
                                                 <div>
-                                                    <h5 class="mt-1 font-14">
+                                                    <h5 class="mt-1 font-14 breed">
                                                         {{ $d['breed_name'] ?? 'N/A' }}
                                                     </h5>
                                                 </div>
@@ -257,7 +284,109 @@
 
     <!-- end Footer -->
     <script>
+        var adoptionlist;
         document.addEventListener('livewire:init', function() {
+            function areinitializeList() {
+                console.log('reinit');
+
+                var options = {
+                    valueNames: ['dogname', 'color', 'gender', 'breed'],
+                    searchClass: 'search',
+                    page: 8,
+                    pagination: true,
+                    paginationClass: 'pagination', // Adds pagination classes (rounded pagination)
+                    nextClass: 'next', // Custom class for the next button
+                    prevClass: 'previous', // Custom class for the previous button
+                    activeClass: 'active', // Custom class for active page
+                    pageClass: 'page-item', // Class for each page item
+                    linkClass: 'page-link' // Class for each link inside the pagination
+                };
+
+                var adoptionlist = new List('adoption_list', options);
+
+                // Initialize pagination update
+
+                // Update pagination links dynamically based on List.js
+                function updatePagination(list) {
+                    const totalPages = list.pages;
+                    const currentPage = list.page;
+
+                    // Clear existing pagination
+                    const pagination = document.getElementById('pagination-list');
+                    pagination.innerHTML = '';
+
+                    // Add Previous page button
+                    const prevDiv = document.createElement('div');
+                    prevDiv.classList.add('page-item', 'claimjPaginateBack');
+
+                    const prevButton = document.createElement('li');
+                    prevButton.classList.add('page-link');
+                    prevButton.innerHTML =
+                        `<a class="" href="javascript:void(0);" id="previous-page" aria-label="Previous">&laquo;</a>`;
+
+                    prevDiv.appendChild(prevButton);
+                    pagination.appendChild(prevDiv);
+
+
+                    const nextDiv = document.createElement('div');
+                    nextDiv.classList.add('page-item', 'claimjPaginateNext');
+
+                    const nextButton = document.createElement('li');
+                    nextButton.classList.add('page-link');
+                    nextButton.innerHTML =
+                        `<a class="" href="javascript:void(0);" id="next-page" aria-label="Next">&raquo;</a>`;
+                    nextDiv.appendChild(nextButton);
+                    pagination.appendChild(nextDiv);
+
+
+                    $('.claimjPaginateNext').on('click', function() {
+                        var list = $('.pagination').find('li');
+                        $.each(list, function(position, element) {
+                            if ($(element).is('.active')) {
+                                $(list[position + 1]).trigger('click');
+                            }
+                        })
+                    });
+
+
+                    $('.claimjPaginateBack').on('click', function() {
+                        var list = $('.pagination').find('li');
+                        $.each(list, function(position, element) {
+                            if ($(element).is('.active')) {
+                                $(list[position - 1]).trigger('click');
+                            }
+                        })
+                    });
+                }
+                updatePagination(adoptionlist);
+
+            }
+
+            areinitializeList();
+            Livewire.hook('commit', ({
+                component,
+                commit,
+                respond,
+                succeed,
+                fail
+            }) => {
+                // Equivalent of 'message.sent'
+                succeed(({
+                    snapshot,
+                    effect
+                }) => {
+                    // Equivalent of 'message.received'
+                    queueMicrotask(() => {
+                        if (component.effects.dispatches[0].name == 'activedogModal' || component.effects.dispatches[0].name == 'notif') {
+                            areinitializeList();
+                        }
+                    })
+                })
+                fail(() => {
+                    // Equivalent of 'message.failed'
+                })
+            })
+
             Livewire.on('dogSaved', event => {
                 Swal.fire({
                     icon: 'success',

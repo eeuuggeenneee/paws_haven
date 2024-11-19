@@ -10,7 +10,7 @@
     <meta content="" name="author" />
 
     <!-- App favicon -->
-    <link rel="shortcut icon" href="assets/images/favicon.ico">
+    <link rel="shortcut icon" href="icon_logo.png" type="image/png">
 
     <!-- Theme Config Js -->
     <script src="assets/js/hyper-config.js"></script>

@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('breed')->nullable();
             $table->string('color')->nullable();
             $table->string('gender')->nullable();
+            $table->string('barangay')->nullable();
             $table->string('location_found')->nullable();
             $table->date('date_found')->nullable();
             $table->text('description')->nullable();

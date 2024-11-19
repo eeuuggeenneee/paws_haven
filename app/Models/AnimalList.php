@@ -17,6 +17,7 @@ class AnimalList extends Model
         'color',
         'gender',
         'report_type',
+        'barangay',
         'location_found',
         'date_found',
         'description',
