@@ -71,9 +71,9 @@
                                                 }
                                             } elseif ($notif['table_source'] == 'found_form') {
                                                 $ticketno = 'F' . (new DateTime($notif['created_at']))->format('ym') . '-' . str_pad($notif['id'], 4, '0', STR_PAD_LEFT);
-                                                if ($notif['status_name'] == 'Found Dog') {
+                                                if ($notif['status_name'] == 'Lost Dog') {
                                                     $statusP = 'Request Approved';
-                                                } else {
+                                                }else {
                                                     $statusP = $notif['status_name'];
                                                 }
                                             }
@@ -123,13 +123,11 @@
                                                 }
                                             } elseif ($notif['table_source'] == 'found_form') {
                                                 $ticketno =  'F' . (new DateTime($notif['created_at']))->format('ym') . '-' . str_pad($notif['id'], 4, '0', STR_PAD_LEFT);
-                                                if ($notif['status_name'] == 'Found Dog') {
+                                                if ($notif['status_name'] == 'Lost Dog') {
                                                     $statusP = 'Request Approved';
                                                 } else {
                                                     $statusP = $notif['status_name'];
-                                                }            '-' .
-                                                    str_pad($notif['id'], 4, '0', STR_PAD_LEFT);
-
+                                                }           
                                             }
                                         @endphp
                                         <div class="tab-pane @if ($loop->first) active show @endif"
@@ -638,7 +636,7 @@
                         if (element.status_name == 'For Publish') {
                             statusText = 'Please expect a call from the pound.';
                             statusP = 'Request Pending';
-                        } else if (element.status_name == 'Found Dog') {
+                        } else if (element.status_name == 'Lost Dog') {
                             statusText = 'Request Approved';
                             statusP = '';
                         } else {

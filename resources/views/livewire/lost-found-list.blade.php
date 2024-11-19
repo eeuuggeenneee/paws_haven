@@ -3,12 +3,11 @@
         <!-- Start Content-->
         <div class="container-fluid" id="lost_found_list">
             <!-- start page title -->
-            <div class=" d-flex">
-                <div class="page-title-box">
+            <div class="row">
+                <div class="col-xl-6 col-sm-12 page-title-box">
                     <h4 class="page-title text-black mb-0">Lost and Found List</h4>
                 </div>
-                <div class="ms-auto d-flex">
-
+                <div class="col-xl-6 col-sm-12 ms-auto d-flex mb-1">
                     <nav class="d-none">
                         <div class="page-item claimjPaginateBack">
                             <a class="page-item" href="javascript: void(0);" aria-label="Previous">
@@ -31,12 +30,12 @@
                         </ul>
                     </div>
 
-                    <select class="form-select mt-3 me-3" style=" height: 40px" id="sortstatus">
+                    <select class="form-select mt-3 me-3" style="max-width:300px; height: 40px" id="sortstatus">
                         <option selected="">Sort By Status</option>
                         <option value="Lost Dog">Lost Dog</option>
                         <option value="Found Dog">Found Dog</option>
                     </select>
-                    <input type="search" class="mt-3 form-control search" style="width:300px; height: 40px"
+                    <input type="search" class="mt-3 form-control search" style=" height: 40px"
                         placeholder="Search name,breed..." id="top-search">
                 </div>
             </div>

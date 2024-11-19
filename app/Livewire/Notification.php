@@ -67,7 +67,7 @@ class Notification extends Component
             ->whereBetween('animal_list_statuses.created_at', [Carbon::now()->subWeek(), Carbon::now()])
             ->get();
 
-        $foundreq = AnimalListStatus::whereIn('status', [8, 9,3])
+        $foundreq = AnimalListStatus::whereIn('status', [8, 9,3 ,2])
             ->leftJoin('statuses', 'statuses.id', '=', 'animal_list_statuses.status')
             ->leftJoin('animal_lists', function ($join) {
                 $join->on('animal_lists.dog_id_unique', '=', 'animal_list_statuses.animal_id')
@@ -180,7 +180,7 @@ class Notification extends Component
             ->whereBetween('animal_list_statuses.created_at', [Carbon::now()->subWeek(), Carbon::now()])
             ->get();
 
-        $foundreq = AnimalListStatus::whereIn('status', [8, 9, 3])
+        $foundreq = AnimalListStatus::whereIn('status', [8, 9, 3,2])
             ->leftJoin('statuses', 'statuses.id', '=', 'animal_list_statuses.status')
             ->leftJoin('animal_lists', function ($join) {
                 $join->on('animal_lists.dog_id_unique', '=', 'animal_list_statuses.animal_id')
