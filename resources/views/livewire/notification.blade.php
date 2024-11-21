@@ -660,11 +660,13 @@
                         }
                     }
 
-
-
+                    var modalclick = 'data-bs-toggle="modal" data-bs-target="#ticketlist"';
+                    if(user_type == 1){
+                        modalclick = '';
+                    }
                     // Push the formatted notification HTML string to the notif array
                     notif.push(`
-            <a id="show-${formattedDate}-${myid}" wire:key="${element.dog_id_unique}" onclick="moveActive('${formattedDate}-${myid}')" href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#ticketlist" class="dropdown-item p-0 notify-item card unread-noti shadow-none mb-2">
+            <a id="show-${formattedDate}-${myid}" wire:key="${element.dog_id_unique}" onclick="moveActive('${formattedDate}-${myid}')" href="javascript:void(0);" ${modalclick} class="dropdown-item p-0 notify-item card unread-noti shadow-none mb-2">
                 <div class="py-1 px-1">
                     <div class="d-flex align-items-center">
                         <div class="flex-shrink-0">
