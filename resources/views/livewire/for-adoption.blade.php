@@ -23,14 +23,16 @@
                             </a>
                         </div>
                     </nav>
-
-                    <div class="mt-3 me-3">
-                        <ul id="pagination-list" class="pagination pagination-rounded mb-0">
-                        </ul>
+                    <div class="d-flex ms-auto">
+                        <div class="mt-3 me-3">
+                            <ul id="pagination-list" class="pagination pagination-rounded mb-0">
+                            </ul>
+                        </div>
+    
+                        <input type="search" class=" mt-3 form-control search" style="height: 40px"
+                            placeholder="Search name,breed..." id="top-search">
                     </div>
-
-                    <input type="search" class="mt-3 form-control search" style=" height: 40px"
-                        placeholder="Search name,breed..." id="top-search">
+          
                 </div>
             </div>
             <!-- end page title -->
@@ -91,7 +93,7 @@
                                                     </svg> </i>
                                                 <div>
                                                     <h5 class="mt-1 font-14" id="clicked-{{ $d['dog_id_unique'] }}"
-                                                        wire:ignore>
+                                                        >
                                                         {{ $d['clicked'] ?? '0' }}
                                                     </h5>
                                                 </div>
@@ -291,7 +293,7 @@
                 var options = {
                     valueNames: ['dogname', 'color', 'gender', 'breed'],
                     searchClass: 'search',
-                    page: 8,
+                    page: 12,
                     pagination: true,
                     paginationClass: 'pagination', // Adds pagination classes (rounded pagination)
                     nextClass: 'next', // Custom class for the next button
@@ -376,7 +378,8 @@
                 }) => {
                     // Equivalent of 'message.received'
                     queueMicrotask(() => {
-                        if (component.effects.dispatches[0].name == 'activedogModal' || component.effects.dispatches[0].name == 'notif') {
+                        console.log(component);
+                        if (component.effects.dispatches[0].name == 'activedogModal' || component.originalEffects.listeners[0] == "fetchdataAdopt") {
                             areinitializeList();
                         }
                     })

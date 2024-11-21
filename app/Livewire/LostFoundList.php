@@ -35,7 +35,8 @@ class LostFoundList extends Component
             ->leftJoin('statuses', 'statuses.id', '=', 'animal_list_statuses.status')
             ->where('animal_lists.isActive', true)
             ->select('animal_lists.*', 'click_dogs.clicked', 'dog_breeds.name as breed_name','statuses.name as status_name')
-            ->orderBy('click_dogs.clicked', 'desc')
+            ->orderBy('click_dogs.clicked','desc')
+            ->orderBy('animal_lists.dog_name','asc')
             ->get();
 
     }

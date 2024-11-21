@@ -539,7 +539,11 @@
 
                                                                             @if ($cdata['status_name'] == 'Found Dog')
                                                                                 <span class="badge bg-danger">
-                                                                                    Rejected
+                                                                                    Claim Rejected
+                                                                                </span>
+                                                                            @elseif($cdata['status_name'] == 'Lost Dog')
+                                                                                <span class="badge bg-danger">
+                                                                                    Lost Dog Rejected
                                                                                 </span>
                                                                             @elseif ($cdata['status_name'] == 'Lost Dog Found')
                                                                                 <span class="badge bg-info">
@@ -584,7 +588,7 @@
                                                     <div class="page-item cl_jPaginateBack">
                                                         <a class="page-link" href="javascript: void(0);"
                                                             aria-label="Previous">
-                                                            <span aria-hidden="true">&laquo;</span>
+                                                            <span>&laquo;</span>
                                                         </a>
                                                     </div>
                                                     <ul class="pagination pagination-rounded mb-0">
@@ -593,7 +597,7 @@
                                                     <div class="page-item ">
                                                         <a class="page-link cl_jPaginateNext"
                                                             href="javascript: void(0);" aria-label="Next">
-                                                            <span aria-hidden="true">&raquo;</span>
+                                                            <span>&raquo;</span>
                                                         </a>
                                                     </div>
                                                 </nav>
@@ -695,7 +699,7 @@
                                                     <div class="page-item claimjPaginateBack">
                                                         <a class="page-link" href="javascript: void(0);"
                                                             aria-label="Previous">
-                                                            <span aria-hidden="true">&laquo;</span>
+                                                            <span>&laquo;</span>
                                                         </a>
                                                     </div>
                                                     <ul class="pagination pagination-rounded mb-0">
@@ -704,7 +708,7 @@
                                                     <div class="page-item ">
                                                         <a class="page-link claimjPaginateNext"
                                                             href="javascript: void(0);" aria-label="Next">
-                                                            <span aria-hidden="true">&raquo;</span>
+                                                            <span>&raquo;</span>
                                                         </a>
                                                     </div>
                                                 </nav>
@@ -828,7 +832,7 @@
                                                             <div class="page-item jPaginateBack">
                                                                 <a class="page-link" href="javascript: void(0);"
                                                                     aria-label="Previous">
-                                                                    <span aria-hidden="true">&laquo;</span>
+                                                                    <span>&laquo;</span>
                                                                 </a>
                                                             </div>
                                                             <ul class="pagination pagination-rounded mb-0">
@@ -837,7 +841,7 @@
                                                             <div class="page-item ">
                                                                 <a class="page-link jPaginateNext"
                                                                     href="javascript: void(0);" aria-label="Next">
-                                                                    <span aria-hidden="true">&raquo;</span>
+                                                                    <span>&raquo;</span>
                                                                 </a>
                                                             </div>
                                                         </nav>
@@ -855,12 +859,12 @@
         </div> <!-- container -->
     </div>
     <div class="modal fade" id="viewdog" tabindex="-1" style="z-index: 10050 !important;" role="dialog"
-        aria-labelledby="myLargeModalLabel" aria-hidden="true" wire:ignore.self>
+        aria-labelledby="myLargeModalLabel" wire:ignore.self>
         <div class="modal-dialog modal-xl">
             <div class="modal-content">
                 <div class="modal-header bg-primary">
                     <h4 class="modal-title text-white" id="myLargeModalLabel">Adoption Details</h4>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
                     <div class="row">
@@ -1230,8 +1234,7 @@
 
 
     </div>
-    <div id="info-alert-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"
-        wire:ignore.self>
+    <div id="info-alert-modal" class="modal fade" tabindex="-1" role="dialog" wire:ignore.self>
         <div class="modal-dialog modal-sm">
             <div class="modal-content">
                 <div class="modal-body p-4">
@@ -1247,13 +1250,12 @@
         </div><!-- /.modal-dialog -->
     </div>
     <div id="primary-header-modal" class="modal fade" role="dialog" data-bs-focus="false"
-        aria-labelledby="primary-header-modalLabel" aria-hidden="true" wire:ignore.self>
+        aria-labelledby="primary-header-modalLabel" wire:ignore.self>
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header bg-primary">
                     <h4 class="modal-title text-white" id="primary-header-modalLabel">Rounds Details</h4>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
-                        aria-hidden="true"></button>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
                     <div class=" d-block">
@@ -1304,149 +1306,184 @@
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
     </div>
-    <div id="primary-header-modal2" class="modal fade" tabindex="-1" role="dialog"
-        aria-labelledby="primary-header-modalLabel" aria-hidden="true" wire:ignore.self>
+    <div id="primary-header-modal2" class="modal fade" tabindex="-1" role="dialog" wire:ignore.self>
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header bg-primary">
                     <h4 class="modal-title text-white" id="primary-header-modalLabel">Claim Details</h4>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
-                        aria-hidden="true"></button>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
                 </div>
 
                 <div class="modal-body">
                     <div class=" d-block">
                         <div class="row">
-                            <div class="col-xl-6 col-sm-12">
-                                <div class="card">
-                                    <div class="px-2 py-2 d-none" id="dog_claimer" wire:ignore.self>
-                                        <h4 class="header-title mb-3">Claim Information</h4>
-                                        <ul class="list-unstyled mb-0">
-                                            @if (isset($claimdetails))
-                                                <li>
-                                                    <p class="mb-2"><span class="fw-bold me-2">Requestor:</span>
-                                                        {{ $claimdetails['fullname'] }}</p>
-                                                    <p class="mb-2"><span class="fw-bold me-2">Address:</span>
-                                                        {{ $claimdetails['address'] }}</p>
-                                                    <p class="mb-2"><span class="fw-bold me-2">Contact
-                                                            Number:</span> {{ $claimdetails['contact'] }} </p>
-                                                    <p class="mb-2"><span class="fw-bold me-2">Location
-                                                            Found:</span> {{ $claimdetails['last_loc'] }} </p>
+                            <div class="col-xl-12 col-sm-12">
+                                <div class="row">
+                                    <div class="col-xl-6 col-sm-12">
+                                        <div class="card h-100">
+                                            <div class="px-2 py-2 d-none" id="dog_claimer" wire:ignore.self>
+                                                <h4 class="header-title mb-3">Claim Information</h4>
+                                                <ul class="list-unstyled mb-0">
+                                                    @if (isset($claimdetails))
+                                                        <li>
+                                                            <p class="mb-2"><span
+                                                                    class="fw-bold me-2">Requestor:</span>
+                                                                {{ $claimdetails['fullname'] }}</p>
+                                                            <p class="mb-2"><span
+                                                                    class="fw-bold me-2">Address:</span>
+                                                                {{ $claimdetails['address'] }}</p>
+                                                            <p class="mb-2"><span class="fw-bold me-2">Contact
+                                                                    Number:</span> {{ $claimdetails['contact'] }} </p>
+                                                            <p class="mb-2"><span class="fw-bold me-2">Location
+                                                                    Found:</span> {{ $claimdetails['last_loc'] }} </p>
 
-                                                </li>
-                                            @endif
-                                        </ul>
-                                    </div>
-                                    <div class="px-2 py-2  d-none" id="dog_lost" wire:ignore.self>
-                                        <h4 class="header-title mb-3">Reporter Information</h4>
-                                        <ul class="list-unstyled mb-0">
-                                            @if (isset($claimdetails))
-                                                <li>
-                                                    <p class="mb-2"><span class="fw-bold me-2">Requestor:</span>
-                                                        {{ $claimdetails['fullname'] }}</p>
-                                                    <p class="mb-2"><span class="fw-bold me-2">Address:</span>
-                                                        {{ $claimdetails['address'] }}</p>
-
-                                                    <p class="mb-2"><span class="fw-bold me-2">Last Location
-                                                            Seen</span> {{ $claimdetails['last_loc'] }} </p>
-
-                                                    <p class="mb-2"><span class="fw-bold me-2">Contact
-                                                            Number:</span>
-                                                        {{ $claimdetails['contact'] }} </p>
-                                                </li>
-                                            @endif
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="card">
-                                    <div class="px-2 py-2">
-                                        @if (isset($claimdetails))
-                                            <h4>Proof</h4>
-                                            <div class="text-center">
-                                                <img src="" alt="">
-                                                <img src="{{ asset('storage/' . $claimdetails['proof']) }}"
-                                                    class="img-thumbnail" alt="friend"
-                                                    style="min-width: 250px; min-height: 170px; width: 250px; height: 170px; object-fit: cover;">
-
+                                                        </li>
+                                                    @endif
+                                                </ul>
                                             </div>
-                                        @endif
-                                    </div>
-                                </div>
+                                            <div class="px-2 py-2  d-none" id="dog_lost" wire:ignore.self>
+                                                <h4 class="header-title mb-3">Reporter Information</h4>
+                                                <ul class="list-unstyled mb-0">
+                                                    @if (isset($claimdetails))
+                                                        <li>
+                                                            <p class="mb-2"><span
+                                                                    class="fw-bold me-2">Reporter:</span>
+                                                                {{ $claimdetails['fullname'] }}</p>
+                                                            <p class="mb-2"><span
+                                                                    class="fw-bold me-2">Address:</span>
+                                                                {{ $claimdetails['address'] }}</p>
 
-                            </div>
-                            <div class="col-xl-6 col-sm-12">
-                                <div class="card">
-                                    <div class="px-2 py-2">
-                                        <h4>Dog Details</h4>
-                                        @php
-                                            $images = [];
-                                            if (isset($activedog)) {
-                                                $images = json_decode($activedog['animal_images']);
-                                            }
-                                        @endphp
-                                        <div class="d-lg-flex justify-content-center">
-                                            <div id="carouselExampleCaption" class="carousel slide"
-                                                data-bs-ride="carousel">
-                                                <div class="carousel-inner" role="listbox">
-                                                    @foreach ($images as $img)
-                                                        <div class="carousel-item {{ $loop->first ? 'active' : '' }}">
-                                                            <img src="{{ asset('storage/' . $img) }}" alt="..."
-                                                                class="d-block img-fluid"
-                                                                style="min-width: 300px; min-height: 210px; width: 300px; height: 210px; object-fit: cover;">
-                                                            <div class="carousel-caption d-none d-md-block">
-                                                            </div>
+                                                            <p class="mb-2"><span class="fw-bold me-2">Last Location
+                                                                    Seen</span> {{ $claimdetails['last_loc'] }} </p>
+
+                                                            <p class="mb-2"><span class="fw-bold me-2">Contact
+                                                                    Number:</span>
+                                                                {{ $claimdetails['contact'] }} </p>
+                                                        </li>
+                                                    @endif
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xl-6 col-sm-12">
+                                        <div class="card h-100">
+                                            <div class="px-2 py-2">
+                                                @if (isset($claimdetails))
+                                                    <h4>Proof</h4>
+                                                    @if ($claimdetails['proof'])
+                                                        <div class="text-center">
+                                                            <img src="" alt="">
+                                                            <img src="{{ asset('storage/' . $claimdetails['proof']) }}"
+                                                                class="img-thumbnail" alt="friend"
+                                                                style="min-width: 250px; min-height: 170px; width: 250px; height: 170px; object-fit: cover;">
                                                         </div>
-                                                    @endforeach
-                                                </div>
-                                                <a class="carousel-control-prev" href="#carouselExampleCaption"
-                                                    role="button" data-bs-slide="prev">
-                                                    <span class="carousel-control-prev-icon"
-                                                        aria-hidden="true"></span>
-                                                    <span class="visually-hidden">Previous</span>
-                                                </a>
-                                                <a class="carousel-control-next" href="#carouselExampleCaption"
-                                                    role="button" data-bs-slide="next">
-                                                    <span class="carousel-control-next-icon"
-                                                        aria-hidden="true"></span>
-                                                    <span class="visually-hidden">Next</span>
-                                                </a>
+                                                    @endif
+                                                @endif
                                             </div>
-
                                         </div>
                                     </div>
                                 </div>
-                                <div class="card">
-                                    <div class="px-2 py-2">
-                                        <h4 class="header-title mb-3">Dog Information</h4>
-                                        <ul class="list-unstyled mb-0">
-                                            <li>
-                                                <p class="mb-2"><span class="fw-bold me-2">Dog Name:</span>
-                                                    {{ $activedog['dog_name'] ?? 'N/A' }}
-                                                </p>
-                                                <p class="mb-2"><span class="fw-bold me-2">Description:</span>
-                                                    {{ $activedog['description'] ?? 'N/A' }}
-                                                </p>
-                                            </li>
-                                        </ul>
+                            </div>
+                            <div class="col-xl-12 col-sm-12">
+                                <div class="row">
+                                    <div class="col-xl-6 col-sm-12">
+                                        <div class="card  h-100">
+                                            <div class="px-2 py-2">
+                                                <h4>Dog Details</h4>
+                                                @php
+                                                    $images = [];
+                                                    if (isset($activedog)) {
+                                                        $images = json_decode($activedog['animal_images']);
+                                                    }
+                                                @endphp
+                                                <div class="d-lg-flex justify-content-center">
+                                                    <div id="carouselExampleCaption" class="carousel slide"
+                                                        data-bs-ride="carousel">
+                                                        <div class="carousel-inner" role="listbox">
+                                                            @foreach ($images as $img)
+                                                                <div
+                                                                    class="carousel-item {{ $loop->first ? 'active' : '' }}">
+                                                                    <img src="{{ asset('storage/' . $img) }}"
+                                                                        alt="..." class="d-block img-fluid"
+                                                                        style="min-width: 300px; min-height: 210px; width: 300px; height: 210px; object-fit: cover;">
+                                                                    <div class="carousel-caption d-none d-md-block">
+                                                                    </div>
+                                                                </div>
+                                                            @endforeach
+                                                        </div>
+                                                        <a class="carousel-control-prev"
+                                                            href="#carouselExampleCaption" role="button"
+                                                            data-bs-slide="prev">
+                                                            <span class="carousel-control-prev-icon"></span>
+                                                            <span class="visually-hidden">Previous</span>
+                                                        </a>
+                                                        <a class="carousel-control-next"
+                                                            href="#carouselExampleCaption" role="button"
+                                                            data-bs-slide="next">
+                                                            <span class="carousel-control-next-icon"></span>
+                                                            <span class="visually-hidden">Next</span>
+                                                        </a>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-6 col-sm-12">
+                                        <div class="card  h-100">
+                                            <div class="px-2 py-2">
+                                                <h4 class="header-title mb-3">Dog Information</h4>
+                                                <ul class="list-unstyled mb-0">
+                                                    <li>
+                                                        <p class="mb-2"><span class="fw-bold me-2">Dog Name:</span>
+                                                            {{ $activedog['dog_name'] ?? 'N/A' }}
+                                                        </p>
+                                                        <p class="mb-2"><span class="fw-bold me-2">Contact
+                                                                Name:</span>
+                                                            {{ $activedog['contact_name'] ?? 'N/A' }}
+                                                        </p>
+                                                        <p class="mb-2"><span class="fw-bold me-2">Contact
+                                                                Number:</span>
+                                                            {{ $activedog['contact_number'] ?? 'N/A' }}
+                                                        </p>
+                                                        <p class="mb-2"><span
+                                                                class="fw-bold me-2">Description:</span>
+                                                            {{ $activedog['description'] ?? 'N/A' }}
+                                                        </p>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-
                     </div>
-
                 </div>
-                <div class="modal-footer" >
-                    <button type="button" class="btn btn-success" id="approve_claim"  
-                    onclick="approve_claim('{{ isset($activedog['dog_id_unique']) ? $activedog['dog_id_unique'] : '' }}')">Approve</button>
-                
-                <button type="button" class="btn btn-danger" id="reject_claim" wire:ignore
-                    onclick="reject_claim('{{ isset($activedog['dog_id_unique']) ? $activedog['dog_id_unique'] : '' }}')">Reject</button>
-                
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success" id="approve_claim"
+                        onclick="approve_claim('{{ isset($activedog['dog_id_unique']) ? $activedog['dog_id_unique'] : '' }}')">Approve</button>
+
+                    <button type="button" class="btn btn-danger" id="reject_claim" wire:ignore
+                        onclick="reject_claim('{{ isset($activedog['dog_id_unique']) ? $activedog['dog_id_unique'] : '' }}')">Reject</button>
+
                 </div>
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
+    </div>
         <script>
+            function closemodals(){
+                var modals = document.querySelectorAll('.modal');
+                    modals.forEach(function(modal) {
+                        var bsModal = bootstrap.Modal.getInstance(
+                            modal); // Get the modal instance
+                        if (bsModal) {
+                            bsModal.hide(); // Hide the modal
+                        }
+                });
+            }
+
             var htmlHeight = document.documentElement.clientHeight;
             var cardHeight = htmlHeight - 300;
 
@@ -1488,6 +1525,7 @@
                         Livewire.dispatch('delete_claim', {
                             id: id
                         });
+                        closemodals();
                         Swal.fire(
                             'Deleted!',
                             'The round claim has been deleted.',
@@ -1515,6 +1553,7 @@
                         Livewire.dispatch('delete_rounds', {
                             id: id
                         });
+                        closemodals();
                         Swal.fire(
                             'Deleted!',
                             'The round request has been deleted.',
@@ -1542,6 +1581,7 @@
                         Livewire.dispatch('delete_adoption', {
                             id: id
                         });
+                        closemodals();
                         Swal.fire(
                             'Deleted!',
                             'The adoption request has been deleted.',
@@ -1570,6 +1610,7 @@
                         Livewire.dispatch('claim_approved', {
                             id: id
                         });
+                        closemodals();
                         Swal.fire(
                             'Approved!',
                             'The claim has been approved.',
@@ -1597,6 +1638,7 @@
                         Livewire.dispatch('claim_dog_rejected', {
                             id: id
                         });
+                        closemodals();
                         Swal.fire(
                             'Rejected!',
                             'The claim has been rejected.',
@@ -1613,8 +1655,8 @@
             function hidethis(status) {
                 console.log(status);
                 if (status === 'Lost Dog Found') {
-      
-           
+
+
                     document.getElementById('dog_lost').classList.remove('d-none');
                     document.getElementById('dog_lost').classList.add('d-block');
 
@@ -1678,7 +1720,7 @@
                 pageClass: 'page-item', // Class for each page item
                 linkClass: 'page-link' // Class for each link inside the pagination
             };
-
+     
 
             document.addEventListener('DOMContentLoaded', function() {
                 document.addEventListener('livewire:init', function() {
@@ -1801,14 +1843,7 @@
                             areinitializeList();
                         }, 1000);
 
-                        var modals = document.querySelectorAll('.modal');
-                        modals.forEach(function(modal) {
-                            var bsModal = bootstrap.Modal.getInstance(
-                                modal); // Get the modal instance
-                            if (bsModal) {
-                                bsModal.hide(); // Hide the modal
-                            }
-                        });
+                      
                     });
 
                 });
@@ -1876,6 +1911,7 @@
                             Livewire.dispatch('rounds_accepted', {
                                 data: result.value
                             });
+                            closemodals();
                         }
                     });
 
@@ -1895,8 +1931,8 @@
                     }).then((result) => {
                         if (result.isConfirmed) {
                             // Emit Livewire event to handle the rejection logic
-                            Livewire.dispatch('rounds_rejected')
-
+                            Livewire.dispatch('rounds_rejected');
+                            closemodals();
                             Swal.fire(
                                 'Rejected!',
                                 'The rounds have been rejected successfully.',
@@ -1919,7 +1955,8 @@
                         confirmButtonText: 'Yes, approve it!'
                     }).then((result) => {
                         if (result.isConfirmed) {
-                            Livewire.dispatch('adopted')
+                            Livewire.dispatch('adopted');
+                            closemodals();
                             Swal.fire(
                                 'Approved!',
                                 'The adoption has been approved.',
@@ -1947,7 +1984,8 @@
                     }).then((result) => {
                         if (result.isConfirmed) {
                             // Perform the reject action here
-                            Livewire.dispatch('r_adopted')
+                            Livewire.dispatch('r_adopted');
+                            closemodals();
                             Swal.fire(
                                 'Rejected!',
                                 'The adoption has been rejected.',
@@ -1960,31 +1998,7 @@
                         }
                     });
                 });
-                document.getElementById('reject_adoption').addEventListener('click', function() {
-                    Swal.fire({
-                        title: 'Are you sure?',
-                        text: "You are about to reject the adoption!",
-                        icon: 'warning',
-                        showCancelButton: true,
-                        confirmButtonColor: '#dc3545',
-                        cancelButtonColor: '#6c757d',
-                        confirmButtonText: 'Yes, reject it!'
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            // Perform the reject action here
-                            Livewire.dispatch('r_adopted')
-                            Swal.fire(
-                                'Rejected!',
-                                'The adoption has been rejected.',
-                                'success'
-                            ).then((result) => {
-                                if (result.isConfirmed) {
 
-                                }
-                            });
-                        }
-                    });
-                });
 
             });
         </script>

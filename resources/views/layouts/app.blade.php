@@ -214,7 +214,6 @@
                         <a class="nav-link dropdown-toggle arrow-none" data-bs-toggle="dropdown" href="#"
                             role="button" aria-haspopup="false" aria-expanded="false">
                             <i class="ri-notification-3-line font-22 text-white"></i>
-                            <span class="noti-icon-badge"></span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-end dropdown-menu-animated dropdown-lg py-0">
                             <div class="p-2 border-top-0 border-start-0 border-end-0 border-dashed border text-white">
@@ -233,10 +232,13 @@
                             </div>
 
                             <!-- All-->
-                            <a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#ticketlist"
-                                class="dropdown-item text-center text-primary notify-item border-top py-2">
-                                View All
-                            </a>
+                            @if(Auth::user()->type != 1)
+                                    <a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#ticketlist"
+                                    class="dropdown-item text-center text-primary notify-item border-top py-2">
+                                    View All
+                                </a>
+                            @endif
+                         
 
                         </div>
                     </li>

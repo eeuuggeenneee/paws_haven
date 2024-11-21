@@ -134,7 +134,8 @@
                                             id="{{ $ticketno }}" role="tabpanel">
                                             <div class="d-flex mb-2 justify-content-between align-items-center">
                                                 <h4 class="mb-0">Ticket Number : {{ $ticketno }}</h4>
-                                                @if ($statusP = 'Rounds Pending' || $statusP = 'For Publish' || $statusP = 'Pending Claim' || $statusP = 'Pending Adoption')
+
+                                                @if ( $statusP == 'Rounds Pending' || $statusP == 'For Publish' || $statusP == 'Pending Claim' || $statusP == 'Pending Adoption')
                                                     <button type="button"
                                                         class="btn btn-danger mt-1 btn-sm d-flex align-items-center"
                                                         onclick="cancelR('{{ $notif['id'] }}','{{ $notif['table_source'] }}','{{ $ticketno }}')">
@@ -502,6 +503,7 @@
 
 
     <script>
+        var user_type = {{ Auth::user()->type }};
         function cancelR(id, form, ticketN) {
             Swal.fire({
                 title: 'Are you sure?',
@@ -595,7 +597,11 @@
                     var statusText = '';
 
                     if (element.table_source == 'adoption') {
-                        if (element.status_name == 'Pending Adoption') {
+
+                        if (element.status_name == 'Pending Adoption'  && user_type == 1) {
+                            statusText = 'Requested by ' + element.fullname;
+                            statusP = element.status_name;
+                        }else if (element.status_name == 'Pending Adoption') {
                             statusText = 'Please expect a call from the pound.';
                             statusP = element.status_name;
                         } else if (element.status_name == "Adopted") {
@@ -607,9 +613,15 @@
                     }
 
                     if (element.table_source == 'claims') {
-                        if (element.status_name == 'Pending Claim') {
+                        if (element.status_name == 'Pending Claim' && user_type == 1) {
+                            statusText = 'Requested by ' + element.fullname;
+                            statusP = 'Pending Approval';
+                        } else if (element.status_name == 'Pending Claim') {
                             statusText = 'Please expect a call from the pound.';
                             statusP = 'Pending Claim';
+                        } else if (element.status_name == 'Lost Dog Found' && user_type == 1) {
+                            statusText = 'Requested by ' + element.fullname;
+                            statusP = 'Pending Approval';
                         } else if (element.status_name == 'Claimed') {
                             statusText = 'Claim Approved';
                             statusP = '';
@@ -620,10 +632,13 @@
                     }
 
                     if (element.table_source == 'rounds') {
-                        if (element.is_approved == null) {
+                       if (element.is_approved == null && user_type == 1) {
+                            statusText = 'Requested by ' + element.name;
+                            statusP = 'Rounds Pending';
+                        } else if (element.is_approved == null) {
                             statusText = 'Please wait for the announcement';
                             statusP = 'Rounds Pending';
-                        } else if (element.is_approved == 1) {
+                        }  else if (element.is_approved == 1) {
                             statusText = 'Rounds Approved';
                             statusP = '';
                         } else {

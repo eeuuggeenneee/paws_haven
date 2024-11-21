@@ -31,6 +31,8 @@ class ForAdoption extends Component
             })
             ->leftJoin('statuses', 'statuses.id', '=', 'animal_list_statuses.status')
             ->select('animal_lists.*', 'click_dogs.clicked', 'dog_breeds.name as breed_name')
+            ->orderBy('click_dogs.clicked','desc')
+            ->orderBy('animal_lists.dog_name','asc')
             ->where('animal_lists.isActive', true)->get();
     }
 

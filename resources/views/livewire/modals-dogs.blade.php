@@ -19,14 +19,14 @@
         }
     </style>
     <div id="info-header-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="info-header-modalLabel"
-        aria-hidden="true" wire:ignore.self>
+         wire:ignore.self>
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <form class="needs-validation" novalidate id="formadddog">
                     <div class="modal-header bg-info">
                         <h4 class="modal-title text-white" id="info-header-modalLabel">Add Dogs</h4>
                         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
-                            aria-hidden="true"></button>
+                            ></button>
                     </div>
                     <div class="modal-body">
                         <div class="mb-3">
@@ -86,7 +86,7 @@
         </div><!-- /.modal-dialog -->
     </div>
     <div id="lostandfounddog" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="info-header-modalLabel"
-        aria-hidden="true" wire:ignore.self>
+         wire:ignore.self>
         <div class="modal-dialog modal-dialog-centered modal-full-width">
             <div class="modal-content">
                 <div class="modal-header">
@@ -99,12 +99,12 @@
     </div>
     <!-- /.modal -->
     <div class="modal fade" id="viewdog" tabindex="-1" style="z-index: 10050 !important;" role="dialog"
-        aria-labelledby="myLargeModalLabel" aria-hidden="true" wire:ignore.self>
+        aria-labelledby="myLargeModalLabel"  wire:ignore.self>
         <div class="modal-dialog modal-xl">
             <div class="modal-content">
                 <div class="modal-header bg-primary">
                     <h4 class="modal-title text-white" id="myLargeModalLabel">View Dog Details</h4>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" ></button>
                 </div>
                 <div class="modal-body">
 
@@ -422,12 +422,12 @@
         </div><!-- /.modal-dialog -->
     </div>
     <div class="modal fade" id="lostdog" tabindex="-1" style="z-index: 10050 !important;" role="dialog"
-        aria-labelledby="myLargeModalLabel" aria-hidden="true" wire:ignore.self>
+        aria-labelledby="myLargeModalLabel"  wire:ignore.self>
         <div class="modal-dialog modal-xl">
             <div class="modal-content">
                 <div class="modal-header bg-primary">
                     <h4 class="modal-title text-white" id="myLargeModalLabel">View Dog Details</h4>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" ></button>
                 </div>
                 <div class="modal-body">
 
@@ -911,12 +911,12 @@
         </div><!-- /.modal-dialog -->
     </div>
     <div class="modal fade" id="adoptdog" tabindex="100" style="z-index: 10051 !important;" role="dialog"
-        aria-labelledby="myLargeModalLabel" aria-hidden="true" wire:ignore.self>
+        aria-labelledby="myLargeModalLabel"  wire:ignore.self>
         <div class="modal-dialog modal-lg modal-dialog-centered">
             <div class="modal-content ">
                 <div class="modal-header bg-info">
                     <h4 class="modal-title text-white" id="myLargeModalLabel">Adoption Form</h4>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" ></button>
                 </div>
                 <div class="modal-body">
 
@@ -926,13 +926,13 @@
     </div>
 
     <div id="request_rounds" class="modal fade" tabindex="-1" role="dialog"
-        aria-labelledby="primary-header-modalLabel" aria-hidden="true" wire:ignore.self>
+        aria-labelledby="primary-header-modalLabel"  wire:ignore.self>
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header bg-primary">
                     <h4 class="modal-title text-white" id="primary-header-modalLabel">Request Rounds</h4>
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
-                        aria-hidden="true"></button>
+                        ></button>
                 </div>
                 <div class="modal-body">
                     <div class="mb-3">
@@ -1106,12 +1106,12 @@
     </div><!-- /.modal -->
 
     <div id="addmorebreed" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="standard-modalLabel"
-        aria-hidden="true">
+        >
         <div class="modal-dialog" wire:ignore.self>
             <div class="modal-content">
                 <div class="modal-header">
                     <h4 class="modal-title" id="standard-modalLabel">Add Dog Breed</h4>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" ></button>
                 </div>
                 <div class="modal-body">
                     <div class="mb-3">
@@ -1131,13 +1131,13 @@
     </div>
 
     <div id="create_aa" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="fullWidthModalLabel"
-        aria-hidden="true" wire:ignore.self>
+         wire:ignore.self>
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
                     <h4 class="modal-title" id="fullWidthModalLabel">Create Annoucements</h4>
                     <button type="button" class="btn-close" data-bs-dismiss="modal"
-                        aria-hidden="true"></button>
+                        ></button>
                 </div>
                 <form id="add_annoucment">
                     <div class="modal-body">
@@ -1166,13 +1166,13 @@
     </div>
 
     <div id="update_aa" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="fullWidthModalLabel"
-        aria-hidden="true" wire:ignore.self>
+         wire:ignore.self>
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
                     <h4 class="modal-title" id="fullWidthModalLabel">Create Annoucements</h4>
                     <button type="button" class="btn-close" data-bs-dismiss="modal"
-                        aria-hidden="true"></button>
+                        ></button>
                 </div>
                 <form id="add_annoucment2">
                     <div class="modal-body">

@@ -241,7 +241,7 @@
 
                                     </h4>
 
-                                    <div class="row" wire:ignore>
+                                    <div class="row" >
                                         <div class="" style="width: 15%">
                                             <div class="d-flex">
                                                 <i class="font-18 text-success me-1">
@@ -278,7 +278,7 @@
                                                     </svg> </i>
                                                 <div>
                                                     <h5 class="mt-1 font-14 " id="view-{{ $d['dog_id_unique'] }}"
-                                                        wire:ignore>
+                                                        >
                                                         {{ $d['clicked'] ?? '0' }}
                                                     </h5>
                                                 </div>
@@ -486,7 +486,7 @@
                 var options = {
                     valueNames: ['dogname', 'color', 'gender', 'breed', 'status'],
                     searchClass: 'search',
-                    page: 8,
+                    page: 12,
                     pagination: true,
                     paginationClass: 'pagination', // Adds pagination classes (rounded pagination)
                     nextClass: 'next', // Custom class for the next button
@@ -608,9 +608,11 @@
                 }
             });
             Livewire.on('click_dogs', event => {
+                setTimeout(() => {
                 let dogid = document.getElementById('view-' + event[0]);
                 dogid.textContent = event[1];
-                console.log(event);
+                console.log(event);   
+                }, 1500);
             });
         });
     </script>
