@@ -231,7 +231,7 @@
             defaultHeaders: !0,
             clickable: !0,
             ignoreHiddenFiles: !0,
-            acceptedFiles: null,
+            acceptedFiles: ".jpeg,.jpg,.png,.gif",
             acceptedMimeTypes: null,
             autoProcessQueue: !0,
             autoQueue: !0,
@@ -1674,39 +1674,44 @@
                         {
                             key: "accept",
                             value: function (e, t) {
-                                this.options.maxFilesize &&
-                                e.size > 1048576 * this.options.maxFilesize
-                                    ? t(
-                                          this.options.dictFileTooBig
-                                              .replace(
-                                                  "{{filesize}}",
-                                                  Math.round(
-                                                      e.size / 1024 / 10.24
-                                                  ) / 100
-                                              )
-                                              .replace(
-                                                  "{{maxFilesize}}",
-                                                  this.options.maxFilesize
-                                              )
-                                      )
-                                    : o.isValidFile(
-                                          e,
-                                          this.options.acceptedFiles
-                                      )
-                                    ? null != this.options.maxFiles &&
-                                      this.getAcceptedFiles().length >=
-                                          this.options.maxFiles
-                                        ? (t(
-                                              this.options.dictMaxFilesExceeded.replace(
-                                                  "{{maxFiles}}",
-                                                  this.options.maxFiles
-                                              )
-                                          ),
-                                          this.emit("maxfilesexceeded", e))
-                                        : this.options.accept.call(this, e, t)
-                                    : t(this.options.dictInvalidFileType);
-                            },
-                        },
+                                // Check for max file size
+                                if (this.options.maxFilesize && e.size > 1048576 * this.options.maxFilesize) {
+                                    t(
+                                        this.options.dictFileTooBig
+                                            .replace("{{filesize}}", Math.round(e.size / 1024 / 10.24) / 100)
+                                            .replace("{{maxFilesize}}", this.options.maxFilesize)
+                                    );
+                                }
+                                // Check if the file type is valid
+                                else if (o.isValidFile(e, this.options.acceptedFiles)) {
+                                    // Check if the file limit is exceeded
+                                    if (this.options.maxFiles && this.getAcceptedFiles().length >= this.options.maxFiles) {
+                                        t(this.options.dictMaxFilesExceeded.replace("{{maxFiles}}", this.options.maxFiles));
+                                        this.emit("maxfilesexceeded", e);
+                                    } else {
+                                        // Call the original accept function
+                                        this.options.accept.call(this, e, t);
+                                    }
+                                } else {
+                                    this.cancelUpload(e);
+                                    this.emit("removedfile", e);
+                                    const Toast = Swal.mixin({
+                                        toast: true,
+                                        position: 'top-end', // Position of the toast
+                                        showConfirmButton: false,
+                                        timer: 3000, // Duration before the toast disappears (in milliseconds)
+                                        timerProgressBar: true,
+                                    });
+                                    Toast.fire({
+                                        icon: 'warning',
+                                        title: "Invalid file type. Only the following file types are allowed: " + this.options.acceptedFiles
+                                    });
+                                    t(this.options.dictInvalidFileType);
+                                    return this.emit("reset");
+                                }
+                            }
+                        }
+                        ,
                         {
                             key: "addFile",
                             value: function (e) {

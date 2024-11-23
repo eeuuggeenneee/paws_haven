@@ -154,7 +154,7 @@
         </ul> <!-- end nav-->
         <div class="tab-content">
             <div class="tab-pane active show" id="collapse-horizontal-preview" role="tabpanel" wire:ignore.self>
-                <div class="card" style="background-color: #f2f2f2">
+                <div class="card" style="background-color: #f2f2f2" id="cardlost">
                     <div class="px-2">
                         <div class="table-responsive-xl" id="lost_list" wire:ignore.self>
                             <div class="d-flex align-items-center w-100">
@@ -250,7 +250,7 @@
             </div>
 
             <div class="tab-pane " id="collapse-horizontal-code" role="tabpanel" wire:ignore.self>
-                <div class="card" style="background-color: #f2f2f2">
+                <div class="card" style="background-color: #f2f2f2" id="cardrequest">
                     <div class="px-2">
                         <div class="table-responsive-xl" id="lost_list_dog2" wire:ignore.self>
                             <div class="d-flex align-items-center w-100">
@@ -346,6 +346,23 @@
     <script>
         var dogList = [];
         var dogList2 = [];
+
+        var htmlHeight = document.documentElement.clientHeight;
+        var cardHeight = htmlHeight - 300;
+
+        document.getElementById('cardlost').style.minHeight = cardHeight + 'px';
+        document.getElementById('cardlost').style.maxHeight = cardHeight + 'px';
+
+        document.getElementById('lost_list').style.minHeight = (cardHeight - 50) + 'px';
+        document.getElementById('lost_list').style.maxHeight = (cardHeight - 50) + 'px';
+        document.getElementById('lost_list').style.overflow = 'hidden';
+
+        document.getElementById('cardrequest').style.minHeight = cardHeight + 'px';
+        document.getElementById('cardrequest').style.maxHeight = cardHeight + 'px';
+
+        document.getElementById('lost_list_dog2').style.minHeight = (cardHeight - 50) + 'px';
+        document.getElementById('lost_list_dog2').style.maxHeight = (cardHeight - 50) + 'px';
+        document.getElementById('lost_list_dog2').style.overflow = 'hidden';
 
         function confirmDelete(dogid) {
             Swal.fire({

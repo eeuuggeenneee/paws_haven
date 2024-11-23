@@ -142,7 +142,7 @@
                                     data-upload-preview-template="#uploadPreviewTemplate">
                                     @csrf
                                     <div class="fallback">
-                                        <input type="file" class="d-none" wire:model="images" multiple>
+                                        <input type="file" class="d-none" wire:model="images" multiple accept="image/*">
                                     </div>
 
                                     <div class="dz-message needsclick">
@@ -220,6 +220,7 @@
     </div>
     <!-- end row-->
     <script>
+
         function clickDogbreed() {
             $('#addmorebreed').modal('show');
         }
@@ -259,6 +260,15 @@
                     }
                 }
             });
+
+            const filePreviewsContainer = document.getElementById('file-previews');
+            if (filePreviewsContainer.children.length > 0) {
+                console.log('There is at least one file preview.');
+            } else {
+                isValid = false; 
+                console.log('No files uploaded.');
+            }
+
 
             if (!isValid) {
                 const Toast = Swal.mixin({
@@ -309,6 +319,7 @@
         }
 
         document.addEventListener('livewire:init', function() {
+
             Livewire.on('newdogbreed', event => {
                 let newbreed = event[0];
                 console.log(event[0])
