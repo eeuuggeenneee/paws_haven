@@ -132,11 +132,11 @@
         </div>
         <!-- end page title -->
 
-        <div class="row">
+        <div class="row" >
             <div class="col-12">
-                <div class="card" id="cardhe">
+                <div class="card" style="background-color: #f2f2f2" id="cardhe" wire:ignore.self>
                     <div class="card-body">
-                        <div class="table-responsive-xl" id="animals-datatable">
+                        <div class="table-responsive-xl" id="animals-datatable" wire:ignore.self>
                             <div class="d-flex align-items-center ">
                                 <div class="search-container ms-auto" onclick="focusSearchInput()">
                                     <input type="text" class="search form-control " id="searchtb"
@@ -227,6 +227,20 @@
         @livewire('modals-dogs')
 
         <script>
+            var htmlHeight = document.documentElement.clientHeight;
+            var cardHeight = htmlHeight - 300;
+    
+            document.getElementById('cardhe').style.minHeight = cardHeight + 'px';
+            document.getElementById('cardhe').style.maxHeight = cardHeight + 'px';
+            document.getElementById('cardhe').style.overflow = 'hidden';
+
+
+
+            document.getElementById('animals-datatable').style.minHeight = (cardHeight - 50) + 'px';
+            document.getElementById('animals-datatable').style.maxHeight = (cardHeight - 50) + 'px';
+            document.getElementById('animals-datatable').style.overflow = 'hidden';
+
+            
             function focusSearchInput() {
                 document.getElementById('searchtb').focus();
                 console.log('hehe');
