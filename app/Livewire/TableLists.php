@@ -62,7 +62,7 @@ class TableLists extends Component
 
         // dd($this->reqrounds);
 
-        $this->claimlist = AnimalListStatus::whereIn('status', [6, 7, 10, 11])
+        $this->claimlist = AnimalListStatus::whereIn('status', [6, 7, 10, 11,2,3])
             ->leftJoin('dog_claims', 'dog_claims.dog_id_unique', '=', 'animal_list_statuses.animal_id')
             ->leftJoin('statuses', 'statuses.id', '=', 'animal_list_statuses.status')
             ->leftJoin('animal_lists', function ($join) {
@@ -151,14 +151,24 @@ class TableLists extends Component
     }
     public function claim_dog_rejected()
     {
-
+        $finddog = AnimalListStatus::where('animal_id', $this->dog_unique)->first();
+      
         AnimalListStatus::where('animal_id', $this->dog_unique)->update(['isActive' => 0]);
-
-        AnimalListStatus::create([
-            'animal_id' => $this->dog_unique,
-            'status' => 10,
-            'isActive' => 1,
-        ]);
+        
+        if($finddog->status == 8){
+            AnimalListStatus::create([
+                'animal_id' => $this->dog_unique,
+                'status' => 2,
+                'isActive' => 1,
+            ]);
+        }else{
+            AnimalListStatus::create([
+                'animal_id' => $this->dog_unique,
+                'status' => 3,
+                'isActive' => 1,
+            ]);
+        }
+    
 
         $this->dispatch('reinit_table');
     }

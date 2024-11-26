@@ -27,14 +27,31 @@ class Notification extends Component
     {
 
         if ($source == 'claims') {
+            $finddog = DogClaim::where('id', $id)->where('isActive',1)->first();
+            $find_old_status = AnimalListStatus::where('animal_id',$finddog->dog_id_unique)->first();
+            AnimalListStatus::where('animal_id',$finddog->dog_id_unique)->update(['isActive' => 0]);
+            AnimalListStatus::create([
+                'animal_id' => $finddog->dog_id_unique,
+                'status' => $find_old_status->status,
+                'isActive' => 1,
+            ]);
             DogClaim::where('id', $id)->update(['isActive' => 0]);
         } else if ($source == 'adoption') {
+            $finddog = AdoptionForm::where('id', $id)->where('is_active',1)->first();
+            $find_old_status = AnimalListStatus::where('animal_id',$finddog->dog_id_unique)->first();
+            AnimalListStatus::where('animal_id',$finddog->dog_id_unique)->update(['isActive' => 0]);
+            AnimalListStatus::create([
+                'animal_id' => $finddog->dog_id_unique,
+                'status' => $find_old_status->status,
+                'isActive' => 1,
+            ]);
             AdoptionForm::where('id', $id)->update(['is_active' => 0]);
         } else if ($source == 'rounds') {
             Rounds::where('id', $id)->where('is_active', 1)->update(['is_active' => 0]);
         } else if ($source == 'found_form') {
             AnimalList::where('id', $id)->update(['isActive' => 0]);
         }
+
         $this->fetchdatanotif();
     }
     public function mount()

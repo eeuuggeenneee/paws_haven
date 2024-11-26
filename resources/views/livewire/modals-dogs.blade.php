@@ -9,6 +9,7 @@
         }
 
         @media (min-width: 1200px) {
+
             /* For large screens (XL and above) */
             .responsive-img {
                 min-width: 420px;
@@ -18,15 +19,14 @@
             }
         }
     </style>
-    <div id="info-header-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="info-header-modalLabel"
-         wire:ignore.self>
+    <div id="info-header-modal" class="modal fade" tabindex="-1" role="dialog" 
+        wire:ignore.self>
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <form class="needs-validation" novalidate id="formadddog">
                     <div class="modal-header" style="background-color: #0396a6;">
                         <h4 class="modal-title text-white" id="info-header-modalLabel">Add Dogs</h4>
-                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
-                            ></button>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
                     </div>
                     <div class="modal-body">
                         <div class="mb-3">
@@ -71,41 +71,36 @@
                         </div>
                         <div class="mb-3">
                             <label for="dogImages" class="form-label">Dog Images</label>
-                            <input 
-                            class="form-control" 
-                            type="file" 
-                            id="dogImages" 
-                            wire:model="dogImages" 
-                            multiple 
-                            accept="image/*"
-                            onchange="validateFiles(event)"
-                            @if (!$updatedog) required @endif>
+                            <input class="form-control" type="file" id="dogImages" wire:model="dogImages" multiple
+                                accept="image/*" onchange="validateFiles(event)"
+                                @if (!$updatedog) required @endif>
                         </div>
 
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn text-white" onclick="confimSaveAdd()" style="background-color: #0396a6;">Save changes</button>
+                        <button type="button" class="btn text-white" onclick="confimSaveAdd()"
+                            style="background-color: #0396a6;">Save changes</button>
 
                     </div>
                 </form>
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
     </div>
-    <div id="lostandfounddog" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="info-header-modalLabel"
-         wire:ignore.self>
+    <div id="lostandfounddog" class="modal fade" tabindex="-1" role="dialog" 
+        wire:ignore.self>
         <div class="modal-dialog modal-dialog-centered modal-full-width">
             <div class="modal-content">
                 <div class="modal-header">
                     <h4 class="modal-title" id="fullWidthModalLabel">
-                        @if(Auth::user()->type != 1)
+                        @if (Auth::user()->type != 1)
                             Report Lost Dog
                         @else
                             Report Found Dog
                         @endif
-                   
-                        </h4>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+
+                    </h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" ></button>
                 </div>
                 @livewire('add-lost-dog')
             </div><!-- /.modal-content -->
@@ -113,12 +108,12 @@
     </div>
     <!-- /.modal -->
     <div class="modal fade" id="viewdog" tabindex="-1" style="z-index: 10050 !important;" role="dialog"
-        aria-labelledby="myLargeModalLabel"  wire:ignore.self>
+         wire:ignore.self>
         <div class="modal-dialog modal-xl">
             <div class="modal-content">
                 <div class="modal-header bg-primary">
                     <h4 class="modal-title text-white" id="myLargeModalLabel">View Dog Details</h4>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" ></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
 
@@ -140,11 +135,12 @@
                                                     data-bs-ride="carousel">
                                                     <div class="carousel-inner" role="listbox">
                                                         @foreach ($images as $img)
-                                                        <div class="carousel-item {{ $loop->first ? 'active' : '' }}">
-                                                            <img class="d-block img-fluid img-thumbnail responsive-img"
-                                                                src="{{ asset('storage/' . $img) }}"
-                                                                alt="Slide {{ $loop->iteration }}">
-                                                        </div>
+                                                            <div
+                                                                class="carousel-item {{ $loop->first ? 'active' : '' }}">
+                                                                <img class="d-block img-fluid img-thumbnail responsive-img"
+                                                                    src="{{ asset('storage/' . $img) }}"
+                                                                    alt="Slide {{ $loop->iteration }}">
+                                                            </div>
                                                         @endforeach
                                                     </div>
                                                     <div class="text-center mt-3">
@@ -436,12 +432,12 @@
         </div><!-- /.modal-dialog -->
     </div>
     <div class="modal fade" id="lostdog" tabindex="-1" style="z-index: 10050 !important;" role="dialog"
-        aria-labelledby="myLargeModalLabel"  wire:ignore.self>
+        wire:ignore.self>
         <div class="modal-dialog modal-xl">
             <div class="modal-content">
                 <div class="modal-header bg-primary">
                     <h4 class="modal-title text-white" id="myLargeModalLabel">View Dog Details</h4>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" ></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
 
@@ -491,14 +487,223 @@
                                         <div class="col-lg-7">
                                             <form class="ps-lg-4">
                                                 <!-- Product title -->
-                                                <h3 class="mt-0">{{ $activedog['dog_name'] ?? 'N/A' }} 
-                                                    <a
-                                                        href="javascript: void(0);" class="text-muted">
-                                                        @if(isset($activedog))
-                                                            @if($activedog['status_name'] == 'Lost Dog')
-                                                                <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" width="24" height="24" x="0" y="0" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512" xml:space="preserve" class=""><g><path d="M512 256c0 69.141-27.408 131.897-71.962 177.946C393.488 482.074 328.244 512 256 512s-137.498-29.926-184.048-78.064C27.408 387.887 0 325.13 0 256S27.408 124.113 71.952 78.064C118.502 29.926 183.756 0 256 0c36.456 0 71.126 7.617 102.505 21.347l.01.01C448.867 60.886 512 151.071 512 256z" style="" fill="#005572" data-original="#60c5e8" class="" opacity="0"></path><path d="M440.043 102.881v331.065C393.493 482.074 328.249 512 256.005 512s-137.498-29.926-184.048-78.064V0h265.216l21.337 21.347 81.533 81.534z" style="" fill="#ea5a52" data-original="#ea5a52" class=""></path><path d="M119.118 87.803h273.763v273.763H119.118z" style="" fill="#ffffff" data-original="#ffffff" class="" opacity="1"></path><path d="m317.143 178.775-4.104-70.989c-.271-4.679-6.195-6.523-9.074-2.825l-34.036 43.717" style="" fill="#a03510" data-original="#a03510" class=""></path><path d="M327.747 362.129h-164.77c-.251-.178-.491-.376-.742-.564l12.309-212.888h126.589c8.004 0 14.629 6.248 15.088 14.242l.919 15.851 10.607 183.359z" style="" fill="#ba4c20" data-original="#ba4c20"></path><path d="M209.517 362.129h-46.54c-.251-.178-.491-.376-.742-.564l12.309-212.888h30.71l4.263 213.452z" style="" fill="#a03510" data-original="#a03510" class=""></path><ellipse cx="299.426" cy="196.305" rx="11.546" ry="17.975" style="" fill="#3c363f" data-original="#3c363f"></ellipse><ellipse cx="303.512" cy="194.79" rx="3.769" ry="9.172" style="" fill="#5c5560" data-original="#5c5560" class=""></ellipse><path d="m220.017 148.68-20.512 13.072-6.529 4.161-5.006 3.196c-6.332 4.003-14.565-.837-14.127-8.33l3.061-52.996c.272-4.674 6.196-6.521 9.076-2.826l34.037 43.723z" style="" fill="#ba4c20" data-original="#ba4c20"></path><ellipse cx="251.361" cy="196.305" rx="11.546" ry="17.975" style="" fill="#3c363f" data-original="#3c363f"></ellipse><ellipse cx="255.446" cy="194.79" rx="3.769" ry="9.172" style="" fill="#5c5560" data-original="#5c5560" class=""></ellipse><path d="M240.453 218.536h115.331v69.128a25.66 25.66 0 0 1-15.406 23.522l-42.752 18.636c-16.02 6.983-34.554-1.516-39.714-18.213l-25.429-82.268c-1.66-5.366 2.353-10.805 7.97-10.805z" style="" fill="#d8d8d8" data-original="#d8d8d8" class=""></path><path d="M338.01 239.739v53.018a29.709 29.709 0 0 1-17.821 27.229c-.007 0-.007.007-.015.007l-22.548 9.83c-16.019 6.981-34.557-1.515-39.713-18.213l-25.428-82.268c-1.658-5.368 2.352-10.811 7.968-10.811h92.844l4.713 21.208z" style="" fill="#eaeaea" data-original="#eaeaea" class=""></path><path d="M352.015 218.536H317.84c-6.522 0-11.811 5.287-11.811 11.81 0 6.522 5.287 11.81 11.811 11.81h34.174c6.522 0 11.81-5.287 11.81-11.81 0-6.523-5.287-11.81-11.809-11.81z" style="" fill="#3c363f" data-original="#3c363f"></path><path d="M354.149 222.305h-17.087a5.905 5.905 0 0 0 0 11.81h17.087a5.905 5.905 0 1 0 0-11.81z" style="" fill="#5c5560" data-original="#5c5560" class=""></path><circle cx="272.781" cy="275.425" r="9.047" style="" fill="#d8d8d8" data-original="#d8d8d8" class=""></circle><circle cx="305.455" cy="275.425" r="9.047" style="" fill="#d8d8d8" data-original="#d8d8d8" class=""></circle><circle cx="290.377" cy="295.027" r="9.047" style="" fill="#d8d8d8" data-original="#d8d8d8" class=""></circle><path d="m199.507 161.751-6.533 4.164-5.003 3.195a7.488 7.488 0 0 1-.537.313c-.029.018-.06.029-.089.047-6.231 3.325-13.927-1.441-13.502-8.695l3.059-52.992c.272-4.678 6.196-6.52 9.078-2.83 2.628 6.408 6.462 16.455 10.071 26.07 1.016 2.705 2.008 5.369 2.959 7.914a5126.72 5126.72 0 0 1 4.288 11.594 9.442 9.442 0 0 1-3.791 11.22z" style="" fill="#f9b7d2" data-original="#f9b7d2" class=""></path><path d="M440.039 102.875H337.163V0z" style="" fill="#d33531" data-original="#d33531" class=""></path><path d="M163.662 444.454c-.796 2.385-3.738 3.499-6.76 3.499-2.941 0-6.044-1.113-6.601-3.499l-5.09-21.473-5.169 21.473c-.556 2.385-3.658 3.499-6.6 3.499-3.023 0-6.045-1.113-6.76-3.499l-15.747-50.023a3.432 3.432 0 0 1-.159-.954c0-2.307 3.659-4.136 6.601-4.136 1.59 0 3.023.557 3.42 2.068l12.565 43.104 6.759-27.675c.478-1.988 2.784-2.863 5.09-2.863 2.228 0 4.534.875 5.01 2.863l6.76 27.675 12.565-43.104c.398-1.511 1.83-2.068 3.42-2.068 2.941 0 6.6 1.829 6.6 4.136 0 .318-.079.716-.158.954l-15.746 50.023zM178.696 443.182c0-.159.079-.478.159-.795l15.348-50.023c.717-2.387 3.658-3.499 6.601-3.499 3.023 0 5.964 1.113 6.681 3.499l15.349 50.023c.079.319.159.557.159.795 0 2.465-3.738 4.294-6.521 4.294-1.75 0-3.102-.557-3.5-2.068l-3.022-10.577h-18.21l-3.022 10.577c-.398 1.511-1.75 2.068-3.5 2.068-2.784 0-6.522-1.75-6.522-4.294zm29.029-16.462-6.919-24.415-6.918 24.415h13.837zM256.717 444.215l-17.099-31.971v31.971c0 2.147-2.625 3.261-5.169 3.261-2.625 0-5.169-1.113-5.169-3.261v-51.614c0-2.227 2.545-3.261 5.169-3.261 3.738 0 5.249.795 7.714 5.488l15.348 29.664v-31.971c0-2.227 2.545-3.181 5.169-3.181 2.545 0 5.169.955 5.169 3.181v51.693c0 2.147-2.625 3.261-5.169 3.261-2.464.001-4.611-.795-5.963-3.26zM311.274 389.34c2.228 0 3.261 2.387 3.261 4.613 0 2.465-1.193 4.693-3.261 4.693h-11.611v45.569c0 2.147-2.625 3.261-5.169 3.261-2.625 0-5.169-1.113-5.169-3.261v-45.569h-11.69c-2.068 0-3.261-2.147-3.261-4.693 0-2.227 1.033-4.613 3.261-4.613h33.639zM331.317 414.312h12.088c2.068 0 3.26 1.988 3.26 4.136 0 1.829-1.033 3.976-3.26 3.976h-12.088v15.985h22.506c2.068 0 3.261 2.147 3.261 4.613 0 2.147-1.033 4.453-3.261 4.453h-28.312c-2.306 0-4.534-1.113-4.534-3.261V392.6c0-2.147 2.228-3.261 4.534-3.261h28.312c2.228 0 3.261 2.307 3.261 4.453 0 2.465-1.193 4.613-3.261 4.613h-22.506v15.907zM382.535 389.34c10.497 0 18.689 4.931 18.689 18.213v21.711c0 13.281-8.192 18.212-18.689 18.212h-14.077c-2.704 0-4.534-1.511-4.534-3.181v-51.773c0-1.67 1.83-3.181 4.534-3.181h14.077v-.001zm-8.271 9.067v40.003h8.271c5.247 0 8.35-2.942 8.35-9.145v-21.711c0-6.204-3.102-9.146-8.35-9.146h-8.271v-.001z" style="" fill="#ffffff" data-original="#ffffff" class="" opacity="1"></path></g></svg>                                                    
+                                                <h3 class="mt-0">{{ $activedog['dog_name'] ?? 'N/A' }}
+                                                    <a href="javascript: void(0);" class="text-muted">
+                                                        @if (isset($activedog))
+                                                            @if ($activedog['status_name'] == 'Lost Dog')
+                                                                <svg xmlns="http://www.w3.org/2000/svg" version="1.1"
+                                                                    xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                                    width="24" height="24" x="0" y="0"
+                                                                    viewBox="0 0 512 512"
+                                                                    style="enable-background:new 0 0 512 512"
+                                                                    xml:space="preserve" class="">
+                                                                    <g>
+                                                                        <path
+                                                                            d="M512 256c0 69.141-27.408 131.897-71.962 177.946C393.488 482.074 328.244 512 256 512s-137.498-29.926-184.048-78.064C27.408 387.887 0 325.13 0 256S27.408 124.113 71.952 78.064C118.502 29.926 183.756 0 256 0c36.456 0 71.126 7.617 102.505 21.347l.01.01C448.867 60.886 512 151.071 512 256z"
+                                                                            style="" fill="#005572"
+                                                                            data-original="#60c5e8" class=""
+                                                                            opacity="0"></path>
+                                                                        <path
+                                                                            d="M440.043 102.881v331.065C393.493 482.074 328.249 512 256.005 512s-137.498-29.926-184.048-78.064V0h265.216l21.337 21.347 81.533 81.534z"
+                                                                            style="" fill="#ea5a52"
+                                                                            data-original="#ea5a52" class="">
+                                                                        </path>
+                                                                        <path
+                                                                            d="M119.118 87.803h273.763v273.763H119.118z"
+                                                                            style="" fill="#ffffff"
+                                                                            data-original="#ffffff" class=""
+                                                                            opacity="1"></path>
+                                                                        <path
+                                                                            d="m317.143 178.775-4.104-70.989c-.271-4.679-6.195-6.523-9.074-2.825l-34.036 43.717"
+                                                                            style="" fill="#a03510"
+                                                                            data-original="#a03510" class="">
+                                                                        </path>
+                                                                        <path
+                                                                            d="M327.747 362.129h-164.77c-.251-.178-.491-.376-.742-.564l12.309-212.888h126.589c8.004 0 14.629 6.248 15.088 14.242l.919 15.851 10.607 183.359z"
+                                                                            style="" fill="#ba4c20"
+                                                                            data-original="#ba4c20"></path>
+                                                                        <path
+                                                                            d="M209.517 362.129h-46.54c-.251-.178-.491-.376-.742-.564l12.309-212.888h30.71l4.263 213.452z"
+                                                                            style="" fill="#a03510"
+                                                                            data-original="#a03510" class="">
+                                                                        </path>
+                                                                        <ellipse cx="299.426" cy="196.305"
+                                                                            rx="11.546" ry="17.975"
+                                                                            style="" fill="#3c363f"
+                                                                            data-original="#3c363f"></ellipse>
+                                                                        <ellipse cx="303.512" cy="194.79"
+                                                                            rx="3.769" ry="9.172"
+                                                                            style="" fill="#5c5560"
+                                                                            data-original="#5c5560" class="">
+                                                                        </ellipse>
+                                                                        <path
+                                                                            d="m220.017 148.68-20.512 13.072-6.529 4.161-5.006 3.196c-6.332 4.003-14.565-.837-14.127-8.33l3.061-52.996c.272-4.674 6.196-6.521 9.076-2.826l34.037 43.723z"
+                                                                            style="" fill="#ba4c20"
+                                                                            data-original="#ba4c20"></path>
+                                                                        <ellipse cx="251.361" cy="196.305"
+                                                                            rx="11.546" ry="17.975"
+                                                                            style="" fill="#3c363f"
+                                                                            data-original="#3c363f"></ellipse>
+                                                                        <ellipse cx="255.446" cy="194.79"
+                                                                            rx="3.769" ry="9.172"
+                                                                            style="" fill="#5c5560"
+                                                                            data-original="#5c5560" class="">
+                                                                        </ellipse>
+                                                                        <path
+                                                                            d="M240.453 218.536h115.331v69.128a25.66 25.66 0 0 1-15.406 23.522l-42.752 18.636c-16.02 6.983-34.554-1.516-39.714-18.213l-25.429-82.268c-1.66-5.366 2.353-10.805 7.97-10.805z"
+                                                                            style="" fill="#d8d8d8"
+                                                                            data-original="#d8d8d8" class="">
+                                                                        </path>
+                                                                        <path
+                                                                            d="M338.01 239.739v53.018a29.709 29.709 0 0 1-17.821 27.229c-.007 0-.007.007-.015.007l-22.548 9.83c-16.019 6.981-34.557-1.515-39.713-18.213l-25.428-82.268c-1.658-5.368 2.352-10.811 7.968-10.811h92.844l4.713 21.208z"
+                                                                            style="" fill="#eaeaea"
+                                                                            data-original="#eaeaea" class="">
+                                                                        </path>
+                                                                        <path
+                                                                            d="M352.015 218.536H317.84c-6.522 0-11.811 5.287-11.811 11.81 0 6.522 5.287 11.81 11.811 11.81h34.174c6.522 0 11.81-5.287 11.81-11.81 0-6.523-5.287-11.81-11.809-11.81z"
+                                                                            style="" fill="#3c363f"
+                                                                            data-original="#3c363f"></path>
+                                                                        <path
+                                                                            d="M354.149 222.305h-17.087a5.905 5.905 0 0 0 0 11.81h17.087a5.905 5.905 0 1 0 0-11.81z"
+                                                                            style="" fill="#5c5560"
+                                                                            data-original="#5c5560" class="">
+                                                                        </path>
+                                                                        <circle cx="272.781" cy="275.425"
+                                                                            r="9.047" style="" fill="#d8d8d8"
+                                                                            data-original="#d8d8d8" class="">
+                                                                        </circle>
+                                                                        <circle cx="305.455" cy="275.425"
+                                                                            r="9.047" style="" fill="#d8d8d8"
+                                                                            data-original="#d8d8d8" class="">
+                                                                        </circle>
+                                                                        <circle cx="290.377" cy="295.027"
+                                                                            r="9.047" style="" fill="#d8d8d8"
+                                                                            data-original="#d8d8d8" class="">
+                                                                        </circle>
+                                                                        <path
+                                                                            d="m199.507 161.751-6.533 4.164-5.003 3.195a7.488 7.488 0 0 1-.537.313c-.029.018-.06.029-.089.047-6.231 3.325-13.927-1.441-13.502-8.695l3.059-52.992c.272-4.678 6.196-6.52 9.078-2.83 2.628 6.408 6.462 16.455 10.071 26.07 1.016 2.705 2.008 5.369 2.959 7.914a5126.72 5126.72 0 0 1 4.288 11.594 9.442 9.442 0 0 1-3.791 11.22z"
+                                                                            style="" fill="#f9b7d2"
+                                                                            data-original="#f9b7d2" class="">
+                                                                        </path>
+                                                                        <path d="M440.039 102.875H337.163V0z"
+                                                                            style="" fill="#d33531"
+                                                                            data-original="#d33531" class="">
+                                                                        </path>
+                                                                        <path
+                                                                            d="M163.662 444.454c-.796 2.385-3.738 3.499-6.76 3.499-2.941 0-6.044-1.113-6.601-3.499l-5.09-21.473-5.169 21.473c-.556 2.385-3.658 3.499-6.6 3.499-3.023 0-6.045-1.113-6.76-3.499l-15.747-50.023a3.432 3.432 0 0 1-.159-.954c0-2.307 3.659-4.136 6.601-4.136 1.59 0 3.023.557 3.42 2.068l12.565 43.104 6.759-27.675c.478-1.988 2.784-2.863 5.09-2.863 2.228 0 4.534.875 5.01 2.863l6.76 27.675 12.565-43.104c.398-1.511 1.83-2.068 3.42-2.068 2.941 0 6.6 1.829 6.6 4.136 0 .318-.079.716-.158.954l-15.746 50.023zM178.696 443.182c0-.159.079-.478.159-.795l15.348-50.023c.717-2.387 3.658-3.499 6.601-3.499 3.023 0 5.964 1.113 6.681 3.499l15.349 50.023c.079.319.159.557.159.795 0 2.465-3.738 4.294-6.521 4.294-1.75 0-3.102-.557-3.5-2.068l-3.022-10.577h-18.21l-3.022 10.577c-.398 1.511-1.75 2.068-3.5 2.068-2.784 0-6.522-1.75-6.522-4.294zm29.029-16.462-6.919-24.415-6.918 24.415h13.837zM256.717 444.215l-17.099-31.971v31.971c0 2.147-2.625 3.261-5.169 3.261-2.625 0-5.169-1.113-5.169-3.261v-51.614c0-2.227 2.545-3.261 5.169-3.261 3.738 0 5.249.795 7.714 5.488l15.348 29.664v-31.971c0-2.227 2.545-3.181 5.169-3.181 2.545 0 5.169.955 5.169 3.181v51.693c0 2.147-2.625 3.261-5.169 3.261-2.464.001-4.611-.795-5.963-3.26zM311.274 389.34c2.228 0 3.261 2.387 3.261 4.613 0 2.465-1.193 4.693-3.261 4.693h-11.611v45.569c0 2.147-2.625 3.261-5.169 3.261-2.625 0-5.169-1.113-5.169-3.261v-45.569h-11.69c-2.068 0-3.261-2.147-3.261-4.693 0-2.227 1.033-4.613 3.261-4.613h33.639zM331.317 414.312h12.088c2.068 0 3.26 1.988 3.26 4.136 0 1.829-1.033 3.976-3.26 3.976h-12.088v15.985h22.506c2.068 0 3.261 2.147 3.261 4.613 0 2.147-1.033 4.453-3.261 4.453h-28.312c-2.306 0-4.534-1.113-4.534-3.261V392.6c0-2.147 2.228-3.261 4.534-3.261h28.312c2.228 0 3.261 2.307 3.261 4.453 0 2.465-1.193 4.613-3.261 4.613h-22.506v15.907zM382.535 389.34c10.497 0 18.689 4.931 18.689 18.213v21.711c0 13.281-8.192 18.212-18.689 18.212h-14.077c-2.704 0-4.534-1.511-4.534-3.181v-51.773c0-1.67 1.83-3.181 4.534-3.181h14.077v-.001zm-8.271 9.067v40.003h8.271c5.247 0 8.35-2.942 8.35-9.145v-21.711c0-6.204-3.102-9.146-8.35-9.146h-8.271v-.001z"
+                                                                            style="" fill="#ffffff"
+                                                                            data-original="#ffffff" class=""
+                                                                            opacity="1"></path>
+                                                                    </g>
+                                                                </svg>
                                                             @else
-                                                                <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" width="24" height="24" x="0" y="0" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512" xml:space="preserve" class=""><g><path d="M512 256c0 69.141-27.408 131.897-71.962 177.946C393.488 482.074 328.244 512 256 512s-137.498-29.926-184.048-78.064C27.408 387.887 0 325.13 0 256S27.408 124.113 71.952 78.064C118.502 29.926 183.756 0 256 0c36.456 0 71.126 7.617 102.505 21.347l.01.01C448.867 60.886 512 151.071 512 256z" style="" fill="#60c5e8" data-original="#60c5e8" class="" opacity="0"></path><path d="M440.043 102.881v331.065C393.493 482.074 328.249 512 256.005 512s-137.498-29.926-184.048-78.064V0h265.216l21.337 21.347 81.533 81.534z" style="" fill="#ea5a52" data-original="#ea5a52" class=""></path><path d="M119.118 87.803h273.763v273.763H119.118z" style="" fill="#ffffff" data-original="#ffffff" class="" opacity="0"></path><path d="m317.143 178.775-4.104-70.989c-.271-4.679-6.195-6.523-9.074-2.825l-34.036 43.717" style="" fill="#a03510" data-original="#a03510" class=""></path><path d="M327.747 362.129h-164.77c-.251-.178-.491-.376-.742-.564l12.309-212.888h126.589c8.004 0 14.629 6.248 15.088 14.242l.919 15.851 10.607 183.359z" style="" fill="#ba4c20" data-original="#ba4c20" class=""></path><path d="M209.517 362.129h-46.54c-.251-.178-.491-.376-.742-.564l12.309-212.888h30.71l4.263 213.452z" style="" fill="#a03510" data-original="#a03510" class=""></path><ellipse cx="299.426" cy="196.305" rx="11.546" ry="17.975" style="" fill="#3c363f" data-original="#3c363f"></ellipse><ellipse cx="303.512" cy="194.79" rx="3.769" ry="9.172" style="" fill="#5c5560" data-original="#5c5560" class=""></ellipse><path d="m220.017 148.68-20.512 13.072-6.529 4.161-5.006 3.196c-6.332 4.003-14.565-.837-14.127-8.33l3.061-52.996c.272-4.674 6.196-6.521 9.076-2.826l34.037 43.723z" style="" fill="#ba4c20" data-original="#ba4c20" class=""></path><ellipse cx="251.361" cy="196.305" rx="11.546" ry="17.975" style="" fill="#3c363f" data-original="#3c363f"></ellipse><ellipse cx="255.446" cy="194.79" rx="3.769" ry="9.172" style="" fill="#5c5560" data-original="#5c5560" class=""></ellipse><path d="M240.453 218.536h115.331v69.128a25.66 25.66 0 0 1-15.406 23.522l-42.752 18.636c-16.02 6.983-34.554-1.516-39.714-18.213l-25.429-82.268c-1.66-5.366 2.353-10.805 7.97-10.805z" style="" fill="#d8d8d8" data-original="#d8d8d8" class=""></path><path d="M338.01 239.739v53.018a29.709 29.709 0 0 1-17.821 27.229c-.007 0-.007.007-.015.007l-22.548 9.83c-16.019 6.981-34.557-1.515-39.713-18.213l-25.428-82.268c-1.658-5.368 2.352-10.811 7.968-10.811h92.844l4.713 21.208z" style="" fill="#eaeaea" data-original="#eaeaea" class=""></path><path d="M352.015 218.536H317.84c-6.522 0-11.811 5.287-11.811 11.81 0 6.522 5.287 11.81 11.811 11.81h34.174c6.522 0 11.81-5.287 11.81-11.81 0-6.523-5.287-11.81-11.809-11.81z" style="" fill="#3c363f" data-original="#3c363f"></path><path d="M354.149 222.305h-17.087a5.905 5.905 0 0 0 0 11.81h17.087a5.905 5.905 0 1 0 0-11.81z" style="" fill="#5c5560" data-original="#5c5560" class=""></path><circle cx="272.781" cy="275.425" r="9.047" style="" fill="#d8d8d8" data-original="#d8d8d8" class=""></circle><circle cx="305.455" cy="275.425" r="9.047" style="" fill="#d8d8d8" data-original="#d8d8d8" class=""></circle><circle cx="290.377" cy="295.027" r="9.047" style="" fill="#d8d8d8" data-original="#d8d8d8" class=""></circle><path d="m199.507 161.751-6.533 4.164-5.003 3.195a7.488 7.488 0 0 1-.537.313c-.029.018-.06.029-.089.047-6.231 3.325-13.927-1.441-13.502-8.695l3.059-52.992c.272-4.678 6.196-6.52 9.078-2.83 2.628 6.408 6.462 16.455 10.071 26.07 1.016 2.705 2.008 5.369 2.959 7.914a5126.72 5126.72 0 0 1 4.288 11.594 9.442 9.442 0 0 1-3.791 11.22z" style="" fill="#f9b7d2" data-original="#f9b7d2" class=""></path><path d="M440.039 102.875H337.163V0z" style="" fill="#d33531" data-original="#d33531" class=""></path><path d="M163.662 444.454c-.796 2.385-3.738 3.499-6.76 3.499-2.941 0-6.044-1.113-6.601-3.499l-5.09-21.473-5.169 21.473c-.556 2.385-3.658 3.499-6.6 3.499-3.023 0-6.045-1.113-6.76-3.499l-15.747-50.023a3.432 3.432 0 0 1-.159-.954c0-2.307 3.659-4.136 6.601-4.136 1.59 0 3.023.557 3.42 2.068l12.565 43.104 6.759-27.675c.478-1.988 2.784-2.863 5.09-2.863 2.228 0 4.534.875 5.01 2.863l6.76 27.675 12.565-43.104c.398-1.511 1.83-2.068 3.42-2.068 2.941 0 6.6 1.829 6.6 4.136 0 .318-.079.716-.158.954l-15.746 50.023zM178.696 443.182c0-.159.079-.478.159-.795l15.348-50.023c.717-2.387 3.658-3.499 6.601-3.499 3.023 0 5.964 1.113 6.681 3.499l15.349 50.023c.079.319.159.557.159.795 0 2.465-3.738 4.294-6.521 4.294-1.75 0-3.102-.557-3.5-2.068l-3.022-10.577h-18.21l-3.022 10.577c-.398 1.511-1.75 2.068-3.5 2.068-2.784 0-6.522-1.75-6.522-4.294zm29.029-16.462-6.919-24.415-6.918 24.415h13.837zM256.717 444.215l-17.099-31.971v31.971c0 2.147-2.625 3.261-5.169 3.261-2.625 0-5.169-1.113-5.169-3.261v-51.614c0-2.227 2.545-3.261 5.169-3.261 3.738 0 5.249.795 7.714 5.488l15.348 29.664v-31.971c0-2.227 2.545-3.181 5.169-3.181 2.545 0 5.169.955 5.169 3.181v51.693c0 2.147-2.625 3.261-5.169 3.261-2.464.001-4.611-.795-5.963-3.26zM311.274 389.34c2.228 0 3.261 2.387 3.261 4.613 0 2.465-1.193 4.693-3.261 4.693h-11.611v45.569c0 2.147-2.625 3.261-5.169 3.261-2.625 0-5.169-1.113-5.169-3.261v-45.569h-11.69c-2.068 0-3.261-2.147-3.261-4.693 0-2.227 1.033-4.613 3.261-4.613h33.639zM331.317 414.312h12.088c2.068 0 3.26 1.988 3.26 4.136 0 1.829-1.033 3.976-3.26 3.976h-12.088v15.985h22.506c2.068 0 3.261 2.147 3.261 4.613 0 2.147-1.033 4.453-3.261 4.453h-28.312c-2.306 0-4.534-1.113-4.534-3.261V392.6c0-2.147 2.228-3.261 4.534-3.261h28.312c2.228 0 3.261 2.307 3.261 4.453 0 2.465-1.193 4.613-3.261 4.613h-22.506v15.907zM382.535 389.34c10.497 0 18.689 4.931 18.689 18.213v21.711c0 13.281-8.192 18.212-18.689 18.212h-14.077c-2.704 0-4.534-1.511-4.534-3.181v-51.773c0-1.67 1.83-3.181 4.534-3.181h14.077v-.001zm-8.271 9.067v40.003h8.271c5.247 0 8.35-2.942 8.35-9.145v-21.711c0-6.204-3.102-9.146-8.35-9.146h-8.271v-.001z" style="" fill="#ffffff" data-original="#ffffff" class="" opacity="0"></path></g></svg>
+                                                                <svg xmlns="http://www.w3.org/2000/svg" version="1.1"
+                                                                    xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                                    width="24" height="24" x="0" y="0"
+                                                                    viewBox="0 0 512 512"
+                                                                    style="enable-background:new 0 0 512 512"
+                                                                    xml:space="preserve" class="">
+                                                                    <g>
+                                                                        <path
+                                                                            d="M512 256c0 69.141-27.408 131.897-71.962 177.946C393.488 482.074 328.244 512 256 512s-137.498-29.926-184.048-78.064C27.408 387.887 0 325.13 0 256S27.408 124.113 71.952 78.064C118.502 29.926 183.756 0 256 0c36.456 0 71.126 7.617 102.505 21.347l.01.01C448.867 60.886 512 151.071 512 256z"
+                                                                            style="" fill="#60c5e8"
+                                                                            data-original="#60c5e8" class=""
+                                                                            opacity="0"></path>
+                                                                        <path
+                                                                            d="M440.043 102.881v331.065C393.493 482.074 328.249 512 256.005 512s-137.498-29.926-184.048-78.064V0h265.216l21.337 21.347 81.533 81.534z"
+                                                                            style="" fill="#ea5a52"
+                                                                            data-original="#ea5a52" class="">
+                                                                        </path>
+                                                                        <path
+                                                                            d="M119.118 87.803h273.763v273.763H119.118z"
+                                                                            style="" fill="#ffffff"
+                                                                            data-original="#ffffff" class=""
+                                                                            opacity="0"></path>
+                                                                        <path
+                                                                            d="m317.143 178.775-4.104-70.989c-.271-4.679-6.195-6.523-9.074-2.825l-34.036 43.717"
+                                                                            style="" fill="#a03510"
+                                                                            data-original="#a03510" class="">
+                                                                        </path>
+                                                                        <path
+                                                                            d="M327.747 362.129h-164.77c-.251-.178-.491-.376-.742-.564l12.309-212.888h126.589c8.004 0 14.629 6.248 15.088 14.242l.919 15.851 10.607 183.359z"
+                                                                            style="" fill="#ba4c20"
+                                                                            data-original="#ba4c20" class="">
+                                                                        </path>
+                                                                        <path
+                                                                            d="M209.517 362.129h-46.54c-.251-.178-.491-.376-.742-.564l12.309-212.888h30.71l4.263 213.452z"
+                                                                            style="" fill="#a03510"
+                                                                            data-original="#a03510" class="">
+                                                                        </path>
+                                                                        <ellipse cx="299.426" cy="196.305"
+                                                                            rx="11.546" ry="17.975"
+                                                                            style="" fill="#3c363f"
+                                                                            data-original="#3c363f"></ellipse>
+                                                                        <ellipse cx="303.512" cy="194.79"
+                                                                            rx="3.769" ry="9.172"
+                                                                            style="" fill="#5c5560"
+                                                                            data-original="#5c5560" class="">
+                                                                        </ellipse>
+                                                                        <path
+                                                                            d="m220.017 148.68-20.512 13.072-6.529 4.161-5.006 3.196c-6.332 4.003-14.565-.837-14.127-8.33l3.061-52.996c.272-4.674 6.196-6.521 9.076-2.826l34.037 43.723z"
+                                                                            style="" fill="#ba4c20"
+                                                                            data-original="#ba4c20" class="">
+                                                                        </path>
+                                                                        <ellipse cx="251.361" cy="196.305"
+                                                                            rx="11.546" ry="17.975"
+                                                                            style="" fill="#3c363f"
+                                                                            data-original="#3c363f"></ellipse>
+                                                                        <ellipse cx="255.446" cy="194.79"
+                                                                            rx="3.769" ry="9.172"
+                                                                            style="" fill="#5c5560"
+                                                                            data-original="#5c5560" class="">
+                                                                        </ellipse>
+                                                                        <path
+                                                                            d="M240.453 218.536h115.331v69.128a25.66 25.66 0 0 1-15.406 23.522l-42.752 18.636c-16.02 6.983-34.554-1.516-39.714-18.213l-25.429-82.268c-1.66-5.366 2.353-10.805 7.97-10.805z"
+                                                                            style="" fill="#d8d8d8"
+                                                                            data-original="#d8d8d8" class="">
+                                                                        </path>
+                                                                        <path
+                                                                            d="M338.01 239.739v53.018a29.709 29.709 0 0 1-17.821 27.229c-.007 0-.007.007-.015.007l-22.548 9.83c-16.019 6.981-34.557-1.515-39.713-18.213l-25.428-82.268c-1.658-5.368 2.352-10.811 7.968-10.811h92.844l4.713 21.208z"
+                                                                            style="" fill="#eaeaea"
+                                                                            data-original="#eaeaea" class="">
+                                                                        </path>
+                                                                        <path
+                                                                            d="M352.015 218.536H317.84c-6.522 0-11.811 5.287-11.811 11.81 0 6.522 5.287 11.81 11.811 11.81h34.174c6.522 0 11.81-5.287 11.81-11.81 0-6.523-5.287-11.81-11.809-11.81z"
+                                                                            style="" fill="#3c363f"
+                                                                            data-original="#3c363f"></path>
+                                                                        <path
+                                                                            d="M354.149 222.305h-17.087a5.905 5.905 0 0 0 0 11.81h17.087a5.905 5.905 0 1 0 0-11.81z"
+                                                                            style="" fill="#5c5560"
+                                                                            data-original="#5c5560" class="">
+                                                                        </path>
+                                                                        <circle cx="272.781" cy="275.425"
+                                                                            r="9.047" style="" fill="#d8d8d8"
+                                                                            data-original="#d8d8d8" class="">
+                                                                        </circle>
+                                                                        <circle cx="305.455" cy="275.425"
+                                                                            r="9.047" style="" fill="#d8d8d8"
+                                                                            data-original="#d8d8d8" class="">
+                                                                        </circle>
+                                                                        <circle cx="290.377" cy="295.027"
+                                                                            r="9.047" style="" fill="#d8d8d8"
+                                                                            data-original="#d8d8d8" class="">
+                                                                        </circle>
+                                                                        <path
+                                                                            d="m199.507 161.751-6.533 4.164-5.003 3.195a7.488 7.488 0 0 1-.537.313c-.029.018-.06.029-.089.047-6.231 3.325-13.927-1.441-13.502-8.695l3.059-52.992c.272-4.678 6.196-6.52 9.078-2.83 2.628 6.408 6.462 16.455 10.071 26.07 1.016 2.705 2.008 5.369 2.959 7.914a5126.72 5126.72 0 0 1 4.288 11.594 9.442 9.442 0 0 1-3.791 11.22z"
+                                                                            style="" fill="#f9b7d2"
+                                                                            data-original="#f9b7d2" class="">
+                                                                        </path>
+                                                                        <path d="M440.039 102.875H337.163V0z"
+                                                                            style="" fill="#d33531"
+                                                                            data-original="#d33531" class="">
+                                                                        </path>
+                                                                        <path
+                                                                            d="M163.662 444.454c-.796 2.385-3.738 3.499-6.76 3.499-2.941 0-6.044-1.113-6.601-3.499l-5.09-21.473-5.169 21.473c-.556 2.385-3.658 3.499-6.6 3.499-3.023 0-6.045-1.113-6.76-3.499l-15.747-50.023a3.432 3.432 0 0 1-.159-.954c0-2.307 3.659-4.136 6.601-4.136 1.59 0 3.023.557 3.42 2.068l12.565 43.104 6.759-27.675c.478-1.988 2.784-2.863 5.09-2.863 2.228 0 4.534.875 5.01 2.863l6.76 27.675 12.565-43.104c.398-1.511 1.83-2.068 3.42-2.068 2.941 0 6.6 1.829 6.6 4.136 0 .318-.079.716-.158.954l-15.746 50.023zM178.696 443.182c0-.159.079-.478.159-.795l15.348-50.023c.717-2.387 3.658-3.499 6.601-3.499 3.023 0 5.964 1.113 6.681 3.499l15.349 50.023c.079.319.159.557.159.795 0 2.465-3.738 4.294-6.521 4.294-1.75 0-3.102-.557-3.5-2.068l-3.022-10.577h-18.21l-3.022 10.577c-.398 1.511-1.75 2.068-3.5 2.068-2.784 0-6.522-1.75-6.522-4.294zm29.029-16.462-6.919-24.415-6.918 24.415h13.837zM256.717 444.215l-17.099-31.971v31.971c0 2.147-2.625 3.261-5.169 3.261-2.625 0-5.169-1.113-5.169-3.261v-51.614c0-2.227 2.545-3.261 5.169-3.261 3.738 0 5.249.795 7.714 5.488l15.348 29.664v-31.971c0-2.227 2.545-3.181 5.169-3.181 2.545 0 5.169.955 5.169 3.181v51.693c0 2.147-2.625 3.261-5.169 3.261-2.464.001-4.611-.795-5.963-3.26zM311.274 389.34c2.228 0 3.261 2.387 3.261 4.613 0 2.465-1.193 4.693-3.261 4.693h-11.611v45.569c0 2.147-2.625 3.261-5.169 3.261-2.625 0-5.169-1.113-5.169-3.261v-45.569h-11.69c-2.068 0-3.261-2.147-3.261-4.693 0-2.227 1.033-4.613 3.261-4.613h33.639zM331.317 414.312h12.088c2.068 0 3.26 1.988 3.26 4.136 0 1.829-1.033 3.976-3.26 3.976h-12.088v15.985h22.506c2.068 0 3.261 2.147 3.261 4.613 0 2.147-1.033 4.453-3.261 4.453h-28.312c-2.306 0-4.534-1.113-4.534-3.261V392.6c0-2.147 2.228-3.261 4.534-3.261h28.312c2.228 0 3.261 2.307 3.261 4.453 0 2.465-1.193 4.613-3.261 4.613h-22.506v15.907zM382.535 389.34c10.497 0 18.689 4.931 18.689 18.213v21.711c0 13.281-8.192 18.212-18.689 18.212h-14.077c-2.704 0-4.534-1.511-4.534-3.181v-51.773c0-1.67 1.83-3.181 4.534-3.181h14.077v-.001zm-8.271 9.067v40.003h8.271c5.247 0 8.35-2.942 8.35-9.145v-21.711c0-6.204-3.102-9.146-8.35-9.146h-8.271v-.001z"
+                                                                            style="" fill="#ffffff"
+                                                                            data-original="#ffffff" class=""
+                                                                            opacity="0"></path>
+                                                                    </g>
+                                                                </svg>
                                                             @endif
                                                         @endif
                                                     </a>
@@ -756,11 +961,26 @@
                                                         <!--</div>-->
                                                     </div>
                                                 </div>
-                                                @if (Auth::user()->type == 0)
-                                                    <button type="button" id="claimtoggle"
-                                                        class="mt-3 btn btn-outline-success rounded-pill w-100"><i
-                                                            class="uil-heart"></i> @if(isset($activedog['status_name']) && $activedog['status_name'] == 'Lost Dog') Lost Dog @else Claim Dog @endif <i
-                                                            class="uil-heart"></i></button>
+                                                @if (isset($activedog))
+                                                    @if (Auth::user()->type == 0)
+                                                        @if (Auth::user()->id != $activedog['user_id'] || $activedog['user_id'] == null)
+                                                            <button type="button" onclick="claimtoggle()"
+                                                                class="mt-3 btn btn-outline-success rounded-pill w-100">
+                                                                <i class="uil-heart"></i>
+                                                                @if (isset($activedog['status_name']) && $activedog['status_name'] == 'Lost Dog')
+                                                                    Lost Dog
+                                                                @else
+                                                                    Claim Dog
+                                                                @endif
+                                                                <i class="uil-heart"></i>
+                                                            </button>
+                                                        @else
+                                                            <button type="button"
+                                                                class="mt-3 btn btn-outline-success rounded-pill w-100">
+                                                                <i class="uil-heart"></i> Thank you for reporting <i
+                                                                    class="uil-heart"></i></button>
+                                                        @endif
+                                                    @endif
                                                 @endif
                                             </form>
                                         </div> <!-- end col -->
@@ -768,7 +988,7 @@
                                     <div class="container mt-3 d-none" id="claimformtoggle" wire:ignore>
                                         <div class="card shadow">
                                             <div class="card-header bg-warning text-white">
-                                                <h5 class="card-title">Claim Form</h5>
+                                                <h5 class="card-title" id="form_title">Claim Form</h5>
                                                 <h6 class="card-subtitle ">Every Information is important</h6>
                                             </div>
                                             <div class="py-3 px-3">
@@ -828,10 +1048,11 @@
                                                         </div>
                                                         <div class="col-6">
                                                             <div class="mb-3">
-                                                                <label class="form-label"
-                                                                    for="validationCustom02" id="proof"> </label>
+                                                                <label class="form-label" for="validationCustom02"
+                                                                    id="proof"> </label>
                                                                 <input type="file" class="form-control"
-                                                                    id="validationCustom02" placeholder="" accept="image/*" wire:model="c_proof">
+                                                                    id="validationCustom02" placeholder=""
+                                                                    accept="image/*" wire:model="c_proof">
                                                                 <div class="valid-feedback">
                                                                     Looks good!
                                                                 </div>
@@ -839,8 +1060,8 @@
                                                         </div>
                                                         <div class="col-6">
                                                             <div class="mb-3">
-                                                                <label class="form-label"
-                                                                    for="validationCustom02" id="lastloc"> </label>
+                                                                <label class="form-label" for="validationCustom02"
+                                                                    id="lastloc"> </label>
                                                                 <input type="text" class="form-control"
                                                                     id="validationCustom02"
                                                                     placeholder="Last Location" wire:model="c_loc"
@@ -924,12 +1145,12 @@
         </div><!-- /.modal-dialog -->
     </div>
     <div class="modal fade" id="adoptdog" tabindex="100" style="z-index: 10051 !important;" role="dialog"
-        aria-labelledby="myLargeModalLabel"  wire:ignore.self>
+         wire:ignore.self>
         <div class="modal-dialog modal-lg modal-dialog-centered">
             <div class="modal-content ">
                 <div class="modal-header bg-info">
                     <h4 class="modal-title text-white" id="myLargeModalLabel">Adoption Form</h4>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" ></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
 
@@ -939,79 +1160,78 @@
     </div>
 
     <div id="request_rounds" class="modal fade" tabindex="-1" role="dialog"
-        aria-labelledby="primary-header-modalLabel"  wire:ignore.self>
+         wire:ignore.self>
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header bg-primary">
                     <h4 class="modal-title text-white" id="primary-header-modalLabel">Request Rounds</h4>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
-                        ></button>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
                 </div>
-          
-                    
-          
+
+
+
                 <div class="modal-body" id="add_requestR">
-                        <div class="mb-3">
-                            <label class="form-label" for="validationCustom01">Requestor</label>
-                            <input type="text" class="form-control" id="validationCustom01" placeholder="First name"
-                                value="{{ Auth::user()->name }}" disabled>
-                            <div class="valid-feedback">
-                                Looks good!
-                            </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="validationCustom01">Requestor</label>
+                        <input type="text" class="form-control" id="validationCustom01" placeholder="First name"
+                            value="{{ Auth::user()->name }}" disabled>
+                        <div class="valid-feedback">
+                            Looks good!
                         </div>
-                        <div class="mb-3">
-                            <label class="form-label" for="fulladdress">Address, where you want rounds to be
-                                conducted</label>
-                            <input type="text" class="form-control" id="fulladdressR"
-                                placeholder="Full address" wire:model="fulladdress" required>
-                            <div class="invalid-feedback">
-                                Please provide a valid address.
-                            </div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="fulladdress">Address, where you want rounds to be
+                            conducted</label>
+                        <input type="text" class="form-control" id="fulladdressR" placeholder="Full address"
+                            wire:model="fulladdress" required>
+                        <div class="invalid-feedback">
+                            Please provide a valid address.
                         </div>
-                        <div class="mb-3">
-                            <label class="form-label" for="validationCustom03">Barangay</label>
-                            <select class="form-select mb-3" wire:model="barangay" id="barangayR" required>
-                                <option selected>Select a Barangay</option>
-                                <option value="Bagbaguin">Bagbaguin</option>
-                                <option value="Bulac">Bulac</option>
-                                <option value="Balasing">Balasing</option>
-                                <option value="Beunavista">Beunavista</option>
-                                <option value="Camangyanan">Camangyanan</option>
-                                <option value="Catmon">Catmon</option>
-                                <option value="Caypombo">Caypombo</option>
-                                <option value="Caysio">Caysio</option>
-                                <option value="Guyong">Guyong</option>
-                                <option value="Lalakhan">Lalakhan</option>
-                                <option value="Mag-asawang sapa">Mag-asawang Sapa</option>
-                                <option value="Mahabang parang">Mahabang Parang</option>
-                                <option value="Manggahan">Manggahan</option>
-                                <option value="Parada">Parada</option>
-                                <option value="Poblacion">Poblacion</option>
-                                <option value="Pulong Buhangin">Pulong Buhangin</option>
-                                <option value="San Gabriel">San Gabriel</option>
-                                <option value="San Jose Patag">San Jose Patag</option>
-                                <option value="San Vicente">San Vicente</option>
-                                <option value="Santa Clara">Santa Clara</option>
-                                <option value="Santa Cruz">Santa Cruz</option>
-                                <option value="Silangan">Silangan</option>
-                                <option value="Tabing Bakod">Tabing Bakod</option>
-                                <option value="Tumana">Tumana</option>
-                            </select>
-                             <div class="invalid-feedback">
-                                Please select a barangay.
-                            </div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="validationCustom03">Barangay</label>
+                        <select class="form-select mb-3" wire:model="barangay" id="barangayR" required>
+                            <option selected>Select a Barangay</option>
+                            <option value="Bagbaguin">Bagbaguin</option>
+                            <option value="Bulac">Bulac</option>
+                            <option value="Balasing">Balasing</option>
+                            <option value="Beunavista">Beunavista</option>
+                            <option value="Camangyanan">Camangyanan</option>
+                            <option value="Catmon">Catmon</option>
+                            <option value="Caypombo">Caypombo</option>
+                            <option value="Caysio">Caysio</option>
+                            <option value="Guyong">Guyong</option>
+                            <option value="Lalakhan">Lalakhan</option>
+                            <option value="Mag-asawang sapa">Mag-asawang Sapa</option>
+                            <option value="Mahabang parang">Mahabang Parang</option>
+                            <option value="Manggahan">Manggahan</option>
+                            <option value="Parada">Parada</option>
+                            <option value="Poblacion">Poblacion</option>
+                            <option value="Pulong Buhangin">Pulong Buhangin</option>
+                            <option value="San Gabriel">San Gabriel</option>
+                            <option value="San Jose Patag">San Jose Patag</option>
+                            <option value="San Vicente">San Vicente</option>
+                            <option value="Santa Clara">Santa Clara</option>
+                            <option value="Santa Cruz">Santa Cruz</option>
+                            <option value="Silangan">Silangan</option>
+                            <option value="Tabing Bakod">Tabing Bakod</option>
+                            <option value="Tumana">Tumana</option>
+                        </select>
+                        <div class="invalid-feedback">
+                            Please select a barangay.
                         </div>
-                        <div class="mb-3">
-                            <label class="form-label" for="contactR">Contact number</label>
-                            <input type="text" type="tel" class="form-control" id="contactR"
-                                placeholder="09123456789" required wire:model="contact" pattern="09[0-9]{9}"
-                                title="Phone number must start with 09 and contain exactly 11 digits." maxlength="11"
-                                oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 11);">
-                            <div class="invalid-feedback">
-                                Please provide a valid phone number.
-                            </div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="contactR">Contact number</label>
+                        <input type="text" type="tel" class="form-control" id="contactR"
+                            placeholder="09123456789" required wire:model="contact" pattern="09[0-9]{9}"
+                            title="Phone number must start with 09 and contain exactly 11 digits." maxlength="11"
+                            oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 11);">
+                        <div class="invalid-feedback">
+                            Please provide a valid phone number.
                         </div>
-                        {{-- 
+                    </div>
+                    {{-- 
                         <div class="mb-3">
                             <label class="form-label" for="validationCustom04">Specific Locations, Mention any particular
                                 spots</label>
@@ -1021,14 +1241,15 @@
                                 Please provide a valid locations.
                             </div>
                         </div> --}}
-                        <div class="mb-3">
-                            <label class="form-label" for="validationCustom04">Reason for request</label>
-                            <textarea class="form-control" id="reasonR" rows="5" placeholder="Enter a reason..." wire:model="reason"></textarea>
-                            <div class="invalid-feedback">
-                                Please provide a valid reason.
-                            </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="validationCustom04">Reason for request</label>
+                        <textarea class="form-control" id="reasonR" rows="5" placeholder="Enter a reason..."
+                            wire:model="reason"></textarea>
+                        <div class="invalid-feedback">
+                            Please provide a valid reason.
                         </div>
-                        {{-- <div class="mb-3">
+                    </div>
+                    {{-- <div class="mb-3">
                             <label class="form-label" for="validationCustom05">Preferred Schedule</label>
                             <input type="text" id="datetime-datepicker" class="form-control"
                                 placeholder="Date and Time" wire:model="schedule">
@@ -1036,22 +1257,22 @@
                                 Please provide a valid schedule.
                             </div>
                         </div> --}}
-                    </div>
-                <div class="modal-footer">
-                        <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary text-white" onclick="saveRounds()">Submit
-                            Request</button>
-                        <button type="button " class="btn btn-primary d-none" id="real_btn_rounds"
-                            wire:click="saveRounds">Submit Request</button>
-    
                 </div>
-            
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary text-white" onclick="saveRounds()">Submit
+                        Request</button>
+                    <button type="button " class="btn btn-primary d-none" id="real_btn_rounds"
+                        wire:click="saveRounds">Submit Request</button>
+
+                </div>
+
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
 
     <div id="terms-modal" class="modal" data-bs-backdrop="static" style="z-index: 1000000000;" tabindex="-1"
-        role="dialog" aria-labelledby="standard-modalLabel">
+        role="dialog">
         <div class="modal-dialog modal-lg modal-dialog-scrollable">
             <div class="modal-content">
                 <div class="modal-header">
@@ -1124,13 +1345,13 @@
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
 
-    <div id="addmorebreed" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="standard-modalLabel"
+    <div id="addmorebreed" class="modal fade" tabindex="-1" role="dialog"
         >
         <div class="modal-dialog" wire:ignore.self>
             <div class="modal-content">
                 <div class="modal-header">
                     <h4 class="modal-title" id="standard-modalLabel">Add Dog Breed</h4>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" ></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
                     <div class="mb-3">
@@ -1149,14 +1370,13 @@
         </div><!-- /.modal-dialog -->
     </div>
 
-    <div id="create_aa" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="fullWidthModalLabel"
-         wire:ignore.self>
+    <div id="create_aa" class="modal fade" tabindex="-1" role="dialog" 
+        wire:ignore.self>
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
                     <h4 class="modal-title" id="fullWidthModalLabel">Create Annoucements</h4>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                        ></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 <form id="add_annoucment">
                     <div class="modal-body">
@@ -1184,14 +1404,13 @@
         </div>
     </div>
 
-    <div id="update_aa" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="fullWidthModalLabel"
-         wire:ignore.self>
+    <div id="update_aa" class="modal fade" tabindex="-1" role="dialog" 
+        wire:ignore.self>
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
                     <h4 class="modal-title" id="fullWidthModalLabel">Create Annoucements</h4>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                        ></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 <form id="add_annoucment2">
                     <div class="modal-body">
@@ -1222,31 +1441,30 @@
         </div>
     </div>
     <script>
+        function validateFiles(event) {
+            const files = event.target.files;
+            const validImageTypes = ['image/jpeg', 'image/png', 'image/gif'];
+            let invalidFile = false;
 
-    function validateFiles(event) {
-        const files = event.target.files;
-        const validImageTypes = ['image/jpeg', 'image/png', 'image/gif'];
-        let invalidFile = false;
+            // Check each file's type
+            for (let i = 0; i < files.length; i++) {
+                if (!validImageTypes.includes(files[i].type)) {
+                    invalidFile = true;
+                    break;
+                }
+            }
 
-        // Check each file's type
-        for (let i = 0; i < files.length; i++) {
-            if (!validImageTypes.includes(files[i].type)) {
-                invalidFile = true;
-                break;
+            if (invalidFile) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Invalid File',
+                    text: 'Only image files are allowed!',
+                });
+
+                // Clear the file input
+                event.target.value = '';
             }
         }
-
-        if (invalidFile) {
-            Swal.fire({
-                icon: 'error',
-                title: 'Invalid File',
-                text: 'Only image files are allowed!',
-            });
-
-            // Clear the file input
-            event.target.value = '';
-        }
-    }
 
 
         function confirmApprove() {
@@ -1363,7 +1581,6 @@
 
             var quilltext = document.getElementById('snow-editor');
             const htmlContent = quilltext.innerHTML;
-            console.log(htmlContent);
             Swal.fire({
                 title: 'Are you sure?',
                 text: "Are you sure you want to save this form?",
@@ -1419,6 +1636,42 @@
                 ]
             }
         });
+
+        function claimtoggle() {
+            var claim_dog = document.getElementById('claim_dog');
+            var claimformtoggle = document.getElementById('claimformtoggle');
+
+            claim_dog.classList.toggle('d-none');
+            claimformtoggle.classList.toggle('d-none');
+
+            toggledclaim = true;
+        }
+
+        function clearForm(){
+            var claimformtoggle = document.getElementById('claimformtoggle');
+
+            // Clear input fields
+            var inputs = claimformtoggle.querySelectorAll('input');
+            inputs.forEach(function(input) {
+                if (input.type === 'checkbox' || input.type === 'radio') {
+                    input.checked = false; // Uncheck checkboxes and radio buttons
+                } else {
+                    input.value = ''; // Clear other input types (text, number, etc.)
+                }
+            });
+
+            // Clear select options
+            var selects = claimformtoggle.querySelectorAll('select');
+            selects.forEach(function(select) {
+                select.selectedIndex = -1; // Deselect selected option
+            });
+
+            // Clear textareas
+            var textareas = claimformtoggle.querySelectorAll('textarea');
+            textareas.forEach(function(textarea) {
+                textarea.value = ''; // Clear text area contents
+            });
+        }
     </script>
     <script>
         var toggledclaim = false;
@@ -1469,41 +1722,41 @@
         }
 
         function saveRounds() {
-        
-    const fulladdress = document.getElementById('fulladdressR').value.trim();
-    const barangaySelect = document.getElementById('barangayR');
-    const barangay = barangaySelect.options[barangaySelect.selectedIndex].value; // Get the selected value
-    const contact = document.getElementById('contactR').value.trim();
-    const reason = document.getElementById('reasonR').value.trim();
 
-    // Initialize an array to hold missing field names
-    let missingFields = [];
+            const fulladdress = document.getElementById('fulladdressR').value.trim();
+            const barangaySelect = document.getElementById('barangayR');
+            const barangay = barangaySelect.options[barangaySelect.selectedIndex].value; // Get the selected value
+            const contact = document.getElementById('contactR').value.trim();
+            const reason = document.getElementById('reasonR').value.trim();
 
-    // Check each field and add to missingFields if empty or invalid
-    if (!fulladdress) missingFields.push('Address');
-    if (!barangay || barangay === 'Select a Barangay') missingFields.push('Barangay'); // Validate selected value
-    if (!contact) missingFields.push('Contact number');
-    if (!reason) missingFields.push('Reason for request');
+            // Initialize an array to hold missing field names
+            let missingFields = [];
 
-    // If there are missing fields, show a warning toast
-    if (missingFields.length > 0) {
-        const Toast = Swal.mixin({
-            toast: true,
-            position: 'top-end',
-            showConfirmButton: false,
-            timer: 3000,
-            timerProgressBar: true,
-        });
+            // Check each field and add to missingFields if empty or invalid
+            if (!fulladdress) missingFields.push('Address');
+            if (!barangay || barangay === 'Select a Barangay') missingFields.push('Barangay'); // Validate selected value
+            if (!contact) missingFields.push('Contact number');
+            if (!reason) missingFields.push('Reason for request');
 
-        Toast.fire({
-            icon: 'warning',
-            title: `Please fill out the following fields: ${missingFields.join(', ')}.`,
-        });
+            // If there are missing fields, show a warning toast
+            if (missingFields.length > 0) {
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 3000,
+                    timerProgressBar: true,
+                });
 
-        return; // Stop the submission process
-    }
-          
-          
+                Toast.fire({
+                    icon: 'warning',
+                    title: `Please fill out the following fields: ${missingFields.join(', ')}.`,
+                });
+
+                return; // Stop the submission process
+            }
+
+
             Swal.fire({
                 title: 'Are you sure?',
                 text: "Are you sure you want to request rounds?",
@@ -1585,23 +1838,17 @@
 
 
         function openTerms() {
-            console.log('hehe');
             $('#terms-modal').modal('show');
         }
 
         function closeTerms() {
-            console.log('hehe');
             $('#terms-modal').modal('hide');
         }
-        document.getElementById('claimtoggle').addEventListener('click', function() {
-            var claim_dog = document.getElementById('claim_dog');
-            var claimformtoggle = document.getElementById('claimformtoggle');
 
-            claim_dog.classList.toggle('d-none');
-            claimformtoggle.classList.toggle('d-none');
+        // document.getElementById('claimtoggle').addEventListener('click', function() {
 
-            toggledclaim = true;
-        });
+        // });
+
         document.getElementById('adoptiontoggle').addEventListener('click', function() {
             var adopt_dog = document.getElementById('adopt_dog');
             var adoptionform = document.getElementById('adoptionform');
@@ -1641,10 +1888,15 @@
             }).then((result) => {
                 if (result.isConfirmed) {
                     document.getElementById('claimhidden_dog').click();
+                    clearForm();
+                    form2.classList.remove('was-validated');
                 }
             });
 
         });
+
+
+
         document.getElementById('adopt_dog').addEventListener('click', function() {
             var form = document.getElementById('checkform');
 
@@ -1685,24 +1937,22 @@
 
         document.addEventListener('livewire:init', function() {
 
-
-            
             Livewire.on('activedogModal', event => {
-                console.log(event[0])
-                if(event[0] == 'Lost Dog'){
-                    
-                    
+                if (event[0] == 'Lost Dog') {
+
+                    document.getElementById('form_title').textContent = 'Lost Dog Form';
                     document.getElementById('claim_dog').textContent = 'Confim Lost Dog';
                     document.getElementById('proof').textContent = 'Proof of Lost Dog';
                     document.getElementById('lastloc').textContent = 'Last Location Seen';
-                }else{
+                } else {
+                    document.getElementById('form_title').textContent = 'Claim Form';
                     document.getElementById('claim_dog').textContent = 'Confim Claim';
                     document.getElementById('proof').textContent = 'Proof of Ownership';
                     document.getElementById('lastloc').textContent = 'Last Location';
 
                 }
             });
-            
+
             Livewire.on('dogAdopted', event => {
                 closeAllModals();
                 Swal.fire({
