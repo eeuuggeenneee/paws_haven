@@ -43,7 +43,7 @@
                                         </label>
                                         <select id="dog_breed" name="dog-breed" class="form-select" wire:model="breed"
                                             required wire:ignore>
-                                            <option value="" disabled selected>Select a breed</option>
+                                            <option value="" selected>Select a breed</option>
                                             @foreach ($breedlist as $breed)
                                                 <option value="{{ $breed['id'] }}">{{ $breed['name'] }}</option>
                                             @endforeach
@@ -77,7 +77,7 @@
                                     <div class="mb-3">
                                         <label class="form-label" for="validationCustom03">Barangay</label>
                                         <select class="form-select mb-3" wire:model="barangay_f" required>
-                                            <option selected>Select a Barangay</option>
+                                            <option value="" selected>Select a Barangay</option>
                                             <option value="Bagbaguin">Bagbaguin</option>
                                             <option value="Bulac">Bulac</option>
                                             <option value="Balasing">Balasing</option>
@@ -108,7 +108,7 @@
                                 <div class="col-6">
                                     <div class="mb-3">
                                         <label for="location_found" class="form-label">Specific Location</label>
-                                        <input type="text" id="location_found" class="form-control" required
+                                        <input type="text" id="location_found" class="form-control"
                                             placeholder="Enter specific location (optional)" wire:model="location_found">
                                     </div>
                                 </div>
@@ -180,8 +180,8 @@
                                     </div>
                                 </div>
                             </div>
-
-                            <div class="mb-3 position-relative">
+                            @if(Auth::user()->type != 1)
+                              <div class="mb-3 position-relative">
                                 <label class="form-label">Contact Name</label>
                                 <input class="form-control" type="text" wire:model="contact_name" required>
                             </div>
@@ -195,6 +195,8 @@
                                     maxlength="11"
                                     oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 11);">
                             </div>
+                            @endif
+                          
                         </div> <!-- end col-->
                     </div>
                     <!-- end row -->

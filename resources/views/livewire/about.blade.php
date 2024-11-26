@@ -11,7 +11,7 @@
                             <g>
                                 <linearGradient id="a" x1="4" x2="60" y1="32"
                                     y2="32" gradientUnits="userSpaceOnUse">
-                                    <stop offset="0" stop-color="#9cded8"></stop>
+                                    <stop offset="0" stop-color="#0894a4"></stop>
                                     <stop offset="1" stop-color="#0894a4"></stop>
                                 </linearGradient>
                                 <path fill="url(#a)"
@@ -166,26 +166,26 @@
                             @if ($shuffled_data1->isEmpty())
                                 <!-- If no data, display the placeholder images -->
                                 <div class="carousel-item active">
-                                    <img src="assets/images/small/small-1.jpg" alt="..."
+                                    <img src="https://fakeimg.pl/1080x600" alt="..."
                                         class="d-block img-fluid">
                                     <div class="carousel-caption d-none d-md-block">
-                                        <h3 class="text-white">First slide label</h3>
+                                        <h3 class="text-white">Placeholder 1</h3>
                                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
                                     </div>
                                 </div>
                                 <div class="carousel-item">
-                                    <img src="assets/images/small/small-3.jpg" alt="..."
+                                    <img src="https://fakeimg.pl/1080x600" alt="..."
                                         class="d-block img-fluid">
                                     <div class="carousel-caption d-none d-md-block">
-                                        <h3 class="text-white">Second slide label</h3>
+                                        <h3 class="text-white">Placeholder 2</h3>
                                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
                                     </div>
                                 </div>
                                 <div class="carousel-item">
-                                    <img src="assets/images/small/small-2.jpg" alt="..."
+                                    <img src="https://fakeimg.pl/1080x600" alt="..."
                                         class="d-block img-fluid">
                                     <div class="carousel-caption d-none d-md-block">
-                                        <h3 class="text-white">Third slide label</h3>
+                                        <h3 class="text-white">Placeholder 3</h3>
                                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
                                     </div>
                                 </div>
@@ -200,8 +200,10 @@
 
                                     @if ($firstImage)
                                         <div class="carousel-item {{ $index === 0 ? 'active' : '' }}">
-                                            <img src="{{ asset('storage/' . $firstImage) }}" alt="..."
-                                                class="d-block img-fluid">
+                                           <img src="{{ asset('storage/' . $firstImage) }}" 
+     alt="..." 
+     class="d-block" 
+     style="width: 100%; height: 400px; object-fit: contain;">
                                             <div class="carousel-caption d-none d-md-block">
                                                 <h3 class="text-white">{{ $animal['dog_name'] }}</h3>
                                                 <p>{{ $animal['description'] }}</p>
@@ -271,73 +273,20 @@
                 </div>
                 <div class="col-lg-5 col-md-6 offset-md-1">
                     <div id="carouselExampleCaption2" class="carousel slide" data-bs-ride="carousel">
+                        
                         <div class="carousel-inner" role="listbox">
-                            @php
-                                $shuffled_data = collect($data->toArray())->shuffle();
-                            @endphp
-                            @if ($shuffled_data->isEmpty())
-                                <!-- If no data, display the placeholder images -->
-                                <div class="carousel-item active">
-                                    <img src="assets/images/small/small-1.jpg" alt="..."
-                                        class="d-block img-fluid">
-                                    <div class="carousel-caption d-none d-md-block">
-                                        <h3 class="text-white">First slide label</h3>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                                    </div>
-                                </div>
-                                <div class="carousel-item">
-                                    <img src="assets/images/small/small-3.jpg" alt="..."
-                                        class="d-block img-fluid">
-                                    <div class="carousel-caption d-none d-md-block">
-                                        <h3 class="text-white">Second slide label</h3>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                                    </div>
-                                </div>
-                                <div class="carousel-item">
-                                    <img src="assets/images/small/small-2.jpg" alt="..."
-                                        class="d-block img-fluid">
-                                    <div class="carousel-caption d-none d-md-block">
-                                        <h3 class="text-white">Third slide label</h3>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                                    </div>
-                                </div>
-                            @else
-                                @foreach ($shuffled_data as $index => $animal)
-                                    @php
-                                        $images = json_decode($animal['animal_images'], true);
-                                        $firstImage = $images[0] ?? ''; // Get the first image URL (if exists)
-                                    @endphp
-
-                                    @if ($firstImage)
-                                        <div class="carousel-item {{ $index === 0 ? 'active' : '' }}">
-                                            <img src="{{ asset('storage/' . $firstImage) }}" alt="..."
-                                                class="d-block img-fluid">
-                                            <div class="carousel-caption d-none d-md-block">
-                                                <h3 class="text-white">{{ $animal['dog_name'] }}</h3>
-                                                <p>{{ $animal['description'] }}</p>
-                                            </div>
-                                        </div>
-                                    @endif
-                                @endforeach
-                            @endif
+                              <img src="{{ asset('assets/munisipyo.jpg') }}" alt="..." class="d-block img-fluid">
+                 
                         </div>
-                        <a class="carousel-control-prev" href="#carouselExampleCaption2" role="button"
-                            data-bs-slide="prev">
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Previous</span>
-                        </a>
-                        <a class="carousel-control-next" href="#carouselExampleCaption2" role="button"
-                            data-bs-slide="next">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Next</span>
-                        </a>
+                       
                     </div>
                 </div>
             </div>
 
         </div>
     </section>
-    <section class="py-5 bg-light-lighten border-top border-bottom border-light">
+
+    <section class="py-5 border-top border-bottom border-light">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
@@ -351,28 +300,25 @@
 
             <div class="row align-items-center mt-3">
                 <div class="col-md-4">
-                    <p class="text-black"><span class="fw-bold">Contact Number:</span><br> <span
-                            class="d-block mt-1">09208154069</span></p>
+                    <!--<p class="text-black"><span class="fw-bold">Contact Number:</span><br> <span-->
+                    <!--        class="d-block mt-1">09208154069</span></p>-->
                     <p class="text-black mt-4"><span class="fw-bold">Email Address:</span><br> <span
-                            class="d-block mt-1">smb.maoffice@gmail.com</span></p>
-                    <p class="text-black mt-4"><span class="fw-bold">Office Contact No:</span><br> <span
-                            class="d-block mt-1"> (044) 328-2113</span></p>
+                            class="d-block mt-1">teamagri2020@gmail.com</span></p>
+                    <!--<p class="text-black mt-4"><span class="fw-bold">Office Contact No:</span><br> <span-->
+                    <!--        class="d-block mt-1"> (044) 328-2113</span></p>-->
                     <p class="text-black mt-4"><span class="fw-bold">Head of office:</span><br> <span
                             class="d-block mt-1">Arnel M. Garcia DVM</span></p>
                 </div>
 
                 <div class="col-md-7">
-                    <iframe
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1535.241857099605!2d121.00039165144975!3d14.871589059077712!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3397a9435a2e096f%3A0x1dff22aaf74463ba!2sPulong%20Buhangin%20Youth%20Band!5e0!3m2!1sen!2sph!4v1726316707307!5m2!1sen!2sph"
-                        width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy"
-                        referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d808.5943105176145!2d120.9958984855321!3d14.875573675663771!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3397a95629e6fc75%3A0x6102a046b1f659bd!2sSta%20Maria%20Dog%20Pound!5e1!3m2!1sen!2sph!4v1732413712846!5m2!1sen!2sph" width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                 </div>
             </div>
         </div>
     </section>
-    <hr>
+
     <script>
-        document.getElementById('whitebg').style.backgroundColor = 'white';
+        // document.getElementById('whitebg').style.backgroundColor = '#f2f2f2 ';
     </script>
     <script>
         var chartConfig = {
@@ -411,7 +357,7 @@
                             progress: ''
                         },
                         tooltip: '',
-                        annotation_label_text: ' <img src="{{ asset('assets/images/picture.PNG') }}" width="150" height="150"  margin-top:4px;"><br><br><span style="font-size:14px; color: black;"><b>%position</b><br>%name</span>'
+                        annotation_label_text: ' <img src="{{ asset('assets/santa_maria.png') }}" width="150" height="150"  margin-top:4px;"><br><br><span style="font-size:14px; color: black;"><b>%position</b><br>%name</span>'
                     },
                     {
                         name: 'Laborer 1',

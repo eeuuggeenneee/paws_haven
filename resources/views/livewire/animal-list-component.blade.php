@@ -132,7 +132,7 @@
         </div>
         <!-- end page title -->
 
-        <div class="row" >
+        <div class="row">
             <div class="col-12">
                 <div class="card" style="background-color: #f2f2f2" id="cardhe" wire:ignore.self>
                     <div class="card-body">
@@ -170,9 +170,17 @@
                                             @endphp
                                             <tr id="dog-{{ $item['dog_id_unique'] }}">
                                                 <td class="dog_name text-black">
-                                                    <img src="{{ asset('storage/' . $images[0]) }}" alt="Animal Image"
-                                                        title="Animal Image" class="rounded me-3"
-                                                        style="min-width: 72px; min-height: 48px; width: 70px; height: 48px; object-fit: cover;" />
+                                                    @if(isset($images[0]))
+                                                        <img src="{{ asset('storage/' . $images[0]) }}" 
+                                                             class="img-thumbnail" 
+                                                             alt="friend" 
+                                                             style="min-width: 70px; min-height: 50px; width: 70px; height: 50px; object-fit: cover;">
+                                                    @else
+                                                        <img src="https://placehold.co/600x400" 
+                                                             class="img-thumbnail" 
+                                                             alt="friend" 
+                                                             style="min-width: 70px; min-height: 50px; width: 70px; height: 50px; object-fit: cover;">
+                                                    @endif
                                                     <p class="m-0 d-inline-block align-middle font-16">
                                                         <a class="text-black">{{ $item['dog_name'] }}</a>
                                                     </p>
@@ -227,20 +235,15 @@
         @livewire('modals-dogs')
 
         <script>
-            var htmlHeight = document.documentElement.clientHeight;
+              var htmlHeight = document.documentElement.clientHeight;
             var cardHeight = htmlHeight - 300;
     
             document.getElementById('cardhe').style.minHeight = cardHeight + 'px';
             document.getElementById('cardhe').style.maxHeight = cardHeight + 'px';
-            document.getElementById('cardhe').style.overflow = 'hidden';
-
-
-
+    
             document.getElementById('animals-datatable').style.minHeight = (cardHeight - 50) + 'px';
             document.getElementById('animals-datatable').style.maxHeight = (cardHeight - 50) + 'px';
             document.getElementById('animals-datatable').style.overflow = 'hidden';
-
-            
             function focusSearchInput() {
                 document.getElementById('searchtb').focus();
                 console.log('hehe');

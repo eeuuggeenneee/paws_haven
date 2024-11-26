@@ -14,6 +14,8 @@ class LostFoundList extends Component
 {
     public $doglist;
     public $activedog;
+    public $statusC;
+    public $changeName;
     use LivewireAlert;
 
     protected $listeners = ['fetchdatanotif' => 'fetchdataAdopt'];
@@ -24,8 +26,41 @@ class LostFoundList extends Component
     }
     public function fetchDataDog()
     {
-        $dogid = AnimalListStatus::where('isActive', true)->whereIn('status', [3,2])->get('animal_id');
-        $this->doglist = AnimalList::whereIn('animal_lists.dog_id_unique', $dogid)
+        $dogid = null;
+        if($this->statusC){
+            if($this->statusC == 'Lost Dog'){
+                $dogid = AnimalListStatus::where('isActive', true)->whereIn('status', [2])->get('animal_id');
+            }else if ($this->statusC == 'Found Dog'){
+                $dogid = AnimalListStatus::where('isActive', true)->whereIn('status', [3])->get('animal_id');
+            }
+        }else{
+            $dogid = AnimalListStatus::where('isActive', true)->whereIn('status', [3,2])->get('animal_id');
+        }
+        
+        if(!$dogid){
+            $dogid = AnimalListStatus::where('isActive', true)->whereIn('status', [3,2])->get('animal_id');
+        }
+        
+        if($this->changeName){
+            $this->doglist = AnimalList::whereIn('animal_lists.dog_id_unique', $dogid)
+            ->leftJoin('click_dogs', 'click_dogs.dog_id_unique', '=', 'animal_lists.dog_id_unique')
+            ->leftJoin('dog_breeds', 'dog_breeds.id', '=', 'animal_lists.breed')
+            ->leftJoin('animal_list_statuses', function ($join) {
+                $join->on('animal_list_statuses.animal_id', '=', 'animal_lists.dog_id_unique')
+                    ->where('animal_list_statuses.isActive', '=', 1);
+            })
+            ->leftJoin('statuses', 'statuses.id', '=', 'animal_list_statuses.status')
+            ->where('animal_lists.isActive', true)
+            ->where(function ($query) {
+                $query->where('animal_lists.dog_name', 'like', '%' . $this->changeName . '%')
+                      ->orWhere('dog_breeds.name', 'like', '%' . $this->changeName . '%');
+            })
+            ->select('animal_lists.*', 'click_dogs.clicked', 'dog_breeds.name as breed_name','statuses.name as status_name')
+            ->orderBy('click_dogs.clicked','desc')
+            ->orderBy('animal_lists.dog_name','asc')
+            ->get();
+        }else{
+            $this->doglist = AnimalList::whereIn('animal_lists.dog_id_unique', $dogid)
             ->leftJoin('click_dogs', 'click_dogs.dog_id_unique', '=', 'animal_lists.dog_id_unique')
             ->leftJoin('dog_breeds', 'dog_breeds.id', '=', 'animal_lists.breed')
             ->leftJoin('animal_list_statuses', function ($join) {
@@ -38,7 +73,12 @@ class LostFoundList extends Component
             ->orderBy('click_dogs.clicked','desc')
             ->orderBy('animal_lists.dog_name','asc')
             ->get();
-
+        }
+      
+    }
+    public function changeStatus(){
+        $this->fetchDataDog();
+        $this->dispatch('reinit');
     }
     public function adoptionform($id)
     {

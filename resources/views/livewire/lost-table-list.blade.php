@@ -196,8 +196,17 @@
                                             @endphp
                                             <tr>
                                                 <td class="dog_name">
-                                                    <img src="{{ asset('storage/' . $images[0]) }}" alt="Animal Image"
-                                                        title="Animal Image" class="rounded me-3" height="48" />
+                                                    @if(isset($images[0]))
+                                                        <img src="{{ asset('storage/' . $images[0]) }}" 
+                                                             class="img-thumbnail" 
+                                                             alt="friend" 
+                                                             style="min-width: 70px; min-height: 50px; width: 70px; height: 50px; object-fit: cover;">
+                                                    @else
+                                                        <img src="https://placehold.co/600x400" 
+                                                             class="img-thumbnail" 
+                                                             alt="friend" 
+                                                             style="min-width: 70px; min-height: 50px; width: 70px; height: 50px; object-fit: cover;">
+                                                    @endif
                                                     <p class="m-0 d-inline-block align-middle font-16">
                                                         <a class="text-black">{{ $item['dog_name'] }}</a>
                                                         <br />
@@ -279,8 +288,17 @@
                                             @endphp
                                             <tr>
                                                 <td class="dog_name">
-                                                    <img src="{{ asset('storage/' . $images[0]) }}" alt="Animal Image"
-                                                        title="Animal Image" class="rounded me-3" height="48" />
+                                                    @if(isset($images[0]))
+                                                        <img src="{{ asset('storage/' . $images[0]) }}" 
+                                                             class="img-thumbnail" 
+                                                             alt="friend" 
+                                                             style="min-width: 70px; min-height: 50px; width: 70px; height: 50px; object-fit: cover;">
+                                                    @else
+                                                        <img src="https://placehold.co/600x400" 
+                                                             class="img-thumbnail" 
+                                                             alt="friend" 
+                                                             style="min-width: 70px; min-height: 50px; width: 70px; height: 50px; object-fit: cover;">
+                                                    @endif
                                                     <p class="m-0 d-inline-block align-middle font-16">
                                                         <a class="text-black">{{ $item['dog_name'] }}</a>
                                                         <br />

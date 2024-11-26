@@ -73,25 +73,30 @@
                                     <div class="card">
                                         <div class="card-body">
                                             <div class="d-flex justify-content-between align-items-center mb-2">
-                                                <h4 class="header-title">Most Clicked Dogs</h4>
+                                                <h4 class="header-title">Most Popular Dogs</h4>
                                                 <div class="dropdown">
         
                                                 </div>
                                             </div>
                                             @if (isset($dogclicked))
-                                                @foreach ($dogclicked as $clicked)
-                                                    <div class="d-flex mt-1">
-                                                        <i class='uil uil-arrow-growth me-2 font-18 text-primary'></i>
-                                                        <div>
-                                                            <p class="mt-1 font-14" href="javascript:void(0);">
-                                                                <strong>{{ $clicked['dog_name'] }}</strong>
-                                                                <span class="text-muted"><br>
-                                                                    {{ $clicked['description'] }}
-                                                                </span>
-                                                            </p>
+                                                @if(count($dogclicked) == 0)
+                                                    <p>No Available Data</p>
+                                                @else
+                                                    @foreach ($dogclicked as $clicked)
+                                                        <div class="d-flex mt-1">
+                                                            <i class='uil uil-arrow-growth me-2 font-18 text-primary'></i>
+                                                            <div>
+                                                                <p class="mt-1 font-14" href="javascript:void(0);">
+                                                                    <strong>{{ $clicked['dog_name'] }}</strong>
+                                                                    <span class="text-muted"><br>
+                                                                        {{ $clicked['description'] }}
+                                                                    </span>
+                                                                </p>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                @endforeach
+                                                    @endforeach
+                                                @endif
+                                                
                                             @endif
                                         </div> <!-- end card-body-->
                                     </div>

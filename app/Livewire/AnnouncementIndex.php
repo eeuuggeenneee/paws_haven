@@ -25,11 +25,27 @@ class AnnouncementIndex extends Component
             ->limit(5) // Limit results to top 10
             ->get();
 
-        $clicked = ClickDogs::orderBy('clicked', 'desc')->take(5)->get('dog_id_unique');
-        $this->dogclicked = AnimalList::whereIn('dog_id_unique', $clicked)->where('animal_lists.isActive', true)
+        $clicked = ClickDogs::orderBy('clicked', 'desc')
+            ->leftJoin('animal_list_statuses', 'animal_list_statuses.animal_id', '=', 'click_dogs.dog_id_unique')
+            ->leftJoin('animal_lists', 'animal_list_statuses.animal_id', '=', 'animal_lists.dog_id_unique')
+            ->whereIn('animal_list_statuses.status', [1, 2, 3])
+            ->where('animal_list_statuses.isActive', 1)
+             ->where('animal_lists.isActive', 1)
+            ->select('click_dogs.dog_id_unique')
+            ->orderby('click_dogs.clicked','desc')
+            ->take(5)
+            ->pluck('dog_id_unique');
+            
+        // Using the plucked array in the next query
+        $this->dogclicked = AnimalList::whereIn('animal_lists.dog_id_unique', $clicked)
+            ->where('animal_lists.isActive', 1)
             ->leftJoin('dog_breeds', 'dog_breeds.id', '=', 'animal_lists.breed')
+            ->leftJoin('click_dogs', 'click_dogs.dog_id_unique', '=', 'animal_lists.dog_id_unique')
+            ->orderby('click_dogs.clicked','desc')
             ->select('animal_lists.*', 'dog_breeds.name as breed_name')
             ->get();
+        // dd($clicked,$this->dogclicked);
+
 
         // dd($this->dogclicked);
     }
