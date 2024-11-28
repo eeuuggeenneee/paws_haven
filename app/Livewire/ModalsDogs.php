@@ -15,6 +15,8 @@ use App\Models\Rounds;
 use App\Models\RoundsStatus;
 use Illuminate\Support\Facades\Auth;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
+use Illuminate\Support\Facades\Cache;
+use Throwable;
 
 class ModalsDogs extends Component
 {
@@ -214,17 +216,27 @@ class ModalsDogs extends Component
     }
     public function activedog($id)
     {
-        $this->dog_unique = $id;
-        $this->activedog = AnimalList::where('animal_lists.dog_id_unique', $id)
-            ->leftJoin('dog_breeds', 'dog_breeds.id', '=', 'animal_lists.breed')
-            ->leftJoin('animal_list_statuses', function ($join) {
-                $join->on('animal_list_statuses.animal_id', '=', 'animal_lists.dog_id_unique')
-                    ->where('animal_list_statuses.isActive', '=', 1);
-            })->leftJoin('statuses', 'statuses.id', '=', 'animal_list_statuses.status')
-            ->select('animal_lists.*', 'dog_breeds.name as breed_name', 'statuses.name as status_name')
-            ->where('animal_lists.isActive', true)->first();
-
-        $this->dispatch('activedogModal',$this->activedog['status_name']);
+        try{
+            $this->dog_unique = $id;
+        
+            // Cache the query results forever using Cache::rememberForever
+            $this->activedog = AnimalList::where('animal_lists.dog_id_unique', $id)
+                ->leftJoin('dog_breeds', 'dog_breeds.id', '=', 'animal_lists.breed')
+                ->leftJoin('animal_list_statuses', function ($join) {
+                    $join->on('animal_list_statuses.animal_id', '=', 'animal_lists.dog_id_unique')
+                        ->where('animal_list_statuses.isActive', '=', 1);
+                })
+                ->leftJoin('statuses', 'statuses.id', '=', 'animal_list_statuses.status')
+                ->select('animal_lists.*', 'dog_breeds.name as breed_name', 'statuses.name as status_name')
+                ->where('animal_lists.isActive', true)
+                ->first();
+        
+            $this->dispatch('activedogModal', $this->activedog['status_name']);
+                
+        }catch(Throwable $r){
+            
+        }
+        
     }
     public function rejectDRequest()
     {

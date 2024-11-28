@@ -242,15 +242,17 @@
                                                                     <div id="carouselExampleCaption"
                                                                         class="carousel slide" data-bs-ride="carousel">
                                                                         <div class="carousel-inner" role="listbox">
-                                                                            @foreach ($images as $img)
-                                                                                <div
-                                                                                    class="carousel-item {{ $loop->first ? 'active' : '' }}">
-                                                                                    <img src="{{ asset('storage/' . $img) }}"
-                                                                                        alt="..."
-                                                                                        class="d-block img-fluid w-100"
-                                                                                        style="height: 200px; object-fit: cover; border-radius: 10px;">
-                                                                                </div>
-                                                                            @endforeach
+                                                                            @if(isset($images)
+                                                                                @foreach ($images as $img)
+                                                                                    <div
+                                                                                        class="carousel-item {{ $loop->first ? 'active' : '' }}">
+                                                                                        <img src="{{ asset('storage/' . $img) }}"
+                                                                                            alt="..."
+                                                                                            class="d-block img-fluid w-100"
+                                                                                            style="height: 200px; object-fit: cover; border-radius: 10px;">
+                                                                                    </div>
+                                                                                @endforeach
+                                                                            @endif
                                                                         </div>
                                                                         <a class="carousel-control-prev"
                                                                             href="#carouselExampleCaption"
@@ -353,15 +355,17 @@
                                                                         class="carousel slide"
                                                                         data-bs-ride="carousel">
                                                                         <div class="carousel-inner" role="listbox">
-                                                                            @foreach ($images as $img)
-                                                                                <div
-                                                                                    class="carousel-item {{ $loop->first ? 'active' : '' }}">
-                                                                                    <img src="{{ asset('storage/' . $img) }}"
-                                                                                        alt="..."
-                                                                                        class="d-block img-fluid w-100"
-                                                                                        style="height: 200px; object-fit: cover; border-radius: 10px;">
-                                                                                </div>
-                                                                            @endforeach
+                                                                            @if(isset($images)
+                                                                                @foreach ($images as $img)
+                                                                                    <div
+                                                                                        class="carousel-item {{ $loop->first ? 'active' : '' }}">
+                                                                                        <img src="{{ asset('storage/' . $img) }}"
+                                                                                            alt="..."
+                                                                                            class="d-block img-fluid w-100"
+                                                                                            style="height: 200px; object-fit: cover; border-radius: 10px;">
+                                                                                    </div>
+                                                                                @endforeach
+                                                                            @endif
                                                                         </div>
                                                                         <a class="carousel-control-prev"
                                                                             href="#carouselExampleCaption"
@@ -456,15 +460,18 @@
                                                                         class="carousel slide"
                                                                         data-bs-ride="carousel">
                                                                         <div class="carousel-inner" role="listbox">
-                                                                            @foreach ($images as $img)
-                                                                                <div
-                                                                                    class="carousel-item {{ $loop->first ? 'active' : '' }}">
-                                                                                    <img src="{{ asset('storage/' . $img) }}"
-                                                                                        alt="..."
-                                                                                        class="d-block img-fluid w-100"
-                                                                                        style="height: 200px; object-fit: cover; border-radius: 10px;">
-                                                                                </div>
-                                                                            @endforeach
+                                                                            @if(isset($images)
+                                                                                @foreach ($images as $img)
+                                                                                    <div
+                                                                                        class="carousel-item {{ $loop->first ? 'active' : '' }}">
+                                                                                        <img src="{{ asset('storage/' . $img) }}"
+                                                                                            alt="..."
+                                                                                            class="d-block img-fluid w-100"
+                                                                                            style="height: 200px; object-fit: cover; border-radius: 10px;">
+                                                                                    </div>
+                                                                                @endforeach
+                                                                            @endif
+                                                                            
                                                                         </div>
                                                                         <a class="carousel-control-prev"
                                                                             href="#carouselExampleCaption"

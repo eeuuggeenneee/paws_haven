@@ -55,7 +55,19 @@
             border-bottom: 3px solid #057ed8;
             color: #000;
         }
+        .table-container {
+            overflow-x: auto;
+            /* Enables horizontal scrolling */
+            -webkit-overflow-scrolling: touch;
+            /* Smooth scrolling for iOS devices */
+            margin-bottom: 20px;
+            /* Adjust as needed */
+        }
 
+        .table-container table {
+            min-width: 100%;
+            /* Makes sure the table takes up at least the full width of its container */
+        }
         .pagination a {
             text-decoration: none;
             color: #66696a;
@@ -177,6 +189,7 @@
                                 style="background-color: #0396a6;">
                                 <i class="mdi mdi-plus-circle me-2"></i> Add Dog
                             </a>
+                            <div class="table-container">
                             <table class="table table-centered w-100 dt-responsive nowrap" id="animals-datatable">
                                 <thead style="background-color: #0396a6;">
                                     <tr>
@@ -235,6 +248,7 @@
                                     @endif
                                 </tbody>
                             </table>
+                            </div>
                             <div class="table-footer">
                                 <nav>
                                     <div class="page-item jPaginateBack">
@@ -261,6 +275,7 @@
             <div class="tab-pane " id="collapse-horizontal-code" role="tabpanel" wire:ignore.self>
                 <div class="card" style="background-color: #f2f2f2" id="cardrequest">
                     <div class="px-2">
+                        
                         <div class="table-responsive-xl" id="lost_list_dog2" wire:ignore.self>
                             <div class="d-flex align-items-center w-100">
                                 <div class="search-container">
@@ -269,7 +284,7 @@
                                 </div>
                                 <h3 class="mb-4 d-flex align-items-center ms-auto"></h3>
                             </div>
-
+                            <div class="table-container">
                             <table class="table table-centered w-100 dt-responsive nowrap" id="animals-datatable">
                                 <thead style="background-color: #0396a6;">
                                     <tr>
@@ -332,6 +347,7 @@
                                     @endif
                                 </tbody>
                             </table>
+                            </div>
                             <div class="table-footer">
                                 <nav>
                                     <div class="page-item dog2_jPaginateBack">
@@ -368,19 +384,19 @@
         var htmlHeight = document.documentElement.clientHeight;
         var cardHeight = htmlHeight - 300;
 
-        document.getElementById('cardlost').style.minHeight = cardHeight + 'px';
-        document.getElementById('cardlost').style.maxHeight = cardHeight + 'px';
+        // document.getElementById('cardlost').style.minHeight = cardHeight + 'px';
+        // document.getElementById('cardlost').style.maxHeight = cardHeight + 'px';
 
-        document.getElementById('lost_list').style.minHeight = (cardHeight - 50) + 'px';
-        document.getElementById('lost_list').style.maxHeight = (cardHeight - 50) + 'px';
-        document.getElementById('lost_list').style.overflow = 'hidden';
+        // document.getElementById('lost_list').style.minHeight = (cardHeight - 50) + 'px';
+        // document.getElementById('lost_list').style.maxHeight = (cardHeight - 50) + 'px';
+        // document.getElementById('lost_list').style.overflow = 'hidden';
 
-        document.getElementById('cardrequest').style.minHeight = cardHeight + 'px';
-        document.getElementById('cardrequest').style.maxHeight = cardHeight + 'px';
+        // document.getElementById('cardrequest').style.minHeight = cardHeight + 'px';
+        // document.getElementById('cardrequest').style.maxHeight = cardHeight + 'px';
 
-        document.getElementById('lost_list_dog2').style.minHeight = (cardHeight - 50) + 'px';
-        document.getElementById('lost_list_dog2').style.maxHeight = (cardHeight - 50) + 'px';
-        document.getElementById('lost_list_dog2').style.overflow = 'hidden';
+        // document.getElementById('lost_list_dog2').style.minHeight = (cardHeight - 50) + 'px';
+        // document.getElementById('lost_list_dog2').style.maxHeight = (cardHeight - 50) + 'px';
+        // document.getElementById('lost_list_dog2').style.overflow = 'hidden';
 
         function confirmDelete(dogid) {
             Swal.fire({

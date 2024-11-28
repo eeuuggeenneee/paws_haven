@@ -134,27 +134,32 @@
                                                 <div id="carouselExampleIndicators" class="carousel slide"
                                                     data-bs-ride="carousel">
                                                     <div class="carousel-inner" role="listbox">
-                                                        @foreach ($images as $img)
-                                                            <div
-                                                                class="carousel-item {{ $loop->first ? 'active' : '' }}">
-                                                                <img class="d-block img-fluid img-thumbnail responsive-img"
-                                                                    src="{{ asset('storage/' . $img) }}"
-                                                                    alt="Slide {{ $loop->iteration }}">
-                                                            </div>
-                                                        @endforeach
+                                                        @if(isset($images)
+                                                             @foreach ($images as $img)
+                                                                <div
+                                                                    class="carousel-item {{ $loop->first ? 'active' : '' }}">
+                                                                    <img class="d-block img-fluid img-thumbnail responsive-img"
+                                                                        src="{{ asset('storage/' . $img) }}"
+                                                                        alt="Slide {{ $loop->iteration }}">
+                                                                </div>
+                                                             @endforeach
+                                                        @endif
+                                                       
                                                     </div>
                                                     <div class="text-center mt-3">
-                                                        @foreach ($images as $key => $img)
-                                                            <a href="javascript: void(0);">
-                                                                <img src="{{ asset('storage/' . $img) }}"
-                                                                    class="img-fluid img-thumbnail p-2"
-                                                                    data-bs-target="#carouselExampleIndicators"
-                                                                    class="active"
-                                                                    data-bs-slide-to="{{ $key }}"
-                                                                    style="min-width: 75px; min-height: 75px; width: 75px; height: 75px; object-fit: cover;"
-                                                                    alt="Product-img" />
-                                                            </a>
-                                                        @endforeach
+                                                        @if(isset($images)
+                                                            @foreach ($images as $key => $img)
+                                                                <a href="javascript: void(0);">
+                                                                    <img src="{{ asset('storage/' . $img) }}"
+                                                                        class="img-fluid img-thumbnail p-2"
+                                                                        data-bs-target="#carouselExampleIndicators"
+                                                                        class="active"
+                                                                        data-bs-slide-to="{{ $key }}"
+                                                                        style="min-width: 75px; min-height: 75px; width: 75px; height: 75px; object-fit: cover;"
+                                                                        alt="Product-img" />
+                                                                </a>
+                                                            @endforeach
+                                                        @endif
                                                     </div>
 
                                                 </div>
@@ -458,27 +463,32 @@
                                                 <div id="carouselExampleIndicators" class="carousel slide"
                                                     data-bs-ride="carousel">
                                                     <div class="carousel-inner" role="listbox">
-                                                        @foreach ($images as $img)
-                                                            <div
-                                                                class="carousel-item {{ $loop->first ? 'active' : '' }}">
-                                                                <img class="d-block img-fluid img-thumbnail responsive-img"
-                                                                    src="{{ asset('storage/' . $img) }}"
-                                                                    alt="Slide {{ $loop->iteration }}">
-                                                            </div>
-                                                        @endforeach
+                                                        @if(isset($images)
+                                                            @foreach ($images as $img)
+                                                                <div
+                                                                    class="carousel-item {{ $loop->first ? 'active' : '' }}">
+                                                                    <img class="d-block img-fluid img-thumbnail responsive-img"
+                                                                        src="{{ asset('storage/' . $img) }}"
+                                                                        alt="Slide {{ $loop->iteration }}">
+                                                                </div>
+                                                            @endforeach
+                                                        @endif
+                                                        
                                                     </div>
                                                     <div class="text-center mt-3">
-                                                        @foreach ($images as $key => $img)
-                                                            <a href="javascript: void(0);">
-                                                                <img src="{{ asset('storage/' . $img) }}"
-                                                                    class="img-fluid img-thumbnail p-2"
-                                                                    data-bs-target="#carouselExampleIndicators"
-                                                                    class="active"
-                                                                    data-bs-slide-to="{{ $key }}"
-                                                                    style="min-width: 75px; min-height: 75px; width: 75px; height: 75px; object-fit: cover;"
-                                                                    alt="Product-img" />
-                                                            </a>
-                                                        @endforeach
+                                                        @if(isset($images)
+                                                            @foreach ($images as $key => $img)
+                                                                <a href="javascript: void(0);">
+                                                                    <img src="{{ asset('storage/' . $img) }}"
+                                                                        class="img-fluid img-thumbnail p-2"
+                                                                        data-bs-target="#carouselExampleIndicators"
+                                                                        class="active"
+                                                                        data-bs-slide-to="{{ $key }}"
+                                                                        style="min-width: 75px; min-height: 75px; width: 75px; height: 75px; object-fit: cover;"
+                                                                        alt="Product-img" />
+                                                                </a>
+                                                            @endforeach
+                                                        @endif
                                                     </div>
 
                                                 </div>
@@ -1191,7 +1201,7 @@
                     <div class="mb-3">
                         <label class="form-label" for="validationCustom03">Barangay</label>
                         <select class="form-select mb-3" wire:model="barangay" id="barangayR" required>
-                            <option selected>Select a Barangay</option>
+                            <option value="" selected>Select a Barangay</option>
                             <option value="Bagbaguin">Bagbaguin</option>
                             <option value="Bulac">Bulac</option>
                             <option value="Balasing">Balasing</option>
@@ -1243,7 +1253,7 @@
                         </div> --}}
                     <div class="mb-3">
                         <label class="form-label" for="validationCustom04">Reason for request</label>
-                        <textarea class="form-control" id="reasonR" rows="5" placeholder="Enter a reason..."
+                        <textarea class="form-control" id="reasonR" rows="5" placeholder="Enter a reason..." required
                             wire:model="reason"></textarea>
                         <div class="invalid-feedback">
                             Please provide a valid reason.
@@ -1723,6 +1733,11 @@
 
         function saveRounds() {
 
+            var add_requestR = document.getElementById('add_requestR');
+            add_requestR.classList.add('was-validated');
+            
+
+
             const fulladdress = document.getElementById('fulladdressR').value.trim();
             const barangaySelect = document.getElementById('barangayR');
             const barangay = barangaySelect.options[barangaySelect.selectedIndex].value; // Get the selected value
@@ -1750,7 +1765,7 @@
 
                 Toast.fire({
                     icon: 'warning',
-                    title: `Please fill out the following fields: ${missingFields.join(', ')}.`,
+                    title: 'Please fill out all required fields.'
                 });
 
                 return; // Stop the submission process

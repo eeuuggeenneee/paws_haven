@@ -39,6 +39,19 @@
                 left: 14.75%;
             }
         }
+        .table-container {
+            overflow-x: auto;
+            /* Enables horizontal scrolling */
+            -webkit-overflow-scrolling: touch;
+            /* Smooth scrolling for iOS devices */
+            margin-bottom: 20px;
+            /* Adjust as needed */
+        }
+
+        .table-container table {
+            min-width: 100%;
+            /* Makes sure the table takes up at least the full width of its container */
+        }
 
         .table-footer nav>.primary-btn {
             vertical-align: middle;
@@ -153,6 +166,7 @@
                                 class="btn d-sm-block d-lg-none col-5 mt-4  text-white mb-2 d-flex align-items-center ms-auto" style="background-color: #0396a6;">
                                 <i class="mdi mdi-plus-circle me-2"></i> Add Dog
                              </a>
+                             <div class="table-container">
                             <table class="table table-centered w-100 dt-responsive nowrap">
                                 <thead style="background-color: #0396a6;">
                                     <tr>
@@ -204,6 +218,7 @@
                                 </tbody>
 
                             </table>
+                            </div>
                             <div class="table-footer">
                                 <nav>
                                     <div class="page-item jPaginateBack">
@@ -238,12 +253,13 @@
               var htmlHeight = document.documentElement.clientHeight;
             var cardHeight = htmlHeight - 300;
     
-            document.getElementById('cardhe').style.minHeight = cardHeight + 'px';
-            document.getElementById('cardhe').style.maxHeight = cardHeight + 'px';
+            // document.getElementById('cardhe').style.minHeight = cardHeight + 'px';
+            // document.getElementById('cardhe').style.maxHeight = cardHeight + 'px';
     
-            document.getElementById('animals-datatable').style.minHeight = (cardHeight - 50) + 'px';
-            document.getElementById('animals-datatable').style.maxHeight = (cardHeight - 50) + 'px';
-            document.getElementById('animals-datatable').style.overflow = 'hidden';
+            // document.getElementById('animals-datatable').style.minHeight = (cardHeight - 50) + 'px';
+            // document.getElementById('animals-datatable').style.maxHeight = (cardHeight - 50) + 'px';
+            // document.getElementById('animals-datatable').style.overflow = 'hidden';
+            
             function focusSearchInput() {
                 document.getElementById('searchtb').focus();
                 console.log('hehe');
