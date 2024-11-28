@@ -115,6 +115,9 @@
                         <div class="carousel-inner" role="listbox">
                             @php
                                 $shuffled_data1 = collect($data->toArray())->shuffle();
+                                $shuffled_data1 = $shuffled_data1->filter(function ($item) {
+                                        return $item['status'] == "1";
+                                    });
                             @endphp
                             @if ($shuffled_data1->isEmpty())
                                 <!-- If no data, display the placeholder images -->
@@ -150,7 +153,7 @@
                                     @endphp
 
                                     @if ($firstImage)
-                                        <div class="carousel-item {{ $index === 0 ? 'active' : '' }}">
+                                        <div class="carousel-item {{ $loop->first ? 'active' : '' }}">
                                             <img src="{{ asset('storage/' . $firstImage) }}" alt="..."
                                                 class="d-block img-fluid">
                                             <div class="carousel-caption d-none d-md-block">
@@ -197,7 +200,7 @@
 
             <div class="row pb-3 align-items-center">
                 <div class="col-lg-6 col-md-5">
-                    <h3 class="fw-normal">Lost Dogs</h3>
+                    <h3 class="fw-normal">Lost and Found Dogs</h3>
                     <p class="text-muted mt-3">Owners of lost dogs can visit the pound to check if their pet has been
                         taken in. The facility usually keeps the dogs for a specific period, allowing time for owners to
                         reclaim their pets. After this holding period, if a dog is not claimed, it might be put up for
@@ -221,10 +224,13 @@
 
                 </div>
                 <div class="col-lg-5 col-md-6 offset-md-1">
-                    <div id="carouselExampleCaption" class="carousel slide" data-bs-ride="carousel">
+                    <div id="carouselExampleCaption2" class="carousel slide" data-bs-ride="carousel">
                         <div class="carousel-inner" role="listbox">
                             @php
                                 $shuffled_data = collect($data->toArray())->shuffle();
+                                $shuffled_data = $shuffled_data->filter(function ($item) {
+                                        return in_array($item['status'], [2, 3]);
+                                    });
                             @endphp
                             @if ($shuffled_data->isEmpty())
                                 <div class="carousel-item active">
@@ -259,7 +265,7 @@
                                     @endphp
 
                                     @if ($firstImage)
-                                        <div class="carousel-item {{ $index === 0 ? 'active' : '' }}">
+                                        <div class="carousel-item {{ $loop->first ? 'active' : '' }}">
                                             <img src="{{ asset('storage/' . $firstImage) }}" alt="..."
                                                 class="d-block img-fluid">
                                             <div class="carousel-caption d-none d-md-block">
@@ -271,12 +277,12 @@
                                 @endforeach
                             @endif
                         </div>
-                        <a class="carousel-control-prev" href="#carouselExampleCaption" role="button"
+                        <a class="carousel-control-prev" href="#carouselExampleCaption2" role="button"
                             data-bs-slide="prev">
                             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                             <span class="visually-hidden">Previous</span>
                         </a>
-                        <a class="carousel-control-next" href="#carouselExampleCaption" role="button"
+                        <a class="carousel-control-next" href="#carouselExampleCaption2" role="button"
                             data-bs-slide="next">
                             <span class="carousel-control-next-icon" aria-hidden="true"></span>
                             <span class="visually-hidden">Next</span>

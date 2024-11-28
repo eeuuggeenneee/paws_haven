@@ -8,7 +8,12 @@ use Livewire\Livewire;
 
 Route::get('/', function () {
     // Fetch data from the model
-    $data = AnimalList::where('isActive', 1)->get(); 
+    $data = AnimalList::where('animal_lists.isActive',1)
+    ->leftJoin('animal_list_statuses', 'animal_list_statuses.animal_id','=','animal_lists.dog_id_unique')
+    ->whereIn('animal_list_statuses.status',[1,2,3])
+    ->where('animal_list_statuses.isActive',1)
+    ->select('animal_lists.*','animal_list_statuses.status')
+    ->get(); 
     return view('welcome', compact('data'));
 })->name('landing')->middleware('check_login');
 
