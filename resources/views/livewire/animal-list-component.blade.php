@@ -152,7 +152,7 @@
                         <div class="table-responsive-xl" id="animals-datatable" wire:ignore.self>
                             <div class="d-flex align-items-center ">
                                 <div class="search-container ms-auto" onclick="focusSearchInput()">
-                                    <input type="text" class="search form-control " id="searchtb"
+                                    <input type="text" class="search form-control " id="searchtb" wire:keydown="changeStatus" wire:model="dogname"
                                         style="width: 150%;" placeholder="Search for dogs...">
                                 </div>
                                 <a data-bs-toggle="modal" data-bs-target="#info-header-modal"

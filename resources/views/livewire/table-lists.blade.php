@@ -399,7 +399,7 @@
                                     <div class="table-responsive-xl" id="claim_list" wire:ignore.self>
                                         <div class="d-flex align-items-center">
                                             <div class="search-container ms-auto">
-                                                <input type="text" class="cl_search form-control " id="searchtb"
+                                                <input type="text" class="cl_search form-control " id="searchtb" wire:model="searchDogClaim" wire:keydown="changeStatus"
                                                     style="width: 150%;" placeholder="Search for dogs...">
                                             </div>
                                             <h3 class="mb-4 d-flex align-items-center ms-auto"></h3>
@@ -409,8 +409,8 @@
                                                 <label for="addressFilter"
                                                     style="white-space: nowrap; margin-right: 10px;">Filter by
                                                     Proof</label>
-                                                <select id="addressFilter" class="form-select ">
-                                                    <option value="">All</option>
+                                                <select id="addressFilter" class="form-select" wire:model="dog_proof"  wire:change="changeStatus">
+                                                    <option value="all">All</option>
                                                     <option value="with">With Proof</option>
                                                     <option value="without">Without Proof</option>
                                                 </select>
@@ -582,7 +582,7 @@
                                                 </tbody>
                                             </table>
                                         </div>
-                                        <div class="card-footer mt-3">
+                                        {{-- <div class="card-footer mt-3">
                                             <div class="table-footer">
                                                 <nav>
                                                     <div class="page-item cl_jPaginateBack">
@@ -602,7 +602,10 @@
                                                     </div>
                                                 </nav>
                                             </div>
-                                        </div>
+                                        </div> --}}
+                                        @if($claimlist instanceof \Illuminate\Pagination\LengthAwarePaginator)
+                                         {{ $claimlist->links() }}
+                                        @endif
                                     </div>
                                 </div> <!-- end card-body-->
                             </div>
@@ -615,7 +618,7 @@
                                     <div class="" id="round_lists" wire:ignore.self>
                                         <div class="d-flex align-items-center ">
                                             <div class="search-container ms-auto">
-                                                <input type="text" class="c_search form-control " id="searchtb"
+                                                <input type="text" class="c_search form-control " id="searchtb" wire:model="ticket_num" wire:keydown="changeStatus"
                                                     style="width: 150%;" placeholder="Search rounds...">
                                             </div>
                                             <h3 class="mb-4 d-flex align-items-center ms-auto"></h3>
@@ -676,16 +679,20 @@
                                                                     </h5>
                                                                 </td>
                                                                 <td class="action text-black">
-                                                                    @if ($data['is_approved'] == null)
+
+                                                                    @if (isset($data['is_approved']))
+                                                                
+                                                                    @else
                                                                         <a href="javascript:void(0);"
-                                                                            wire:click="getrounds({{ $data['id'] ?? 0 }})"
-                                                                            class="action-icon" data-bs-toggle="modal"
-                                                                            data-bs-target="#primary-header-modal"> <i
-                                                                                class="mdi mdi-square-edit-outline"></i></a>
+                                                                        wire:click="getrounds({{ $data['id'] ?? 0 }})"
+                                                                        class="action-icon" data-bs-toggle="modal"
+                                                                        data-bs-target="#primary-header-modal"> <i
+                                                                            class="mdi mdi-square-edit-outline"></i></a>
                                                                     @endif
                                                                     <a href="javascript:void(0);" class="action-icon">
                                                                         <i class="mdi mdi-delete"
                                                                             onclick="deleteRounds({{ $data['id'] ?? 0 }})"></i></a>
+                                                                 
                                                                 </td>
                                                             </tr>
                                                         @endforeach
@@ -693,7 +700,7 @@
                                                 </tbody>
                                             </table>
                                         </div>
-                                        <div class="card-footer mt-3">
+                                        {{-- <div class="card-footer mt-3">
                                             <div class="table-footer" wire:ignore>
                                                 <nav>
                                                     <div class="page-item claimjPaginateBack">
@@ -713,7 +720,10 @@
                                                     </div>
                                                 </nav>
                                             </div>
-                                        </div>
+                                        </div> --}}
+                                        @if($reqrounds instanceof \Illuminate\Pagination\LengthAwarePaginator)
+                                        {{ $reqrounds->links() }}
+                                       @endif
                                     </div>
                                 </div> <!-- end card-body-->
                             </div>
@@ -725,12 +735,14 @@
                                         <div class="px-3">
                                             <h3>Adoption List</h3>
                                             <div class="table-responsive-xl" id="adoption_list" wire:ignore.self>
-                                                <div class="search-container ms-auto">
-                                                    <input type="text" class="search form-control " id="searchtb"
-                                                        style="width: 150%;" placeholder="Search for dogs...">
-                                                </div>
+                                                <div class="d-flex align-items-center ">
+                                                    <div class="search-container ms-auto">
+                                                        <input type="text" class="search form-control " id="searchtb"  wire:model="changeName" wire:keydown="changeStatus"
+                                                            style="width: 150%;" placeholder="Search for dogs...">
+                                                    </div>
 
-                                                <h3 class="mb-4 d-flex align-items-center ms-auto"></h3>
+                                                    <h3 class="mb-4 d-flex align-items-center ms-auto"></h3>
+                                                </div>
                                                 <div class="table-container">
 
                                                     <table class="table table-centered table-nowrap mb-0">
@@ -825,7 +837,7 @@
                                                         </tbody>
                                                     </table>
                                                 </div>
-                                                <div class="card-footer mt-3">
+                                                {{-- <div class="card-footer mt-3">
 
                                                     <div class="table-footer">
                                                         <nav>
@@ -846,7 +858,10 @@
                                                             </div>
                                                         </nav>
                                                     </div>
-                                                </div>
+                                                </div> --}}
+                                                @if($adoptionlist instanceof \Illuminate\Pagination\LengthAwarePaginator)
+                                                {{ $adoptionlist->links() }}
+                                               @endif
                                             </div>
                                         </div> <!-- end card-body-->
                                     </div> <!-- end card-->
@@ -1728,9 +1743,9 @@
                     function areinitializeList() {
                         console.log(adoptionlist);
                         console.log('reinit');
-                        adoptionlist = new List('adoption_list', a_options);
-                        cdoptionlist = new List('round_lists', c_options);
-                        cl_list = new List('claim_list', cl_options);
+                        // adoptionlist = new List('adoption_list', a_options);
+                        // cdoptionlist = new List('round_lists', c_options);
+                        // cl_list = new List('claim_list', cl_options);
                     }
 
 
