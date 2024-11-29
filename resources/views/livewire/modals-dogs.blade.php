@@ -986,9 +986,8 @@
                                                             </button>
                                                         @else
                                                             <button type="button"
-                                                                class="mt-3 btn btn-outline-success rounded-pill w-100">
-                                                                <i class="uil-heart"></i> Thank you for reporting <i
-                                                                    class="uil-heart"></i></button>
+                                                                class="mt-3 btn btn-outline-success rounded-pill w-100" onclick="cancellostDog()">
+                                                                 Cancel Lost Dog </button>
                                                         @endif
                                                     @endif
                                                 @endif
@@ -1060,9 +1059,7 @@
                                                             <div class="mb-3">
                                                                 <label class="form-label" for="validationCustom02"
                                                                     id="proof"> </label>
-                                                                <input type="file" class="form-control"
-                                                                    id="validationCustom02" placeholder=""
-                                                                    accept="image/*" wire:model="c_proof">
+                                                                <input type="file" class="form-control" id="validationCustom02file" placeholder="" accept="image/*" wire:model="c_proof" onchange="validateImage()" />
                                                                 <div class="valid-feedback">
                                                                     Looks good!
                                                                 </div>
@@ -1451,6 +1448,61 @@
         </div>
     </div>
     <script>
+        function validateImage() {
+            const fileInput = document.getElementById('validationCustom02file');
+            const file = fileInput.files[0];
+
+            if (file) {
+                const fileType = file.type.split('/')[0]; // Get the type (e.g., image)
+
+                // Check if the file is an image
+                if (fileType !== 'image') {
+                    // Display SweetAlert error message
+                     Swal.fire({
+                           icon: 'error',
+                        title: 'Invalid file type',
+                        text: 'Only images are allowed!',
+                        toast: true,  // Enable toast mode
+                        position: 'top-end',  // Position the toast at the top-right
+                        showConfirmButton: false,  // Hide the confirm button
+                        timer: 3000,  // Toast duration (3 seconds)
+                        timerProgressBar: true,  // Show progress bar
+                        didOpen: (toast) => {
+                            toast.addEventListener('mouseenter', Swal.stopTimer)
+                            toast.addEventListener('mouseleave', Swal.resumeTimer)
+                        }
+                    });
+
+                    // Clear the file input
+                    fileInput.value = '';
+                }
+            }
+        }
+
+        function cancellostDog(){
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "Do you really want to cancel?",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, cancel it!',
+                cancelButtonText: 'No'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Livewire.dispatch('cancelPosing');
+                    Swal.fire(
+                        'Cancelled!',
+                        'The lost dog report has been successfully canceled.',
+                        'success'
+                    );
+                    closeAllModals();
+                }
+            });
+        }
+
+
         function validateFiles(event) {
             const files = event.target.files;
             const validImageTypes = ['image/jpeg', 'image/png', 'image/gif'];
@@ -1495,6 +1547,7 @@
                         text: 'The request has been approved successfully.',
                         confirmButtonColor: '#28a745'
                     });
+                    closeAllModals();
                 }
             });
         }
@@ -1517,6 +1570,8 @@
                         text: 'The request has been rejected successfully.',
                         confirmButtonColor: '#d33'
                     });
+                    closeAllModals();
+
                 }
             });
         }
@@ -1685,31 +1740,38 @@
     </script>
     <script>
         var toggledclaim = false;
-        document.getElementById('create_aa').addEventListener('show.bs.modal', function() {
-            document.getElementById('annc_active').classList.add('active')
-        });
-        document.getElementById('create_aa').addEventListener('hide.bs.modal', function() {
-            document.getElementById('annc_active').classList.remove('active')
-            activeElement.classList.add('active');
-        });
 
-        document.getElementById('request_rounds').addEventListener('show.bs.modal', function() {
-            document.getElementById('rounds_active').classList.add('active')
-        });
+        try{
+                document.getElementById('create_aa').addEventListener('show.bs.modal', function() {
+                document.getElementById('annc_active').classList.add('active')
+            });
+            document.getElementById('create_aa').addEventListener('hide.bs.modal', function() {
+                document.getElementById('annc_active').classList.remove('active')
+                activeElement.classList.add('active');
+            });
 
-        document.getElementById('request_rounds').addEventListener('hide.bs.modal', function() {
-            document.getElementById('rounds_active').classList.remove('active')
-            activeElement.classList.add('active');
-        });
+            document.getElementById('request_rounds').addEventListener('show.bs.modal', function() {
+                document.getElementById('rounds_active').classList.add('active')
+            });
 
-        document.getElementById('lostandfounddog').addEventListener('show.bs.modal', function() {
-            document.getElementById('lostandfoudSelect').classList.add('active')
-        });
+            document.getElementById('request_rounds').addEventListener('hide.bs.modal', function() {
+                document.getElementById('rounds_active').classList.remove('active')
+                activeElement.classList.add('active');
+            });
 
-        document.getElementById('lostandfounddog').addEventListener('hide.bs.modal', function() {
-            document.getElementById('lostandfoudSelect').classList.remove('active')
-            activeElement.classList.add('active');
-        });
+            document.getElementById('lostandfounddog').addEventListener('show.bs.modal', function() {
+                document.getElementById('lostandfoudSelect').classList.add('active')
+            });
+
+            document.getElementById('lostandfounddog').addEventListener('hide.bs.modal', function() {
+                    document.getElementById('lostandfoudSelect').classList.remove('active')
+                    activeElement.classList.add('active');
+            });
+
+        }catch(error){
+
+        }
+      
 
 
         function closeAllModals() {

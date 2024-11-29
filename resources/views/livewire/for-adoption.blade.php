@@ -25,9 +25,16 @@
                                     <div class="text-center">
                                         <a data-bs-toggle="modal" data-bs-target="#viewdog" onclick="dog_adopt_view('{{ $d['dog_id_unique'] }}')"
                                             wire:click="adoptionform('{{ $d['dog_id_unique'] }}')">
-                                            <img src="{{ asset('storage/' . $images[0]) }}" class="img-thumbnail"
+                                            @if(isset($images[0]))
+                                                <img src="{{ asset('storage/' . $images[0]) }}" class="img-thumbnail"
                                                 alt="friend"
-                                                style="min-width: 300px; min-height: 170px; width: 300px; height: 170px; object-fit: cover;"></a>
+                                                style="min-width: 300px; min-height: 170px; width: 300px; height: 170px; object-fit: cover;">
+                                            @else
+                                                <img src="https://placehold.co/600x400" class="img-thumbnail"
+                                                alt="friend"
+                                                style="min-width: 300px; min-height: 170px; width: 300px; height: 170px; object-fit: cover;">
+                                            @endif
+                                            </a>
 
                                         <h4 class="mt-2 dogname"><a data-bs-toggle="modal" data-bs-target="#viewdog" onclick="dog_adopt_view('{{ $d['dog_id_unique'] }}')"
                                                 wire:click="adoptionform('{{ $d['dog_id_unique'] }}')"

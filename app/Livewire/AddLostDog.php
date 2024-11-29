@@ -11,6 +11,8 @@ use App\Models\AnimalListStatus;
 use App\Models\DogBreed;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
+use Throwable;
+
 
 class AddLostDog extends Component
 {
@@ -40,34 +42,39 @@ class AddLostDog extends Component
     }
     public function updateForm()
     {
-        $finddog = AnimalList::where('dog_id_unique', $this->dog_unique)->where('isActive', 1)->first();
-        $dogImages = session()->get('dog_images', []);
-
-        if ($finddog) {
-            if ($dogImages) {
-                $finddog->animal_images = json_encode($dogImages);
+        try{
+            $finddog = AnimalList::where('dog_id_unique', $this->dog_unique)->where('isActive', 1)->first();
+            $dogImages = session()->get('dog_images', []);
+    
+            if ($finddog) {
+                if ($dogImages) {
+                    $finddog->animal_images = json_encode($dogImages);
+                }
+                $finddog->dog_name = $this->dog_name;
+                $finddog->dog_id_unique = $this->dog_unique;
+                $finddog->breed = $this->breed;
+                $finddog->color = $this->color;
+                $finddog->gender = $this->gender;
+                $finddog->barangay = $this->barangay_f;
+                $finddog->location_found = $this->location_found;
+                $finddog->date_found = $this->date_found;
+                $finddog->description = $this->description;
+                $finddog->contact_name = $this->contact_name;
+                $finddog->contact_number = $this->contact_number;
+                $finddog->isActive = 1;
+                $finddog->save();
             }
-            $finddog->dog_name = $this->dog_name;
-            $finddog->dog_id_unique = $this->dog_unique;
-            $finddog->breed = $this->breed;
-            $finddog->color = $this->color;
-            $finddog->gender = $this->gender;
-            $finddog->report_type = $this->report_type;
-            $finddog->barangay = $this->barangay_f;
-            $finddog->location_found = $this->location_found;
-            $finddog->date_found = $this->date_found;
-            $finddog->description = $this->description;
-            $finddog->contact_name = $this->contact_name;
-            $finddog->contact_number = $this->contact_number;
-            $finddog->isActive = 1;
-            $finddog->save();
+        }catch(Throwable $r){
+            
         }
+
 
         $this->clearDogImages();
         $this->dispatch('dogUpdate', 'Data has been successfully updated!');
     }
     public function adddog()
     {
+
         //clear the variables
         $this->updatedog = false;
         $this->dog_unique = null;
@@ -84,24 +91,38 @@ class AddLostDog extends Component
     }
     public function editDoggo($id)
     {
-        $this->updatedog = true;
-        $finddog = AnimalList::where('dog_id_unique', $id)->where('isActive', 1)->first();
-        $this->dog_unique = $finddog->dog_id_unique;
-        $this->dog_name = $finddog->dog_name;
-        $this->breed = $finddog->breed;
-        $this->color = $finddog->color;
-        $this->gender = $finddog->gender;
-        $this->barangay_f = $finddog->barangay;
-        $this->description = $finddog->description;
-        $this->date_found = $finddog->date_found;
-        $this->location_found = $finddog->location_found;
-        $this->contact_name = $finddog->contact_name;
-        $this->contact_number = $finddog->contact_number;
+        try{
+            $this->updatedog = true;
+            $finddog = AnimalList::where('dog_id_unique', $id)->where('isActive', 1)->first();
+            $this->dog_unique = $finddog->dog_id_unique;
+            $this->dog_name = $finddog->dog_name;
+            $this->breed = $finddog->breed;
+            $this->color = $finddog->color;
+            $this->gender = $finddog->gender;
+            $this->barangay_f = $finddog->barangay;
+            $this->description = $finddog->description;
+            $this->date_found = $finddog->date_found;
+            $this->location_found = $finddog->location_found;
+            $this->contact_name = $finddog->contact_name;
+            $this->contact_number = $finddog->contact_number;
+        }catch(Throwable $r){
+            
+        }
+
     }
     public function submitForm()
     {
-        $dogImages = session()->get('dog_images', []);
+        try{
+
+                    $dogImages = session()->get('dog_images', []);
         $uniqueId = Str::uuid();
+
+
+        if(Auth::user()->type == 1){
+            $this->report_type = 3;
+        }else{
+            $this->report_type = 2;
+        }
 
         $dog = AnimalList::create([
             'dog_name' => $this->dog_name,
@@ -140,6 +161,10 @@ class AddLostDog extends Component
             $this->dispatch('dogSaved', 'Data has been successfully saved!');
         }
         
+        }catch(Throwable $r){
+            
+        }
+
         $this->dispatch('fetchdatanotif');
         $this->clearDogImages();
         $this->resetForm();
@@ -156,7 +181,8 @@ class AddLostDog extends Component
 
     public function uploadImages(Request $request)
     {
-        if ($request->hasFile('file')) {
+                try{
+if ($request->hasFile('file')) {
             $file = $request->file('file');
             $filePath = $file->store('animal_images', 'public');
 
@@ -170,9 +196,15 @@ class AddLostDog extends Component
                 'message' => 'File uploaded successfully!'
             ]);
         }
-        return response()->json([
+ 
+            
+        }catch(Throwable $r){
+                   return response()->json([
             'message' => 'No file uploaded.'
         ], 400);
+        }
+        
+        
     }
 
     public function resetForm()

@@ -31,7 +31,7 @@ class TableLists extends Component
     }
     public function fetchdata()
     {
-        // dd('hhe');
+   
         $this->adoptionlist = AnimalListStatus::whereIn('status', [4, 5, 1])
             ->join('adoption_forms', 'adoption_forms.dog_id_unique', '=', 'animal_list_statuses.animal_id')
             ->leftJoin('statuses', 'statuses.id', '=', 'animal_list_statuses.status')
@@ -77,19 +77,25 @@ class TableLists extends Component
     }
     public function getrounds($id)
     {
-        $this->roundsid = $id;
+        try {
+             $this->roundsid = $id;
 
         $this->activerounds = Rounds::where('is_active', 1)
             ->leftJoin('users', 'users.id', '=', 'rounds.user_id')
-            ->select('users.name', 'rounds.*',)
+            ->select('users.name', 'rounds.*')
             ->where('rounds.id', $id)
             ->first();
         // dd($this->reqrounds);
+        } catch (Throwable $r) {
+        }
+       
         $this->dispatch('reinit_table');
     }
     public function lostclaim($dog_id)
     {
-        $this->dog_unique = $dog_id;
+        
+        try {
+             $this->dog_unique = $dog_id;
 
         $this->activedog = AnimalList::where('dog_id_unique', $dog_id)->where('animal_lists.isActive', true)
             ->leftJoin('dog_breeds', 'dog_breeds.id', '=', 'animal_lists.breed')
@@ -97,6 +103,9 @@ class TableLists extends Component
             ->first();
 
         $this->claimdetails = DogClaim::where('dog_id_unique', $dog_id)->where('isActive', true)->first();
+        } catch (Throwable $r) {
+        }
+       
         // dd($this->activedog,$this->claimdetails);
         $this->dispatch('reinit_table');
     }

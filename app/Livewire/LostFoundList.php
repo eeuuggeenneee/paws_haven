@@ -22,7 +22,7 @@ class LostFoundList extends Component
     use LivewireAlert;
     use WithPagination;
 
-
+    protected $paginationTheme = 'bootstrap';
     protected $listeners = ['fetchdatanotif' => 'fetchdataAdopt', 'dog_viewed'];
     public function mount()
     {

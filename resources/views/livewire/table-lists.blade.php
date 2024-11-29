@@ -1487,26 +1487,26 @@
             var htmlHeight = document.documentElement.clientHeight;
             var cardHeight = htmlHeight - 300;
 
-            document.getElementById('claimcard').style.minHeight = cardHeight + 'px';
-            document.getElementById('claimcard').style.maxHeight = cardHeight + 'px';
+            // document.getElementById('claimcard').style.minHeight = cardHeight + 'px';
+            // document.getElementById('claimcard').style.maxHeight = cardHeight + 'px';
 
-            document.getElementById('claim_list').style.minHeight = (cardHeight - 50) + 'px';
-            document.getElementById('claim_list').style.maxHeight = (cardHeight - 50) + 'px';
-            document.getElementById('claim_list').style.overflow = 'hidden';
+            // document.getElementById('claim_list').style.minHeight = (cardHeight - 50) + 'px';
+            // document.getElementById('claim_list').style.maxHeight = (cardHeight - 50) + 'px';
+            // document.getElementById('claim_list').style.overflow = 'hidden';
 
-            document.getElementById('roundscard').style.minHeight = cardHeight + 'px';
-            document.getElementById('roundscard').style.maxHeight = cardHeight + 'px';
+            // document.getElementById('roundscard').style.minHeight = cardHeight + 'px';
+            // document.getElementById('roundscard').style.maxHeight = cardHeight + 'px';
 
-            document.getElementById('round_lists').style.minHeight = (cardHeight - 50) + 'px';
-            document.getElementById('round_lists').style.maxHeight = (cardHeight - 50) + 'px';
-            document.getElementById('round_lists').style.overflow = 'hidden';
+            // document.getElementById('round_lists').style.minHeight = (cardHeight - 50) + 'px';
+            // document.getElementById('round_lists').style.maxHeight = (cardHeight - 50) + 'px';
+            // document.getElementById('round_lists').style.overflow = 'hidden';
 
-            document.getElementById('adoptcard').style.minHeight = cardHeight + 'px';
-            document.getElementById('adoptcard').style.maxHeight = cardHeight + 'px';
+            // document.getElementById('adoptcard').style.minHeight = cardHeight + 'px';
+            // document.getElementById('adoptcard').style.maxHeight = cardHeight + 'px';
 
-            document.getElementById('adoption_list').style.minHeight = (cardHeight - 50) + 'px';
-            document.getElementById('adoption_list').style.maxHeight = (cardHeight - 50) + 'px';
-            document.getElementById('adoption_list').style.overflow = 'hidden';
+            // document.getElementById('adoption_list').style.minHeight = (cardHeight - 50) + 'px';
+            // document.getElementById('adoption_list').style.maxHeight = (cardHeight - 50) + 'px';
+            // document.getElementById('adoption_list').style.overflow = 'hidden';
 
 
             function deleteClaim(id) {

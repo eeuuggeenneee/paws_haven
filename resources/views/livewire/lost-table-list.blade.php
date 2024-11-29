@@ -45,16 +45,7 @@
             /* Add ellipsis (...) for overflowing content */
         }
 
-        .pagination .pager li {
-            display: inline-block;
-            line-height: 1.2;
-        }
-
-        .pagination .pager li.active a {
-            font-weight: 700;
-            border-bottom: 3px solid #057ed8;
-            color: #000;
-        }
+   
         .table-container {
             overflow-x: auto;
             /* Enables horizontal scrolling */
@@ -68,18 +59,7 @@
             min-width: 100%;
             /* Makes sure the table takes up at least the full width of its container */
         }
-        .pagination a {
-            text-decoration: none;
-            color: #66696a;
-            padding: 0.3333333333ex 0.25em 0.2ex;
-            font-size: 16px;
-        }
-
-        .pagination .prev,
-        .pagination .next {
-            width: 8px;
-            height: 16px;
-        }
+       
 
         .search-container {
             position: absolute;
@@ -171,8 +151,8 @@
                         <div class="table-responsive-xl" id="lost_list" wire:ignore.self>
                             <div class="d-flex align-items-center w-100">
                                 <div class="search-container">
-                                    <input type="text" class="search form-control" id="searchtb"
-                                        style="width: 150%;" placeholder="Search for dogs...">
+                                    <input type="text" class="search form-control" id="searchtb" wire:model="dogname"  wire:keydown="changeStatus"
+                                        style="width: 150%;" placeholder="Search for dogs and breed">
                                 </div>
 
                                 <!-- Move the Add Dog button to the right -->
@@ -190,66 +170,66 @@
                                 <i class="mdi mdi-plus-circle me-2"></i> Add Dog
                             </a>
                             <div class="table-container">
-                            <table class="table table-centered w-100 dt-responsive nowrap" id="animals-datatable">
-                                <thead style="background-color: #0396a6;">
-                                    <tr>
-                                        <th class="all text-white">Dog Name</th>
-                                        <th class="text-white">Breed</th>
-                                        <th class="text-white">Color</th>
-                                        <th class="text-white">Status</th>
+                                <table class="table table-centered w-100 dt-responsive nowrap" id="animals-datatable">
+                                    <thead style="background-color: #0396a6;">
+                                        <tr>
+                                            <th class="all text-white">Dog Name</th>
+                                            <th class="text-white">Breed</th>
+                                            <th class="text-white">Color</th>
+                                            <th class="text-white">Status</th>
 
-                                        <th style="width: 120px;" class="text-white">Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody class="list">
-                                    @if (isset($doglist))
-                                        @foreach ($doglist as $item)
-                                            @php
-                                                $images = json_decode($item['animal_images']);
-                                            @endphp
-                                            <tr>
-                                                <td class="dog_name">
-                                                    @if(isset($images[0]))
-                                                        <img src="{{ asset('storage/' . $images[0]) }}" 
-                                                             class="img-thumbnail" 
-                                                             alt="friend" 
-                                                             style="min-width: 70px; min-height: 50px; width: 70px; height: 50px; object-fit: cover;">
-                                                    @else
-                                                        <img src="https://placehold.co/600x400" 
-                                                             class="img-thumbnail" 
-                                                             alt="friend" 
-                                                             style="min-width: 70px; min-height: 50px; width: 70px; height: 50px; object-fit: cover;">
-                                                    @endif
-                                                    <p class="m-0 d-inline-block align-middle font-16">
-                                                        <a class="text-black">{{ $item['dog_name'] }}</a>
-                                                        <br />
-                                                    </p>
-                                                </td>
-                                                <td class="breed text-black">
-                                                    {{ $item['breed_name'] }}
-                                                </td>
-                                                <td class="color text-black">
-                                                    {{ $item['color'] }}
-                                                </td>
-                                                <td class="description text-black">
-                                                    {{ $item['status_name'] }}
-                                                </td>
-                                                <td class="table-action action text-black">
+                                            <th style="width: 120px;" class="text-white">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="list">
+                                        @if (isset($doglist))
+                                            @foreach ($doglist as $item)
+                                                @php
+                                                    $images = json_decode($item['animal_images']);
+                                                @endphp
+                                                <tr>
+                                                    <td class="dog_name">
+                                                        @if(isset($images[0]))
+                                                            <img src="{{ asset('storage/' . $images[0]) }}" 
+                                                                class="img-thumbnail" 
+                                                                alt="friend" 
+                                                                style="min-width: 70px; min-height: 50px; width: 70px; height: 50px; object-fit: cover;">
+                                                        @else
+                                                            <img src="https://placehold.co/600x400" 
+                                                                class="img-thumbnail" 
+                                                                alt="friend" 
+                                                                style="min-width: 70px; min-height: 50px; width: 70px; height: 50px; object-fit: cover;">
+                                                        @endif
+                                                        <p class="m-0 d-inline-block align-middle font-16">
+                                                            <a class="text-black">{{ $item['dog_name'] }}</a>
+                                                            <br />
+                                                        </p>
+                                                    </td>
+                                                    <td class="breed text-black">
+                                                        {{ $item['breed_name'] }}
+                                                    </td>
+                                                    <td class="color text-black">
+                                                        {{ $item['color'] }}
+                                                    </td>
+                                                    <td class="description text-black">
+                                                        {{ $item['status_name'] }}
+                                                    </td>
+                                                    <td class="table-action action text-black">
 
-                                                    <a data-bs-toggle="modal" data-bs-target="#lostandfounddog"
-                                                        wire:click="editDog('{{ $item['dog_id_unique'] }}')"
-                                                        class="action-icon"> <i
-                                                            class="mdi mdi-square-edit-outline"></i></a>
-                                                    <a onclick="confirmDelete('{{ $item['dog_id_unique'] }}')"
-                                                        class="action-icon"> <i class="mdi mdi-delete"></i></a>
-                                                </td>
-                                            </tr>
-                                        @endforeach
-                                    @endif
-                                </tbody>
-                            </table>
+                                                        <a data-bs-toggle="modal" data-bs-target="#lostandfounddog"
+                                                            wire:click="editDog('{{ $item['dog_id_unique'] }}')"
+                                                            class="action-icon"> <i
+                                                                class="mdi mdi-square-edit-outline"></i></a>
+                                                        <a onclick="confirmDelete('{{ $item['dog_id_unique'] }}')"
+                                                            class="action-icon"> <i class="mdi mdi-delete"></i></a>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        @endif
+                                    </tbody>
+                                </table>
                             </div>
-                            <div class="table-footer">
+                            {{-- <div class="table-footer">
                                 <nav>
                                     <div class="page-item jPaginateBack">
                                         <a class="page-link" href="javascript: void(0);" aria-label="Previous">
@@ -266,7 +246,10 @@
                                         </a>
                                     </div>
                                 </nav>
-                            </div>
+                            </div> --}}
+                            @if($doglist instanceof \Illuminate\Pagination\LengthAwarePaginator)
+                                {{ $doglist->links() }}
+                            @endif
                         </div>
                     </div> <!-- end card-body-->
                 </div> <!-- end card-->
@@ -279,7 +262,7 @@
                         <div class="table-responsive-xl" id="lost_list_dog2" wire:ignore.self>
                             <div class="d-flex align-items-center w-100">
                                 <div class="search-container">
-                                    <input type="text" class="search_dog2 form-control" id="searchtb"
+                                    <input type="text" class="search_dog2 form-control" id="searchtb" wire:model="dogname2" wire:keydown="changeStatus"
                                         style="width: 150%;" placeholder="Search for dogs...">
                                 </div>
                                 <h3 class="mb-4 d-flex align-items-center ms-auto"></h3>
@@ -360,7 +343,7 @@
                                 </tbody>
                             </table>
                             </div>
-                            <div class="table-footer">
+                            {{-- <div class="table-footer">
                                 <nav>
                                     <div class="page-item dog2_jPaginateBack">
                                         <a class="page-link" href="javascript: void(0);" aria-label="Previous">
@@ -377,7 +360,10 @@
                                         </a>
                                     </div>
                                 </nav>
-                            </div>
+                            </div> --}}
+                            @if($doglist2 instanceof \Illuminate\Pagination\LengthAwarePaginator)
+                                {{ $doglist2->links() }}
+                            @endif
                         </div>
                     </div> <!-- end card-body-->
                 </div> <!-- end card-->
@@ -429,7 +415,18 @@
                 }
             });
         }
-
+        function clearModal() {
+        // dogList = new List('lost_list', options);
+        // dogList2 = new List('lost_list_dog2', options2);
+            var modals = document.querySelectorAll('.modal');
+            modals.forEach(function(modal) {
+                var bsModal = bootstrap.Modal.getInstance(
+                    modal); // Get the modal instance
+                if (bsModal) {
+                    bsModal.hide(); // Hide the modal
+                }
+            });
+        }
         document.addEventListener('DOMContentLoaded', function() {
 
             document.addEventListener('livewire:init', function() {
@@ -461,8 +458,8 @@
 
                 function reinitializeList() {
 
-                    dogList = new List('lost_list', options);
-                    dogList2 = new List('lost_list_dog2', options2);
+                    // dogList = new List('lost_list', options);
+                    // dogList2 = new List('lost_list_dog2', options2);
 
                     var modals = document.querySelectorAll('.modal');
                     modals.forEach(function(modal) {
@@ -474,52 +471,52 @@
                     });
                 }
 
-                reinitializeList();
+                // reinitializeList();
 
-                document.querySelector('.search').addEventListener('input', function(event) {
-                    dogList.search(event.target.value); // Filter results based on the search input
-                });
-                document.querySelector('.search_dog2').addEventListener('input', function(event) {
-                    dogList2.search(event.target.value); // Filter results based on the search input
-                });
+                // document.querySelector('.search').addEventListener('input', function(event) {
+                //     dogList.search(event.target.value); // Filter results based on the search input
+                // });
+                // document.querySelector('.search_dog2').addEventListener('input', function(event) {
+                //     dogList2.search(event.target.value); // Filter results based on the search input
+                // });
 
-                $('.jPaginateNext').on('click', function() {
-                    var list = $('.pagination').find('li');
-                    $.each(list, function(position, element) {
-                        if ($(element).is('.active')) {
-                            $(list[position + 1]).trigger('click');
-                        }
-                    })
-                });
-
-
-                $('.jPaginateBack').on('click', function() {
-                    var list = $('.pagination').find('li');
-                    $.each(list, function(position, element) {
-                        if ($(element).is('.active')) {
-                            $(list[position - 1]).trigger('click');
-                        }
-                    })
-                });
-
-                $('.dog2_jPaginateNext').on('click', function() {
-                    var list = $('.pagination').find('li');
-                    $.each(list, function(position, element) {
-                        if ($(element).is('.active')) {
-                            $(list[position + 1]).trigger('click');
-                        }
-                    })
-                });
+                // $('.jPaginateNext').on('click', function() {
+                //     var list = $('.pagination').find('li');
+                //     $.each(list, function(position, element) {
+                //         if ($(element).is('.active')) {
+                //             $(list[position + 1]).trigger('click');
+                //         }
+                //     })
+                // });
 
 
-                $('.dog2_jPaginateBack').on('click', function() {
-                    var list = $('.pagination').find('li');
-                    $.each(list, function(position, element) {
-                        if ($(element).is('.active')) {
-                            $(list[position - 1]).trigger('click');
-                        }
-                    })
-                });
+                // $('.jPaginateBack').on('click', function() {
+                //     var list = $('.pagination').find('li');
+                //     $.each(list, function(position, element) {
+                //         if ($(element).is('.active')) {
+                //             $(list[position - 1]).trigger('click');
+                //         }
+                //     })
+                // });
+
+                // $('.dog2_jPaginateNext').on('click', function() {
+                //     var list = $('.pagination').find('li');
+                //     $.each(list, function(position, element) {
+                //         if ($(element).is('.active')) {
+                //             $(list[position + 1]).trigger('click');
+                //         }
+                //     })
+                // });
+
+
+                // $('.dog2_jPaginateBack').on('click', function() {
+                //     var list = $('.pagination').find('li');
+                //     $.each(list, function(position, element) {
+                //         if ($(element).is('.active')) {
+                //             $(list[position - 1]).trigger('click');
+                //         }
+                //     })
+                // });
 
 
                 Livewire.on('editDoggo', event => {
@@ -530,7 +527,7 @@
                 });
 
                 Livewire.on('reinnitdata', event => {
-                    reinitializeList();
+                    // reinitializeList();
                 });
 
                 Livewire.on('dogUpdate', event => {
@@ -541,7 +538,8 @@
                         confirmButtonText: 'Okay'
                     }).then((result) => {
                         if (result.isConfirmed) {
-                            reinitializeList();
+                            // reinitializeList();
+                            closeAllModals();
                         }
                     });
                 });
@@ -553,9 +551,11 @@
                         confirmButtonText: 'Okay'
                     }).then((result) => {
                         if (result.isConfirmed) {
-                            reinitializeList();
+                            // reinitializeList();
+                            closeAllModals();
                         }
                     });
+
 
                 });
 
@@ -568,7 +568,7 @@
                         confirmButtonText: 'Okay'
                     }).then((result) => {
                         if (result.isConfirmed) {
-                            reinitializeList();
+                            // reinitializeList();
 
                         }
                     });
@@ -582,7 +582,8 @@
                     }).then((result) => {
                         if (result.isConfirmed) {
                             // Reload the page
-                            reinitializeList();
+                            // reinitializeList();
+                            closeAllModals();
                         }
                     });
 

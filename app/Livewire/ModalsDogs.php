@@ -71,7 +71,7 @@ class ModalsDogs extends Component
     public $edit_message;
     public $editA_id;
 
-    protected $listeners = ['editDoggo', 'activedog', 'clearData', 'saveDogData', 'editAnnouncement', 'deleteAnnoucement'];
+    protected $listeners = ['cancelPosing','editDoggo', 'activedog', 'clearData', 'saveDogData', 'editAnnouncement', 'deleteAnnoucement'];
 
     public function deleteAnnoucement($a_id)
     {
@@ -192,25 +192,29 @@ class ModalsDogs extends Component
 
     public function saveRounds()
     {
-        $rounds = Rounds::create([
-            'address' => $this->fulladdress,
-            'barangay' => $this->barangay,
-            // 'specific_location' => $this->specificloc,
-            'reason' => $this->reason,
-            'schedule' => ' ',
-            'contact' => $this->contact,
-            'is_active' => 1,
-            'user_id' => Auth::user()->id,
-        ]);
-
-        $status = RoundsStatus::create([
-            'rounds_id' => $rounds->id,
-            'is_active' => 1,
-        ]);
-
-        $formattedId = str_pad($rounds->id, 4, '0', STR_PAD_LEFT);
-        $ticket = 'R' . $rounds->created_at->format('ym') . '-' . $formattedId;
-        $this->reset(['fulladdress', 'barangay', 'contact', 'reason']);
+        try {
+                $rounds = Rounds::create([
+                'address' => $this->fulladdress,
+                'barangay' => $this->barangay,
+                // 'specific_location' => $this->specificloc,
+                'reason' => $this->reason,
+                'schedule' => ' ',
+                'contact' => $this->contact,
+                'is_active' => 1,
+                'user_id' => Auth::user()->id,
+            ]);
+    
+            $status = RoundsStatus::create([
+                'rounds_id' => $rounds->id,
+                'is_active' => 1,
+            ]);
+    
+            $formattedId = str_pad($rounds->id, 4, '0', STR_PAD_LEFT);
+            $ticket = 'R' . $rounds->created_at->format('ym') . '-' . $formattedId;
+            $this->reset(['fulladdress', 'barangay', 'contact', 'reason']);
+        } catch (Throwable $r) {
+        }
+        
         $this->dispatch('saveRounds', 'Your rounds request has been successfully saved! Please expect a call from the pound when your request is approved. Thank you!', $ticket);
         $this->dispatch('fetchdatanotif');
     }
@@ -237,6 +241,12 @@ class ModalsDogs extends Component
             
         }
         
+    }
+    public function cancelPosing(){
+
+        AnimalList::where('dog_id_unique', $this->dog_unique)->where('isActive', 1)->update(['isActive' => 0]);
+        $this->dispatch('fetchdatanotif');
+
     }
     public function rejectDRequest()
     {
@@ -265,7 +275,8 @@ class ModalsDogs extends Component
     }
     public function editDoggo($id)
     {
-        $finddog = AnimalList::where('dog_id_unique', $id)->where('isActive', 1)->first();
+        try {
+              $finddog = AnimalList::where('dog_id_unique', $id)->where('isActive', 1)->first();
         $this->updatedog = true;
         $this->dog_unique = $id;
         $this->dogName = $finddog->dog_name;
@@ -274,6 +285,9 @@ class ModalsDogs extends Component
         $this->gender = $finddog->gender;
         $this->description = $finddog->description;
         $this->previmages = $finddog->animal_images;
+        } catch (Throwable $r) {
+        }
+      
     }
     public function clearData()
     {
@@ -288,7 +302,8 @@ class ModalsDogs extends Component
     }
     public function saveDogData()
     {
-        $images = [];
+        try {
+                   $images = [];
         $dog = null;
         if ($this->dogImages) {
             foreach ($this->dogImages as $image) {
@@ -344,7 +359,10 @@ class ModalsDogs extends Component
                 ]);
                 $this->dispatch('dogSaved', 'Data has been successfully saved!');
             }
+        } 
+        } catch (Throwable $r) {
         }
+
     }
     public function mount()
     {

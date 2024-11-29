@@ -585,7 +585,7 @@ function timeAgo(createdAt) {
                 let notif = [];
 
                 event[0].forEach((element, index) => {
-                    console.log(element)
+                    // console.log(element)
                     var createdAt = new Date(element.created_at);
                     var year = createdAt.getFullYear().toString().slice(-2);
                     var month = (createdAt.getMonth() + 1).toString().padStart(2, '0');

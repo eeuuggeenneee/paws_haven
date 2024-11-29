@@ -14,6 +14,8 @@ use Livewire\WithPagination;
 
 class ForAdoption extends Component
 {
+    protected $paginationTheme = 'bootstrap';
+
     public $activedog;
     public $changeName;
     public $hovered = false;

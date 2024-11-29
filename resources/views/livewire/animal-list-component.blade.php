@@ -219,7 +219,10 @@
 
                             </table>
                             </div>
-                            <div class="table-footer">
+                            @if($doglist instanceof \Illuminate\Pagination\LengthAwarePaginator)
+                                {{ $doglist->links() }}
+                            @endif
+                            {{-- <div class="table-footer">
                                 <nav>
                                     <div class="page-item jPaginateBack">
                                         <a class="page-link" href="javascript: void(0);" aria-label="Previous">
@@ -236,7 +239,7 @@
                                         </a>
                                     </div>
                                 </nav>
-                            </div>
+                            </div> --}}
 
                             <!-- Add a search box -->
 
@@ -315,12 +318,12 @@
                                 bsModal.hide(); // Hide the modal
                             }
                         });
-                        dogList = new List('animals-datatable', options);
+                        // dogList = new List('animals-datatable', options);
 
                     }
 
 
-                    reinitializeList();
+                    // reinitializeList();
 
                     document.querySelector('.search').addEventListener('input', function(event) {
                         dogList.search(event.target.value); // Filter results based on the search input
