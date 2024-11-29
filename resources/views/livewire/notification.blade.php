@@ -242,7 +242,7 @@
                                                                     <div id="carouselExampleCaption"
                                                                         class="carousel slide" data-bs-ride="carousel">
                                                                         <div class="carousel-inner" role="listbox">
-                                                                            @if(isset($images)
+                                                                            @if(isset($images))
                                                                                 @foreach ($images as $img)
                                                                                     <div
                                                                                         class="carousel-item {{ $loop->first ? 'active' : '' }}">
@@ -355,7 +355,7 @@
                                                                         class="carousel slide"
                                                                         data-bs-ride="carousel">
                                                                         <div class="carousel-inner" role="listbox">
-                                                                            @if(isset($images)
+                                                                            @if(isset($images))
                                                                                 @foreach ($images as $img)
                                                                                     <div
                                                                                         class="carousel-item {{ $loop->first ? 'active' : '' }}">
@@ -460,7 +460,7 @@
                                                                         class="carousel slide"
                                                                         data-bs-ride="carousel">
                                                                         <div class="carousel-inner" role="listbox">
-                                                                            @if(isset($images)
+                                                                            @if(isset($images))
                                                                                 @foreach ($images as $img)
                                                                                     <div
                                                                                         class="carousel-item {{ $loop->first ? 'active' : '' }}">

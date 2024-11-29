@@ -29,7 +29,7 @@
                         @php
                             $images = json_decode($d['animal_images']);
                         @endphp
-                        <div class="col-md-6 col-xxl-3" wire:mouseover="adoptionform('{{ $d['dog_id_unique'] }}')">
+                        <div class="col-md-6 col-xxl-3" wire:mouseover="$dispatch('activedog',['{{ $d['dog_id_unique'] }}'])">
                             <div class="card status" data-address-status="{{ $d['status_name'] ?? 'N/A' }}">
                                 <div class="card-body py-3 px-3">
                                     <div class="float-end position-absolute">

@@ -20,7 +20,7 @@
                             $images = json_decode($d['animal_images']);
                         @endphp
                         <div class="col-md-6 col-xxl-3">
-                            <div class="card" wire:mouseover="adoptionform('{{ $d['dog_id_unique'] }}')">
+                            <div class="card" wire:mouseover="$dispatch('activedog',['{{ $d['dog_id_unique'] }}'])">
                                 <div class="card-body py-3 px-3">
                                     <div class="text-center">
                                         <a data-bs-toggle="modal" data-bs-target="#viewdog" onclick="dog_adopt_view('{{ $d['dog_id_unique'] }}')"

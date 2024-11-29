@@ -288,6 +288,9 @@
                             <table class="table table-centered w-100 dt-responsive nowrap" id="animals-datatable">
                                 <thead style="background-color: #0396a6;">
                                     <tr>
+                                        <th class="all text-white">Ticket Number</th>
+                                        <th class="all text-white">Requestor</th>
+                                        <th class="all text-white">Contact Number</th>
                                         <th class="all text-white">Dog Name</th>
                                         <th class="text-white">Breed</th>
                                         <th class="text-white">Color</th>
@@ -302,6 +305,15 @@
                                                 $images = json_decode($item['animal_images']);
                                             @endphp
                                             <tr>
+                                                 <td class="ticket text-black">
+                                                     F{{ $item['created_at']->format('ym') . '-' . str_pad($item['id'], 4, '0', STR_PAD_LEFT) ?? 'N/A' }}
+                                                </td>
+                                                 <td class="requuestor text-black">
+                                                    {{ $item['contact_name'] }}
+                                                </td>
+                                                   <td class="contact text-black">
+                                                    {{ $item['contact_number'] }}
+                                                </td>
                                                 <td class="dog_name">
                                                     @if(isset($images[0]))
                                                         <img src="{{ asset('storage/' . $images[0]) }}" 

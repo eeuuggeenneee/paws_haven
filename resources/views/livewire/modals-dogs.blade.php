@@ -134,7 +134,7 @@
                                                 <div id="carouselExampleIndicators" class="carousel slide"
                                                     data-bs-ride="carousel">
                                                     <div class="carousel-inner" role="listbox">
-                                                        @if(isset($images)
+                                                        @if(isset($images))
                                                              @foreach ($images as $img)
                                                                 <div
                                                                     class="carousel-item {{ $loop->first ? 'active' : '' }}">
@@ -147,7 +147,7 @@
                                                        
                                                     </div>
                                                     <div class="text-center mt-3">
-                                                        @if(isset($images)
+                                                        @if(isset($images))
                                                             @foreach ($images as $key => $img)
                                                                 <a href="javascript: void(0);">
                                                                     <img src="{{ asset('storage/' . $img) }}"
@@ -463,7 +463,7 @@
                                                 <div id="carouselExampleIndicators" class="carousel slide"
                                                     data-bs-ride="carousel">
                                                     <div class="carousel-inner" role="listbox">
-                                                        @if(isset($images)
+                                                        @if(isset($images))
                                                             @foreach ($images as $img)
                                                                 <div
                                                                     class="carousel-item {{ $loop->first ? 'active' : '' }}">
@@ -476,7 +476,7 @@
                                                         
                                                     </div>
                                                     <div class="text-center mt-3">
-                                                        @if(isset($images)
+                                                        @if(isset($images))
                                                             @foreach ($images as $key => $img)
                                                                 <a href="javascript: void(0);">
                                                                     <img src="{{ asset('storage/' . $img) }}"
@@ -2047,6 +2047,32 @@
                                 }],
                                 ['link', 'image'],
 
+                                ['clean']
+                            ]
+                        }
+                    });
+                    
+                    var quill = new Quill('#snow-editor', {
+                        theme: 'snow',
+                        modules: {
+                            imageResize: {
+                                displaySize: true
+                            },
+                            toolbar: [
+                                [{
+                                    'header': [1, 2, 3, 4, 5, 6, false]
+                                }],
+                                ['bold', 'italic', 'underline', 'strike'],
+                                [{
+                                    'color': []
+                                }, {
+                                    'background': []
+                                }],
+                                [{
+                                    'align': []
+                                }],
+                                ['link', 'image'],
+            
                                 ['clean']
                             ]
                         }
