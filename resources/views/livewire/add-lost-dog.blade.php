@@ -109,7 +109,8 @@
                                     <div class="mb-3">
                                         <label for="location_found" class="form-label">Specific Location</label>
                                         <input type="text" id="location_found" class="form-control"
-                                            placeholder="Enter specific location (optional)" wire:model="location_found">
+                                            placeholder="Enter specific location (optional)"
+                                            wire:model="location_found">
                                     </div>
                                 </div>
                             </div>
@@ -130,19 +131,20 @@
                                 </div>
                             </div>
                         </div> <!-- end col-->
-                        <div class="col-xl-6">
+                        <div class="col-xl-6" wire:ignore>
                             <div class="mb-3 mt-3 mt-xl-0">
                                 <label for="projectname" class="mb-0">Dog Images</label>
                                 <p class="text-muted font-14">Recommended thumbnail size 800x400 (px).</p>
 
                                 <!-- File Upload -->
-                                <form action="{{ route('upload.images') }}" method="post"
+                                <form action="{{ route('upload.images') }}" method="post" wire:ignore
                                     enctype="multipart/form-data" class="dropzone" id="myAwesomeDropzone"
                                     data-plugin="dropzone" data-previews-container="#file-previews"
                                     data-upload-preview-template="#uploadPreviewTemplate">
                                     @csrf
                                     <div class="fallback">
-                                        <input type="file" class="d-none" wire:model="images" multiple accept="image/*">
+                                        <input type="file" class="d-none" wire:ignore wire:model="images" multiple
+                                            accept="image/*">
                                     </div>
 
                                     <div class="dz-message needsclick">
@@ -180,23 +182,42 @@
                                     </div>
                                 </div>
                             </div>
-                            @if(Auth::user()->type != 1)
-                              <div class="mb-3 position-relative">
-                                <label class="form-label">Contact Name</label>
-                                <input class="form-control" type="text" wire:model="contact_name" required>
-                            </div>
+                            @if (Auth::user()->type != 1)
+                                <div class="mb-3 position-relative">
+                                    <label class="form-label">Contact Name</label>
+                                    <input class="form-control" type="text" wire:model="contact_name" required>
+                                </div>
+                                <div class="mb-3" wire:ignore>
+                                    <label class="form-label" for="validationCustom03"
+                                        id="label_phonenumber_claim">Contact Number</label>
 
-                            <div class="mb-3 position-relative">
-                                <label class="form-label">Contact Number</label>
-                                <input type="tel" class="form-control" id="validationCustom03"
-                                    placeholder="09123456789" required wire:model="contact_number"
-                                    pattern="09[0-9]{9}"
-                                    title="Phone number must start with 09 and contain exactly 11 digits."
-                                    maxlength="11"
-                                    oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 11);">
-                            </div>
+                                    <div class="input-group" wire:ignore.self>
+                                        <input type="tel" class="form-control" wire:ignore.self
+                                            id="phonenumber_claim" placeholder="09123456789" required
+                                            wire:model="contact_number" pattern="09[0-9]{9}"
+                                            title="Phone number must start with 09 and contain exactly 11 digits."
+                                            maxlength="11" oninput="validatePhoneNumber(this);">
+
+                                        <input type="number" wire:ignore.self class="form-control d-none"
+                                            id="otp_input" wire:model="otp_input" max="999999"
+                                            oninput="this.value = this.value.slice(0, 6)"
+                                            placeholder="Please input 6 digits code">
+
+                                        <button class="btn btn-outline-secondary" wire:ignore.self id="verify_button"
+                                            type="button" wire:click="verifyMobile('requestdog')"
+                                            disabled>Verify</button>
+                                        <button class="btn btn-outline-secondary d-none" wire:ignore.self
+                                            id="verify_otp" type="button" wire:click="checkOTP">Submit</button>
+                                    </div>
+                                    <small id="resend_container" wire:ignore.self>
+
+                                    </small>
+
+                                    <div class="invalid-feedback">
+                                        Please provide a valid phone number.
+                                    </div>
+                                </div>
                             @endif
-                          
                         </div> <!-- end col-->
                     </div>
                     <!-- end row -->
@@ -213,7 +234,8 @@
                         @endif
                         <button type="button" class="btn btn-info me-2 d-none " wire:click="submitForm"
                             id="add_dog_form"><i class="uil-exit"></i> Submit</button>
-                        <button type="reset" class="me-1 btn btn-outline-primary " data-bs-dismiss="modal" aria-label="Close"><i class="uil-cloud-times"></i>
+                        <button type="reset" class="me-1 btn btn-outline-primary " data-bs-dismiss="modal"
+                            aria-label="Close"><i class="uil-cloud-times"></i>
                             Cancel</button>
                     </div>
                 </div> <!-- end card-body -->
@@ -222,7 +244,6 @@
     </div>
     <!-- end row-->
     <script>
-
         function clickDogbreed() {
             $('#addmorebreed').modal('show');
         }
@@ -267,10 +288,13 @@
             if (filePreviewsContainer.children.length > 0) {
                 console.log('There is at least one file preview.');
             } else {
-                isValid = false; 
+                isValid = false;
                 console.log('No files uploaded.');
             }
 
+            var phone_dog_c2 = document.getElementById('phonenumber_claim');
+
+     
 
             if (!isValid) {
                 const Toast = Swal.mixin({
@@ -286,6 +310,23 @@
                 });
                 return false; // Return false to indicate validation failed
             }
+
+            if(!phone_dog_c2.classList.contains('verified')){
+                phone_dog_c2.classList.add('is-invalid');
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: 'top-end', // Position of the toast
+                    showConfirmButton: false,
+                    timer: 3000, // Duration before the toast disappears (in milliseconds)
+                    timerProgressBar: true,
+                });
+                Toast.fire({
+                    icon: 'warning',
+                    title: 'Please verify your phone number'
+                });  
+                return;
+            }
+
 
             Swal.fire({
                 title: 'Are you sure?',
@@ -334,6 +375,30 @@
                 newOption.textContent = newBreedName;
                 document.getElementById('dog_breed').appendChild(newOption);
             });
+
+
+            Livewire.on('otp_result2', event => {
+                console.log(event);
+
+                if (event[1] == 'requestdog') {
+                    var phone5 = document.getElementById('phonenumber_claim');
+                    var otp_input5 = document.getElementById('otp_input');
+                    if (event[0]) {
+                        changeInput();
+                        phone5.disabled = true;
+                        phone5.classList.remove('is-invalid')
+                        phone5.classList.add('verified', 'is-valid')
+                        phone5.value = event[2];
+
+                        document.getElementById('verify_button').classList.toggle('d-none');
+                        document.getElementById('resend_container').classList.toggle('d-none');
+                    } else {
+                        otp_input5.classList.add('is-invalid')
+                    }
+                }
+            });
+
+
         });
     </script>
 </div> <!-- container -->

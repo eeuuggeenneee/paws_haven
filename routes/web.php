@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Route;
 use App\Livewire\AddLostDog;
 use App\Models\AnimalList;
 use Livewire\Livewire;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\TestMail;
 
 Route::get('/', function () {
     // Fetch data from the model
@@ -59,6 +61,14 @@ Route::get('/test', function () {
     return view('testevent');
 })->middleware('is_login');
 
+Route::get('/emailview', function () {
+    return view('testemail');
+})->middleware('is_login');
+
+
+Route::get('/archive', function () {
+    return view('archivedata');
+})->middleware('is_login');
 
 Route::get('auth/google', [GoogleAuthController::class,'redirect'])->name('google-auth');
 Route::get('auth/google/callback', [GoogleAuthController::class, 'callbackGoogle'])->name('google.callback');

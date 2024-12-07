@@ -16,6 +16,8 @@ use App\Models\RoundsStatus;
 use Illuminate\Support\Facades\Auth;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 use Throwable;
 
 class ModalsDogs extends Component
@@ -70,8 +72,11 @@ class ModalsDogs extends Component
     public $edit_sub_title;
     public $edit_message;
     public $editA_id;
-
-    protected $listeners = ['cancelPosing','editDoggo', 'activedog', 'clearData', 'saveDogData', 'editAnnouncement', 'deleteAnnoucement'];
+    public $otpdigis;
+    public $otp_input;
+    public $request_w;
+    public $otp_attempts = 0;
+    protected $listeners = ['verifyMobile','cancelPosing', 'editDoggo', 'activedog', 'clearData', 'saveDogData', 'editAnnouncement', 'deleteAnnoucement'];
 
     public function deleteAnnoucement($a_id)
     {
@@ -138,13 +143,13 @@ class ModalsDogs extends Component
         $checkdata = AnimalListStatus::where('animal_id', $this->dog_unique)->where('isActive', 1)->first();
         AnimalListStatus::where('animal_id', $this->dog_unique)->update(['isActive' => 0]);
 
-        if($checkdata->status == 2){
+        if ($checkdata->status == 2) {
             $status = AnimalListStatus::create([
                 'animal_id' => $this->dog_unique,
                 'status' => 11,
                 'isActive' => 1,
             ]);
-        }else{
+        } else {
             $status = AnimalListStatus::create([
                 'animal_id' => $this->dog_unique,
                 'status' => 6,
@@ -187,13 +192,10 @@ class ModalsDogs extends Component
         $this->dispatch('fetchdatanotif');
         $this->dispatch('fetchdataAdopt');
     }
-
-
-
     public function saveRounds()
     {
         try {
-                $rounds = Rounds::create([
+            $rounds = Rounds::create([
                 'address' => $this->fulladdress,
                 'barangay' => $this->barangay,
                 // 'specific_location' => $this->specificloc,
@@ -203,26 +205,173 @@ class ModalsDogs extends Component
                 'is_active' => 1,
                 'user_id' => Auth::user()->id,
             ]);
-    
+
             $status = RoundsStatus::create([
                 'rounds_id' => $rounds->id,
                 'is_active' => 1,
             ]);
-    
+
             $formattedId = str_pad($rounds->id, 4, '0', STR_PAD_LEFT);
             $ticket = 'R' . $rounds->created_at->format('ym') . '-' . $formattedId;
             $this->reset(['fulladdress', 'barangay', 'contact', 'reason']);
         } catch (Throwable $r) {
         }
-        
+
         $this->dispatch('saveRounds', 'Your rounds request has been successfully saved! Please expect a call from the pound when your request is approved. Thank you!', $ticket);
         $this->dispatch('fetchdatanotif');
     }
+    public function checkOTP()
+    {
+        // Get the current user ID
+        $userId = Auth::user()->id;
+
+        // Check if the user has exceeded the OTP attempts limit and is currently locked out
+        $lockKey = 'otp_lock_' . $userId;
+        $requestKey = 'otp_request_' . $userId;
+
+        if (Cache::has($lockKey)) {
+            $lockExpiresIn = Cache::get($lockKey);
+            $remainingTime = intval(now()->diffInSeconds($lockExpiresIn));
+
+            $this->alert('error', 'You have exceeded the maximum number of attempts. Please try again after ' . $remainingTime . ' seconds.');
+            return;
+        }
+
+        // Check if the OTP is correct
+        $verified = false;
+
+        // If more than 3 attempts have been made
+        if ($this->otp_attempts >= 3) {
+            // Lock the user out for 5 minutes (300 seconds)
+
+
+            Cache::put($lockKey, now()->addMinutes(5), now()->addMinutes(5));  // Lock for 5 minutes
+            $this->alert('error', 'You have exceeded the maximum number of attempts. Please try again after 5 minutes.');
+            return;
+        }
+
+        if ($this->otp_input == $this->otpdigis) {
+            $verified = true;
+            Cache::forget($lockKey);
+            Cache::forget($requestKey);
+            $this->alert('success', 'The OTP has been verified');
+        } else {
+            $this->otp_attempts++;  // Increment the attempt counter on failure
+            if ($this->otp_attempts == 3) {
+                Cache::put($lockKey, now()->addMinutes(5), now()->addMinutes(5));  // Lock for 5 minutes
+
+                $this->alert('error', 'You have entered the incorrect OTP 3 times. Your account request function is locked for 5 minutes.');
+                return;
+            }
+            $this->alert('error', 'The OTP is incorrect. Attempts remaining: ' . (3 - $this->otp_attempts));
+        }
+
+        // Dispatch the result
+
+        if ($this->c_contact) {
+            $value = $this->c_contact;
+        } elseif ($this->contact) {
+            $value = $this->contact;
+        }
+        $this->dispatch('otp_result', $verified, $this->request_w,$value);
+
+        // Optionally, reset attempts if verification is successful
+        if ($verified) {
+            $this->otp_attempts = 0;
+        }
+    }
+    public function verifyMobile($request)
+    {
+        // Get the current user ID
+        $this->request_w = $request;
+        $userId = Auth::user()->id;
+
+        if((!$this->c_contact && !$this->contact)){
+            $this->alert('error', 'Please input contact number');
+            return;
+        }
+        if ($this->c_contact) {
+            $value = $this->c_contact;
+        } elseif ($this->contact) {
+            $value = $this->contact;
+        }
+
+        // Define the lock key (to track OTP requests within the last 10 minutes)
+        $requestKey = 'otp_request_' . $userId;
+
+        // Define the lock key for re-sending OTP within 5 minutes
+        $lockKey = 'otp_lock_' . $userId;
+
+        $otpRequestCount = Cache::get($requestKey, 0);
+
+        if ($otpRequestCount >= 3) {
+            $this->alert('error', 'You have exceeded the maximum number of OTP requests in the last 10 minutes. Please try again later.');
+            return;
+        }
+
+        // Check if the user is locked out (cache exists for 5-minute restriction)
+        if (Cache::has($lockKey)) {
+            $lockExpiresIn = Cache::get($lockKey);
+            $remainingTime = intval(now()->diffInSeconds($lockExpiresIn));
+            $this->alert('error', 'You have reached the maximum retries. Please try again in ' . $remainingTime . ' seconds.');
+            return;
+        }
+
+        // Check if the user has exceeded the 3 OTP requests within 10 minutes
+      
+        // Generate the OTP (6 digits)
+        $otp = rand(100000, 999999);
+
+        // Store the generated OTP in a property (to verify later)
+        $this->otpdigis = $otp;
+
+        // Prepare the message to be sent via Semaphore API
+        $message = 'Your 6 digits OTP is ' . $otp . '. Please do not share this code with anyone. Thank you!';
+
+        // Set up the API parameters
+        $url = 'https://semaphore.co/api/v4/messages';
+        $parameters = [
+            'apikey'    => env('SEMAPHORE_API_KEY'),
+            'number'    => $value,
+            'message'   => $message,
+            'sendername' => 'AlertME',
+        ];
+
+        // Initialize cURL
+        $ch = curl_init();
+   
+        // Set cURL options
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($parameters));
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+             
+        // $result = curl_exec($ch);
+        // Execute the request
+        if (curl_errno($ch)) {
+            $error_msg = curl_error($ch);
+            Log::error('Semaphore API cURL Error: ' . $error_msg);
+            curl_close($ch);
+            return response()->json(['error' => $error_msg], 500);
+        }
+
+        // Close cURL connection
+        curl_close($ch);
+
+        // Increment OTP request count in the cache, with an expiration of 10 minutes
+        Cache::put($requestKey, $otpRequestCount + 1, now()->addMinutes(10));
+
+        // Show message
+        $this->alert('success', 'The OTP has been sent: ' . $otp);
+        $this->dispatch('open_otp', true,$request);
+    }
+
     public function activedog($id)
     {
-        try{
+        try {
             $this->dog_unique = $id;
-        
+
             // Cache the query results forever using Cache::rememberForever
             $this->activedog = AnimalList::where('animal_lists.dog_id_unique', $id)
                 ->leftJoin('dog_breeds', 'dog_breeds.id', '=', 'animal_lists.breed')
@@ -234,19 +383,16 @@ class ModalsDogs extends Component
                 ->select('animal_lists.*', 'dog_breeds.name as breed_name', 'statuses.name as status_name')
                 ->where('animal_lists.isActive', true)
                 ->first();
-        
+
             $this->dispatch('activedogModal', $this->activedog['status_name']);
-                
-        }catch(Throwable $r){
-            
+        } catch (Throwable $r) {
         }
-        
     }
-    public function cancelPosing(){
+    public function cancelPosing()
+    {
 
         AnimalList::where('dog_id_unique', $this->dog_unique)->where('isActive', 1)->update(['isActive' => 0]);
         $this->dispatch('fetchdatanotif');
-
     }
     public function rejectDRequest()
     {
@@ -276,18 +422,17 @@ class ModalsDogs extends Component
     public function editDoggo($id)
     {
         try {
-              $finddog = AnimalList::where('dog_id_unique', $id)->where('isActive', 1)->first();
-        $this->updatedog = true;
-        $this->dog_unique = $id;
-        $this->dogName = $finddog->dog_name;
-        $this->breed = $finddog->breed;
-        $this->color = $finddog->color;
-        $this->gender = $finddog->gender;
-        $this->description = $finddog->description;
-        $this->previmages = $finddog->animal_images;
+            $finddog = AnimalList::where('dog_id_unique', $id)->where('isActive', 1)->first();
+            $this->updatedog = true;
+            $this->dog_unique = $id;
+            $this->dogName = $finddog->dog_name;
+            $this->breed = $finddog->breed;
+            $this->color = $finddog->color;
+            $this->gender = $finddog->gender;
+            $this->description = $finddog->description;
+            $this->previmages = $finddog->animal_images;
         } catch (Throwable $r) {
         }
-      
     }
     public function clearData()
     {
@@ -303,66 +448,65 @@ class ModalsDogs extends Component
     public function saveDogData()
     {
         try {
-                   $images = [];
-        $dog = null;
-        if ($this->dogImages) {
-            foreach ($this->dogImages as $image) {
-                $images[] = $image->store('dog-images', 'public'); // Save images in storage
-            }
-        }
-
-        if ($this->dogName == '' || $this->breed == '' || $this->color == '' || $this->description == "") {
-        } else {
-            if ($this->dog_unique) {
-
-                AnimalList::where('dog_id_unique', $this->dog_unique)->update(['isActive' => 0]);
-
-                $data = [
-                    'dog_name' => $this->dogName,
-                    'dog_id_unique' => $this->dog_unique,
-                    'breed' => $this->breed,
-                    'color' => $this->color,
-                    'gender' => $this->gender,
-                    'location_found' => null,  // Adjust as needed
-                    'date_found' => null,      // Adjust as needed
-                    'description' => $this->description,
-                    'isActive' => 1,
-                ];
-
-                if (!empty($images)) {
-                    $data['animal_images'] = json_encode($images);
-                } else {
-                    $data['animal_images'] = $this->previmages;
+            $images = [];
+            $dog = null;
+            if ($this->dogImages) {
+                foreach ($this->dogImages as $image) {
+                    $images[] = $image->store('dog-images', 'public'); // Save images in storage
                 }
-                $dog = AnimalList::create($data);
-
-                $this->dispatch('dogSaved', 'Data has been successfully updated!');
-            } else {
-                $uniqueId = Str::uuid();
-                $dog = AnimalList::create([
-                    'dog_name' => $this->dogName,
-                    'dog_id_unique' => $uniqueId,
-                    'breed' => $this->breed,
-                    'color' => $this->color,
-                    'gender' => $this->gender,
-                    'location_found' => null, // You can adjust this as per your form
-                    'date_found' => null,     // Same here
-                    'description' => $this->description,
-                    'animal_images' => json_encode($images), // Store images as JSON
-                    'isActive' => 1,
-                ]);
-
-                AnimalListStatus::create([
-                    'animal_id' => $dog->dog_id_unique,
-                    'status' => 1,
-                    'isActive' => 1,
-                ]);
-                $this->dispatch('dogSaved', 'Data has been successfully saved!');
             }
-        } 
+
+            if ($this->dogName == '' || $this->breed == '' || $this->color == '' || $this->description == "") {
+            } else {
+                if ($this->dog_unique) {
+
+                    AnimalList::where('dog_id_unique', $this->dog_unique)->update(['isActive' => 0]);
+
+                    $data = [
+                        'dog_name' => $this->dogName,
+                        'dog_id_unique' => $this->dog_unique,
+                        'breed' => $this->breed,
+                        'color' => $this->color,
+                        'gender' => $this->gender,
+                        'location_found' => null,  // Adjust as needed
+                        'date_found' => null,      // Adjust as needed
+                        'description' => $this->description,
+                        'isActive' => 1,
+                    ];
+
+                    if (!empty($images)) {
+                        $data['animal_images'] = json_encode($images);
+                    } else {
+                        $data['animal_images'] = $this->previmages;
+                    }
+                    $dog = AnimalList::create($data);
+
+                    $this->dispatch('dogSaved', 'Data has been successfully updated!');
+                } else {
+                    $uniqueId = Str::uuid();
+                    $dog = AnimalList::create([
+                        'dog_name' => $this->dogName,
+                        'dog_id_unique' => $uniqueId,
+                        'breed' => $this->breed,
+                        'color' => $this->color,
+                        'gender' => $this->gender,
+                        'location_found' => null, // You can adjust this as per your form
+                        'date_found' => null,     // Same here
+                        'description' => $this->description,
+                        'animal_images' => json_encode($images), // Store images as JSON
+                        'isActive' => 1,
+                    ]);
+
+                    AnimalListStatus::create([
+                        'animal_id' => $dog->dog_id_unique,
+                        'status' => 1,
+                        'isActive' => 1,
+                    ]);
+                    $this->dispatch('dogSaved', 'Data has been successfully saved!');
+                }
+            }
         } catch (Throwable $r) {
         }
-
     }
     public function mount()
     {

@@ -153,8 +153,6 @@
                                 <div class="search-container">
                                     <input type="text" class="search form-control" id="searchtb" wire:model="dogname"  wire:keydown="changeStatus"
                                         style="width: 150%;" placeholder="Search for dogs and breed">
-                                     
-
                                 </div>
 
                                 <!-- Move the Add Dog button to the right -->

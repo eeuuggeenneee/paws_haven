@@ -259,7 +259,14 @@
                         <div class="dropdown-menu dropdown-menu-end dropdown-menu-animated profile-dropdown">
                             <!-- item-->
                             <div class=" dropdown-header noti-title">
+
                             </div>
+
+                            <a href="{{ url('/archive') }}" class="dropdown-item">
+                                <i class="mdi mdi-account-edit me-1"></i>
+                                <span>Archive Data</span>
+                            </a>
+
                             <!-- item-->
                             <form id="logout-form" action="{{ route('logout') }}" method="POST"
                                 style="display: none;">

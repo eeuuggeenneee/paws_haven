@@ -29,7 +29,8 @@
                         @php
                             $images = json_decode($d['animal_images']);
                         @endphp
-                        <div class="col-md-6 col-xxl-3" wire:mouseover="$dispatch('activedog',['{{ $d['dog_id_unique'] }}'])">
+                        <div class="col-md-6 col-xxl-3"
+                            wire:mouseover="$dispatch('activedog',['{{ $d['dog_id_unique'] }}'])">
                             <div class="card status" data-address-status="{{ $d['status_name'] ?? 'N/A' }}">
                                 <div class="card-body py-3 px-3">
                                     <div class="float-end position-absolute">
@@ -524,11 +525,22 @@
             // areinitializeList();
             $('.modal').on('hidden.bs.modal', function() {
                 var claimformtoggle = document.getElementById('claimformtoggle');
-                if (claimformtoggle.classList.contains('d-none')) {
-                } else {
+
+                if (claimformtoggle.classList.contains('d-none')) {} else {
                     if (toggledclaim) {
                         claimtoggle();
+
                         toggledclaim = false;
+                        var phone_v = document.getElementById('phonenumber_claim');
+
+                        if (!phone_v.classList.contains('verified')) {
+                       
+                            if (phone_v.classList.contains('d-none')) {
+                                changeInput();
+                                phone_v.value = ''; // Reset the phone number input
+                                document.getElementById('otp_input').value = ''; // Clear OTP input
+                            }
+                        }
                     }
                 }
 

@@ -39,7 +39,7 @@ class AnimalListComponent extends Component
                     ->orWhere('dog_breeds.name', 'like', '%' . $this->dogname . '%');
             })
             ->orderBy('animal_lists.created_at', 'desc')
-            ->paginate(2); 
+            ->paginate(5); 
 
     }
     public function editDog($dogID)

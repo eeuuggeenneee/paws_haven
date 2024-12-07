@@ -19,8 +19,7 @@
             }
         }
     </style>
-    <div id="info-header-modal" class="modal fade" tabindex="-1" role="dialog" 
-        wire:ignore.self>
+    <div id="info-header-modal" class="modal fade" tabindex="-1" role="dialog" wire:ignore.self>
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <form class="needs-validation" novalidate id="formadddog">
@@ -87,8 +86,7 @@
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
     </div>
-    <div id="lostandfounddog" class="modal fade" tabindex="-1" role="dialog" 
-        wire:ignore.self>
+    <div id="lostandfounddog" class="modal fade" tabindex="-1" role="dialog" wire:ignore.self>
         <div class="modal-dialog modal-dialog-centered modal-full-width">
             <div class="modal-content">
                 <div class="modal-header">
@@ -100,7 +98,7 @@
                         @endif
 
                     </h4>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" ></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 @livewire('add-lost-dog')
             </div><!-- /.modal-content -->
@@ -108,7 +106,7 @@
     </div>
     <!-- /.modal -->
     <div class="modal fade" id="viewdog" tabindex="-1" style="z-index: 10050 !important;" role="dialog"
-         wire:ignore.self>
+        wire:ignore.self>
         <div class="modal-dialog modal-xl">
             <div class="modal-content">
                 <div class="modal-header bg-primary">
@@ -134,20 +132,20 @@
                                                 <div id="carouselExampleIndicators" class="carousel slide"
                                                     data-bs-ride="carousel">
                                                     <div class="carousel-inner" role="listbox">
-                                                        @if(isset($images))
-                                                             @foreach ($images as $img)
+                                                        @if (isset($images))
+                                                            @foreach ($images as $img)
                                                                 <div
                                                                     class="carousel-item {{ $loop->first ? 'active' : '' }}">
                                                                     <img class="d-block img-fluid img-thumbnail responsive-img"
                                                                         src="{{ asset('storage/' . $img) }}"
                                                                         alt="Slide {{ $loop->iteration }}">
                                                                 </div>
-                                                             @endforeach
+                                                            @endforeach
                                                         @endif
-                                                       
+
                                                     </div>
                                                     <div class="text-center mt-3">
-                                                        @if(isset($images))
+                                                        @if (isset($images))
                                                             @foreach ($images as $key => $img)
                                                                 <a href="javascript: void(0);">
                                                                     <img src="{{ asset('storage/' . $img) }}"
@@ -362,6 +360,9 @@
                                                     </div>
 
                                                     <div class="mb-3">
+
+
+                                                        
                                                         <label class="form-label" for="validationCustom03">Contact
                                                             Number</label>
                                                         <input type="tel" class="form-control"
@@ -463,7 +464,7 @@
                                                 <div id="carouselExampleIndicators" class="carousel slide"
                                                     data-bs-ride="carousel">
                                                     <div class="carousel-inner" role="listbox">
-                                                        @if(isset($images))
+                                                        @if (isset($images))
                                                             @foreach ($images as $img)
                                                                 <div
                                                                     class="carousel-item {{ $loop->first ? 'active' : '' }}">
@@ -473,10 +474,10 @@
                                                                 </div>
                                                             @endforeach
                                                         @endif
-                                                        
+
                                                     </div>
                                                     <div class="text-center mt-3">
-                                                        @if(isset($images))
+                                                        @if (isset($images))
                                                             @foreach ($images as $key => $img)
                                                                 <a href="javascript: void(0);">
                                                                     <img src="{{ asset('storage/' . $img) }}"
@@ -986,8 +987,9 @@
                                                             </button>
                                                         @else
                                                             <button type="button"
-                                                                class="mt-3 btn btn-outline-success rounded-pill w-100" onclick="cancellostDog()">
-                                                                 Cancel Lost Dog </button>
+                                                                class="mt-3 btn btn-outline-success rounded-pill w-100"
+                                                                onclick="cancellostDog()">
+                                                                Cancel Lost Dog </button>
                                                         @endif
                                                     @endif
                                                 @endif
@@ -1059,7 +1061,10 @@
                                                             <div class="mb-3">
                                                                 <label class="form-label" for="validationCustom02"
                                                                     id="proof"> </label>
-                                                                <input type="file" class="form-control" id="validationCustom02file" placeholder="" accept="image/*" wire:model="c_proof" onchange="validateImage()" />
+                                                                <input type="file" class="form-control"
+                                                                    id="validationCustom02file" placeholder=""
+                                                                    accept="image/*" wire:model="c_proof"
+                                                                    onchange="validateImage()" />
                                                                 <div class="valid-feedback">
                                                                     Looks good!
                                                                 </div>
@@ -1079,17 +1084,37 @@
                                                             </div>
                                                         </div>
                                                         <div class="col-6">
-                                                            <div class="mb-3">
-                                                                <label class="form-label"
-                                                                    for="validationCustom03">Contact
-                                                                    Number</label>
-                                                                <input type="tel" class="form-control"
-                                                                    id="validationCustom03" placeholder="09123456789"
-                                                                    required wire:model="c_contact"
-                                                                    pattern="09[0-9]{9}"
-                                                                    title="Phone number must start with 09 and contain exactly 11 digits."
-                                                                    maxlength="11"
-                                                                    oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 11);">
+                                                            <div class="mb-3" wire:ignore>
+                                                                <label class="form-label" for="validationCustom03"
+                                                                    id="label_phonenumber_claim">Contact Number</label>
+
+                                                                <div class="input-group" wire:ignore.self>
+                                                                    <input type="tel" class="form-control" wire:ignore.self
+                                                                        id="phonenumber_claim"
+                                                                        placeholder="09123456789" required
+                                                                        wire:model="c_contact" pattern="09[0-9]{9}"
+                                                                        title="Phone number must start with 09 and contain exactly 11 digits."
+                                                                        maxlength="11"
+                                                                        oninput="validatePhoneNumber(this);">
+
+                                                                    <input type="number" wire:ignore.self class="form-control d-none"
+                                                                        id="otp_input" wire:model="otp_input"
+                                                                        max="999999"
+                                                                        oninput="this.value = this.value.slice(0, 6)"
+                                                                        placeholder="Please input 6 digits code">
+
+                                                                    <button class="btn btn-outline-secondary" wire:ignore.self
+                                                                        id="verify_button" type="button"
+                                                                        wire:click="verifyMobile('lostdog')"
+                                                                        disabled>Verify</button>
+                                                                    <button class="btn btn-outline-secondary d-none" wire:ignore.self
+                                                                        id="verify_otp" type="button"
+                                                                        wire:click="checkOTP">Submit</button>
+                                                                </div>
+                                                                <small id="resend_container" wire:ignore.self>
+                                                                  
+                                                                </small>
+                                                                
                                                                 <div class="invalid-feedback">
                                                                     Please provide a valid phone number.
                                                                 </div>
@@ -1152,7 +1177,7 @@
         </div><!-- /.modal-dialog -->
     </div>
     <div class="modal fade" id="adoptdog" tabindex="100" style="z-index: 10051 !important;" role="dialog"
-         wire:ignore.self>
+        wire:ignore.self>
         <div class="modal-dialog modal-lg modal-dialog-centered">
             <div class="modal-content ">
                 <div class="modal-header bg-info">
@@ -1166,8 +1191,7 @@
         </div><!-- /.modal-dialog -->
     </div>
 
-    <div id="request_rounds" class="modal fade" tabindex="-1" role="dialog"
-         wire:ignore.self>
+    <div id="request_rounds" class="modal fade" tabindex="-1" role="dialog" wire:ignore.self>
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header bg-primary">
@@ -1180,8 +1204,8 @@
                 <div class="modal-body" id="add_requestR">
                     <div class="mb-3">
                         <label class="form-label" for="validationCustom01">Requestor</label>
-                        <input type="text" class="form-control" id="validationCustom01" placeholder="First name"
-                            value="{{ Auth::user()->name }}" disabled>
+                        <input type="text" class="form-control" id="validationCustom01"
+                            placeholder="First name" value="{{ Auth::user()->name }}" disabled>
                         <div class="valid-feedback">
                             Looks good!
                         </div>
@@ -1229,13 +1253,40 @@
                         </div>
                     </div>
                     <div class="mb-3">
-                        <label class="form-label" for="contactR">Contact number</label>
-                        <input type="text" type="tel" class="form-control" id="contactR"
-                            placeholder="09123456789" required wire:model="contact" pattern="09[0-9]{9}"
-                            title="Phone number must start with 09 and contain exactly 11 digits." maxlength="11"
-                            oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 11);">
-                        <div class="invalid-feedback">
-                            Please provide a valid phone number.
+                        <div class="mb-3" wire:ignore>
+                            <label class="form-label" for="validationCustom03"
+                                id="label_phonenumber_claim2">Contact Number</label>
+
+                            <div class="input-group" wire:ignore.self>
+                                <input type="tel" class="form-control" wire:ignore.self
+                                    id="phonenumber_claim2"
+                                    placeholder="09123456789" required
+                                    wire:model="contact" pattern="09[0-9]{9}"
+                                    title="Phone number must start with 09 and contain exactly 11 digits."
+                                    maxlength="11"
+                                    oninput=" validatePhoneNumber2(this);">
+
+                                <input type="number" wire:ignore.self class="form-control d-none"
+                                    id="otp_input2" wire:model="otp_input"
+                                    max="999999"
+                                    oninput="this.value = this.value.slice(0, 6)"
+                                    placeholder="Please input 6 digits code">
+
+                                <button class="btn btn-outline-secondary" wire:ignore.self
+                                    id="verify_button2" type="button"
+                                    wire:click="verifyMobile('rounds')"
+                                    disabled>Verify</button>
+                                <button class="btn btn-outline-secondary d-none" wire:ignore.self
+                                    id="verify_otp2" type="button"
+                                    wire:click="checkOTP">Submit</button>
+                            </div>
+                            <small id="resend_container2" wire:ignore.self>
+                              
+                            </small>
+                            
+                            <div class="invalid-feedback">
+                                Please provide a valid phone number.
+                            </div>
                         </div>
                     </div>
                     {{-- 
@@ -1352,8 +1403,7 @@
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
 
-    <div id="addmorebreed" class="modal fade" tabindex="-1" role="dialog"
-        >
+    <div id="addmorebreed" class="modal fade" tabindex="-1" role="dialog">
         <div class="modal-dialog" wire:ignore.self>
             <div class="modal-content">
                 <div class="modal-header">
@@ -1377,8 +1427,7 @@
         </div><!-- /.modal-dialog -->
     </div>
 
-    <div id="create_aa" class="modal fade" tabindex="-1" role="dialog" 
-        wire:ignore.self>
+    <div id="create_aa" class="modal fade" tabindex="-1" role="dialog" wire:ignore.self>
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
@@ -1411,8 +1460,7 @@
         </div>
     </div>
 
-    <div id="update_aa" class="modal fade" tabindex="-1" role="dialog" 
-        wire:ignore.self>
+    <div id="update_aa" class="modal fade" tabindex="-1" role="dialog" wire:ignore.self>
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
@@ -1448,6 +1496,67 @@
         </div>
     </div>
     <script>
+        function validatePhoneNumber(input) {
+            // Enable or disable the button based on the phone number's length
+            const button = document.getElementById('verify_button');
+            const phoneNumber = input.value.trim(); // Remove any leading/trailing spaces
+            
+            // Check if the input is 11 digits and starts with '09'
+            if (/^09\d{9}$/.test(phoneNumber)) {
+                button.disabled = false; // Enable button
+            } else {
+                button.disabled = true; // Disable button
+            }
+        }
+        function validatePhoneNumber2(input) {
+            // Enable or disable the button based on the phone number's validity
+            const button = document.getElementById('verify_button2');
+            const phoneNumber = input.value.trim(); // Remove any leading/trailing spaces
+            
+            // Check if the input is 11 digits and starts with '09'
+            if (/^09\d{9}$/.test(phoneNumber)) {
+                button.disabled = false; // Enable button
+            } else {
+                button.disabled = true; // Disable button
+            }
+        }
+
+        function changeInput() {
+            // Toggle visibility of phone number and OTP input
+            document.getElementById('phonenumber_claim').classList.toggle('d-none');
+            document.getElementById('otp_input').classList.toggle('d-none');
+            document.getElementById('verify_otp').classList.toggle('d-none');
+            document.getElementById('verify_button').classList.toggle('d-none');
+
+            // Change the label text
+            const label = document.getElementById('label_phonenumber_claim');
+            label.textContent = label.textContent === "Contact Number" ? "OTP" : "Contact Number";
+
+            // Reset the phone number input when switching back
+            if (!document.getElementById('phonenumber_claim').classList.contains('d-none')) {
+                document.getElementById('phonenumber_claim').value = ''; // Reset the phone number input
+                document.getElementById('otp_input').value = ''; // Clear OTP input
+            }
+        }
+        function changeInput2() {
+            // Toggle visibility of phone number and OTP input
+            document.getElementById('phonenumber_claim2').classList.toggle('d-none');
+            document.getElementById('otp_input2').classList.toggle('d-none');
+            document.getElementById('verify_otp2').classList.toggle('d-none');
+            document.getElementById('verify_button2').classList.toggle('d-none');
+
+            // Change the label text
+            const label = document.getElementById('label_phonenumber_claim2');
+            label.textContent = label.textContent === "Contact Number" ? "OTP" : "Contact Number";
+
+            // Reset the phone number input when switching back
+            if (!document.getElementById('phonenumber_claim2').classList.contains('d-none')) {
+                document.getElementById('phonenumber_claim2').value = ''; // Reset the phone number input
+                document.getElementById('otp_input2').value = ''; // Clear OTP input
+            }
+        }
+
+
         function validateImage() {
             const fileInput = document.getElementById('validationCustom02file');
             const file = fileInput.files[0];
@@ -1458,15 +1567,15 @@
                 // Check if the file is an image
                 if (fileType !== 'image') {
                     // Display SweetAlert error message
-                     Swal.fire({
-                           icon: 'error',
+                    Swal.fire({
+                        icon: 'error',
                         title: 'Invalid file type',
                         text: 'Only images are allowed!',
-                        toast: true,  // Enable toast mode
-                        position: 'top-end',  // Position the toast at the top-right
-                        showConfirmButton: false,  // Hide the confirm button
-                        timer: 3000,  // Toast duration (3 seconds)
-                        timerProgressBar: true,  // Show progress bar
+                        toast: true, // Enable toast mode
+                        position: 'top-end', // Position the toast at the top-right
+                        showConfirmButton: false, // Hide the confirm button
+                        timer: 3000, // Toast duration (3 seconds)
+                        timerProgressBar: true, // Show progress bar
                         didOpen: (toast) => {
                             toast.addEventListener('mouseenter', Swal.stopTimer)
                             toast.addEventListener('mouseleave', Swal.resumeTimer)
@@ -1479,7 +1588,7 @@
             }
         }
 
-        function cancellostDog(){
+        function cancellostDog() {
             Swal.fire({
                 title: 'Are you sure?',
                 text: "Do you really want to cancel?",
@@ -1712,7 +1821,7 @@
             toggledclaim = true;
         }
 
-        function clearForm(){
+        function clearForm() {
             var claimformtoggle = document.getElementById('claimformtoggle');
 
             // Clear input fields
@@ -1740,9 +1849,15 @@
     </script>
     <script>
         var toggledclaim = false;
+        let timerInterval;
+        let timerInterval2;
 
-        try{
-                document.getElementById('create_aa').addEventListener('show.bs.modal', function() {
+        let countdownTime = 60; // Countdown time in seconds
+        let countdownTime2 = 60; // Countdown time in seconds
+
+        let resend_otp = false;
+        try {
+            document.getElementById('create_aa').addEventListener('show.bs.modal', function() {
                 document.getElementById('annc_active').classList.add('active')
             });
             document.getElementById('create_aa').addEventListener('hide.bs.modal', function() {
@@ -1764,14 +1879,14 @@
             });
 
             document.getElementById('lostandfounddog').addEventListener('hide.bs.modal', function() {
-                    document.getElementById('lostandfoudSelect').classList.remove('active')
-                    activeElement.classList.add('active');
+                document.getElementById('lostandfoudSelect').classList.remove('active')
+                activeElement.classList.add('active');
             });
 
-        }catch(error){
+        } catch (error) {
 
         }
-      
+
 
 
         function closeAllModals() {
@@ -1797,13 +1912,13 @@
 
             var add_requestR = document.getElementById('add_requestR');
             add_requestR.classList.add('was-validated');
-            
+
 
 
             const fulladdress = document.getElementById('fulladdressR').value.trim();
             const barangaySelect = document.getElementById('barangayR');
             const barangay = barangaySelect.options[barangaySelect.selectedIndex].value; // Get the selected value
-            const contact = document.getElementById('contactR').value.trim();
+            const contact = document.getElementById('phonenumber_claim2');
             const reason = document.getElementById('reasonR').value.trim();
 
             // Initialize an array to hold missing field names
@@ -1812,7 +1927,12 @@
             // Check each field and add to missingFields if empty or invalid
             if (!fulladdress) missingFields.push('Address');
             if (!barangay || barangay === 'Select a Barangay') missingFields.push('Barangay'); // Validate selected value
-            if (!contact) missingFields.push('Contact number');
+            if (!contact.value.trim() || !contact.classList.contains('verified')) {
+                missingFields.push('Contact number');
+                contact.classList.add('is-invalid');
+            }else{
+
+            }
             if (!reason) missingFields.push('Reason for request');
 
             // If there are missing fields, show a warning toast
@@ -1922,9 +2042,83 @@
             $('#terms-modal').modal('hide');
         }
 
-        // document.getElementById('claimtoggle').addEventListener('click', function() {
+        function startCountdown() {
+            const resendContainer = document.getElementById("resend_container");
 
-        // });
+            // Clear any existing interval to avoid multiple timers
+            if (timerInterval) {
+                clearInterval(timerInterval);
+            }
+
+            // Update the inner HTML with the countdown
+            resendContainer.innerHTML = `<small>You can resend in <span id="countdown_time">${countdownTime}</span> seconds.</small>`;
+
+            // Start the timer
+            timerInterval = setInterval(() => {
+                countdownTime--;
+
+                // Update the countdown text
+                document.getElementById("countdown_time").textContent = countdownTime;
+
+                // When the countdown reaches 0
+                if (countdownTime <= 0) {
+                    clearInterval(timerInterval); // Stop the timer
+                    countdownTime = 60; // Reset for next use
+
+                    // Restore the "resend" link
+                    resendContainer.innerHTML = `
+                        <small>
+                            Click <a class="text-primary" onclick="resendOTP()">here</a> to resend
+                        </small>
+                    `;
+                }
+            }, 1000);
+        }
+        function startCountdown2() {
+            const resendContainer = document.getElementById("resend_container2");
+            // Clear any existing interval to avoid multiple timers
+            if (timerInterval2) {
+                clearInterval(timerInterval2);
+            }
+
+            // Update the inner HTML with the countdown
+            resendContainer.innerHTML = `<small>You can resend in <span id="countdown_time2">${countdownTime2}</span> seconds.</small>`;
+
+            // Start the timer
+            timerInterval2 = setInterval(() => {
+                countdownTime2--;
+
+                // Update the countdown text
+                document.getElementById("countdown_time2").textContent = countdownTime2;
+
+                // When the countdown reaches 0
+                if (countdownTime2 <= 0) {
+                    clearInterval(timerInterval2); // Stop the timer
+                    countdownTime2 = 60; // Reset for next use
+
+                    // Restore the "resend" link
+                    resendContainer.innerHTML = `
+                        <small>
+                            Click <a class="text-primary" onclick="resendOTP2()">here</a> to resend
+                        </small>
+                    `;
+                }
+            }, 1000);
+        }
+        function resendOTP(){
+            resend_otp = true;
+            Livewire.dispatch('verifyMobile',{
+                request:'lostdog'
+            });
+            startCountdown();
+        }
+        function resendOTP2(){
+            resend_otp = true;
+            Livewire.dispatch('verifyMobile',{
+                request:'rounds'
+            });
+            startCountdown2();
+        }
 
         document.getElementById('adoptiontoggle').addEventListener('click', function() {
             var adopt_dog = document.getElementById('adopt_dog');
@@ -1937,7 +2131,10 @@
 
         document.getElementById('claim_dog').addEventListener('click', function() {
             var form2 = document.getElementById('claimcheckform');
-
+            var phone_dog_c = document.getElementById('phonenumber_claim');
+        
+     
+       
             form2.classList.add('was-validated');
 
             if (!form2.checkValidity()) {
@@ -1955,7 +2152,25 @@
                 });
                 return false; // Stop further actions
             }
+
+            if(!phone_dog_c.classList.contains('verified')){
+                phone_dog_c.classList.add('is-invalid');
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: 'top-end', // Position of the toast
+                    showConfirmButton: false,
+                    timer: 3000, // Duration before the toast disappears (in milliseconds)
+                    timerProgressBar: true,
+                });
+                Toast.fire({
+                    icon: 'warning',
+                    title: 'Please verify your phone number'
+                });  
+                return;
+            }
+
             Swal.fire({
+
                 title: 'Are you sure?',
                 icon: 'warning',
                 showCancelButton: true,
@@ -2029,6 +2244,56 @@
 
                 }
             });
+            Livewire.on('otp_result', event => {
+                console.log(event);
+                
+                if(event[1] == 'rounds'){
+                    var phone = document.getElementById('phonenumber_claim2');
+                    var otp_input = document.getElementById('otp_input2');
+                    if (event[0]) {
+                        changeInput2();
+                        phone.disabled = true;
+                        phone.classList.remove('is-invalid')
+                        phone.classList.add('verified', 'is-valid')
+                        phone.value = event[2];
+                        document.getElementById('verify_button2').classList.toggle('d-none');
+                        document.getElementById('resend_container2').classList.toggle('d-none');
+                    }else{
+                        otp_input.classList.add('is-invalid')
+                    }
+                }else if(event[1] == 'lostdog'){
+                    var phone = document.getElementById('phonenumber_claim');
+                var otp_input = document.getElementById('otp_input');
+                    if (event[0]) {
+                        changeInput();
+                        phone.disabled = true;
+                        phone.classList.remove('is-invalid')
+                        phone.classList.add('verified', 'is-valid')
+                        phone.value = event[2];
+
+                        document.getElementById('verify_button').classList.toggle('d-none');
+                        document.getElementById('resend_container').classList.toggle('d-none');
+                    }else{
+                        otp_input.classList.add('is-invalid')
+                    }
+                }
+            });
+
+            Livewire.on('open_otp', event => {
+                if (event[0]) {
+                    if(!resend_otp){
+                        if(event[1] == 'rounds'){
+                            changeInput2();
+                            startCountdown2();
+
+                        }
+                        changeInput();
+                        startCountdown();
+                    }
+                    // change_html
+                }
+            });
+            
 
             Livewire.on('dogAdopted', event => {
                 closeAllModals();
@@ -2045,6 +2310,17 @@
             });
             Livewire.on('dogClaimed', event => {
                 closeAllModals();
+                var phone = document.getElementById('phonenumber_claim');
+                phone.disabled = false; // Enable the phone number input field
+                phone.classList.remove('verified', 'is-valid'); // Remove verification classes
+                phone.value = ''; // Reset the value of the phone input
+
+                // Reset the OTP input
+                var otpInput = document.getElementById('otp_input');
+                otpInput.value = ''; // Clear the OTP input field
+
+                // Toggle visibility of the verify button
+                document.getElementById('verify_button').classList.remove('d-none');
                 Swal.fire({
                     icon: 'success',
                     title: 'Ticket Number ' + event[1],
@@ -2053,6 +2329,7 @@
                 }).then((result) => {
                     if (result.isConfirmed) {
                         // Reload the page
+
                     }
                 });
             });
@@ -2113,7 +2390,7 @@
                             ]
                         }
                     });
-                    
+
                     var quill = new Quill('#snow-editor', {
                         theme: 'snow',
                         modules: {
@@ -2134,7 +2411,7 @@
                                     'align': []
                                 }],
                                 ['link', 'image'],
-            
+
                                 ['clean']
                             ]
                         }
