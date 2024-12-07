@@ -30,29 +30,72 @@ class ArchiveData extends Component
     public $ticket_num = '';
     public $changeName = '';
 
+    protected $listeners = ['restore_claim','restore_adoption','restore_rounds'];
+    public function restore_rounds($id){
+
+        $findid = RoundsStatus::where('rounds_id',$id)->where('is_active',0)->orderBy('id', 'desc')->get();
+
+        RoundsStatus::where('rounds_id', $id)->update(['is_active' => 0]);
+
+        RoundsStatus::create([
+            'rounds_id' => $id,
+            'is_approved' => $findid[0]->is_approved,
+            'is_active' => 1,
+        ]);
+
+    }
+    public function restore_claim($id)
+    {
+        $findid = AnimalListStatus::where('animal_id', $id)
+            ->where('status', '!=', 12)
+            ->orderBy('id', 'desc')
+            ->get();
+
+        AnimalListStatus::where('animal_id', $id)->update(['isActive' => 0]);
+
+        AnimalListStatus::create([
+            'animal_id' => $id,
+            'status' => $findid[0]->status,
+            'isActive' => 1,
+        ]);
+    }
+    public function restore_adoption($id)
+    {
+        $findid = AnimalListStatus::where('animal_id', $id)
+            ->where('status', '!=', 12)
+            ->orderBy('id', 'desc')
+            ->get();
+
+        AnimalListStatus::where('animal_id', $id)->update(['isActive' => 0]);
+
+        AnimalListStatus::create([
+            'animal_id' => $id,
+            'status' => $findid[0]->status,
+            'isActive' => 1,
+        ]);
+    }
     public function fetchdata()
     {
         // Fetch and paginate adoption list
-        $adoptionlist = AnimalListStatus::whereIn('status', [4, 5, 1])
-        ->join('adoption_forms', 'adoption_forms.dog_id_unique', '=', 'animal_list_statuses.animal_id')
-        ->leftJoin('statuses', 'statuses.id', '=', 'animal_list_statuses.status')
-        ->leftJoin('animal_lists', function ($join) {
-            $join->on('animal_lists.dog_id_unique', '=', 'animal_list_statuses.animal_id')
-                ->where('animal_lists.isActive', '=', 1);
-        })
-        ->select(
-            'adoption_forms.*',
-            'animal_list_statuses.status',
-            'animal_lists.dog_name',
-            'animal_lists.animal_images',
-            'statuses.name as status_name'
-        )
-        ->where('adoption_forms.is_active', 1)
-        ->where('animal_list_statuses.isActive', 1)
-        // Conditionally apply the search filter if changeName is not empty
-        ->when($this->changeName, function ($query) {
-            $query->where('animal_lists.dog_name', 'like', '%' . $this->changeName . '%');
-        });
+        $adoptionlist = AnimalListStatus::whereIn('status', [12])
+            ->join('adoption_forms', 'adoption_forms.dog_id_unique', '=', 'animal_list_statuses.animal_id')
+            ->leftJoin('statuses', 'statuses.id', '=', 'animal_list_statuses.status')
+            ->leftJoin('animal_lists', function ($join) {
+                $join->on('animal_lists.dog_id_unique', '=', 'animal_list_statuses.animal_id')
+                    ->where('animal_lists.isActive', '=', 1);
+            })
+            ->select(
+                'adoption_forms.*',
+                'animal_list_statuses.status',
+                'animal_lists.dog_name',
+                'animal_lists.animal_images',
+                'statuses.name as status_name'
+            )
+            ->where('adoption_forms.is_active', 1)
+            ->where('animal_list_statuses.isActive', 1)
+            ->when($this->changeName, function ($query) {
+                $query->where('animal_lists.dog_name', 'like', '%' . $this->changeName . '%');
+            });
 
         if ($adoptionlist->count() > 5) {
             $adoptionlist = $adoptionlist->paginate(5, ['*'], 'adoption_list'); // Apply pagination if more than 2 results
@@ -78,6 +121,7 @@ class ArchiveData extends Component
                     $query->orWhere('users.name', 'like', '%' . $searchPattern . '%');
                 }
             })
+            ->where('rounds_statuses.is_approved', 2)
             ->orderBy('rounds_statuses.id', 'desc');
 
         if ($reqrounds->count() > 5) {
@@ -88,7 +132,7 @@ class ArchiveData extends Component
 
 
         // Fetch and paginate claimlist
-        $claimlist = AnimalListStatus::whereIn('status', [6, 7, 10, 11, 2, 3])
+        $claimlist = AnimalListStatus::whereIn('status', [12])
             ->leftJoin('dog_claims', 'dog_claims.dog_id_unique', '=', 'animal_list_statuses.animal_id')
             ->leftJoin('statuses', 'statuses.id', '=', 'animal_list_statuses.status')
             ->leftJoin('animal_lists', function ($join) {
@@ -132,7 +176,7 @@ class ArchiveData extends Component
 
         $data = $this->fetchdata();
 
-        return view('livewire.archive-data',[
+        return view('livewire.archive-data', [
             'adoptionlist' => $data['adoptionlist'],
             'reqrounds' => $data['reqrounds'],
             'claimlist' => $data['claimlist'],

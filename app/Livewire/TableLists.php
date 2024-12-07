@@ -30,8 +30,8 @@ class TableLists extends Component
     public $dog_proof = '';
     public $ticket_num = '';
     public $changeName = '';
-    
-    protected $listeners = ['adopted', 'rounds_accepted', 'delete_claim', 'claim_approved', 'claim_dog_rejected', 'rounds_rejected', 'r_adopted', 'delete_adoption', 'delete_rounds'];
+
+    protected $listeners = ['archive_rounds', 'archive_adoption', 'archive_claim', 'adopted', 'rounds_accepted', 'delete_claim', 'claim_approved', 'claim_dog_rejected', 'rounds_rejected', 'r_adopted', 'delete_adoption', 'delete_rounds'];
     public function mount()
     {
         // dd($this->claimlist);
@@ -41,25 +41,25 @@ class TableLists extends Component
     {
         // Fetch and paginate adoption list
         $adoptionlist = AnimalListStatus::whereIn('status', [4, 5, 1])
-        ->join('adoption_forms', 'adoption_forms.dog_id_unique', '=', 'animal_list_statuses.animal_id')
-        ->leftJoin('statuses', 'statuses.id', '=', 'animal_list_statuses.status')
-        ->leftJoin('animal_lists', function ($join) {
-            $join->on('animal_lists.dog_id_unique', '=', 'animal_list_statuses.animal_id')
-                ->where('animal_lists.isActive', '=', 1);
-        })
-        ->select(
-            'adoption_forms.*',
-            'animal_list_statuses.status',
-            'animal_lists.dog_name',
-            'animal_lists.animal_images',
-            'statuses.name as status_name'
-        )
-        ->where('adoption_forms.is_active', 1)
-        ->where('animal_list_statuses.isActive', 1)
-        // Conditionally apply the search filter if changeName is not empty
-        ->when($this->changeName, function ($query) {
-            $query->where('animal_lists.dog_name', 'like', '%' . $this->changeName . '%');
-        });
+            ->join('adoption_forms', 'adoption_forms.dog_id_unique', '=', 'animal_list_statuses.animal_id')
+            ->leftJoin('statuses', 'statuses.id', '=', 'animal_list_statuses.status')
+            ->leftJoin('animal_lists', function ($join) {
+                $join->on('animal_lists.dog_id_unique', '=', 'animal_list_statuses.animal_id')
+                    ->where('animal_lists.isActive', '=', 1);
+            })
+            ->select(
+                'adoption_forms.*',
+                'animal_list_statuses.status',
+                'animal_lists.dog_name',
+                'animal_lists.animal_images',
+                'statuses.name as status_name'
+            )
+            ->where('adoption_forms.is_active', 1)
+            ->where('animal_list_statuses.isActive', 1)
+            // Conditionally apply the search filter if changeName is not empty
+            ->when($this->changeName, function ($query) {
+                $query->where('animal_lists.dog_name', 'like', '%' . $this->changeName . '%');
+            });
 
         if ($adoptionlist->count() > 5) {
             $adoptionlist = $adoptionlist->paginate(5, ['*'], 'adoption_list'); // Apply pagination if more than 2 results
@@ -74,6 +74,7 @@ class TableLists extends Component
                 $join->on('rounds_statuses.rounds_id', '=', 'rounds.id')
                     ->where('rounds_statuses.is_active', '=', 1);
             })
+
             ->select('users.name', 'rounds.*', 'rounds_statuses.is_approved')
             ->where(function ($query) {
                 // If ticket_num (round ID) is provided, filter by rounds.id
@@ -85,7 +86,11 @@ class TableLists extends Component
                     $query->orWhere('users.name', 'like', '%' . $searchPattern . '%');
                 }
             })
-            ->orderBy('rounds_statuses.id', 'desc');
+            ->where(function ($query) {
+                // Ensure we're only getting rounds_statuses with is_approved being null or 1
+                $query->whereNull('rounds_statuses.is_approved')
+                    ->orWhereNot('rounds_statuses.is_approved', 2);
+            })->orderBy('rounds_statuses.id', 'desc');
 
         if ($reqrounds->count() > 5) {
             $reqrounds = $reqrounds->paginate(5, ['*'], 'req_rounds'); // Apply pagination if more than 2 results
@@ -251,9 +256,24 @@ class TableLists extends Component
 
         $this->dispatch('reinit_table');
     }
+
+    public function archive_rounds($id)
+    {
+
+        RoundsStatus::where('rounds_id', $id)->update(['is_active' => 0]);
+
+        RoundsStatus::create([
+            'rounds_id' => $id,
+            'is_approved' => 2,
+            'is_active' => 1,
+        ]);
+
+        $this->dispatch('reinit_table');
+    }
     public function adopted()
     {
         AnimalListStatus::where('animal_id', $this->dog_unique)->update(['isActive' => 0]);
+
         AnimalListStatus::create([
             'animal_id' => $this->dog_unique,
             'status' => 5,
@@ -274,6 +294,31 @@ class TableLists extends Component
 
         Rounds::where('id', $id)->where('is_active', 1)->update(['is_active' => 0]);
         // AdoptionForm::where('dog_id_unique', $id)->update(['isActive' => 0]);
+        $this->dispatch('reinit_table');
+    }
+
+    public function archive_adoption($id)
+    {
+        AnimalListStatus::where('animal_id', $id)->update(['isActive' => 0]);
+
+        AnimalListStatus::create([
+            'animal_id' => $id,
+            'status' => 12,
+            'isActive' => 1,
+        ]);
+
+        $this->dispatch('reinit_table');
+    }
+    public function archive_claim($id)
+    {
+        AnimalListStatus::where('animal_id', $id)->update(['isActive' => 0]);
+
+        AnimalListStatus::create([
+            'animal_id' => $id,
+            'status' => 12,
+            'isActive' => 1,
+        ]);
+
         $this->dispatch('reinit_table');
     }
     public function delete_claim($id)

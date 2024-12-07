@@ -395,7 +395,7 @@
                         <div class="tab-pane show active" id="settings-b1" wire:ignore.self>
                             <div class="card" style="background-color: #f2f2f2;" id="claimcard">
                                 <div class="px-3">
-                                    <h3>Claim List</h3>
+                                    <h3>Archive Claim List</h3>
                                     <div class="table-responsive-xl" id="claim_list" wire:ignore.self>
                                         <div class="d-flex align-items-center">
                                             <div class="search-container ms-auto">
@@ -571,9 +571,16 @@
                                                                         @endif
 
                                                                         <a href="javascript:void(0);"
-                                                                            class="action-icon"
+                                                                            class="action-icon text-danger"
                                                                             onclick="deleteClaim('{{ $cdata['dog_id_unique'] }}')">
-                                                                            <i class="mdi mdi-delete"></i></a>
+                                                                            <i class="mdi mdi-delete"></i>
+                                                                        </a>
+
+                                                                        <a href="javascript:void(0);"
+                                                                            class="action-icon text-success"
+                                                                            onclick="restoreClaim('{{ $cdata['dog_id_unique'] }}')">
+                                                                            <i class="mdi mdi-backup-restore"></i>
+                                                                        </a>
                                                                     </td>
                                                                 </tr>
                                                             @endif
@@ -669,6 +676,10 @@
                                                                                 <span class="badge bg-danger">
                                                                                     <span>Rejected</span>
                                                                                 </span>
+                                                                            @elseif ($data['is_approved'] == 2)
+                                                                                <span class="badge bg-info">
+                                                                                    <span>Archived</span>
+                                                                                </span>
                                                                             @endif
                                                                         @else
                                                                             <span class="badge bg-info">
@@ -689,9 +700,17 @@
                                                                         data-bs-target="#primary-header-modal"> <i
                                                                             class="mdi mdi-square-edit-outline"></i></a>
                                                                     @endif
+
+
                                                                     <a href="javascript:void(0);" class="action-icon">
                                                                         <i class="mdi mdi-delete"
-                                                                            onclick="deleteRounds({{ $data['id'] ?? 0 }})"></i></a>
+                                                                            onclick="deleteRounds({{ $data['id'] ?? 0 }})"></i>
+                                                                        </a>
+                                                                    <a href="javascript:void(0);"
+                                                                        class="action-icon text-success"
+                                                                        onclick="restoreRounds('{{ $data['id'] ?? 0 }}')">
+                                                                        <i class="mdi mdi-backup-restore"></i>
+                                                                    </a>   
                                                                  
                                                                 </td>
                                                             </tr>
@@ -733,7 +752,7 @@
                                 <div class="col-12">
                                     <div class="card" style="background-color: #f2f2f2" id="adoptcard">
                                         <div class="px-3">
-                                            <h3>Adoption List</h3>
+                                            <h3>Archived Adoption List</h3>
                                             <div class="table-responsive-xl" id="adoption_list" wire:ignore.self>
                                                 <div class="d-flex align-items-center ">
                                                     <div class="search-container ms-auto">
@@ -827,9 +846,15 @@
                                                                                         class="mdi mdi-square-edit-outline"></i></a>
                                                                             @endif
                                                                             <a href="javascript:void(0);"
-                                                                                class="action-icon"
+                                                                                class="action-icon text-danger"
                                                                                 onclick="deleteAdoption('{{ $data['dog_id_unique'] }}')">
-                                                                                <i class="mdi mdi-delete"></i></a>
+                                                                                <i class="mdi mdi-delete"></i>
+                                                                            </a>
+                                                                            <a href="javascript:void(0);"
+                                                                                class="action-icon text-success"
+                                                                                onclick="restoreAdoption('{{ $data['dog_id_unique'] }}')">
+                                                                                <i class="mdi mdi-backup-restore"></i>
+                                                                            </a>
                                                                         </td>
                                                                     </tr>
                                                                 @endforeach
@@ -1551,6 +1576,89 @@
                     }
                 });
             }
+
+            function restoreClaim(id) {
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: 'Do you really want to restore this claim request?',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, restore it!',
+                    cancelButtonText: 'No, cancel!',
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // Perform the approval action here
+                        Livewire.dispatch('restore_claim', {
+                            id: id
+                        });
+                        closemodals();
+                        Swal.fire(
+                            'Restored!',
+                            'The round claim has been restored.',
+                            'success'
+                        ).then(() => {
+
+                        });
+                    }
+                });
+            }
+            function restoreAdoption(id) {
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: 'Do you really want to restore this claim request?',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, restore it!',
+                    cancelButtonText: 'No, cancel!',
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // Perform the approval action here
+                        Livewire.dispatch('restore_adoption', {
+                            id: id
+                        });
+                        closemodals();
+                        Swal.fire(
+                            'Restored!',
+                            'The round claim has been restored.',
+                            'success'
+                        ).then(() => {
+
+                        });
+                    }
+                });
+            }
+            function restoreRounds(id) {
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: 'Do you really want to restore this claim request?',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, restore it!',
+                    cancelButtonText: 'No, cancel!',
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // Perform the approval action here
+                        Livewire.dispatch('restore_rounds', {
+                            id: id
+                        });
+                        closemodals();
+                        Swal.fire(
+                            'Restored!',
+                            'The round claim has been restored.',
+                            'success'
+                        ).then(() => {
+
+                        });
+                    }
+                });
+            }
+            
 
             function deleteRounds(id) {
                 Swal.fire({

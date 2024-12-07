@@ -399,7 +399,8 @@
                                     <div class="table-responsive-xl" id="claim_list" wire:ignore.self>
                                         <div class="d-flex align-items-center">
                                             <div class="search-container ms-auto">
-                                                <input type="text" class="cl_search form-control " id="searchtb" wire:model="searchDogClaim" wire:keydown="changeStatus"
+                                                <input type="text" class="cl_search form-control " id="searchtb"
+                                                    wire:model="searchDogClaim" wire:keydown="changeStatus"
                                                     style="width: 150%;" placeholder="Search for dogs...">
                                             </div>
                                             <h3 class="mb-4 d-flex align-items-center ms-auto"></h3>
@@ -409,7 +410,8 @@
                                                 <label for="addressFilter"
                                                     style="white-space: nowrap; margin-right: 10px;">Filter by
                                                     Proof</label>
-                                                <select id="addressFilter" class="form-select" wire:model="dog_proof"  wire:change="changeStatus">
+                                                <select id="addressFilter" class="form-select" wire:model="dog_proof"
+                                                    wire:change="changeStatus">
                                                     <option value="all">All</option>
                                                     <option value="with">With Proof</option>
                                                     <option value="without">Without Proof</option>
@@ -562,7 +564,7 @@
                                                                             <a href="#"
                                                                                 onclick="hidethis('{{ $cdata['status_name'] }}')"
                                                                                 wire:click.prevent="lostclaim('{{ $cdata['dog_id_unique'] ?? 0 }}')"
-                                                                                class="action-icon"
+                                                                                class="action-icon "
                                                                                 data-bs-toggle="modal"
                                                                                 data-bs-target="#primary-header-modal2">
                                                                                 <i
@@ -571,9 +573,23 @@
                                                                         @endif
 
                                                                         <a href="javascript:void(0);"
-                                                                            class="action-icon"
-                                                                            onclick="deleteClaim('{{ $cdata['dog_id_unique'] }}')">
-                                                                            <i class="mdi mdi-delete"></i></a>
+                                                                            class="action-icon text-danger"
+                                                                            onclick="deleteClaim('{{ $cdata['dog_id_unique'] }}')"
+                                                                            data-bs-toggle="tooltip"
+                                                                            data-bs-placement="top"
+                                                                            title="Delete Claim">
+                                                                            <i class="mdi mdi-delete"></i>
+                                                                        </a>
+
+                                                                        <a href="javascript:void(0);"
+                                                                            class="action-icon text-info"
+                                                                            onclick="archiveClaim('{{ $cdata['dog_id_unique'] }}')"
+                                                                            data-bs-toggle="tooltip"
+                                                                            data-bs-placement="top"
+                                                                            title="Archive Claim">
+                                                                            <i class="mdi mdi-archive"></i>
+                                                                        </a>
+
                                                                     </td>
                                                                 </tr>
                                                             @endif
@@ -603,8 +619,8 @@
                                                 </nav>
                                             </div>
                                         </div> --}}
-                                        @if($claimlist instanceof \Illuminate\Pagination\LengthAwarePaginator)
-                                         {{ $claimlist->links() }}
+                                        @if ($claimlist instanceof \Illuminate\Pagination\LengthAwarePaginator)
+                                            {{ $claimlist->links() }}
                                         @endif
                                     </div>
                                 </div> <!-- end card-body-->
@@ -618,7 +634,8 @@
                                     <div class="" id="round_lists" wire:ignore.self>
                                         <div class="d-flex align-items-center ">
                                             <div class="search-container ms-auto">
-                                                <input type="text" class="c_search form-control " id="searchtb" wire:model="ticket_num" wire:keydown="changeStatus"
+                                                <input type="text" class="c_search form-control " id="searchtb"
+                                                    wire:model="ticket_num" wire:keydown="changeStatus"
                                                     style="width: 150%;" placeholder="Search rounds...">
                                             </div>
                                             <h3 class="mb-4 d-flex align-items-center ms-auto"></h3>
@@ -681,18 +698,25 @@
                                                                 <td class="action text-black">
 
                                                                     @if (isset($data['is_approved']))
-                                                                
                                                                     @else
                                                                         <a href="javascript:void(0);"
-                                                                        wire:click="getrounds({{ $data['id'] ?? 0 }})"
-                                                                        class="action-icon" data-bs-toggle="modal"
-                                                                        data-bs-target="#primary-header-modal"> <i
-                                                                            class="mdi mdi-square-edit-outline"></i></a>
+                                                                            wire:click="getrounds({{ $data['id'] ?? 0 }})"
+                                                                            class="action-icon" data-bs-toggle="modal"
+                                                                            data-bs-target="#primary-header-modal"> <i
+                                                                                class="mdi mdi-square-edit-outline"></i></a>
                                                                     @endif
                                                                     <a href="javascript:void(0);" class="action-icon">
                                                                         <i class="mdi mdi-delete"
-                                                                            onclick="deleteRounds({{ $data['id'] ?? 0 }})"></i></a>
-                                                                 
+                                                                            onclick="deleteRounds({{ $data['id'] ?? 0 }})"></i>
+                                                                        </a>
+                                                                    <a href="javascript:void(0);"
+                                                                        class="action-icon text-info"
+                                                                        onclick="archiveRounds('{{ $data['id'] ?? 0 }}')"
+                                                                        data-bs-toggle="tooltip"
+                                                                        data-bs-placement="top"
+                                                                        title="Archive Claim">
+                                                                        <i class="mdi mdi-archive"></i>
+                                                                    </a>
                                                                 </td>
                                                             </tr>
                                                         @endforeach
@@ -721,9 +745,9 @@
                                                 </nav>
                                             </div>
                                         </div> --}}
-                                        @if($reqrounds instanceof \Illuminate\Pagination\LengthAwarePaginator)
-                                        {{ $reqrounds->links() }}
-                                       @endif
+                                        @if ($reqrounds instanceof \Illuminate\Pagination\LengthAwarePaginator)
+                                            {{ $reqrounds->links() }}
+                                        @endif
                                     </div>
                                 </div> <!-- end card-body-->
                             </div>
@@ -737,8 +761,10 @@
                                             <div class="table-responsive-xl" id="adoption_list" wire:ignore.self>
                                                 <div class="d-flex align-items-center ">
                                                     <div class="search-container ms-auto">
-                                                        <input type="text" class="search form-control " id="searchtb"  wire:model="changeName" wire:keydown="changeStatus"
-                                                            style="width: 150%;" placeholder="Search for dogs...">
+                                                        <input type="text" class="search form-control "
+                                                            id="searchtb" wire:model="changeName"
+                                                            wire:keydown="changeStatus" style="width: 150%;"
+                                                            placeholder="Search for dogs...">
                                                     </div>
 
                                                     <h3 class="mb-4 d-flex align-items-center ms-auto"></h3>
@@ -827,9 +853,19 @@
                                                                                         class="mdi mdi-square-edit-outline"></i></a>
                                                                             @endif
                                                                             <a href="javascript:void(0);"
-                                                                                class="action-icon"
+                                                                                class="action-icon text-danger"
                                                                                 onclick="deleteAdoption('{{ $data['dog_id_unique'] }}')">
-                                                                                <i class="mdi mdi-delete"></i></a>
+                                                                                <i class="mdi mdi-delete"></i>
+                                                                            </a>
+
+                                                                            <a href="javascript:void(0);"
+                                                                                class="action-icon text-info"
+                                                                                onclick="archiveAdoption('{{ $data['dog_id_unique'] }}')"
+                                                                                data-bs-toggle="tooltip"
+                                                                                data-bs-placement="top"
+                                                                                title="Archive Claim">
+                                                                                <i class="mdi mdi-archive"></i>
+                                                                            </a>
                                                                         </td>
                                                                     </tr>
                                                                 @endforeach
@@ -859,9 +895,9 @@
                                                         </nav>
                                                     </div>
                                                 </div> --}}
-                                                @if($adoptionlist instanceof \Illuminate\Pagination\LengthAwarePaginator)
-                                                {{ $adoptionlist->links() }}
-                                               @endif
+                                                @if ($adoptionlist instanceof \Illuminate\Pagination\LengthAwarePaginator)
+                                                    {{ $adoptionlist->links() }}
+                                                @endif
                                             </div>
                                         </div> <!-- end card-body-->
                                     </div> <!-- end card-->
@@ -1487,410 +1523,495 @@
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
     </div>
-        <script>
-            function closemodals(){
-                var modals = document.querySelectorAll('.modal');
-                    modals.forEach(function(modal) {
-                        var bsModal = bootstrap.Modal.getInstance(
-                            modal); // Get the modal instance
-                        if (bsModal) {
-                            bsModal.hide(); // Hide the modal
-                        }
-                });
-            }
-
-            var htmlHeight = document.documentElement.clientHeight;
-            var cardHeight = htmlHeight - 300;
-
-            // document.getElementById('claimcard').style.minHeight = cardHeight + 'px';
-            // document.getElementById('claimcard').style.maxHeight = cardHeight + 'px';
-
-            // document.getElementById('claim_list').style.minHeight = (cardHeight - 50) + 'px';
-            // document.getElementById('claim_list').style.maxHeight = (cardHeight - 50) + 'px';
-            // document.getElementById('claim_list').style.overflow = 'hidden';
-
-            // document.getElementById('roundscard').style.minHeight = cardHeight + 'px';
-            // document.getElementById('roundscard').style.maxHeight = cardHeight + 'px';
-
-            // document.getElementById('round_lists').style.minHeight = (cardHeight - 50) + 'px';
-            // document.getElementById('round_lists').style.maxHeight = (cardHeight - 50) + 'px';
-            // document.getElementById('round_lists').style.overflow = 'hidden';
-
-            // document.getElementById('adoptcard').style.minHeight = cardHeight + 'px';
-            // document.getElementById('adoptcard').style.maxHeight = cardHeight + 'px';
-
-            // document.getElementById('adoption_list').style.minHeight = (cardHeight - 50) + 'px';
-            // document.getElementById('adoption_list').style.maxHeight = (cardHeight - 50) + 'px';
-            // document.getElementById('adoption_list').style.overflow = 'hidden';
-
-
-            function deleteClaim(id) {
-                Swal.fire({
-                    title: 'Are you sure?',
-                    text: 'Do you really want to delete this claim request?',
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'Yes, delete it!',
-                    cancelButtonText: 'No, cancel!',
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        // Perform the approval action here
-                        Livewire.dispatch('delete_claim', {
-                            id: id
-                        });
-                        closemodals();
-                        Swal.fire(
-                            'Deleted!',
-                            'The round claim has been deleted.',
-                            'success'
-                        ).then(() => {
-
-                        });
-                    }
-                });
-            }
-
-            function deleteRounds(id) {
-                Swal.fire({
-                    title: 'Are you sure?',
-                    text: 'Do you really want to delete this round request?',
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'Yes, delete it!',
-                    cancelButtonText: 'No, cancel!',
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        // Perform the approval action here
-                        Livewire.dispatch('delete_rounds', {
-                            id: id
-                        });
-                        closemodals();
-                        Swal.fire(
-                            'Deleted!',
-                            'The round request has been deleted.',
-                            'success'
-                        ).then(() => {
-
-                        });
-                    }
-                });
-            }
-
-            function deleteAdoption(id) {
-                Swal.fire({
-                    title: 'Are you sure?',
-                    text: 'Do you really want to delete this adoption request?',
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'Yes, delete it!',
-                    cancelButtonText: 'No, cancel!',
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        // Perform the approval action here
-                        Livewire.dispatch('delete_adoption', {
-                            id: id
-                        });
-                        closemodals();
-                        Swal.fire(
-                            'Deleted!',
-                            'The adoption request has been deleted.',
-                            'success'
-                        ).then(() => {
-                            // Reload the page after the user clicks "OK" or clicks outside the modal
-
-                        });
-                    }
-                });
-            }
-
-            function approve_claim(id) {
-                Swal.fire({
-                    title: 'Are you sure?',
-                    text: 'Do you really want to approve this claim?',
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'Yes, approve it!',
-                    cancelButtonText: 'No, cancel!',
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        // Perform the approval action here
-                        Livewire.dispatch('claim_approved', {
-                            id: id
-                        });
-                        closemodals();
-                        Swal.fire(
-                            'Approved!',
-                            'The claim has been approved.',
-                            'success'
-                        ).then(() => {
-                            // Reload the page after the user clicks "OK" or clicks outside the modal
-
-                        });
-                    }
-                });
-            }
-
-            function reject_claim(id) {
-                Swal.fire({
-                    title: 'Are you sure?',
-                    text: 'Do you really want to reject this claim?',
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#d33',
-                    cancelButtonColor: '#3085d6',
-                    confirmButtonText: 'Yes, reject it!',
-                    cancelButtonText: 'No, cancel!',
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        Livewire.dispatch('claim_dog_rejected', {
-                            id: id
-                        });
-                        closemodals();
-                        Swal.fire(
-                            'Rejected!',
-                            'The claim has been rejected.',
-                            'success'
-                        ).then(() => {
-                            // Reload the page after the user clicks "OK" or clicks outside the modal
-
-                        });
-                    }
-                });
-            }
-        </script>
-        <script>
-            function hidethis(status) {
-                console.log(status);
-                if (status === 'Lost Dog Found') {
-
-
-                    document.getElementById('dog_lost').classList.remove('d-none');
-                    document.getElementById('dog_lost').classList.add('d-block');
-
-                    document.getElementById('dog_claimer').classList.remove('d-block');
-                    document.getElementById('dog_claimer').classList.add('d-none');
-                } else {
-
-                    document.getElementById('dog_claimer').classList.remove('d-none');
-                    document.getElementById('dog_claimer').classList.add('d-block');
-
-                    document.getElementById('dog_lost').classList.remove('d-block');
-                    document.getElementById('dog_lost').classList.add('d-none');
+    <script>
+        function closemodals() {
+            var modals = document.querySelectorAll('.modal');
+            modals.forEach(function(modal) {
+                var bsModal = bootstrap.Modal.getInstance(
+                    modal); // Get the modal instance
+                if (bsModal) {
+                    bsModal.hide(); // Hide the modal
                 }
+            });
+        }
+
+        var htmlHeight = document.documentElement.clientHeight;
+        var cardHeight = htmlHeight - 300;
+
+        // document.getElementById('claimcard').style.minHeight = cardHeight + 'px';
+        // document.getElementById('claimcard').style.maxHeight = cardHeight + 'px';
+
+        // document.getElementById('claim_list').style.minHeight = (cardHeight - 50) + 'px';
+        // document.getElementById('claim_list').style.maxHeight = (cardHeight - 50) + 'px';
+        // document.getElementById('claim_list').style.overflow = 'hidden';
+
+        // document.getElementById('roundscard').style.minHeight = cardHeight + 'px';
+        // document.getElementById('roundscard').style.maxHeight = cardHeight + 'px';
+
+        // document.getElementById('round_lists').style.minHeight = (cardHeight - 50) + 'px';
+        // document.getElementById('round_lists').style.maxHeight = (cardHeight - 50) + 'px';
+        // document.getElementById('round_lists').style.overflow = 'hidden';
+
+        // document.getElementById('adoptcard').style.minHeight = cardHeight + 'px';
+        // document.getElementById('adoptcard').style.maxHeight = cardHeight + 'px';
+
+        // document.getElementById('adoption_list').style.minHeight = (cardHeight - 50) + 'px';
+        // document.getElementById('adoption_list').style.maxHeight = (cardHeight - 50) + 'px';
+        // document.getElementById('adoption_list').style.overflow = 'hidden';
+
+
+        function deleteClaim(id) {
+            Swal.fire({
+                title: 'Are you sure?',
+                text: 'Do you really want to delete this claim request?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!',
+                cancelButtonText: 'No, cancel!',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Perform the approval action here
+                    Livewire.dispatch('delete_claim', {
+                        id: id
+                    });
+                    closemodals();
+                    Swal.fire(
+                        'Deleted!',
+                        'The request has been deleted.',
+                        'success'
+                    ).then(() => {
+
+                    });
+                }
+            });
+        }
+
+        
+        function archiveClaim(id) {
+            Swal.fire({
+                title: 'Are you sure?',
+                text: 'Do you really want to archive this claim request?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, archive it!',
+                cancelButtonText: 'No, cancel!',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Perform the approval action here
+                    Livewire.dispatch('archive_claim', {
+                        id: id
+                    });
+                    closemodals();
+                    Swal.fire(
+                        'Archived!',
+                        'The has been archived.',
+                        'success'
+                    ).then(() => {
+
+                    });
+                }
+            });
+        }
+        function archiveRounds(id) {
+            Swal.fire({
+                title: 'Are you sure?',
+                text: 'Do you really want to archive this round request?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, archive it!',
+                cancelButtonText: 'No, cancel!',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Perform the approval action here
+                    Livewire.dispatch('archive_rounds', {
+                        id: id
+                    });
+                    closemodals();
+                    Swal.fire(
+                        'Archived!',
+                        'The request has been archived.',
+                        'success'
+                    ).then(() => {
+
+                    });
+                }
+            });
+        }
+        
+        function deleteRounds(id) {
+            Swal.fire({
+                title: 'Are you sure?',
+                text: 'Do you really want to delete this round request?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!',
+                cancelButtonText: 'No, cancel!',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Perform the approval action here
+                    Livewire.dispatch('delete_rounds', {
+                        id: id
+                    });
+                    closemodals();
+                    Swal.fire(
+                        'Deleted!',
+                        'The request has been deleted.',
+                        'success'
+                    ).then(() => {
+
+                    });
+                }
+            });
+        }
+
+        function deleteAdoption(id) {
+            Swal.fire({
+                title: 'Are you sure?',
+                text: 'Do you really want to delete this adoption request?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!',
+                cancelButtonText: 'No, cancel!',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Perform the approval action here
+                    Livewire.dispatch('delete_adoption', {
+                        id: id
+                    });
+                    closemodals();
+                    Swal.fire(
+                        'Deleted!',
+                        'The request has been deleted.',
+                        'success'
+                    ).then(() => {
+                        // Reload the page after the user clicks "OK" or clicks outside the modal
+
+                    });
+                }
+            });
+        }
+
+        function archiveAdoption(id) {
+            Swal.fire({
+                title: 'Are you sure?',
+                text: 'Do you really want to archive this claim request?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, archive it!',
+                cancelButtonText: 'No, cancel!',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Perform the approval action here
+                    Livewire.dispatch('archive_adoption', {
+                        id: id
+                    });
+                    closemodals();
+                    Swal.fire(
+                        'Archived!',
+                        'The request has been archived.',
+                        'success'
+                    ).then(() => {
+
+                    });
+                }
+            });
+        }
+
+
+        function approve_claim(id) {
+            Swal.fire({
+                title: 'Are you sure?',
+                text: 'Do you really want to approve this claim?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, approve it!',
+                cancelButtonText: 'No, cancel!',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Perform the approval action here
+                    Livewire.dispatch('claim_approved', {
+                        id: id
+                    });
+                    closemodals();
+                    Swal.fire(
+                        'Approved!',
+                        'The claim has been approved.',
+                        'success'
+                    ).then(() => {
+                        // Reload the page after the user clicks "OK" or clicks outside the modal
+
+                    });
+                }
+            });
+        }
+
+        function reject_claim(id) {
+            Swal.fire({
+                title: 'Are you sure?',
+                text: 'Do you really want to reject this claim?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Yes, reject it!',
+                cancelButtonText: 'No, cancel!',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Livewire.dispatch('claim_dog_rejected', {
+                        id: id
+                    });
+                    closemodals();
+                    Swal.fire(
+                        'Rejected!',
+                        'The claim has been rejected.',
+                        'success'
+                    ).then(() => {
+                        // Reload the page after the user clicks "OK" or clicks outside the modal
+
+                    });
+                }
+            });
+        }
+    </script>
+    <script>
+        function hidethis(status) {
+            console.log(status);
+            if (status === 'Lost Dog Found') {
+
+
+                document.getElementById('dog_lost').classList.remove('d-none');
+                document.getElementById('dog_lost').classList.add('d-block');
+
+                document.getElementById('dog_claimer').classList.remove('d-block');
+                document.getElementById('dog_claimer').classList.add('d-none');
+            } else {
+
+                document.getElementById('dog_claimer').classList.remove('d-none');
+                document.getElementById('dog_claimer').classList.add('d-block');
+
+                document.getElementById('dog_lost').classList.remove('d-block');
+                document.getElementById('dog_lost').classList.add('d-none');
             }
+        }
 
 
 
-            var adoptionlist = [];
-            var cdoptionlist = [];
-            var cl_list = [];
+        var adoptionlist = [];
+        var cdoptionlist = [];
+        var cl_list = [];
 
-            var a_options = {
-                valueNames: ['ticket_number', 'requestor', 'dog_name', 'contact', 'address', 'date_request', 'status',
-                    'actions'
-                ],
-                searchClass: 'search',
-                page: 6,
-                pagination: true,
-                paginationClass: 'pagination pagination-rounded', // Adds pagination classes (rounded pagination)
-                nextClass: 'next', // Custom class for the next button
-                prevClass: 'previous', // Custom class for the previous button
-                activeClass: 'active', // Custom class for active page
-                pageClass: 'page-item', // Class for each page item
-                linkClass: 'page-link' // Class for each link inside the pagination
-            };
+        var a_options = {
+            valueNames: ['ticket_number', 'requestor', 'dog_name', 'contact', 'address', 'date_request', 'status',
+                'actions'
+            ],
+            searchClass: 'search',
+            page: 6,
+            pagination: true,
+            paginationClass: 'pagination pagination-rounded', // Adds pagination classes (rounded pagination)
+            nextClass: 'next', // Custom class for the next button
+            prevClass: 'previous', // Custom class for the previous button
+            activeClass: 'active', // Custom class for active page
+            pageClass: 'page-item', // Class for each page item
+            linkClass: 'page-link' // Class for each link inside the pagination
+        };
 
-            var c_options = {
-                valueNames: ['ticket_number', 'requestor', 'address', 'specific', 'contact', 'created', 'status',
-                    'actions'
-                ],
-                searchClass: 'c_search',
-                page: 6,
-                pagination: true,
-                paginationClass: 'pagination', // Adds pagination classes (rounded pagination)
-                nextClass: 'next', // Custom class for the next button
-                prevClass: 'previous', // Custom class for the previous button
-                activeClass: 'active', // Custom class for active page
-                pageClass: 'page-item', // Class for each page item
-                linkClass: 'page-link' // Class for each link inside the pagination
-            };
+        var c_options = {
+            valueNames: ['ticket_number', 'requestor', 'address', 'specific', 'contact', 'created', 'status',
+                'actions'
+            ],
+            searchClass: 'c_search',
+            page: 6,
+            pagination: true,
+            paginationClass: 'pagination', // Adds pagination classes (rounded pagination)
+            nextClass: 'next', // Custom class for the next button
+            prevClass: 'previous', // Custom class for the previous button
+            activeClass: 'active', // Custom class for active page
+            pageClass: 'page-item', // Class for each page item
+            linkClass: 'page-link' // Class for each link inside the pagination
+        };
 
-            var cl_options = {
-                valueNames: ['ticket_number', 'requestor', 'dog_name', 'contact', 'address', 'status', 'actions'],
-                searchClass: 'cl_search',
-                page: 6,
-                pagination: true,
-                paginationClass: 'pagination', // Adds pagination classes (rounded pagination)
-                nextClass: 'next', // Custom class for the next button
-                prevClass: 'previous', // Custom class for the previous button
-                activeClass: 'active', // Custom class for active page
-                pageClass: 'page-item', // Class for each page item
-                linkClass: 'page-link' // Class for each link inside the pagination
-            };
-     
-
-            document.addEventListener('DOMContentLoaded', function() {
-                document.addEventListener('livewire:init', function() {
-
-                    function areinitializeList() {
-                        console.log(adoptionlist);
-                        console.log('reinit');
-                        // adoptionlist = new List('adoption_list', a_options);
-                        // cdoptionlist = new List('round_lists', c_options);
-                        // cl_list = new List('claim_list', cl_options);
-                    }
+        var cl_options = {
+            valueNames: ['ticket_number', 'requestor', 'dog_name', 'contact', 'address', 'status', 'actions'],
+            searchClass: 'cl_search',
+            page: 6,
+            pagination: true,
+            paginationClass: 'pagination', // Adds pagination classes (rounded pagination)
+            nextClass: 'next', // Custom class for the next button
+            prevClass: 'previous', // Custom class for the previous button
+            activeClass: 'active', // Custom class for active page
+            pageClass: 'page-item', // Class for each page item
+            linkClass: 'page-link' // Class for each link inside the pagination
+        };
 
 
-                    areinitializeList();
+        document.addEventListener('DOMContentLoaded', function() {
+            document.addEventListener('livewire:init', function() {
 
-                    document.querySelector('.search').addEventListener('input', function(event) {
-                        adoptionlist.search(event.target
-                            .value); // Filter results based on the search input
+                function areinitializeList() {
+                    console.log(adoptionlist);
+                    console.log('reinit');
+                    // adoptionlist = new List('adoption_list', a_options);
+                    // cdoptionlist = new List('round_lists', c_options);
+                    // cl_list = new List('claim_list', cl_options);
+                }
+
+
+                areinitializeList();
+
+                document.querySelector('.search').addEventListener('input', function(event) {
+                    adoptionlist.search(event.target
+                        .value); // Filter results based on the search input
+                });
+                document.querySelector('.c_search').addEventListener('input', function(event) {
+                    cdoptionlist.search(event.target
+                        .value); // Filter results based on the search input
+                });
+                document.querySelector('.cl_search').addEventListener('input', function(event) {
+                    cl_list.search(event.target
+                        .value); // Filter results based on the search input
+                });
+
+                document.getElementById('addressFilter').addEventListener('change', function() {
+                    var selectedOption = this.value;
+
+                    cl_list.filter(function(item) {
+                        var addressStatus = item.elm.querySelector('.address').getAttribute(
+                            'data-address-status');
+                        if (selectedOption === '') {
+                            return true;
+                        } else if (selectedOption === 'with') {
+                            return addressStatus === 'with';
+                        } else if (selectedOption === 'without') {
+                            return addressStatus === 'without';
+                        }
                     });
-                    document.querySelector('.c_search').addEventListener('input', function(event) {
-                        cdoptionlist.search(event.target
-                            .value); // Filter results based on the search input
+                });
+
+                document.getElementById('addressFilter2').addEventListener('change', function() {
+                    var selectedOption = this.value;
+
+                    cl_list.filter(function(item) {
+                        var addressStatus = item.elm.querySelector('.address').getAttribute(
+                            'data-address-status');
+                        if (selectedOption === '') {
+                            return true;
+                        } else if (selectedOption === 'with') {
+                            return addressStatus === 'with';
+                        } else if (selectedOption === 'without') {
+                            return addressStatus === 'without';
+                        }
                     });
-                    document.querySelector('.cl_search').addEventListener('input', function(event) {
-                        cl_list.search(event.target
-                            .value); // Filter results based on the search input
-                    });
+                });
 
-                    document.getElementById('addressFilter').addEventListener('change', function() {
-                        var selectedOption = this.value;
+                $('.cl_PaginateNext').on('click', function() {
+                    var list = $('.pagination').find('li');
+                    $.each(list, function(position, element) {
+                        if ($(element).is('.active')) {
+                            $(list[position + 1]).trigger('click');
+                        }
+                    })
+                });
 
-                        cl_list.filter(function(item) {
-                            var addressStatus = item.elm.querySelector('.address').getAttribute(
-                                'data-address-status');
-                            if (selectedOption === '') {
-                                return true;
-                            } else if (selectedOption === 'with') {
-                                return addressStatus === 'with';
-                            } else if (selectedOption === 'without') {
-                                return addressStatus === 'without';
-                            }
-                        });
-                    });
+                $('.cl_jPaginateBack').on('click', function() {
+                    var list = $('.pagination').find('li');
+                    $.each(list, function(position, element) {
+                        if ($(element).is('.active')) {
+                            $(list[position - 1]).trigger('click');
+                        }
+                    })
+                });
 
-                    document.getElementById('addressFilter2').addEventListener('change', function() {
-                        var selectedOption = this.value;
-
-                        cl_list.filter(function(item) {
-                            var addressStatus = item.elm.querySelector('.address').getAttribute(
-                                'data-address-status');
-                            if (selectedOption === '') {
-                                return true;
-                            } else if (selectedOption === 'with') {
-                                return addressStatus === 'with';
-                            } else if (selectedOption === 'without') {
-                                return addressStatus === 'without';
-                            }
-                        });
-                    });
-
-                    $('.cl_PaginateNext').on('click', function() {
-                        var list = $('.pagination').find('li');
-                        $.each(list, function(position, element) {
-                            if ($(element).is('.active')) {
-                                $(list[position + 1]).trigger('click');
-                            }
-                        })
-                    });
-
-                    $('.cl_jPaginateBack').on('click', function() {
-                        var list = $('.pagination').find('li');
-                        $.each(list, function(position, element) {
-                            if ($(element).is('.active')) {
-                                $(list[position - 1]).trigger('click');
-                            }
-                        })
-                    });
-
-                    $('.claimjPaginateNext').on('click', function() {
-                        var list = $('.pagination').find('li');
-                        $.each(list, function(position, element) {
-                            if ($(element).is('.active')) {
-                                $(list[position + 1]).trigger('click');
-                            }
-                        })
-                    });
-
-
-                    $('.claimjPaginateBack').on('click', function() {
-                        var list = $('.pagination').find('li');
-                        $.each(list, function(position, element) {
-                            if ($(element).is('.active')) {
-                                $(list[position - 1]).trigger('click');
-                            }
-                        })
-                    });
-
-                    $('.cjPaginateNext').on('click', function() {
-                        var list = $('.pagination').find('li');
-                        $.each(list, function(position, element) {
-                            if ($(element).is('.active')) {
-                                $(list[position + 1]).trigger('click');
-                            }
-                        })
-                    });
-
-
-                    $('.cjPaginateBack').on('click', function() {
-                        var list = $('.pagination').find('li');
-                        $.each(list, function(position, element) {
-                            if ($(element).is('.active')) {
-                                $(list[position - 1]).trigger('click');
-                            }
-                        })
-                    });
-
-                    Livewire.on('reinit_table', event => {
-
-                        setTimeout(() => {
-                            areinitializeList();
-                        }, 1000);
-
-                      
-                    });
-
+                $('.claimjPaginateNext').on('click', function() {
+                    var list = $('.pagination').find('li');
+                    $.each(list, function(position, element) {
+                        if ($(element).is('.active')) {
+                            $(list[position + 1]).trigger('click');
+                        }
+                    })
                 });
 
 
-                document.getElementById('approve_rounds').addEventListener('click', function() {
-                    setTimeout(() => {}, 1000);
-                    // Swal.fire({
-                    //     title: 'Approve Rounds?',
-                    //     text: "Are you sure you want to approve this rounds request?",
-                    //     icon: 'warning',
-                    //     showCancelButton: true,
-                    //     confirmButtonColor: '#28a745',
-                    //     cancelButtonColor: '#d33',
-                    //     confirmButtonText: 'Yes, approve rounds!'
-                    // }).then((result) => {
-                    //     if (result.isConfirmed) {
-                    //         Livewire.dispatch('rounds_accepted')
-                    //         Swal.fire(
-                    //             'Approved!',
-                    //             'The rounds have been approved successfully.',
-                    //             'success'
-                    //         ).then(() => {
-                    //             // Reload the page after approval
-                    //         });
-                    //     }
-                    // });
+                $('.claimjPaginateBack').on('click', function() {
+                    var list = $('.pagination').find('li');
+                    $.each(list, function(position, element) {
+                        if ($(element).is('.active')) {
+                            $(list[position - 1]).trigger('click');
+                        }
+                    })
+                });
 
-                    // First prompt: Text input for the title
-                    Swal.fire({
-                        title: 'Approve Rounds?',
-                        html: `
+                $('.cjPaginateNext').on('click', function() {
+                    var list = $('.pagination').find('li');
+                    $.each(list, function(position, element) {
+                        if ($(element).is('.active')) {
+                            $(list[position + 1]).trigger('click');
+                        }
+                    })
+                });
+
+
+                $('.cjPaginateBack').on('click', function() {
+                    var list = $('.pagination').find('li');
+                    $.each(list, function(position, element) {
+                        if ($(element).is('.active')) {
+                            $(list[position - 1]).trigger('click');
+                        }
+                    })
+                });
+
+                Livewire.on('reinit_table', event => {
+
+                    setTimeout(() => {
+                        areinitializeList();
+                    }, 1000);
+
+
+                });
+
+            });
+
+
+            document.getElementById('approve_rounds').addEventListener('click', function() {
+                setTimeout(() => {}, 1000);
+                // Swal.fire({
+                //     title: 'Approve Rounds?',
+                //     text: "Are you sure you want to approve this rounds request?",
+                //     icon: 'warning',
+                //     showCancelButton: true,
+                //     confirmButtonColor: '#28a745',
+                //     cancelButtonColor: '#d33',
+                //     confirmButtonText: 'Yes, approve rounds!'
+                // }).then((result) => {
+                //     if (result.isConfirmed) {
+                //         Livewire.dispatch('rounds_accepted')
+                //         Swal.fire(
+                //             'Approved!',
+                //             'The rounds have been approved successfully.',
+                //             'success'
+                //         ).then(() => {
+                //             // Reload the page after approval
+                //         });
+                //     }
+                // });
+
+                // First prompt: Text input for the title
+                Swal.fire({
+                    title: 'Approve Rounds?',
+                    html: `
                                 <div style="text-align: left;">
                                 <div >
                                     <label for="title" style="display: block; font-weight: bold;">Title:</label>
@@ -1902,119 +2023,119 @@
                                 </div>
                                 </div>
                             `,
-                        icon: 'warning',
-                        showCancelButton: true,
-                        confirmButtonText: 'Submit',
-                        preConfirm: () => {
-                            const title = document.getElementById('titled').value;
-                            const remarks = document.getElementById('remarksd').value;
-                            if (!title || !remarks) {
-                                Swal.showValidationMessage('Please enter both title and remarks');
-                            }
-                            return {
-                                title,
-                                remarks
-                            };
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Submit',
+                    preConfirm: () => {
+                        const title = document.getElementById('titled').value;
+                        const remarks = document.getElementById('remarksd').value;
+                        if (!title || !remarks) {
+                            Swal.showValidationMessage('Please enter both title and remarks');
                         }
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            Swal.fire({
-                                title: 'Rounds Approved!',
-                                text: 'The announcement will now be posted.',
-                                icon: 'success'
-                            });
-                            Livewire.dispatch('rounds_accepted', {
-                                data: result.value
-                            });
-                            closemodals();
-                        }
-                    });
-
-
-
+                        return {
+                            title,
+                            remarks
+                        };
+                    }
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        Swal.fire({
+                            title: 'Rounds Approved!',
+                            text: 'The announcement will now be posted.',
+                            icon: 'success'
+                        });
+                        Livewire.dispatch('rounds_accepted', {
+                            data: result.value
+                        });
+                        closemodals();
+                    }
                 });
 
-                document.getElementById('reject_rounds').addEventListener('click', function() {
-                    Swal.fire({
-                        title: 'Reject Rounds?',
-                        text: "Are you sure you want to approve this rounds request?",
-                        icon: 'warning',
-                        showCancelButton: true,
-                        confirmButtonColor: '#d33',
-                        cancelButtonColor: '#28a745',
-                        confirmButtonText: 'Yes, reject rounds!'
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            // Emit Livewire event to handle the rejection logic
-                            Livewire.dispatch('rounds_rejected');
-                            closemodals();
-                            Swal.fire(
-                                'Rejected!',
-                                'The rounds have been rejected successfully.',
-                                'success'
-                            ).then(() => {
-                                // Reload the page after rejection
-                            });
-                        }
-                    });
-                });
-
-                document.getElementById('approve_adoption').addEventListener('click', function() {
-                    Swal.fire({
-                        title: 'Are you sure?',
-                        text: "You are about to approve the adoption! Please call the Adopter first to confirm the details.",
-                        icon: 'warning',
-                        showCancelButton: true,
-                        confirmButtonColor: '#28a745',
-                        cancelButtonColor: '#d33',
-                        confirmButtonText: 'Yes, approve it!'
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            Livewire.dispatch('adopted');
-                            closemodals();
-                            Swal.fire(
-                                'Approved!',
-                                'The adoption has been approved.',
-                                'success'
-                            ).then((result) => {
-                                if (result.isConfirmed) {
-
-                                }
-                            });
-
-                        }
-                    });
-                });
-
-
-                document.getElementById('reject_adoption').addEventListener('click', function() {
-                    Swal.fire({
-                        title: 'Are you sure?',
-                        text: "You are about to reject the adoption!",
-                        icon: 'warning',
-                        showCancelButton: true,
-                        confirmButtonColor: '#dc3545',
-                        cancelButtonColor: '#6c757d',
-                        confirmButtonText: 'Yes, reject it!'
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            // Perform the reject action here
-                            Livewire.dispatch('r_adopted');
-                            closemodals();
-                            Swal.fire(
-                                'Rejected!',
-                                'The adoption has been rejected.',
-                                'success'
-                            ).then((result) => {
-                                if (result.isConfirmed) {
-
-                                }
-                            });
-                        }
-                    });
-                });
 
 
             });
-        </script>
-    </div>
+
+            document.getElementById('reject_rounds').addEventListener('click', function() {
+                Swal.fire({
+                    title: 'Reject Rounds?',
+                    text: "Are you sure you want to approve this rounds request?",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#d33',
+                    cancelButtonColor: '#28a745',
+                    confirmButtonText: 'Yes, reject rounds!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // Emit Livewire event to handle the rejection logic
+                        Livewire.dispatch('rounds_rejected');
+                        closemodals();
+                        Swal.fire(
+                            'Rejected!',
+                            'The rounds have been rejected successfully.',
+                            'success'
+                        ).then(() => {
+                            // Reload the page after rejection
+                        });
+                    }
+                });
+            });
+
+            document.getElementById('approve_adoption').addEventListener('click', function() {
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: "You are about to approve the adoption! Please call the Adopter first to confirm the details.",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#28a745',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, approve it!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        Livewire.dispatch('adopted');
+                        closemodals();
+                        Swal.fire(
+                            'Approved!',
+                            'The adoption has been approved.',
+                            'success'
+                        ).then((result) => {
+                            if (result.isConfirmed) {
+
+                            }
+                        });
+
+                    }
+                });
+            });
+
+
+            document.getElementById('reject_adoption').addEventListener('click', function() {
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: "You are about to reject the adoption!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#dc3545',
+                    cancelButtonColor: '#6c757d',
+                    confirmButtonText: 'Yes, reject it!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // Perform the reject action here
+                        Livewire.dispatch('r_adopted');
+                        closemodals();
+                        Swal.fire(
+                            'Rejected!',
+                            'The adoption has been rejected.',
+                            'success'
+                        ).then((result) => {
+                            if (result.isConfirmed) {
+
+                            }
+                        });
+                    }
+                });
+            });
+
+
+        });
+    </script>
+</div>
