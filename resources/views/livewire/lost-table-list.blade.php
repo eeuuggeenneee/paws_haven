@@ -520,10 +520,10 @@
 
 
                 Livewire.on('editDoggo', event => {
-                    setTimeout(() => {
-                        dogList = new List('lost_list', options);
-                        dogList2 = new List('lost_list_dog2', options2);
-                    }, 1000);
+                    // setTimeout(() => {
+                    //     dogList = new List('lost_list', options);
+                    //     dogList2 = new List('lost_list_dog2', options2);
+                    // }, 1000);
                 });
 
                 Livewire.on('reinnitdata', event => {

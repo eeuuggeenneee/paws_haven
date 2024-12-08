@@ -621,7 +621,7 @@
                             <div class="card" style="background-color: #f2f2f2; overflow-y: hidden;"
                                 id="roundscard" wire:ignore.self style="">
                                 <div class=" px-3">
-                                    <h3>Rounds List</h3>
+                                    <h3>Archive Rounds List</h3>
                                     <div class="" id="round_lists" wire:ignore.self>
                                         <div class="d-flex align-items-center ">
                                             <div class="search-container ms-auto">

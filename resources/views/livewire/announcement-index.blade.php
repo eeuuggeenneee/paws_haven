@@ -57,12 +57,13 @@
                                                     data-bs-target="#request_rounds">
                                                     <i class='uil uil-comment-alt-message me-1'></i> Request Rounds
                                                 </a>
-                                        
-                                            <a class="nav-link list-group-item list-group-item-action border-0"
-                                                data-bs-toggle="modal" href="#" data-bs-target="#lostandfounddog"
-                                                id="lostandfoudSelect" onclick="activeRounds()">
-                                                <i class='uil uil-comment-alt-message me-1'></i> Report Lost Dog
-                                            </a>
+
+                                                <a class="nav-link list-group-item list-group-item-action border-0"
+                                                    data-bs-toggle="modal" href="#"
+                                                    data-bs-target="#lostandfounddog" id="lostandfoudSelect"
+                                                    onclick="activeRounds()">
+                                                    <i class='uil uil-comment-alt-message me-1'></i> Report Lost Dog
+                                                </a>
                                             @endif
                                         </div>
                                     </div>
@@ -75,16 +76,17 @@
                                             <div class="d-flex justify-content-between align-items-center mb-2">
                                                 <h4 class="header-title">Most Popular Dogs</h4>
                                                 <div class="dropdown">
-        
+
                                                 </div>
                                             </div>
                                             @if (isset($dogclicked))
-                                                @if(count($dogclicked) == 0)
+                                                @if (count($dogclicked) == 0)
                                                     <p>No Available Data</p>
                                                 @else
                                                     @foreach ($dogclicked as $clicked)
                                                         <div class="d-flex mt-1">
-                                                            <i class='uil uil-arrow-growth me-2 font-18 text-primary'></i>
+                                                            <i
+                                                                class='uil uil-arrow-growth me-2 font-18 text-primary'></i>
                                                             <div>
                                                                 <p class="mt-1 font-14" href="javascript:void(0);">
                                                                     <strong>{{ $clicked['dog_name'] }}</strong>
@@ -96,7 +98,7 @@
                                                         </div>
                                                     @endforeach
                                                 @endif
-                                                
+
                                             @endif
                                         </div> <!-- end card-body-->
                                     </div>
@@ -238,7 +240,7 @@
                             </div>
                         </div>
                     </div>
-                </div> 
+                </div>
             </div> <!--end row -->
         </div> <!-- container -->
     </div> <!-- content -->
@@ -280,6 +282,7 @@
             if (activeElement) {
                 activeElement.classList.remove('active');
                 console.log('Active element ID:', activeElement.id);
+
                 return activeElement.id;
             } else {
                 console.log('No active element found');
@@ -305,21 +308,6 @@
                 backdrop.parentNode.removeChild(backdrop); // Remove each backdrop
             });
         }
-        document.addEventListener('livewire:init', function() {
-            Livewire.on('dogSaved', event => {
-                closeAllModals();
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Ticket Number : ' + event[0],
-                    text: 'Your report has been submitted. Please expect a call from the pound.',
-                    confirmButtonText: 'Okay'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-
-                    }
-                });
-            });
-        });
     </script>
 
 </div>

@@ -256,6 +256,7 @@
             );
             var isValid = true;
 
+  
             inputs.forEach(function(input) {
                 if (input.tagName === 'SELECT') {
                     // Check if a valid option is selected
@@ -294,7 +295,7 @@
 
             var phone_dog_c2 = document.getElementById('phonenumber_claim');
 
-     
+
 
             if (!isValid) {
                 const Toast = Swal.mixin({
@@ -311,7 +312,7 @@
                 return false; // Return false to indicate validation failed
             }
 
-            if(!phone_dog_c2.classList.contains('verified')){
+            if (!phone_dog_c2.classList.contains('verified')) {
                 phone_dog_c2.classList.add('is-invalid');
                 const Toast = Swal.mixin({
                     toast: true,
@@ -323,7 +324,7 @@
                 Toast.fire({
                     icon: 'warning',
                     title: 'Please verify your phone number'
-                });  
+                });
                 return;
             }
 
@@ -377,9 +378,48 @@
             });
 
 
+            Livewire.on('dogSaved', event => {
+                closeAllModals();
+
+                const dropzoneInstance = Dropzone.forElement("#myAwesomeDropzone");
+                if (dropzoneInstance) {
+                    dropzoneInstance.removeAllFiles(true); // Remove all files (true: cancel uploads)
+                }
+
+                var phone_v = document.getElementById('phonenumber_claim');
+                if (!phone_v.classList.contains('verified')) {
+                    console.log('walang verified');
+                    if (phone_v.classList.contains('d-none')) {
+                        changeInput();
+                        phone_v.value = ''; // Reset the phone number input
+                        document.getElementById('otp_input').value = ''; // Clear OTP input
+                    }
+                } else {
+                    console.log('verified');
+                    if (!phone_v.classList.contains('d-none')) {
+                        // changeInput();
+                        phone_v.disabled = false;
+                        phone_v.classList.remove('verified','is-valid')
+                        document.getElementById('verify_button').classList.toggle('d-none');
+                        phone_v.value = ''; // Reset the phone number input
+                        document.getElementById('otp_input').value = ''; // Clear OTP input
+                    }
+                }
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Ticket Number : ' + event[0],
+                    text: 'Your report has been submitted. Please expect a call from the pound.',
+                    confirmButtonText: 'Okay'
+                }).then((result) => {
+
+
+                });
+            });
+
+
+
             Livewire.on('otp_result2', event => {
                 console.log(event);
-
                 if (event[1] == 'requestdog') {
                     var phone5 = document.getElementById('phonenumber_claim');
                     var otp_input5 = document.getElementById('otp_input');

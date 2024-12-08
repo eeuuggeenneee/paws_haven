@@ -188,6 +188,15 @@ class ModalsDogs extends Component
         $formattedId = str_pad($adoptionid->id, 4, '0', STR_PAD_LEFT);
         $ticket = 'A' . $adoptionid->created_at->format('ym') . '-' . $formattedId;
 
+        $this->a_fname = '';
+        $this->a_lname = '';
+        $this->a_contact = '';
+        $this->a_reason = '';
+        $this->a_address = '';
+        $this->a_materials = '';
+        $this->a_tos = false; // Assuming it's a checkbox
+        $this->dog_unique = null;
+        
         $this->dispatch('dogAdopted', 'Your adoption request has been successfully saved! Please expect a call from the pound when your request is approved. Thank you!', $ticket);
         $this->dispatch('fetchdatanotif');
         $this->dispatch('fetchdataAdopt');
@@ -272,6 +281,8 @@ class ModalsDogs extends Component
             $value = $this->c_contact;
         } elseif ($this->contact) {
             $value = $this->contact;
+        } elseif ($this->a_contact) {
+            $value = $this->a_contact;
         }
         $this->dispatch('otp_result', $verified, $this->request_w,$value);
 
@@ -286,7 +297,7 @@ class ModalsDogs extends Component
         $this->request_w = $request;
         $userId = Auth::user()->id;
 
-        if((!$this->c_contact && !$this->contact)){
+        if((!$this->c_contact && !$this->contact && !$this->a_contact)){
             $this->alert('error', 'Please input contact number');
             return;
         }
@@ -294,6 +305,8 @@ class ModalsDogs extends Component
             $value = $this->c_contact;
         } elseif ($this->contact) {
             $value = $this->contact;
+        }elseif ($this->a_contact) {
+            $value = $this->a_contact;
         }
 
         // Define the lock key (to track OTP requests within the last 10 minutes)

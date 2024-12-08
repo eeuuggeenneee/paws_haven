@@ -328,7 +328,7 @@
                                             </form>
                                         </div> <!-- end col -->
                                     </div> <!-- end row-->
-                                    <div class="container mt-3 d-none" id="adoptionform">
+                                    <div class="container mt-3 d-none" id="adoptionform" wire:ignore.self>
                                         <div class="card shadow">
                                             <div class="card-header bg-info text-white">
                                                 <h5 class="card-title">Adoption Form</h5>
@@ -358,23 +358,43 @@
                                                             </div>
                                                         </div>
                                                     </div>
+                                                    <div class="mb-3" wire:ignore>
+                                                        <label class="form-label" for="validationCustom03"
+                                                            id="label_phonenumber_claim4">Contact Number</label>
 
-                                                    <div class="mb-3">
+                                                        <div class="input-group" wire:ignore.self>
+                                                            <input type="tel" class="form-control" wire:ignore.self
+                                                                id="phonenumber_claim4"
+                                                                placeholder="09123456789" required
+                                                                wire:model="a_contact" pattern="09[0-9]{9}"
+                                                                title="Phone number must start with 09 and contain exactly 11 digits."
+                                                                maxlength="11"
+                                                                oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 11); validatePhoneNumber4(this);">
 
+                                                            <input type="number" wire:ignore.self class="form-control d-none"
+                                                                id="otp_input4" wire:model="otp_input"
+                                                                max="999999"
+                                                                oninput="this.value = this.value.slice(0, 6)"
+                                                                placeholder="Please input 6 digits code">
 
+                                                            <button class="btn btn-outline-secondary" wire:ignore.self
+                                                                id="verify_button4" type="button"
+                                                                wire:click="verifyMobile('adoptdog')"
+                                                                disabled>Verify</button>
+
+                                                            <button class="btn btn-outline-secondary d-none" wire:ignore.self
+                                                                id="verify_otp4" type="button"
+                                                                wire:click="checkOTP">Submit</button>
+                                                        </div>
+                                                        <small id="resend_container4" wire:ignore.self>
+                                                          
+                                                        </small>
                                                         
-                                                        <label class="form-label" for="validationCustom03">Contact
-                                                            Number</label>
-                                                        <input type="tel" class="form-control"
-                                                            id="validationCustom03" placeholder="09123456789" required
-                                                            wire:model="a_contact" pattern="09[0-9]{9}"
-                                                            title="Phone number must start with 09 and contain exactly 11 digits."
-                                                            maxlength="11"
-                                                            oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 11);">
                                                         <div class="invalid-feedback">
                                                             Please provide a valid phone number.
                                                         </div>
                                                     </div>
+                                                   
 
                                                     <div class="mb-3">
                                                         <label class="form-label"
@@ -428,9 +448,9 @@
                 </div>
 
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-success d-none" id="adopt_dog">Confirm Adoption</button>
-                    <button type="button" class="btn btn-success d-none" id="hidden_dog"
+                    <button type="button" class="btn btn-light" data-bs-dismiss="modal" wire:ignore.self>Close</button>
+                    <button type="button" class="btn btn-success d-none" id="adopt_dog" wire:ignore.self>Confirm Adoption</button>
+                    <button type="button" class="btn btn-success d-none" id="hidden_dog" wire:ignore.self
                         wire:click="confirmadoption">Confirm Adoption</button>
 
                 </div>
@@ -1086,32 +1106,33 @@
                                                         <div class="col-6">
                                                             <div class="mb-3" wire:ignore>
                                                                 <label class="form-label" for="validationCustom03"
-                                                                    id="label_phonenumber_claim">Contact Number</label>
+                                                                    id="label_phonenumber_claim3">Contact Number</label>
 
                                                                 <div class="input-group" wire:ignore.self>
                                                                     <input type="tel" class="form-control" wire:ignore.self
-                                                                        id="phonenumber_claim"
+                                                                        id="phonenumber_claim3"
                                                                         placeholder="09123456789" required
                                                                         wire:model="c_contact" pattern="09[0-9]{9}"
                                                                         title="Phone number must start with 09 and contain exactly 11 digits."
                                                                         maxlength="11"
-                                                                        oninput="validatePhoneNumber(this);">
+                                                                        oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 11); validatePhoneNumber3(this);">
 
                                                                     <input type="number" wire:ignore.self class="form-control d-none"
-                                                                        id="otp_input" wire:model="otp_input"
+                                                                        id="otp_input3" wire:model="otp_input"
                                                                         max="999999"
                                                                         oninput="this.value = this.value.slice(0, 6)"
                                                                         placeholder="Please input 6 digits code">
 
                                                                     <button class="btn btn-outline-secondary" wire:ignore.self
-                                                                        id="verify_button" type="button"
+                                                                        id="verify_button3" type="button"
                                                                         wire:click="verifyMobile('lostdog')"
                                                                         disabled>Verify</button>
+
                                                                     <button class="btn btn-outline-secondary d-none" wire:ignore.self
-                                                                        id="verify_otp" type="button"
+                                                                        id="verify_otp3" type="button"
                                                                         wire:click="checkOTP">Submit</button>
                                                                 </div>
-                                                                <small id="resend_container" wire:ignore.self>
+                                                                <small id="resend_container3" wire:ignore.self>
                                                                   
                                                                 </small>
                                                                 
@@ -1497,15 +1518,43 @@
     </div>
     <script>
         function validatePhoneNumber(input) {
-            // Enable or disable the button based on the phone number's length
-            const button = document.getElementById('verify_button');
-            const phoneNumber = input.value.trim(); // Remove any leading/trailing spaces
-            
+            const button2 = document.getElementById('verify_button');
+            const phoneNumber3 = input.value.trim();
+
             // Check if the input is 11 digits and starts with '09'
-            if (/^09\d{9}$/.test(phoneNumber)) {
-                button.disabled = false; // Enable button
+            if (/^09\d{9}$/.test(phoneNumber3)) {
+                button2.disabled = false; // Enable button
+                console.log('Valid phone number. Button enabled.');
             } else {
-                button.disabled = true; // Disable button
+                button2.disabled = true; // Disable button
+                console.log('Invalid phone number. Button disabled.');
+            }
+        }
+
+        function validatePhoneNumber3(input) {
+            const button4 = document.getElementById('verify_button3');
+            const phoneNumber4 = input.value.trim();
+
+            // Check if the input is 11 digits and starts with '09'
+            if (/^09\d{9}$/.test(phoneNumber4)) {
+                button4.disabled = false; // Enable button
+                console.log('Valid phone number. Button enabled.');
+            } else {
+                button4.disabled = true; // Disable button
+                console.log('Invalid phone number. Button disabled.');
+            }
+        }
+        function validatePhoneNumber4(input) {
+            const button4 = document.getElementById('verify_button4');
+            const phoneNumber4 = input.value.trim();
+
+            // Check if the input is 11 digits and starts with '09'
+            if (/^09\d{9}$/.test(phoneNumber4)) {
+                button4.disabled = false; // Enable button
+                console.log('Valid phone number. Button enabled.');
+            } else {
+                button4.disabled = true; // Disable button
+                console.log('Invalid phone number. Button disabled.');
             }
         }
         function validatePhoneNumber2(input) {
@@ -1555,7 +1604,40 @@
                 document.getElementById('otp_input2').value = ''; // Clear OTP input
             }
         }
+        function changeInput3() {
+            // Toggle visibility of phone number and OTP input
+            document.getElementById('phonenumber_claim3').classList.toggle('d-none');
+            document.getElementById('otp_input3').classList.toggle('d-none');
+            document.getElementById('verify_otp3').classList.toggle('d-none');
+            document.getElementById('verify_button3').classList.toggle('d-none');
 
+            // Change the label text
+            const label = document.getElementById('label_phonenumber_claim3');
+            label.textContent = label.textContent === "Contact Number" ? "OTP" : "Contact Number";
+
+            // Reset the phone number input when switching back
+            if (!document.getElementById('phonenumber_claim3').classList.contains('d-none')) {
+                document.getElementById('phonenumber_claim3').value = ''; // Reset the phone number input
+                document.getElementById('otp_input3').value = ''; // Clear OTP input
+            }
+        }
+        function changeInput4() {
+            // Toggle visibility of phone number and OTP input
+            document.getElementById('phonenumber_claim4').classList.toggle('d-none');
+            document.getElementById('otp_input4').classList.toggle('d-none');
+            document.getElementById('verify_otp4').classList.toggle('d-none');
+            document.getElementById('verify_button4').classList.toggle('d-none');
+
+            // Change the label text
+            const label = document.getElementById('label_phonenumber_claim4');
+            label.textContent = label.textContent === "Contact Number" ? "OTP" : "Contact Number";
+
+            // Reset the phone number input when switching back
+            if (!document.getElementById('phonenumber_claim4').classList.contains('d-none')) {
+                document.getElementById('phonenumber_claim4').value = ''; // Reset the phone number input
+                document.getElementById('otp_input4').value = ''; // Clear OTP input
+            }
+        }
 
         function validateImage() {
             const fileInput = document.getElementById('validationCustom02file');
@@ -1853,7 +1935,7 @@
         let timerInterval2;
 
         let countdownTime = 60; // Countdown time in seconds
-        let countdownTime2 = 60; // Countdown time in seconds
+        let countdownTime2 = 10; // Countdown time in seconds
 
         let resend_otp = false;
         try {
@@ -1964,8 +2046,15 @@
                 confirmButtonText: 'Yes, submit it!'
             }).then((result) => {
                 if (result.isConfirmed) {
+                    var phone_clear = document.getElementById('phonenumber_claim2');
+                    phone_clear.disabled = false;
+                    phone_clear.classList.remove('verified','is-valid')
+                    document.getElementById('verify_button2').classList.toggle('d-none');
+                    phone_clear.value = ''; // Reset the phone number input
+                    document.getElementById('otp_input2').value = ''; // Clear OTP input
 
                     document.getElementById('real_btn_rounds').click();
+
                 }
             });
         }
@@ -2105,10 +2194,72 @@
                 }
             }, 1000);
         }
+        function startCountdown3() {
+            const resendContainer = document.getElementById("resend_container3");
+            // Clear any existing interval to avoid multiple timers
+            if (timerInterval2) {
+                clearInterval(timerInterval2);
+            }
+
+            // Update the inner HTML with the countdown
+            resendContainer.innerHTML = `<small>You can resend in <span id="countdown_time3">${countdownTime2}</span> seconds.</small>`;
+
+            // Start the timer
+            timerInterval2 = setInterval(() => {
+                countdownTime2--;
+
+                // Update the countdown text
+                document.getElementById("countdown_time3").textContent = countdownTime2;
+
+                // When the countdown reaches 0
+                if (countdownTime2 <= 0) {
+                    clearInterval(timerInterval2); // Stop the timer
+                    countdownTime2 = 60; // Reset for next use
+
+                    // Restore the "resend" link
+                    resendContainer.innerHTML = `
+                        <small>
+                            Click <a class="text-primary" onclick="resendOTP3()">here</a> to resend
+                        </small>
+                    `;
+                }
+            }, 1000);
+        }
+        function startCountdown4() {
+            const resendContainer = document.getElementById("resend_container4");
+            // Clear any existing interval to avoid multiple timers
+            if (timerInterval2) {
+                clearInterval(timerInterval2);
+            }
+
+            // Update the inner HTML with the countdown
+            resendContainer.innerHTML = `<small>You can resend in <span id="countdown_time4">${countdownTime2}</span> seconds.</small>`;
+
+            // Start the timer
+            timerInterval2 = setInterval(() => {
+                countdownTime2--;
+
+                // Update the countdown text
+                document.getElementById("countdown_time4").textContent = countdownTime2;
+
+                // When the countdown reaches 0
+                if (countdownTime2 <= 0) {
+                    clearInterval(timerInterval2); // Stop the timer
+                    countdownTime2 = 60; // Reset for next use
+
+                    // Restore the "resend" link
+                    resendContainer.innerHTML = `
+                        <small>
+                            Click <a class="text-primary" onclick="resendOTP4()">here</a> to resend
+                        </small>
+                    `;
+                }
+            }, 1000);
+        }
         function resendOTP(){
             resend_otp = true;
             Livewire.dispatch('verifyMobile',{
-                request:'lostdog'
+                request:'requestdog'
             });
             startCountdown();
         }
@@ -2119,6 +2270,22 @@
             });
             startCountdown2();
         }
+
+        function resendOTP3(){
+            resend_otp = true;
+            Livewire.dispatch('verifyMobile',{
+                request:'lostdog'
+            });
+            startCountdown3();
+        }
+        function resendOTP4(){
+            resend_otp = true;
+            Livewire.dispatch('verifyMobile',{
+                request:'adoptdog'
+            });
+            startCountdown4();
+        }
+
 
         document.getElementById('adoptiontoggle').addEventListener('click', function() {
             var adopt_dog = document.getElementById('adopt_dog');
@@ -2131,7 +2298,7 @@
 
         document.getElementById('claim_dog').addEventListener('click', function() {
             var form2 = document.getElementById('claimcheckform');
-            var phone_dog_c = document.getElementById('phonenumber_claim');
+            var phone_dog_c = document.getElementById('phonenumber_claim3');
         
      
        
@@ -2191,6 +2358,7 @@
 
         document.getElementById('adopt_dog').addEventListener('click', function() {
             var form = document.getElementById('checkform');
+            var phone_dog_a = document.getElementById('phonenumber_claim4');
 
             // Add 'was-validated' class to trigger Bootstrap validation styles
             form.classList.add('was-validated');
@@ -2211,6 +2379,22 @@
                 });
                 return false; // Stop further actions
             }
+
+            if(!phone_dog_a.classList.contains('verified')){
+                phone_dog_a.classList.add('is-invalid');
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: 'top-end', // Position of the toast
+                    showConfirmButton: false,
+                    timer: 3000, // Duration before the toast disappears (in milliseconds)
+                    timerProgressBar: true,
+                });
+                Toast.fire({
+                    icon: 'warning',
+                    title: 'Please verify your phone number'
+                });  
+                return;
+            }
             Swal.fire({
                 title: 'Are you sure?',
                 text: "Do you want to confirm the adoption?",
@@ -2223,6 +2407,7 @@
             }).then((result) => {
                 if (result.isConfirmed) {
                     document.getElementById('hidden_dog').click();
+
                 }
             });
         });
@@ -2262,8 +2447,23 @@
                         otp_input.classList.add('is-invalid')
                     }
                 }else if(event[1] == 'lostdog'){
+                    var phone = document.getElementById('phonenumber_claim3');
+                    var otp_input = document.getElementById('otp_input3');
+                    if (event[0]) {
+                        changeInput3();
+                        phone.disabled = true;
+                        phone.classList.remove('is-invalid')
+                        phone.classList.add('verified', 'is-valid')
+                        phone.value = event[2];
+
+                        document.getElementById('verify_button3').classList.toggle('d-none');
+                        document.getElementById('resend_container3').classList.toggle('d-none');
+                    }else{
+                        otp_input.classList.add('is-invalid')
+                    }
+                }else if(event[1] == 'requestdog'){
                     var phone = document.getElementById('phonenumber_claim');
-                var otp_input = document.getElementById('otp_input');
+                    var otp_input = document.getElementById('otp_input');
                     if (event[0]) {
                         changeInput();
                         phone.disabled = true;
@@ -2276,6 +2476,21 @@
                     }else{
                         otp_input.classList.add('is-invalid')
                     }
+                }else if(event[1] == 'adoptdog'){
+                    var phone = document.getElementById('phonenumber_claim4');
+                    var otp_input = document.getElementById('otp_input4');
+                    if (event[0]) {
+                        changeInput4();
+                        phone.disabled = true;
+                        phone.classList.remove('is-invalid')
+                        phone.classList.add('verified', 'is-valid')
+                        phone.value = event[2];
+
+                        document.getElementById('verify_button4').classList.toggle('d-none');
+                        document.getElementById('resend_container4').classList.toggle('d-none');
+                    }else{
+                        otp_input.classList.add('is-invalid')
+                    }
                 }
             });
 
@@ -2285,7 +2500,12 @@
                         if(event[1] == 'rounds'){
                             changeInput2();
                             startCountdown2();
-
+                        }else if (event[1] == 'lostdog'){
+                            changeInput3();
+                            startCountdown3();
+                        }else if (event[1] == 'adoptdog'){
+                            changeInput4();
+                            startCountdown4();
                         }
                         changeInput();
                         startCountdown();
@@ -2297,6 +2517,18 @@
 
             Livewire.on('dogAdopted', event => {
                 closeAllModals();
+
+                var phone = document.getElementById('phonenumber_claim4');
+                phone.disabled = false; // Enable the phone number input field
+                phone.classList.remove('verified', 'is-valid'); // Remove verification classes
+                phone.value = ''; // Reset the value of the phone input
+
+                // Reset the OTP input
+                var otpInput = document.getElementById('otp_input4');
+                otpInput.value = ''; // Clear the OTP input field
+
+                // Toggle visibility of the verify button
+                document.getElementById('verify_button4').classList.remove('d-none');
                 Swal.fire({
                     icon: 'success',
                     title: 'Ticket Number ' + event[1],
@@ -2310,17 +2542,17 @@
             });
             Livewire.on('dogClaimed', event => {
                 closeAllModals();
-                var phone = document.getElementById('phonenumber_claim');
+                var phone = document.getElementById('phonenumber_claim3');
                 phone.disabled = false; // Enable the phone number input field
                 phone.classList.remove('verified', 'is-valid'); // Remove verification classes
                 phone.value = ''; // Reset the value of the phone input
 
                 // Reset the OTP input
-                var otpInput = document.getElementById('otp_input');
+                var otpInput = document.getElementById('otp_input3');
                 otpInput.value = ''; // Clear the OTP input field
 
                 // Toggle visibility of the verify button
-                document.getElementById('verify_button').classList.remove('d-none');
+                document.getElementById('verify_button3').classList.remove('d-none');
                 Swal.fire({
                     icon: 'success',
                     title: 'Ticket Number ' + event[1],
@@ -2329,7 +2561,6 @@
                 }).then((result) => {
                     if (result.isConfirmed) {
                         // Reload the page
-
                     }
                 });
             });
